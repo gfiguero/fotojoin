@@ -21,19 +21,16 @@ use Symfony\Component\Console\Question\Question;
 use Symfony\Component\Console\Question\ConfirmationQuestion;
 use Sensio\Bundle\GeneratorBundle\Command\AutoComplete\EntitiesAutoCompleter;
 use Sensio\Bundle\GeneratorBundle\Command\Helper\QuestionHelper;
-use Sensio\Bundle\GeneratorBundle\Manipulator\RoutingManipulator;
-use Sensio\Bundle\GeneratorBundle\Command\GenerateDoctrineCrudCommand as BaseGenerateDoctrineCrudCommand;
-
 use FotoJoin\AdminGeneratorBundle\Generator\DoctrineCrudGenerator;
-use Sensio\Bundle\GeneratorBundle\Generator\DoctrineFormGenerator;
-use FotoJoin\AdminGeneratorBundle\Command\Validators;
+use FotoJoin\AdminGeneratorBundle\Generator\DoctrineFormGenerator;
+use Sensio\Bundle\GeneratorBundle\Manipulator\RoutingManipulator;
 
 /**
  * Generates a CRUD for a Doctrine entity.
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-class GenerateDoctrineCrudCommand extends BaseGenerateDoctrineCrudCommand
+class GenerateDoctrineCrudCommand extends GenerateDoctrineCommand
 {
     private $formGenerator;
 

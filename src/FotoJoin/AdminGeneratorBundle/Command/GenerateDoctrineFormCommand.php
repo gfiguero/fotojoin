@@ -15,7 +15,7 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Command\Command;
-use Sensio\Bundle\GeneratorBundle\Generator\DoctrineFormGenerator;
+use FotoJoin\AdminGeneratorBundle\Generator\DoctrineFormGenerator;
 
 /**
  * Generates a form type class for a given Doctrine entity.
@@ -31,8 +31,7 @@ class GenerateDoctrineFormCommand extends GenerateDoctrineCommand
     protected function configure()
     {
         $this
-            ->setName('doctrine:generate:form')
-            ->setAliases(array('generate:doctrine:form'))
+            ->setName('fotojoin:admingenerate:form')
             ->setDescription('Generates a form type class based on a Doctrine entity')
             ->setDefinition(array(
                 new InputArgument('entity', InputArgument::REQUIRED, 'The entity class name to initialize (shortcut notation)'),
