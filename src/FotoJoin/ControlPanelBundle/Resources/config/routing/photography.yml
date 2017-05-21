@@ -1,0 +1,33 @@
+photography_index:
+    path:     /
+    defaults: { _controller: "FotoJoinControlPanelBundle:Photography:index" }
+    methods:  [GET, POST]
+
+photography_show:
+    path:     /{id}/show
+    defaults: { _controller: "FotoJoinControlPanelBundle:Photography:show" }
+    methods:  GET
+
+photography_new:
+    path:     /new
+    defaults: { _controller: "FotoJoinControlPanelBundle:Photography:new" }
+    methods:  [GET, POST]
+
+photography_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "FotoJoinControlPanelBundle:Photography:edit" }
+    methods:  [GET, POST]
+
+photography_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "FotoJoinControlPanelBundle:Photography:delete" }
+    methods:  DELETE
+
+photography_dropzone:
+    path:     /dropzone
+    defaults: { _controller: "FotoJoinControlPanelBundle:Photography:dropzone" }
+    methods:  [GET, POST]
+
+photography_exif:
+    path:     /exif
+    defaults: { _controller: "FotoJoinControlPanelBundle:Photography:exif" }

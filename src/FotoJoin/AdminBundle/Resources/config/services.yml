@@ -1,0 +1,5 @@
+services:
+
+    foto_join_user.form.type.place:
+        class: FotoJoin\AdminBundle\Form\PlaceType
+        arguments: [ "@doctrine.orm.entity_manager" ]

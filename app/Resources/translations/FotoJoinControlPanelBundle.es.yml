@@ -1,0 +1,51 @@
+photography:
+    list: 'Fotografías'
+    index: 'Fotografías'
+    new: 'Subir Fotografía'
+    massiveupload: 'Subir varias Fotografías'
+    show: 'Ver datos de Fotografía'
+    register: 'Registrar Fotografía'
+    edit: 'Editar información de Fotografía'
+    save: 'Guardar Fotografía'
+    delete: 'Eliminar Fotografía'
+    createdAt: 'Fecha de Carga'
+    updatedAt: 'Fecha de Actualización'
+    filename: 'Nombre de Archivo'
+    file:
+        label: 'Archivo'
+        download: 'Descargar Fotografía'
+    city: 'Ciudad'
+    author:
+        title: Fotógrafo
+    appraisement:
+        title: Valoración
+        average: Promedio
+    capture:
+        title: 'Captura Fotográfica'
+        datetimeoriginal: 'Fecha de Captura'
+        makemodel: 'Cámara - Modelo'
+        exposuretime: 'Tiempo'
+        focallength: 'Distancia Focal'
+        fnumber: 'Relación Focal'
+        isospeedratings: ISO
+    categories: 'Categorías Fotográficas'
+    album: 'Álbum'
+
+album:
+    index: 'Álbumes'
+    list: 'Álbumes'
+    new: 'Nuevo Álbum'
+    show: 'Ver datos de Álbum'
+    name: 'Nombre de Álbum'
+    register: 'Crear Álbum'
+    edit: 'Editar Álbum'
+    save: 'Guardar Álbum'
+    delete: 'Eliminar Álbum'
+    createdAt: 'Creado'
+    updatedAt: 'Actualizado'
+
+status:
+    index: 'Mi FotoJoin'
+
+Deleted records can not be recovered.: 'Los datos eliminados no podrán ser recuperados.'
+Are you sure?: '¿Estás Seguro?'

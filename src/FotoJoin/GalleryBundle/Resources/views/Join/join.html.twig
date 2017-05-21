@@ -1,0 +1,148 @@
+{% extends 'FotoJoinGalleryBundle::base.html.twig' %}
+
+{% block stylesheet %}
+<style type="text/css">
+.loadingimage {
+    background-image:url("{{ vich_uploader_asset(photography, 'file', 'FotoJoin\\ControlPanelBundle\\Entity\\Photography')|imagine_filter('frontpage_join_placeholder') }}");
+    background-size: cover;
+}    
+</style>
+{% endblock %}
+
+{% block body %}
+
+    <div class="col-md-8">
+        <div class="row" id="photography">
+            <div class="col-xs-12">
+                <div class="loadingimage">
+                    <img class="img-responsive center-block" src="{{ vich_uploader_asset(photography, 'file', 'FotoJoin\\ControlPanelBundle\\Entity\\Photography')|imagine_filter('frontpage_join') }}" alt="{{ 1 }}" />
+                    <a class="right carousel-control" href="{{ path('foto_join_gallery_join')}}" data-slide="next"><i class="glyphicon glyphicon-chevron-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="row" id="appraisement">
+            <div class="col-md-12">
+                <h3>{{ icon('thumbs-up fa-fw') }}Valoración</h3>
+                <div id="rating"></div>
+            </div>
+            {{ form(appraisementForm) }}
+{#}
+            {{ form_start(appraisementForm) }}
+                {{ form_widget(appraisementForm) }}
+                <div class="form-group"><div class="col-xs-12">
+                    <button type="submit" class="btn btn-block btn-primary">Votar</button>
+                </div></div>
+            {{ form_end(appraisementForm) }}
+{#}
+        </div>
+        <div class="row" id="category">
+            <div class="col-md-12">
+                <h3>{{ icon('dot-circle-o fa-fw') }}Filtrar por Categoría</h3>
+                {{ form(categoryForm, {'attr': {'novalidate': 'novalidate'}}) }}
+{#}
+                {{ form(galleryForm, { 'style': 'horizontal', 'col_size': 'sm', 'label_col': 0, 'widget_col': 12 }) }}
+                {{ form_start(galleryForm, { 'style': 'horizontal', 'col_size': 'sm', 'label_col': 0, 'widget_col': 12 }) }}
+                    {{ form_widget(galleryForm) }}
+                    <div class="form-group"><div class="col-xs-12">
+                        <button type="submit" class="btn btn-block btn-primary">Aplicar Filtro</button>
+                    </div></div>
+                {{ form_end(galleryForm) }}
+{#}
+            </div>
+        </div>
+        <div class="row" id="capture">
+            <div class="col-md-12">
+                <h3>{{ icon('camera fa-fw') }}Información Fotográfica</h3>
+                <dl class="dl-horizontal-caption">
+
+                {% if photography.datetimeoriginal %}
+                    <dt>{{ 'photography.capture.datetimeoriginal'|trans({}, 'FotoJoinControlPanelBundle') }}</dt>
+                    <dd>{{ photography.datetimeoriginal|localizeddate('full', 'full', 'es_ES', 'America/Santiago', "dd-LLL-Y") }}</dd>
+                {% endif %}
+
+                {% if photography.makemodel %}
+                    <dt>{{ 'photography.capture.makemodel'|trans({}, 'FotoJoinControlPanelBundle') }}</dt>
+                    <dd>{{ photography.makemodel }}</dd>
+                {% endif %}
+
+                {% if photography.exposuretime %}
+                    <dt>{{ 'photography.capture.exposuretime'|trans({}, 'FotoJoinControlPanelBundle') }}</dt>
+                    <dd>{{ photography.exposuretime }}{{ ' s' }}</dd>
+                {% endif %}
+
+                {% if photography.focallength %}
+                    <dt>{{ 'photography.capture.focallength'|trans({}, 'FotoJoinControlPanelBundle') }}</dt>
+                    <dd>{{ photography.focallength }}{{ ' mm' }}</dd>
+                {% endif %}
+
+                {% if photography.fnumber %}
+                    <dt>{{ 'photography.capture.fnumber'|trans({}, 'FotoJoinControlPanelBundle') }}</dt>
+                    <dd>{{ 'f/' }}{{ photography.fnumber }}</dd>
+                {% endif %}
+
+                {% if photography.isospeedratings %}
+                    <dt>{{ 'photography.capture.isospeedratings'|trans({}, 'FotoJoinControlPanelBundle') }}</dt>
+                    <dd>{{ photography.isospeedratings }}</dd>
+                {% endif %}
+
+                </dl>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block javascript %}
+    <script type="text/javascript">
+        var appraisementTimeStart;
+        var appraisementTimeSet;
+        var optionsCategories = {
+            enableClickableOptGroups: true,
+            enableCollapsibleOptGroups: true,
+            enableFiltering: true,
+            includeSelectAllOption: true,
+            buttonWidth: '100%',
+            allSelectedText: 'Todas las Categorías',
+            nonSelectedText: 'Todas las Categorías',
+            nSelectedText: 'nSelectedText',
+            delimiterText: ', ',
+            selectAllText: 'Seleccionar Todo',
+            filterPlaceholder: 'Buscar',
+            onChange: function() {
+                $('form[name=gallery]').submit();
+            }
+        };
+        $('#gallery_categories').multiselect(optionsCategories);
+        var optionsCategory = {
+            enableClickableOptGroups: true,
+            enableCollapsibleOptGroups: true,
+            buttonWidth: '100%',
+            onChange: function() {
+                $('form[name=category_filter]').submit();
+            }
+        };
+        $('#category_filter_category').multiselect(optionsCategory);
+        var optionRating = {
+            count: 10,
+            startColor: 'orange',
+            endColor: 'yellow',
+            width: 30,
+            height: 30,
+            precision: 0.5,
+            onSet: function(rating) {
+                appraisementTimeSet = new Date().getTime();
+                $('#appraisement_value').val(rating*2);
+                $('#appraisement_delay').val(appraisementTimeSet-appraisementTimeStart);
+                $('form[name=appraisement]').submit();
+            }
+        }
+        $("#rating").jRate(optionRating);
+        $(document).ready(function() {
+            appraisementTimeStart = new Date().getTime();
+        });
+
+    </script>
+{% endblock %}

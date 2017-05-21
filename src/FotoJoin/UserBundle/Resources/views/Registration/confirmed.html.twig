@@ -1,0 +1,32 @@
+{% extends "FotoJoinFrontPageBundle::base.html.twig" %}
+
+{% trans_default_domain 'FotoJoinUserBundle' %}
+
+{% block title %}{{ 'registration.confirmed.title'|trans }}{% endblock %}
+
+{% block body %}
+
+<div class="section fill" id="register">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2">
+                <div class="transparent-square">
+                    <h1 class="page-header">{{ 'registration.confirmed.title'|trans }}</h1>
+                    <div class="panel panel-default">
+                        <div class="panel-body text-center">
+                            <p>{{ 'registration.confirmed.message'|trans({'%username%': user.username, '%name%': user.name}) }}</p>
+                            {#% if targetUrl %}<a href="{{ targetUrl }}" type="button" class="btn btn-primary">{{ icon('save') }}&nbsp;{{ 'registration.continue'|trans }}</a>{% endif %#}
+                            <a class="btn btn-primary" href="{{ path('foto_join_gallery_homepage') }}" role="button">{{ icon('picture-o') }}&nbsp;{{ 'link.gallery'|trans }}</a>
+                            <a class="btn btn-primary" href="{{ path('fos_user_profile_show') }}" role="button">{{ icon('user') }}&nbsp;{{ 'link.profile'|trans }}</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="push"></div>
+</div>
+
+{% include 'FotoJoinFrontPageBundle::footer.html.twig' %}
+
+{% endblock body %}

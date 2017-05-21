@@ -1,0 +1,24 @@
+photography_index:
+    path:     /
+    defaults: { _controller: "FotoJoinGalleryBundle:Photography:index" }
+    methods:  GET
+
+photography_show:
+    path:     /{id}/show
+    defaults: { _controller: "FotoJoinGalleryBundle:Photography:show" }
+    methods:  GET
+
+photography_new:
+    path:     /new
+    defaults: { _controller: "FotoJoinGalleryBundle:Photography:new" }
+    methods:  [GET, POST]
+
+photography_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "FotoJoinGalleryBundle:Photography:edit" }
+    methods:  [GET, POST]
+
+photography_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "FotoJoinGalleryBundle:Photography:delete" }
+    methods:  DELETE

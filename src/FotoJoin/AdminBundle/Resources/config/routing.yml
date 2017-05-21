@@ -1,0 +1,38 @@
+foto_join_admin_appraisement:
+    resource: "@FotoJoinAdminBundle/Resources/config/routing/appraisement.yml"
+    prefix:   /appraisement
+
+foto_join_admin_author:
+    resource: "@FotoJoinAdminBundle/Resources/config/routing/author.yml"
+    prefix:   /author
+
+foto_join_admin_capture:
+    resource: "@FotoJoinAdminBundle/Resources/config/routing/capture.yml"
+    prefix:   /capture
+
+foto_join_admin_category:
+    resource: "@FotoJoinAdminBundle/Resources/config/routing/category.yml"
+    prefix:   /category
+
+foto_join_admin_dashboard:
+    resource: "@FotoJoinAdminBundle/Resources/config/routing/dashboard.yml"
+    prefix:   /dashboard
+
+foto_join_admin_datetime:
+    resource: "@FotoJoinAdminBundle/Resources/config/routing/datetime.yml"
+    prefix:   /datetime
+
+#foto_join_admin_tag:
+#    resource: "@FotoJoinAdminBundle/Resources/config/routing/tag.yml"
+#    prefix:   /tag
+
+foto_join_admin_city:
+    resource: "@FotoJoinAdminBundle/Resources/config/routing/city.yml"
+    prefix:   /city
+
+foto_join_admin_root:
+    path:     /
+    defaults:
+        _controller: FrameworkBundle:Redirect:urlRedirect
+        path: /admin/dashboard
+        permanent: true

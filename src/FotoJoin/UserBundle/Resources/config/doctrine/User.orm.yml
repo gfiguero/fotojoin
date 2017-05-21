@@ -1,0 +1,101 @@
+FotoJoin\UserBundle\Entity\User:
+    type: entity
+    table: User
+    repositoryClass: FotoJoin\UserBundle\Entity\UserRepository
+#    oneToOne:
+#        author:
+#            targetEntity: Author
+#            inversedBy: user
+#            cascade: ['persist']            
+    oneToMany:
+        photographies:
+            targetEntity: FotoJoin\ControlPanelBundle\Entity\Photography
+            mappedBy: user
+    manyToOne:
+        city1:
+            targetEntity: FotoJoin\AdminBundle\Entity\City
+        city2:
+            targetEntity: FotoJoin\AdminBundle\Entity\City
+        city3:
+            targetEntity: FotoJoin\AdminBundle\Entity\City
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        level:
+            type: integer
+            nullable: true
+        description:
+            type: text
+            nullable: true
+        publiccontact:
+            type: boolean
+            nullable: true
+            options:
+                default: false
+        exigency:
+            type: decimal
+            nullable: true
+            precision: 3
+            scale: 1
+        facebookid:
+            type: string
+            length: '300'
+            nullable: true
+        facebookaccesstoken:
+            type: string
+            length: '300'
+            nullable: true
+        facebookshare:
+            type: boolean
+            nullable: true
+            options:
+                default: false
+        googleid:
+            type: string
+            length: '300'
+            nullable: true
+        googleaccesstoken:
+            type: string
+            length: '300'
+            nullable: true
+        twitterid:
+            type: string
+            length: '300'
+            nullable: true
+        twitteraccesstoken:
+            type: string
+            length: '300'
+            nullable: true
+        name:
+            type: string
+            length: '300'
+            nullable: true
+        birthdate:
+            type: date
+            nullable: true
+        profilephotofilename:
+            type: string
+            length: 300
+            nullable: true
+        createdAt:
+            type: datetime
+            gedmo:
+                timestampable:
+                    on: create
+        updatedAt:
+            type: datetime
+            gedmo:
+                timestampable:
+                    on: update
+        deletedAt:
+            type: datetime
+            nullable: true
+    gedmo:
+        soft_deleteable:
+            field_name: deletedAt
+            time_aware: false
+    lifecycleCallbacks: {  }

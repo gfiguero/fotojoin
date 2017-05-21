@@ -1,0 +1,66 @@
+foto_join_admin_generator:
+    resource: "@FotoJoinAdminGeneratorBundle/Resources/config/routing.yml"
+    prefix:   /
+
+foto_join_generator:
+    resource: "@FotoJoinGeneratorBundle/Resources/config/routing.yml"
+    prefix:   /
+
+foto_join_gallery:
+    resource: "@FotoJoinGalleryBundle/Resources/config/routing.yml"
+    prefix:   /
+
+front_page:
+    resource: "@FotoJoinFrontPageBundle/Resources/config/routing.yml"
+    prefix:   /
+
+control_panel:
+    resource: "@FotoJoinControlPanelBundle/Resources/config/routing.yml"
+    prefix:   /panel
+
+admin:
+    resource: "@FotoJoinAdminBundle/Resources/config/routing.yml"
+    prefix:   /admin
+
+gallery:
+    resource: "@FotoJoinGalleryBundle/Resources/config/routing.yml"
+    prefix:   /gallery
+
+_liip_imagine:
+    resource: "@LiipImagineBundle/Resources/config/routing.xml"
+
+foto_join_user:
+    resource: "@FotoJoinUserBundle/Resources/config/routing.yml"
+    prefix:   /admin/user
+
+foto_join_user_management:
+    resource: "@FotoJoinUserBundle/Resources/config/management.yml"
+
+hwi_oauth_connect:
+    resource: "@HWIOAuthBundle/Resources/config/routing/connect.xml"
+    prefix:   /connect
+
+#foto_join_oauth_connect:
+#    resource: "@FotoJoinUserBundle/Resources/config/routing/oauth.xml"
+#    prefix:   /oauth
+
+hwi_oauth_redirect:
+    resource: "@HWIOAuthBundle/Resources/config/routing/redirect.xml"
+    prefix:   /redirect
+
+hwi_oauth_login:
+    resource: "@HWIOAuthBundle/Resources/config/routing/login.xml"
+    prefix:   /login
+
+facebook_login:
+    path: /login/check-facebook
+
+google_login:
+    path: /login/check-google
+
+twitter_login:
+    path: /login/check-twitter
+
+oneup_uploader:
+    resource: .
+    type: uploader

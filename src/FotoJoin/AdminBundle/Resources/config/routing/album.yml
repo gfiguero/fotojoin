@@ -1,0 +1,24 @@
+album_index:
+    path:     /
+    defaults: { _controller: "FotoJoinAdminBundle:Album:index" }
+    methods:  GET
+
+album_show:
+    path:     /{id}/show
+    defaults: { _controller: "FotoJoinAdminBundle:Album:show" }
+    methods:  GET
+
+album_new:
+    path:     /new
+    defaults: { _controller: "FotoJoinAdminBundle:Album:new" }
+    methods:  [GET, POST]
+
+album_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "FotoJoinAdminBundle:Album:edit" }
+    methods:  [GET, POST]
+
+album_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "FotoJoinAdminBundle:Album:delete" }
+    methods:  DELETE

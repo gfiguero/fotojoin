@@ -1,0 +1,13 @@
+<div class="col-md-3">
+    <div class="row">
+        <div class="col-md-12">
+            <h3>Filtro de Galería</h3>
+            {{ form_start(form, { 'style': 'horizontal', 'col_size': 'sm', 'label_col': 0, 'widget_col': 12, 'attr': {'id': 'gallery_form'} }) }}
+                {{ form_widget(form) }}
+                <div class="form-group"><div class="col-lg-12">
+                    <button type="submit" class="btn btn-block btn-primary">{{ icon('save') }}&nbsp;{{ 'filter.send.post'|trans({}, 'FotoJoinGalleryBundle') }}</button>
+                </div></div>
+            {{ form_end(form) }}
+        </div>
+    </div>
+</div>

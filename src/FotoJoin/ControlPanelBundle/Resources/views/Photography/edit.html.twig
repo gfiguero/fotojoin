@@ -1,0 +1,80 @@
+{% extends ':ControlPanel:base.html.twig' %}
+
+{% block title %}{{ 'photography.edit'|trans({}, 'FotoJoinControlPanelBundle') }}{% endblock %}
+
+{% block body %}
+    <div id="page-wrapper">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">{% include ':ControlPanel:icon.html.twig' %}{{ 'photography.edit'|trans({}, 'FotoJoinControlPanelBundle') }}</h1>
+                {% include ':ControlPanel:flashbag.html.twig' %}
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
+
+        <!-- /.row -->
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <div class="btn-toolbar">
+                            <a type="button" class="btn btn-default" href="{{ path('photography_index') }}">{{ icon('list') }}&nbsp;{{ 'photography.list'|trans({}, 'FotoJoinControlPanelBundle') }}</a>
+                            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modal-confirm">{{ icon('trash-o') }}&nbsp;{{ 'photography.delete'|trans({}, 'FotoJoinControlPanelBundle') }}</button>
+                            <div class="modal fade" id="modal-confirm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                                <div class="modal-dialog modal-md" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                            <h4 class="modal-title" id="myModalLabel">{{ 'Are you sure?'|trans({}, 'FotoJoinControlPanelBundle') }}</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <p>{{ 'Deleted records can not be recovered.'|trans({}, 'FotoJoinControlPanelBundle') }}</p>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <div class="pull-right" style="height:34px;">
+                                                {{ form_start(delete_form) }}
+                                                    <button type="submit" class="btn btn-danger">{{ icon('trash-o') }}&nbsp;{{ 'photography.delete'|trans({}, 'FotoJoinControlPanelBundle') }}</button>
+                                                {{ form_end(delete_form) }}</div>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        {{ form_start(edit_form, { 'style': 'horizontal' }) }}
+                            {{ form_widget(edit_form) }}
+                                <div class="form-group"><div class="col-lg-offset-3 col-lg-9">
+                                    <button type="submit" class="btn btn-primary">{{ icon('save') }}&nbsp;{{ 'photography.save'|trans({}, 'FotoJoinControlPanelBundle') }}</button>
+                                </div></div>
+                        {{ form_end(edit_form) }}
+                    </div>
+                </div>
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
+        <!-- /.row -->
+    </div>
+    <!-- /#page-wrapper -->
+
+{% endblock %}
+
+{% block javascript %}
+    <script type="text/javascript">
+        var optionsCategories = {
+            enableClickableOptGroups: true,
+            enableCollapsibleOptGroups: true,
+            enableFiltering: true,
+            includeSelectAllOption: true,
+            buttonWidth: '100%',
+            allSelectedText: 'Todas las Categorías',
+            nonSelectedText: 'Todas las Categorías',
+            nSelectedText: 'nSelectedText',
+            delimiterText: ', ',
+            selectAllText: 'Seleccionar Todo',
+            filterPlaceholder: 'Buscar'
+        };
+        $('#photography_categories').multiselect(optionsCategories);
+    </script>
+{% endblock %}

@@ -1,0 +1,24 @@
+user_manage_list:
+    path:     /
+    defaults: { _controller: "FotoJoinUserBundle:Manage:list" }
+    methods: [GET]
+
+user_manage_show:
+    path:     /{id}/show
+    defaults: { _controller: "FotoJoinUserBundle:Manage:show" }
+    methods: [GET]
+
+user_manage_new:
+    path:     /new
+    defaults: { _controller: "FotoJoinUserBundle:Manage:new" }
+    methods: [GET|POST]
+
+user_manage_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "FotoJoinUserBundle:Manage:edit" }
+    methods: [GET|POST]
+
+user_manage_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "FotoJoinUserBundle:Manage:delete" }
+    methods: [DELETE]

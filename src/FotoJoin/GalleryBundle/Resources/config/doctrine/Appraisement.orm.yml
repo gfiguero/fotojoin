@@ -1,0 +1,51 @@
+FotoJoin\GalleryBundle\Entity\Appraisement:
+    type: entity
+    repositoryClass: FotoJoin\GalleryBundle\Entity\AppraisementRepository
+    table: Appraisement
+    manyToOne:
+        photography:
+            targetEntity: FotoJoin\ControlPanelBundle\Entity\Photography
+            inversedBy: appraisements
+            cascade: ['persist']            
+        user:
+            targetEntity: FotoJoin\UserBundle\Entity\User
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        value:
+            type: integer
+            nullable: true
+        score:
+            type: decimal
+            nullable: true
+            precision: 4
+            scale: 3
+        delay:
+            type: integer
+            nullable: true
+        ip:
+            type: string
+            length: 50
+            nullable: true
+        createdAt:
+            type: datetime
+            gedmo:
+                timestampable:
+                    on: create
+        updatedAt:
+            type: datetime
+            gedmo:
+                timestampable:
+                    on: update
+        deletedAt:
+            type: datetime
+            nullable: true
+    gedmo:
+        soft_deleteable:
+            field_name: deletedAt
+            time_aware: false
+    lifecycleCallbacks: {  }

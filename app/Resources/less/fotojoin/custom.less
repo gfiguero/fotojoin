@@ -1,0 +1,106 @@
+// Global Styles
+
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:300,400,700,800);
+
+// Wrappers
+
+#wrapper {
+    width: 100%;
+}
+
+#page-wrapper {
+    padding: 0 15px;
+    //min-height: 568px;
+    background-color: @gray-base;
+    border: 1px solid @gray-darkest;
+}
+
+@media(min-width:768px) {
+    #page-wrapper {
+        position: inherit;
+//        margin: 0 0 0 250px;
+//        padding: 0 30px;
+//        border-left: 1px solid darken(@gray-lightest, 6.5%);
+    }
+}
+// DataTables Overrides
+
+table.dataTable thead .sorting,
+table.dataTable thead .sorting_asc,
+table.dataTable thead .sorting_desc,
+table.dataTable thead .sorting_asc_disabled,
+table.dataTable thead .sorting_desc_disabled {
+    background: transparent;
+}
+
+table.dataTable thead .sorting_asc:after {
+    content: "\f0de";
+    float: right;
+    font-family: fontawesome;
+}
+
+table.dataTable thead .sorting_desc:after {
+    content: "\f0dd";
+    float: right;
+    font-family: fontawesome;
+}
+
+table.dataTable thead .sorting:after {
+    content: "\f0dc";
+    float: right;
+    font-family: fontawesome;
+    color: rgba(50,50,50,.5);
+}
+
+.nopadding {
+   padding: 0 !important;
+   margin: 0 !important;
+}
+
+.rating {
+    unicode-bidi: bidi-override;
+    direction: rtl;
+    font-size: 24px;
+}
+.rating span.star {
+    font-family: FontAwesome;
+    font-weight: normal;
+    font-style: normal;
+    display: inline-block
+}
+.rating span.star:hover {
+    cursor: pointer
+}
+.rating span.star:before {
+    content: "\f006";
+    padding-right: 3px;
+    color: #777;
+}
+.rating span.star:hover:before,
+.rating span.star:hover~span.star:before {
+    content: "\f005";
+    color: #e3cf7a;
+}
+
+.carousel-inner > .item > img {
+    margin: 0 auto;
+}
+
+.dl-horizontal-caption {
+    dd {
+        &:extend(.clearfix all); // Clear the floated `dt` if an empty `dd` is present
+    }
+
+    @media (min-width: 1200px) {
+        dt {
+            float: left;
+            width: 150px;
+            clear: left;
+            text-align: right;
+            .text-overflow();
+        }
+        dd {
+            margin-left: 170px;
+        }
+    }
+}

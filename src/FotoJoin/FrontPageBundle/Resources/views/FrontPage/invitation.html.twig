@@ -1,0 +1,117 @@
+{% block invitation %}
+    <div class="section fill" id="invitation">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 text-center">
+                    <h2 class="text-center">Somos el <b>PUNTO DE ENCUENTRO</b> entorno a la fotografía.</h2>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-4 text-center">
+                    <div class="transparent-square">
+                        <h3>Trabaja con nosotros</h3>
+                        <div class="img-container">
+                            <div class="img-frame">
+                                <img class="img-responsive center-block" src="{{ asset('img/estadisticas.png') }}">
+                            </div>
+                        </div>
+                        <div class="caption">
+                            <p>Sube tus fotos y ofrece tu talento fotográfico</p>
+                        </div>
+{#}
+                        <a href="{{ path('fos_user_registration_register', {author : true}) }}" class="btn btn-primary btn-lg">Empezar</a>
+                        <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#modalAuthor">Empezar</button>
+                        <div class="modal fade" id="modalAuthor" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                            <div class="modal-dialog modal-sm" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                        <h4 class="modal-title" id="myModalLabel">Registro de Fotógrafo</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="row">
+                                            <div class="col-xs-12">
+                                                {{ form_start(authorForm) }}
+                                                    {{ form_widget(authorForm) }}
+                                                    <button type="submit" class="btn btn-primary btn-block">{{ icon('pencil-square-o') }}&nbsp;{{ 'registration.submit'|trans({}, 'FotoJoinUserBundle') }}</button>
+                                                {{ form_end(authorForm) }}
+                                            </div>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+{#}
+                        <a type="button" class="btn btn-primary btn-lg" href="{{ path("fos_user_security_login") }}">Empezar</a>
+                    </div>
+                </div>
+
+
+
+                <div class="col-md-4 text-center">
+                    <div class="transparent-square">
+                        <h3>Participa y gana</h3>
+                        <div class="img-container">
+                            <div class="img-frame">
+                                <img class="img-responsive center-block" src="{{ asset('img/tiro_blanco.png') }}">
+                            </div>
+                        </div>
+                        <div class="caption">
+                            <p>Obtendrás puntos y podrás canjearlos por sesiones gratis</p>
+                        </div>
+                        <a type="button" class="btn btn-primary btn-lg" href="{{ path("fos_user_security_login") }}">Empezar</a>
+{#}
+                        <a href="{{ path('fos_user_registration_register') }}" class="btn btn-primary btn-lg">Participar</a>
+                        <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#modalUser">Empezar</button>
+                        <div class="modal fade" id="modalUser" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                            <div class="modal-dialog modal-sm" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                        <h4 class="modal-title" id="myModalLabel">Registro de Usuario</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="row">
+                                            <div class="col-xs-12">
+                                                {{ form_start(userForm) }}
+                                                    {{ form_widget(userForm) }}
+                                                    <button type="submit" class="btn btn-primary btn-block">{{ icon('pencil-square-o') }}&nbsp;{{ 'registration.submit'|trans({}, 'FotoJoinUserBundle') }}</button>
+                                                {{ form_end(userForm) }}
+                                            </div>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+{#}
+                    </div>
+                </div>
+                <div class="col-md-4 text-center">
+                    <div class="transparent-square">
+                        <h3>Explora la galería</h3>
+                        <div class="img-container">
+                            <div class="img-frame">
+                                <img class="img-responsive center-block" src="{{ asset('img/gallery.png') }}">
+                            </div>
+                        </div>
+                        <div class="caption">
+                            <p>Podrás conocer fotógrafos y evaluar su trabajo</p>
+                        </div>
+                        <a href="{{ path('foto_join_gallery_homepage') }}" class="btn btn-primary btn-lg">Ir a la galería</a>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <div class="row text-center"><a href="#features">{{ icon('chevron-down fa-3x') }}</a></div>
+        </div>
+    </div>
+{% endblock %}
+
+{#}
+  <p class=" icon-down text-center">
+    <a href="#home"><i class="fa fa-2x fa-chevron-down"></i></a>
+  </p>
+{#}

@@ -1,0 +1,175 @@
+user:
+    menu:
+        group: 'Usuarios'
+    form:
+        group_name: 'Nombre de grupo'
+        username: 'Nombre de usuario'
+        email: Email
+        current_password: 'Contraseña actual'
+        password: Contraseña
+        password_confirmation: 'Repita la contraseña'
+        termsAccepted: 'He leído y aceptado los términos y condiciones de FotoJoin.'
+        new_password: 'Nueva contraseña'
+        new_password_confirmation: 'Repita la contraseña'
+        name: 'Nombre'
+        createdAt: 'Registrado'
+        updatedAt: 'Última Actualización'
+    list:
+        title: 'Lista de Usuarios'
+        link: 'Lista de Usuarios'
+    new:
+        title: 'Nuevo Usuario'
+        link: 'Nuevo Usuario'
+        submit: 'Registrar Usuario'
+    register:
+        title: 'Formulario de Registro'
+        link: 'Formulario de Registro'
+        submit: 'Registrar'
+    show:
+        title: 'Ver Usuario'
+        link: 'Ver Usuario'
+    edit:
+        title: 'Editar Usuario'
+        link: 'Editar Usuario'
+        submit: 'Guardar Cambios'
+    delete:
+        title: 'Eliminar Usuario'
+        link: 'Eliminar Usuario'
+        message: 'El usuario será eliminado y los datos no podrán ser recuperados.'
+        submit: 'Confirmar Eliminación'
+    flash:
+        updated: 'El usuario ha sido actualizado'
+        created: 'El usuario ha sido creado'
+        deleted: 'El usuario ha sido borrado'
+group:
+    edit:
+        submit: 'Actualizar grupo'
+    show:
+        name: 'Nombre de grupo'
+    new:
+        submit: 'Crear grupo'
+    flash:
+        updated: 'El grupo ha sido actualizado'
+        created: 'El grupo ha sido creado'
+        deleted: 'El grupo ha sido borrado'
+security:
+    register:
+        link: 'Regístrate Aquí'
+    login:
+        title: 'Ingreso de Usuarios'
+        link: 'Ingreso de Usuarios'
+        email: 'Correo Electrónico'
+        username: 'Nombre de Usuario'
+        password: 'Contraseña'
+        remember_me: 'Recordar Contraseña'
+        submit: 'Entrar'
+        goback: 'Volver a la pantalla de ingreso'
+        socialmedia: 'O directamente con redes sociales'
+        register: '¿Aún no tienes una cuenta?'
+        form: 'Ingresa con tus datos'
+    logout:
+        link: 'Desconectar'
+profile:
+    show:
+        title: 'Perfil de Usuario'
+        link: 'Perfil de Usuario'
+        username: 'Nombre de Usuario'
+        email: 'Email'
+    edit:
+        title: 'Editar Perfil de Usuario'
+        link: 'Editar Perfil'
+        submit: 'Actualizar Perfil'
+    flash:
+        updated: 'El perfil ha sido actualizado'
+change_password:
+    title: 'Cambio de Contraseña'
+    link: 'Cambiar Contraseña'
+    submit: 'Cambiar Contraseña'
+    flash:
+        success: 'La contraseña se ha cambiado con éxito'
+registration:
+    link: 'Crear una cuenta'
+    title: 'Formulario de Registro'
+    check_email: "Se ha enviado un email a %email%.\n\nContiene un enlace de activación que debes presionar para activar tu cuenta."
+    confirmed:
+        title: 'Cuenta Confirmada'
+        message: "Felicidades %name%, tu cuenta %username% está ahora confirmada."
+    back: 'Volver a la página original.'
+    submit: Registrar
+    flash:
+        user_created: 'El usuario se ha creado satisfactoriamente'
+    email:
+        subject: 'Bienvenido %name%!'
+        message: "Hola %name%!\n\nPara completar la validación de tu cuenta - por favor visita %confirmationUrl%\n\nAtentamente,\nEquipo de FotoJoin.\n"
+resetting:
+    link: '¿Olvidaste tu contraseña?'
+    password_already_requested: 'La contraseña para este usuario ya ha sido solicitada dentro de las 24 horas.'
+    check_email: 'Un email ha sido enviado a %email%. Contiene un enlace de activación que debes presionar para restablecer tu contraseña.'
+    request:
+        title: 'Recuperar Contraseña'
+        invalid_username: 'El usuario o dirección de correo "%username%" no existe.'
+        username: 'Nombre de Usuario'
+        email: 'Dirección de Correo'
+        submit: 'Recuperar contraseña'
+        back: 'Ingreso de usuarios'
+    reset:
+        title: 'Cambio de Contraseña'
+        request: '¿Olvidaste tu contraseña?'
+        submit: 'Cambiar contraseña'
+    flash:
+        success: 'La contraseña se ha cambiado con éxito'
+    email:
+        subject: 'Restablecer Contraseña'
+        message: "Hola %name%!\n\nPara restablecer tu contraseña - por favor visita %confirmationUrl%\n\nAtentamente,\nel Equipo.\n"
+layout:
+    logout: Salir
+    login: Entrar
+    register: Registrar
+    logged_in_as: 'Identificado como %username%'
+form:
+    group_name: 'Nombre de grupo'
+    username: 'Nombre de usuario'
+    email: Email
+    name: Nombre
+    country: País
+    city:
+        select: 'Seleccione una Ciudad'
+        1: 'Ciudad 1'
+        2: 'Ciudad 2'
+        3: 'Ciudad 3'
+
+    birthdate: Fecha de Nacimiento
+    current_password: 'Contraseña actual'
+    password: Contraseña
+    password_confirmation: 'Repita la contraseña'
+    new_password: 'Nueva contraseña'
+    new_password_confirmation: 'Repita la contraseña'
+    profilephoto:
+        type: 'Foto de Perfil'
+        delete: 'Eliminar foto de perfil'
+        download: 'Descargar foto de perfil'
+    exigency:
+        type: 'Filtro de Exigencia'
+    level:
+        type: 'Tipo de Fotógrafo'
+        amatheur: 'Fotógrafo Aficionado'
+        professional: 'Fotógrafo Profesional'
+    description: 'Experiencia'
+    publiccontact: 'Permitir que otros usuarios se contacten conmigo para participar en actividades fotográficas'
+    facebookshare: 'Permitir que mis fotos puedan ser compartidas a través de redes sociales'
+link:
+    login: 'Formulario de Ingreso'
+    gallery: 'Galería Fotográfica'
+    profile: 'Perfil de Usuario'
+    registration: 'Crear una cuenta'
+    resetting: '¿Olvidaste tu contraseña?'
+    change_password: 'Cambiar Contraseña'
+
+signup:
+    link: 'Crear una cuenta'
+
+upgrade:
+    link: 'Convertirme en fotógrafo de FotoJoin'
+    message: 'Estás a punto de convertir tu cuenta de usuario evaluador en cuenta de fotógrafo FotoJoin. Podrás subir tus propias fotografías para que otros usuarios puedan evaluarte. Esta operación es irreversible. ¿Estás de acuerdo?'
+    title: 'Actualización de cuenta de usuario'
+    confirm: 'Si, quiero ser fotógrafo de FotoJoin!'

@@ -1,0 +1,29 @@
+album_index:
+    path:     /
+    defaults: { _controller: "FotoJoinControlPanelBundle:Album:index" }
+    methods:  GET
+
+album_show:
+    path:     /{id}/show
+    defaults: { _controller: "FotoJoinControlPanelBundle:Album:show" }
+    methods:  GET
+
+album_new:
+    path:     /new
+    defaults: { _controller: "FotoJoinControlPanelBundle:Album:new" }
+    methods:  [GET, POST]
+
+album_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "FotoJoinControlPanelBundle:Album:edit" }
+    methods:  [GET, POST]
+
+album_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "FotoJoinControlPanelBundle:Album:delete" }
+    methods:  DELETE
+
+album_dropzone:
+    path:     /{id}/dropzone
+    defaults: { _controller: "FotoJoinControlPanelBundle:Album:dropzone" }
+    methods:  [GET, POST]

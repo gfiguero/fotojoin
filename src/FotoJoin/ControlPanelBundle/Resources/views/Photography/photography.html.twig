@@ -1,0 +1,196 @@
+{% extends 'FotoJoinControlPanelBundle::base.html.twig' %}
+
+{% block title %}{{ 'photography.index'|trans({}, 'FotoJoinControlPanelBundle') }}{% endblock %}
+
+{% block stylesheet %}
+    <style type="text/css">
+        .shadow {
+            background: rgba(10, 10, 10, 0.7);
+            transition:all 0.3s ease;
+            opacity: 0;
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+        }
+        .btn-box {
+            padding: 20px;
+        }
+        .shadow:hover {
+            opacity: 1;
+        }
+        
+    </style>
+{% endblock %}
+
+{% block body %}
+    <div id="page-wrapper">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">{% include 'FotoJoinControlPanelBundle::icon.html.twig' %}{{ 'photography.list'|trans({}, 'FotoJoinControlPanelBundle') }}</h1>
+                {% include 'FotoJoinControlPanelBundle::flashbag.html.twig' %}
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
+        <!-- /.row -->
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        {{ form_start(albumForm) }}
+                        {{ form_widget(albumForm.album) }}
+                        {{ form_end(albumForm) }}
+{#}
+                        <div class="btn-toolbar">
+                            <a class="btn btn-primary" href="{{ path('photography_new') }}">{{ icon('upload') }}&nbsp;{{ 'photography.new'|trans({}, 'FotoJoinControlPanelBundle') }}</a>
+                            <a class="btn btn-success" href="{{ path('photography_new') }}">{{ icon('upload') }}&nbsp;{{ 'photography.massiveupload'|trans({}, 'FotoJoinControlPanelBundle') }}</a>
+                        </div>
+                        <div class="clearfix"></div>
+{#}
+                    </div>
+                    <div class="panel-body nopadding">
+                        {% for key, photography in photographies %}
+                        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 nopadding">
+                            <div class="photography">
+                                <img class="img-responsive" src="{{ vich_uploader_asset(photography, 'file', 'FotoJoin\\ControlPanelBundle\\Entity\\Photography')|imagine_filter('controlpanel_photography_small') }}" alt="{{ 1 }}" />
+                                <div class="shadow">
+                                    <div class="btn-box">
+                                        <div class="btn-group" role="group" aria-label="...">
+                                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal{{ photography.id }}">{{ icon('edit fa-fw') }}Editar</button>
+                                            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modalDelete{{ photography.id }}">{{ icon('trash-o fa-fw') }}Eliminar</button>
+                                        </div>
+                                    </div>
+                                </div>
+{#}
+                                <a href="{{ path('photography_show', { 'id': photography.id }) }}">
+                                    <img class="img-responsive" src="{{ vich_uploader_asset(photography, 'file', 'FotoJoin\\ControlPanelBundle\\Entity\\Photography')|imagine_filter('frontpage_gallery_small') }}" alt="{{ 1 }}" />
+                                </a>
+{#}
+                                <div class="modal fade" id="modal{{ photography.id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                                    <div class="modal-dialog modal-lg" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                <h4 class="modal-title" id="myModalLabel">Editar Fotografía</h4>
+                                            </div>
+                                            <div class="modal-body">
+                                                <div class="row">
+                                                    <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+                                                            <img class="img-responsive" src="{{ vich_uploader_asset(photography, 'file', 'FotoJoin\\ControlPanelBundle\\Entity\\Photography')|imagine_filter('controlpanel_photography_medium') }}" alt="{{ 1 }}" />
+                                                    </div>
+                                                    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                                        {% set editForm = attribute(editForms, key) %}
+                                                        {{ form_start(editForm) }}
+                                                            {{ form_widget(editForm) }}
+                                                            <button type="submit" class="btn btn-primary btn-block">{{ icon('check') }}&nbsp;{{ 'photography.save'|trans({}, 'FotoJoinControlPanelBundle') }}</button>
+                                                        {{ form_end(editForm) }}
+                                                    </div>
+                                                    <div class="clearfix"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="modal fade" id="modalDelete{{ photography.id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                                    <div class="modal-dialog modal-md" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                <h4 class="modal-title" id="myModalLabel">{{ 'Are you sure?'|trans({}, 'FotoJoinControlPanelBundle') }}</h4>
+                                            </div>
+                                            <div class="modal-body">
+                                                <p>{{ 'Deleted records can not be recovered.'|trans({}, 'FotoJoinControlPanelBundle') }}</p>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <div class="pull-right" style="height:34px;">
+                                                    {% set deleteForm = attribute(deleteForms, key) %}
+                                                    {{ form_start(deleteForm) }}
+                                                        <button type="submit" class="btn btn-danger">{{ icon('trash-o') }}&nbsp;{{ 'photography.delete'|trans({}, 'FotoJoinControlPanelBundle') }}</button>
+                                                    {{ form_end(deleteForm) }}</div>
+                                                <div class="clearfix"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+                        {% endfor %}
+
+                        <div class="clearfix"></div>
+                    </div>
+
+{#}
+                    <div class="table-responsive">
+                        <table class="records_list table table-striped table-hover">
+                            <thead>
+                                <tr>
+                                    <th>{{ knp_pagination_sortable(photographies, 'photography.filename'|trans({}, 'FotoJoinControlPanelBundle'), 'filename') }}{% if sort == 'filename' %}{% if direction == 'desc' %}{{ icon('caret-down') }}{% else %}{{ icon('caret-up') }}{% endif %}{% endif %}</th>
+                                    <th>{{ knp_pagination_sortable(photographies, 'photography.createdAt'|trans({}, 'FotoJoinControlPanelBundle'), 'createdAt') }}{% if sort == 'createdAt' %}{% if direction == 'desc' %}{{ icon('caret-down') }}{% else %}{{ icon('caret-up') }}{% endif %}{% endif %}</th>
+                                    <th>{{ knp_pagination_sortable(photographies, 'photography.updatedAt'|trans({}, 'FotoJoinControlPanelBundle'), 'updatedAt') }}{% if sort == 'updatedAt' %}{% if direction == 'desc' %}{{ icon('caret-down') }}{% else %}{{ icon('caret-up') }}{% endif %}{% endif %}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            {% for photography in photographies %}
+                                <tr class='clickableRow' href="{{ path('photography_show', { 'id': photography.id }) }}">
+                                    <td>{% if photography.filename %}{{ photography.filename }}{% endif %}</td>
+                                    <td>{% if photography.createdAt %}{{ photography.createdAt|localizeddate('full', 'full', 'es_ES', 'America/Santiago', "dd-LLL-Y - HH:mm") }}{% endif %}</td>
+                                    <td>{% if photography.updatedAt %}{{ photography.updatedAt|localizeddate('full', 'full', 'es_ES', 'America/Santiago', "dd-LLL-Y - HH:mm") }}{% endif %}</td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+{#}
+                    <div class="panel-footer">
+                        <div class="text-center">
+                            {{ knp_pagination_render(photographies) }}
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
+        <!-- /.row -->
+    </div>
+    <!-- /#page-wrapper -->
+
+{% endblock %}
+
+{% block javascript %}
+    <script type="text/javascript">
+    var optionsCategories = {
+        enableClickableOptGroups: true,
+        enableCollapsibleOptGroups: true,
+        enableFiltering: true,
+        includeSelectAllOption: true,
+        buttonWidth: '100%',
+        allSelectedText: 'Todas las Categorías',
+        nonSelectedText: 'Ninguna Categoría',
+        nSelectedText: 'Categorías seleccionadas',
+        delimiterText: ', ',
+        selectAllText: 'Seleccionar Todo',
+        filterPlaceholder: 'Buscar'
+    };
+    $('.photography_categories').multiselect(optionsCategories);
+    var optionsAlbum = {
+        enableClickableOptGroups: true,
+        enableCollapsibleOptGroups: true,
+        buttonWidth: '100%',
+        nonSelectedText: 'Ninguno'
+    };
+    $('.photography_album').multiselect(optionsAlbum);
+    var optionsFilter = {
+        enableClickableOptGroups: true,
+        enableCollapsibleOptGroups: true,
+        onChange: function() {
+            $('form[name=photography_filter]').submit();
+        }
+    };
+    $('.photography_filter').multiselect(optionsFilter);
+    </script>
+{% endblock %}

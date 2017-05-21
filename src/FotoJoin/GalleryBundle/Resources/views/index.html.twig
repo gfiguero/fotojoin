@@ -1,0 +1,234 @@
+{% extends ':Gallery:base.html.twig' %}
+
+{% block stylesheet %}{% endblock %}
+
+{% block body %}
+
+    <div class="col-md-3">
+        <div class="row">
+            <div class="col-md-12">
+                <h3>Filtro de Galería</h3>
+                {{ form_start(form, { 'style': 'horizontal', 'col_size': 'sm', 'label_col': 0, 'widget_col': 12, 'attr': {'id': 'gallery_form'} }) }}
+                    {{ form_widget(form) }}
+                    <div class="form-group"><div class="col-lg-12">
+                        {#}<button id="sendFilter" type="button" class="btn btn-primary">{{ icon('save') }}&nbsp;{{ 'filter.send.ajax'|trans }}</button>{#}
+                        <button type="submit" class="btn btn-block btn-primary">{{ icon('save') }}&nbsp;{{ 'filter.send.post'|trans({}, 'FotoJoinGalleryBundle') }}</button>
+                    </div></div>
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+    <!-- /.col-md-3 -->
+    <div class="col-md-9">
+        <div class="row" id="response">
+            {% for photography in photographies %}
+                <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 nopadding">
+                    <a href="#{{ photography.id }}" data-toggle="modal" data-target="#modal">
+                        <img class="img-responsive" src="{{ vich_uploader_asset(photography, 'file', 'FotoJoin\\ControlPanelBundle\\Entity\\Photography')|imagine_filter('frontpage_gallery_small') }}" alt="{{ 1 }}" />
+                    </a>
+                </div>
+            {% endfor %}
+            <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content">
+                        <div class="modal-body">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">{{ icon('times') }}</button>
+                            <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9 nopadding">
+                                <div id="modalCarousel" class="carousel" data-ride="carousel">
+                                    <div class="carousel-inner" role="listbox">
+                                        {% for key, photography in photographies %}
+                                            {% if loop.first %}<div class="item active">{% else %}<div class="item">{% endif %}
+                                                <img class="img-responsive" src="{{ vich_uploader_asset(photography, 'file', 'FotoJoin\\ControlPanelBundle\\Entity\\Photography')|imagine_filter('frontpage_gallery_modal') }}" alt="{{ 1 }}" />
+                                                <div id="carousel-caption">
+                                                    {% include ':Gallery:author.html.twig' %}
+                                                    {% include ':Gallery:capture.html.twig' %}
+                                                    {% include ':Gallery:appraisement.html.twig' %}
+                                                    {#}<button type="button" class="btn btn-block btn-default" data-dismiss="modal" aria-label="Close">{{ icon('times') }} Cerrar</button>{#}
+                                                </div>
+                                            </div>
+                                        {% endfor %}
+                                        <a class="left carousel-control" href="#modalCarousel" data-slide="prev"><i class="glyphicon glyphicon-chevron-left"></i></a>
+                                        <a class="right carousel-control" href="#modalCarousel" data-slide="next"><i class="glyphicon glyphicon-chevron-right"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                                <div id="modal-caption"></div>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /.col-md-3 -->
+
+{% endblock %}
+
+{% block javascript %}
+    <script type="text/javascript">
+    var optionsCities = {
+        enableClickableOptGroups: true,
+        enableCollapsibleOptGroups: true,
+        enableFiltering: true,
+        includeSelectAllOption: true,
+        buttonWidth: '100%',
+        allSelectedText: 'Todas las Ciudades',
+        nonSelectedText: 'Todas las Ciudades',
+        nSelectedText: 'Ciudades seleccionadas',
+        delimiterText: ', ',
+        selectAllText: 'Seleccionar Todo',
+        filterPlaceholder: 'Buscar',
+        onChange: function() {
+            var $form = $('#gallery_form');
+            $.ajax({
+                url: $form.attr('action'),
+                type: $form.attr('method'),
+                data: $form.serializeArray(),
+                success: function(html) {
+                    $('#gallery_categories').multiselect('destroy');
+                    $('#gallery_categories').replaceWith($(html).find('#gallery_categories'));
+                    $('#gallery_categories').multiselect(optionsCategories);
+                    $('#gallery_authors').multiselect('destroy');
+                    $('#gallery_authors').replaceWith($(html).find('#gallery_authors'));
+                    $('#gallery_authors').multiselect(optionsAuthors);
+                }
+            });
+        }
+    };
+    var optionsCategories = {
+        enableClickableOptGroups: true,
+        enableCollapsibleOptGroups: true,
+        enableFiltering: true,
+        includeSelectAllOption: true,
+        buttonWidth: '100%',
+        allSelectedText: 'Todas las Categorías',
+        nonSelectedText: 'Todas las Categorías',
+        nSelectedText: 'Categorías seleccionadas',
+        delimiterText: ', ',
+        selectAllText: 'Seleccionar Todo',
+        filterPlaceholder: 'Buscar',
+        onChange: function() {
+            var $form = $('#gallery_form');
+            $.ajax({
+                url: $form.attr('action'),
+                type: $form.attr('method'),
+                data: $form.serializeArray(),
+                success: function(html) {
+                    $('#gallery_authors').multiselect('destroy');
+                    $('#gallery_authors').replaceWith($(html).find('#gallery_authors'));
+                    $('#gallery_authors').multiselect(optionsAuthors);
+                }
+            });
+        }
+    };
+    var optionsAuthors = {
+        enableClickableOptGroups: true,
+        enableCollapsibleOptGroups: true,
+        enableFiltering: true,
+        includeSelectAllOption: true,
+        buttonWidth: '100%',
+        allSelectedText: 'Todos los Fotógrafos',
+        nonSelectedText: 'Todos los Fotógrafos',
+        nSelectedText: 'Autores seleccionados',
+        delimiterText: ', ',
+        selectAllText: 'Seleccionar Todo',
+        filterPlaceholder: 'Buscar'
+    };
+    var optionsOrder = {
+        enableClickableOptGroups: true,
+        enableCollapsibleOptGroups: true,
+        buttonWidth: '100%'
+    };
+    $('#gallery_cities').multiselect(optionsCities);
+    $('#gallery_categories').multiselect(optionsCategories);
+    $('#gallery_authors').multiselect(optionsAuthors);
+    $('#gallery_order').multiselect(optionsOrder);
+
+    function loadCarousel(){
+        $('#modalCarousel').carousel({interval:false});
+        var caption = $('div.item:nth-child(1) #carousel-caption');
+        $('#modal-caption').html(caption.html());
+        caption.css('display','none');
+        $("#modalCarousel").on('slide.bs.carousel', function(evt) {
+            var key = $(evt.relatedTarget).index();
+            var caption = $('div.item:nth-child(' + (key+1) + ') #carousel-caption');
+            $('#modal-caption').html(caption.html());
+            caption.css('display','none');
+            //loadAppraisement(key);
+        });
+    }
+
+    $(document).ready(function() {
+        loadCarousel();
+    });
+
+    $('#modalCarousel').carousel({interval:false});
+
+    /* change modal title when slide changes */
+    $('#modalCarousel').on('slid.bs.carousel', function () {
+        $('.modal-title').html($(this).find('.active').attr("title"));
+    })
+
+    /* when clicking a thumbnail */
+    $('.row .img-responsive').click(function(){
+        var idx = $(this).parents('div').index();
+        var id = parseInt(idx);
+        $('#myModal').modal('show'); // show the modal
+        $('#modalCarousel').carousel(id); // slide carousel to selected
+    });
+{#}
+    function sendFilter(){
+        var $form = $("#filter");
+        $.ajax({
+            url: $form.attr('action'),
+            type: 'POST',
+            data: $form.serializeObject(),
+            success: function(result) {
+                $.each(result, function(index, value){
+                    $.each(JSON.parse(value),function(index, value){
+                        var list = document.createElement('ul');
+                        $.each(value, function(index, value){
+                            var element = document.createElement('li');
+                            var text = document.createTextNode(index + ' ' + value);
+                            element.appendChild(text);
+                            list.appendChild(element)
+                            console.log(list);
+                        });
+                        var object = document.createElement('div');
+                        object.className = "col-xs-12 col-sm-6 col-md-4 col-lg-3";
+                        object.appendChild(list);
+                        document.getElementById('response').appendChild(object);
+                    });
+                });
+            }
+        });
+    }
+    function sendAppraisement(){
+
+    }
+
+    function loadAppraisement(key){
+        var start = new Date().getTime();
+        var end;
+        $('span.star').click(function(){
+            var value = parseInt($(this).index());
+            end = new Date().getTime();
+            //alert('Time: '+ (end-start) + '\nAppraisement: ' + (5-star) + '\nKey: ' + key);
+            $('#modal-caption #appraisement_value').val(10-value);
+            $('#modal-caption #appraisement_delay').val(end-start);
+            var formId = "appraisement"+key;
+            var $form = $('#modal-caption').find('form');
+            console.log($form.serializeObject());
+            var $html = document.getElementById(formId);
+            console.log($html);
+        });
+    }
+
+    function loadFilter(){
+    }
+{#}
+
+    </script>
+{% endblock %}

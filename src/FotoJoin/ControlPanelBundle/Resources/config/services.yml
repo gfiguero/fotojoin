@@ -1,0 +1,17 @@
+services:
+    foto_join_control_panel.form.type.photography_file:
+        class: FotoJoin\ControlPanelBundle\Form\PhotographyFileType
+        arguments: ['@vich_uploader.storage', '@vich_uploader.upload_handler', '@translator']
+        tags:
+            - { name: form.type, alias: photography_file }
+    foto_join_control_panel.form.type.photography_collection:
+        class: FotoJoin\ControlPanelBundle\Form\PhotographyCollectionType
+        arguments: ['@vich_uploader.storage', '@vich_uploader.upload_handler', '@translator']
+        tags:
+            - { name: form.type, alias: photography_collection }
+    foto_join_control_panel.form.type.entityhidden:
+        class: FotoJoin\ControlPanelBundle\Form\EntityHiddenType
+        arguments: ['@doctrine.orm.entity_manager']
+        tags:
+            - { name: form.type, alias: entity_hidden }
+

@@ -1,0 +1,23 @@
+user_security:
+    resource: "@FotoJoinUserBundle/Resources/config/routing/security.yml"
+
+user_profile:
+    resource: "@FotoJoinUserBundle/Resources/config/routing/profile.yml"
+    prefix: /profile
+
+user_register:
+    resource: "@FotoJoinUserBundle/Resources/config/routing/registration.yml"
+    prefix: /register
+
+user_resetting:
+    resource: "@FotoJoinUserBundle/Resources/config/routing/resetting.yml"
+    prefix: /resetting
+
+user_change_password:
+    resource: "@FotoJoinUserBundle/Resources/config/routing/change_password.yml"
+    prefix: /profile
+
+user_manage:
+    resource: "@FotoJoinUserBundle/Resources/config/routing/manage.yml"
+    prefix: /manage
+

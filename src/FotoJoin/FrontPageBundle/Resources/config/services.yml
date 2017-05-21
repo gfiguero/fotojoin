@@ -1,0 +1,7 @@
+services:
+    foto_join_front_page.form.type.contact_reason:
+        class: FotoJoin\FrontPageBundle\Form\ContactReasonType
+        arguments:
+            - %contact_reason%
+        tags:
+            - { name: form.type, alias: 'contact_reason' }

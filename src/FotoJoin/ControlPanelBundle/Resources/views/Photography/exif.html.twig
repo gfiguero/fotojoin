@@ -1,0 +1,18 @@
+<img src="{{ vich_uploader_asset(photography, 'file')|imagine_filter('frontpage_gallery_small') }}" />
+
+
+<dl>
+    <dt>TotalValue</dt>
+    <dd>{{ totalvalue }}</dd>
+{% for k, field in data %}
+    <dt>{{ k }}</dt>
+    <dd>{{ field }}</dd>
+{% endfor %}
+</dl>
+
+<dl>
+{% for k, field in exif %}
+    <dt>{{ k }}</dt>
+    <dd>{% if field is not iterable %}{{ field }}{% endif %}</dd>
+{% endfor %}
+</dl>

@@ -1,0 +1,20 @@
+FotoJoin\AdminBundle\Entity\Category:
+    type: entity
+    table: Category
+    repositoryClass: FotoJoin\AdminBundle\Entity\CategoryRepository
+    manyToMany:
+        photographies:
+            targetEntity: FotoJoin\ControlPanelBundle\Entity\Photography
+            mappedBy: categories
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        name:
+            type: string
+            length: 100
+            nullable: true
+    lifecycleCallbacks: {  }

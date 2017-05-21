@@ -1,0 +1,20 @@
+{% block profile_photo_widget %}
+{% spaceless %}
+    <div class="profilephoto">
+        {{ form_widget(form.file) }}
+        {% if download_uri is defined and download_uri %}
+        <div class="media">
+            <div class="media-left">
+                <img class="media-object" src="{{ download_uri|imagine_filter('user_credential_small') }}" alt="" />
+            </div>
+            <div class="media-body">
+                <h4 class="media-heading"><a class="btn btn-default" href="{{ download_uri|imagine_filter('user_credential') }}" download>{{ icon('download') }}&nbsp;{{ 'form.profilephoto.download'|trans({}, translation_domain) }}</a></h4>
+                {% if form.delete is defined %}
+                {{ form_row(form.delete, { 'no_form_group': true} ) }}
+                {% endif %}
+            </div>
+        </div>
+        {% endif %}
+    </div>
+{% endspaceless %}
+{% endblock %}

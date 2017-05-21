@@ -1,0 +1,31 @@
+parameters:
+    user_level:
+        0: form.level.amatheur
+        1: form.level.professional
+
+    gallery_order:
+        0: gallery.order.random
+        1: gallery.order.evaluation
+        2: gallery.order.relevance
+        3: gallery.order.date
+
+    user_exigency:
+        '4.0': '4.0'
+        '4.5': '4.5'
+        '5.0': '5.0'
+        '5.5': '5.5'
+        '6.0': '6.0'
+        '6.5': '6.5'
+        '7.0': '7.0'
+        '7.5': '7.5'
+        '8.0': '8.0'
+        '8.5': '8.5'
+        '9.0': '9.0'
+        '9.5': '9.5'
+        '10.0': '10.0'
+
+    contact_reason:
+        0: 'Informar un Problema'
+        1: 'Hacer una sugerencia'
+        2: 'Asóciate con nosotros'
+        3: 'Otro'

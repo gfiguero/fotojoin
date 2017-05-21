@@ -1,0 +1,15 @@
+foto_join_control_panel_photography:
+    resource: "@FotoJoinControlPanelBundle/Resources/config/routing/photography.yml"
+    prefix:   /photography
+
+foto_join_control_panel_album:
+    resource: "@FotoJoinControlPanelBundle/Resources/config/routing/album.yml"
+    prefix:   /album
+
+foto_join_control_panel_status:
+    resource: "@FotoJoinControlPanelBundle/Resources/config/routing/status.yml"
+    prefix:   /status
+
+#foto_join_control_panel_homepage:
+#    path:     /status
+#    defaults: { _controller: FotoJoinControlPanelBundle:ControlPanel:index }

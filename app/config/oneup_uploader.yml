@@ -1,0 +1,4 @@
+oneup_uploader:
+    mappings:
+        album:
+            frontend: blueimp

@@ -1,0 +1,4 @@
+fotojoin_user:
+    resource: "@FotoJoinUserBundle/Resources/config/routing/user.yml"
+    prefix:   /
+

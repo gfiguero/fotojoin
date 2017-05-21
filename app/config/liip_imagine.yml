@@ -1,0 +1,82 @@
+liip_imagine:
+    resolvers:
+        default:
+            web_path:
+                web_root: %kernel.root_dir%/../web
+                cache_prefix: media/cache
+    loaders:
+        default:
+            filesystem:
+                data_root: %kernel.root_dir%/../web/
+    filter_sets:
+        cache: ~
+        controlpanel_photography_small:
+            quality: 75
+            filters:
+                upscale: { min: [640, 360] }
+                thumbnail: { size: [640, 360], mode: outbound }
+        controlpanel_photography_medium:
+            quality: 75
+            filters:
+                upscale: { min: [1600, 900] }
+                thumbnail: { size: [1600, 900], mode: outbound }
+        gallery_photography_small:
+            quality: 75
+            filters:
+                upscale: { min: [640, 360] }
+                thumbnail: { size: [640, 360], mode: outbound }
+        gallery_photography_medium:
+            quality: 75
+            filters:
+                upscale: { min: [1600, 900] }
+                thumbnail: { size: [1600, 900], mode: outbound }
+                watermark: { image: '../web/uploads/photography/fotojoin2.png', size: 1, position: center }
+
+##############################################################
+        album_dropzone:
+            quality: 75
+            default_image: /uploads/photography/default.jpg
+            filters:
+                thumbnail: { size: [120, 120], mode: outbound }
+        frontpage_gallery_small:
+            quality: 75
+            default_image: /uploads/photography/default.jpg
+            filters:
+                upscale: { min: [640, 360] }
+                thumbnail: { size: [640, 360], mode: outbound }
+        frontpage_gallery_modal:
+            quality: 75
+            default_image: /uploads/photography/default.jpg
+            filters:
+                thumbnail: { size: [1280, 1280], mode: inset }
+                watermark:
+                    image: ../web/uploads/photography/watermark.png
+                    size: 0.5
+                    position: center
+        frontpage_author_small:
+            quality: 75
+            filters:
+                thumbnail: { size: [100, 100], mode: outbound }
+        user_credential_small:
+            quality: 75
+            default_image: /uploads/profilephoto/default.jpg
+            filters:
+                thumbnail: { size: [120, 120], mode: outbound }
+        user_credential:
+            quality: 100
+
+
+        frontpage_join:
+            quality: 75
+            filters:
+                upscale: { min: [1600, 900] }
+                thumbnail: { size: [1600, 900], mode: outbound }
+                watermark: { image: '../web/uploads/photography/fotojoin2.png', size: 1, position: center }
+        frontpage_join_placeholder:
+            quality: 5
+            filters:
+                upscale: { min: [1280, 720] }
+                thumbnail: { size: [1280, 720], mode: outbound }
+                    
+                    
+                    

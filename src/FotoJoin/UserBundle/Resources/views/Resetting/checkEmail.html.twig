@@ -1,0 +1,30 @@
+{% extends "FotoJoinFrontPageBundle::base.html.twig" %}
+
+{% trans_default_domain 'FotoJoinUserBundle' %}
+
+{% block title %}{{ 'resetting.request.title'|trans }}{% endblock %}
+
+{% block body %}
+
+<div class="section fill" id="resseting">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 col-lg-offset-3 text-center">
+                <div class="transparent-square">
+                    <h1 class="page-header">{{ 'resetting.request.title'|trans }}</h1>
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            {{ 'resetting.check_email'|trans({'%email%': email}) }}
+                        </div>
+                        <div class="panel-footer"><a href="{{ path("fos_user_security_login") }}">{{ 'security.login.goback'|trans }}</a></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="push"></div>
+</div>
+
+{% include ':FrontPage:footer.html.twig' %}
+
+{% endblock body %}

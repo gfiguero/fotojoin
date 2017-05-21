@@ -1,0 +1,59 @@
+HTTPDUSER=`ps axo user,comm | grep -E '[a]pache|[h]ttpd|[_]www|[w]ww-data|[n]ginx' | grep -v root | head -1 | cut -d\  -f1`
+setfacl -R -m u:"$HTTPDUSER":rwX -m u:`whoami`:rwX app/cache app/logs
+setfacl -dR -m u:"$HTTPDUSER":rwX -m u:`whoami`:rwX app/cache app/logs
+
+HTTPDUSER=`ps axo user,comm | grep -E '[a]pache|[h]ttpd|[_]www|[w]ww-data|[n]ginx' | grep -v root | head -1 | cut -d\  -f1`
+setfacl -R -m u:"$HTTPDUSER":rwX -m u:`whoami`:rwX app/cache app/logs web/uploads web/media
+setfacl -dR -m u:"$HTTPDUSER":rwX -m u:`whoami`:rwX app/cache app/logs web/uploads web/media
+
+HTTPDUSER=`ps axo user,comm | grep -E '[a]pache|[h]ttpd|[_]www|[w]ww-data|[n]ginx' | grep -v root | head -1 | cut -d\  -f1`
+setfacl -R -m u:"$HTTPDUSER":rwX -m u:`whoami`:rwX web/media
+setfacl -dR -m u:"$HTTPDUSER":rwX -m u:`whoami`:rwX web/media
+
+php app/console generate:bundle --namespace FotoJoin/FrontPageBundle --dir src --bundle-name FotoJoinFrontPageBundle --format yml --shared --no-interaction
+php app/console generate:bundle --namespace FotoJoin/GalleryBundle --dir src --bundle-name FotoJoinGalleryBundle --format yml --shared --no-interaction
+php app/console generate:bundle --namespace FotoJoin/ControlPanelBundle --dir src --bundle-name FotoJoinControlPanelBundle --format yml --shared --no-interaction
+php app/console generate:bundle --namespace FotoJoin/AdminBundle --dir src --bundle-name FotoJoinAdminBundle --format yml --shared --no-interaction
+php app/console generate:bundle --namespace FotoJoin/UserBundle --dir src --bundle-name FotoJoinUserBundle --format yml --shared --no-interaction
+
+php app/console assetic:dump --env=dev
+
+php app/console doctrine:generate:entities FotoJoinAdminBundle --path=src
+
+php app/console doctrine:generate:entities FotoJoinAdminBundle:Category --path=src
+php app/console doctrine:generate:entities FotoJoinAdminBundle:City --path=src
+
+php app/console doctrine:generate:entities FotoJoinGalleryBundle:Gallery --path=src
+php app/console doctrine:generate:entities FotoJoinGalleryBundle:Appraisement --path=src
+
+php app/console doctrine:generate:entities FotoJoinControlPanelBundle:Photography --path=src
+php app/console doctrine:generate:entities FotoJoinControlPanelBundle:Capture --path=src
+php app/console doctrine:generate:entities FotoJoinControlPanelBundle:Album --path=src
+
+php app/console doctrine:generate:entities FotoJoinUserBundle:User --path=src
+php app/console doctrine:generate:entities FotoJoinUserBundle:Message --path=src
+php app/console doctrine:generate:entities FotoJoinUserBundle:Author --path=src
+
+php app/console doctrine:schema:drop --force
+php app/console doctrine:schema:create
+php app/console doctrine:schema:update --force
+
+php app/console generate:doctrine:crud --entity=FotoJoinControlPanelBundle:Album --format=yml --with-write --overwrite --no-interaction --route-prefix=album
+php app/console generate:doctrine:crud --entity=FotoJoinControlPanelBundle:Capture --format=yml --with-write --overwrite --no-interaction --route-prefix=capture
+php app/console generate:doctrine:crud --entity=FotoJoinControlPanelBundle:Photography --format=yml --with-write --overwrite --no-interaction --route-prefix=photography
+
+php app/console generate:doctrine:crud --entity=FotoJoinGalleryBundle:Gallery --format=yml --with-write --overwrite --no-interaction --route-prefix=gallery
+
+php app/console generate:doctrine:crud --entity=FotoJoinAdminBundle:Appraisement --format=yml --with-write --overwrite --no-interaction --route-prefix=appraisement
+php app/console generate:doctrine:crud --entity=FotoJoinAdminBundle:Category --format=yml --with-write --overwrite --no-interaction --route-prefix=category
+php app/console generate:doctrine:crud --entity=FotoJoinAdminBundle:Datetime --format=yml --with-write --overwrite --no-interaction --route-prefix=datetime
+php app/console generate:doctrine:crud --entity=FotoJoinAdminBundle:Place --format=yml --with-write --overwrite --no-interaction --route-prefix=place
+php app/console generate:doctrine:crud --entity=FotoJoinAdminBundle:Tag --format=yml --with-write --overwrite --no-interaction --route-prefix=tag
+php app/console generate:doctrine:crud --entity=FotoJoinAdminBundle:City --format=yml --with-write --overwrite --no-interaction --route-prefix=city
+
+php app/console generate:doctrine:crud --entity=FotoJoinUserBundle:Author --format=yml --with-write --overwrite --no-interaction --route-prefix=author
+
+HTTPDUSER=`ps axo user,comm | grep -E '[a]pache|[h]ttpd|[_]www|[w]ww-data|[n]ginx' | grep -v root | head -1 | cut -d\  -f1`
+setfacl -R -m u:"$HTTPDUSER":rwX -m u:`whoami`:rwX app/cache app/logs
+setfacl -dR -m u:"$HTTPDUSER":rwX -m u:`whoami`:rwX app/cache app/logs
+

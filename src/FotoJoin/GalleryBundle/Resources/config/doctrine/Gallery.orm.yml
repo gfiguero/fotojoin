@@ -1,0 +1,38 @@
+FotoJoin\GalleryBundle\Entity\Gallery:
+    type: entity
+    table: Gallery
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        order:
+            type: integer
+            nullable: true
+        createdAt:
+            type: datetime
+            gedmo:
+                timestampable:
+                    on: create
+        updatedAt:
+            type: datetime
+            gedmo:
+                timestampable:
+                    on: update
+        deletedAt:
+            type: datetime
+            nullable: true
+    gedmo:
+        soft_deleteable:
+            field_name: deletedAt
+            time_aware: false
+    manyToMany:
+        categories:
+            targetEntity: FotoJoin\AdminBundle\Entity\Category
+        users:
+            targetEntity: FotoJoin\UserBundle\Entity\User
+        cities:
+            targetEntity: FotoJoin\AdminBundle\Entity\City
+    lifecycleCallbacks: {  }

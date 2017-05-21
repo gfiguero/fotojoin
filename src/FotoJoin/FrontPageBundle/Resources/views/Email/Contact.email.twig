@@ -1,0 +1,17 @@
+{% trans_default_domain 'FotoJoinUserBundle' %}
+
+{% block subject %}
+{% autoescape false %}
+{{ 'Asunto: ' }}{{ contact_reason[subject] }}
+{% endautoescape %}
+{% endblock %}
+
+{% block body_text %}
+{% autoescape false %}
+{{ 'Nombre: ' }}{{ name }}
+{{ 'Email: ' }}{{ email }}
+{{ 'Mensaje: ' }}{{ message }}
+{% endautoescape %}
+{% endblock %}
+
+{% block body_html %}{% endblock %}

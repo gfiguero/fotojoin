@@ -1,0 +1,24 @@
+appraisement_index:
+    path:     /
+    defaults: { _controller: "FotoJoinAdminBundle:Appraisement:index" }
+    methods:  GET
+
+appraisement_show:
+    path:     /{id}/show
+    defaults: { _controller: "FotoJoinAdminBundle:Appraisement:show" }
+    methods:  GET
+
+appraisement_new:
+    path:     /new
+    defaults: { _controller: "FotoJoinAdminBundle:Appraisement:new" }
+    methods:  [GET, POST]
+
+appraisement_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "FotoJoinAdminBundle:Appraisement:edit" }
+    methods:  [GET, POST]
+
+appraisement_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "FotoJoinAdminBundle:Appraisement:delete" }
+    methods:  DELETE

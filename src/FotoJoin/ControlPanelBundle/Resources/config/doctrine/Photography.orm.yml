@@ -1,0 +1,105 @@
+FotoJoin\ControlPanelBundle\Entity\Photography:
+    type: entity
+    repositoryClass: FotoJoin\ControlPanelBundle\Entity\PhotographyRepository
+    table: Photography
+    manyToOne:
+        user:
+            targetEntity: FotoJoin\UserBundle\Entity\User
+            inversedBy: photographies
+        album:
+            targetEntity: FotoJoin\ControlPanelBundle\Entity\Album
+            joinColumn:
+                onDelete: "SET NULL"
+    oneToMany:
+        appraisements:
+            targetEntity: FotoJoin\GalleryBundle\Entity\Appraisement
+            mappedBy: photography
+    manyToMany:
+        categories:
+            targetEntity: FotoJoin\AdminBundle\Entity\Category
+            inversedBy: photographies
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        filename:
+            type: string
+            length: 300
+            nullable: true
+        value:
+            type: decimal
+            nullable: true
+##################################
+        published:
+            type: boolean
+            nullable: true
+            options:
+                default: false
+##################################
+        MakeModel:
+            type: string
+            length: 200
+            nullable: true
+        DateTimeOriginal:
+            type: date
+            nullable: true
+        ExposureTime:
+            type: string
+            length: 20
+            nullable: true
+        FocalLength:
+            type: integer
+            nullable: true
+        FNumber:
+            type: decimal
+            precision: 6
+            scale: 2
+            nullable: true
+        ISOSpeedRatings:
+            type: integer
+            nullable: true
+#        date:
+#            type: date
+#            nullable: true
+#        camera:
+#            type: string
+#            length: 200
+#            nullable: true
+#        shutterspeed:
+#            type: string
+#            length: 20
+#            nullable: true
+#        aperture:
+#            type: string
+#            length: 20
+#            nullable: true
+#        iso:
+#            type: integer
+#            nullable: true
+#        focallength:
+#            type: integer
+#            nullable: true
+#        fnumber:
+#            type: integer
+#            nullable: true
+        createdAt:
+            type: datetime
+            gedmo:
+                timestampable:
+                    on: create
+        updatedAt:
+            type: datetime
+            gedmo:
+                timestampable:
+                    on: update
+        deletedAt:
+            type: datetime
+            nullable: true
+    gedmo:
+        soft_deleteable:
+            field_name: deletedAt
+            time_aware: false
+    lifecycleCallbacks: {  }

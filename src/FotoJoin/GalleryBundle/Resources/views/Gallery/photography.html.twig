@@ -1,0 +1,43 @@
+{% extends 'FotoJoinGalleryBundle::base.html.twig' %}
+
+{% block meta %}
+    <meta property = "og:url"                content="{{ absolute_url(path('foto_join_gallery_share', {'id': photography.id})) }}" />
+    <meta property = "og:type"               content="article" />
+    <meta property = "og:title"              content="FotoJoin.com" />
+    <meta property = "og:description"        content="Imagen compartida" />
+    <meta property = "og:image"              content="{{ vich_uploader_asset(photography, 'file', 'FotoJoin\\ControlPanelBundle\\Entity\\Photography')|imagine_filter('frontpage_join') }}" />
+{% endblock %}
+
+{% block stylesheet %}
+    <link href="{{ asset('css/bootstrap-social/bootstrap-social.css') }}" rel="stylesheet">
+{% endblock %}
+
+{% block body %}
+    <div class="col-md-8">
+        <div class="row" id="photography">
+            <div class="col-xs-12">
+                <div class="loadingimage">
+                    <img class="img-responsive center-block" src="{{ vich_uploader_asset(photography, 'file', 'FotoJoin\\ControlPanelBundle\\Entity\\Photography')|imagine_filter('frontpage_join') }}" />
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="row" id="photography-data">
+            <div class="col-md-12">
+                {% include 'FotoJoinGalleryBundle:Gallery:user.html.twig' %}
+                {% include 'FotoJoinGalleryBundle:Gallery:capture.html.twig' %}
+                {% include 'FotoJoinGalleryBundle:Gallery:appraisement.html.twig' %}
+                {% include 'FotoJoinGalleryBundle:Gallery:share.html.twig' %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascript %}
+    <script src="//platform.twitter.com/widgets.js" async charset="utf-8"></script>
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <script src="//connect.facebook.net/en_US/sdk.js" async defer id="facebook-jssdk"></script>
+    <script src="{{ asset('js/share-init.js') }}"></script>
+{% endblock %}

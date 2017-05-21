@@ -1,0 +1,68 @@
+{% extends ':ControlPanel:base.html.twig' %}
+
+{% block title %}{{ 'capture.index'|trans }}{% endblock %}
+
+{% block body %}
+    <div id="page-wrapper">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">{% include ':ControlPanel:icon.html.twig' %}{{ 'capture.list'|trans }}</h1>
+                {% include ':ControlPanel:flashbag.html.twig' %}
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
+        <!-- /.row -->
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <div class="btn-toolbar">
+                            <a class="btn btn-primary" href="{{ path('capture_new') }}">{{ icon('file') }}&nbsp;{{ 'capture.new'|trans }}</a>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="records_list table table-striped table-hover">
+                            <thead>
+                                <tr>
+                                    <th>{{ knp_pagination_sortable(captures, 'capture.brand'|trans, 'brand') }}{% if sort == 'brand' %}{% if direction == 'desc' %}{{ icon('caret-down') }}{% else %}{{ icon('caret-up') }}{% endif %}{% endif %}</th>
+                                    <th>{{ knp_pagination_sortable(captures, 'capture.model'|trans, 'model') }}{% if sort == 'model' %}{% if direction == 'desc' %}{{ icon('caret-down') }}{% else %}{{ icon('caret-up') }}{% endif %}{% endif %}</th>
+                                    <th>{{ knp_pagination_sortable(captures, 'capture.lens'|trans, 'lens') }}{% if sort == 'lens' %}{% if direction == 'desc' %}{{ icon('caret-down') }}{% else %}{{ icon('caret-up') }}{% endif %}{% endif %}</th>
+                                    <th>{{ knp_pagination_sortable(captures, 'capture.sensibility'|trans, 'sensibility') }}{% if sort == 'sensibility' %}{% if direction == 'desc' %}{{ icon('caret-down') }}{% else %}{{ icon('caret-up') }}{% endif %}{% endif %}</th>
+                                    <th>{{ knp_pagination_sortable(captures, 'capture.aperture'|trans, 'aperture') }}{% if sort == 'aperture' %}{% if direction == 'desc' %}{{ icon('caret-down') }}{% else %}{{ icon('caret-up') }}{% endif %}{% endif %}</th>
+                                    <th>{{ knp_pagination_sortable(captures, 'capture.shutter'|trans, 'shutter') }}{% if sort == 'shutter' %}{% if direction == 'desc' %}{{ icon('caret-down') }}{% else %}{{ icon('caret-up') }}{% endif %}{% endif %}</th>
+                                    <th>{{ knp_pagination_sortable(captures, 'capture.createdAt'|trans, 'createdAt') }}{% if sort == 'createdAt' %}{% if direction == 'desc' %}{{ icon('caret-down') }}{% else %}{{ icon('caret-up') }}{% endif %}{% endif %}</th>
+                                    <th>{{ knp_pagination_sortable(captures, 'capture.updatedAt'|trans, 'updatedAt') }}{% if sort == 'updatedAt' %}{% if direction == 'desc' %}{{ icon('caret-down') }}{% else %}{{ icon('caret-up') }}{% endif %}{% endif %}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            {% for capture in captures %}
+                                <tr class='clickableRow' href="{{ path('capture_show', { 'id': capture.id }) }}">
+                                    <td>{% if capture.brand %}{{ capture.brand }}{% endif %}</td>
+                                    <td>{% if capture.model %}{{ capture.model }}{% endif %}</td>
+                                    <td>{% if capture.lens %}{{ capture.lens }}{% endif %}</td>
+                                    <td>{% if capture.sensibility %}{{ capture.sensibility }}{% endif %}</td>
+                                    <td>{% if capture.aperture %}{{ capture.aperture }}{% endif %}</td>
+                                    <td>{% if capture.shutter %}{{ capture.shutter }}{% endif %}</td>
+                                    <td>{% if capture.createdAt %}{{ capture.createdAt|localizeddate('full', 'full', 'es_ES', 'America/Santiago', "dd-LLL-Y - HH:mm") }}{% endif %}</td>
+                                    <td>{% if capture.updatedAt %}{{ capture.updatedAt|localizeddate('full', 'full', 'es_ES', 'America/Santiago', "dd-LLL-Y - HH:mm") }}{% endif %}</td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="panel-footer">
+                        <div class="text-center">
+                            {{ knp_pagination_render(captures) }}
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
+        <!-- /.row -->
+    </div>
+    <!-- /#page-wrapper -->
+
+{% endblock %}

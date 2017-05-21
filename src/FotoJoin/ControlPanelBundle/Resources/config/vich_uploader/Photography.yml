@@ -1,0 +1,4 @@
+FotoJoin\ControlPanelBundle\Entity\Photography:
+    file:
+        mapping:           photography
+        filename_property: filename

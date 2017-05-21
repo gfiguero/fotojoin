@@ -1,0 +1,48 @@
+fos_user:
+    db_driver:                  orm
+    firewall_name:              main
+    user_class:                 FotoJoin\UserBundle\Entity\User
+    use_listener:               true
+    use_username_form_type:     true
+    model_manager_name:         null
+    from_email:
+        address:                admin.fotojoin@izarus.cl
+        sender_name:            FotoJoin
+    profile:
+        form:
+            type:               FotoJoin\UserBundle\Form\ProfileType
+            name:               fotojoin_user_profile_form
+            validation_groups:  [FotoJoinProfile]
+    change_password:
+        form:
+            type:               FotoJoin\UserBundle\Form\ChangePasswordType
+            name:               fotojoin_user_change_password_form
+            validation_groups:  [ChangePassword, Default]
+    service:
+        mailer:                 fos_user.mailer.default
+        email_canonicalizer:    fos_user.util.canonicalizer.default
+        username_canonicalizer: fos_user.util.canonicalizer.default
+        token_generator:        fos_user.util.token_generator.default
+        user_manager:           fos_user.user_manager.default
+    registration:
+        confirmation:
+            from_email: # Use this node only if you don't want the global email address for the confirmation email
+                address:        registro.fotojoin@izarus.cl
+                sender_name:    FotoJoin
+            enabled:            true
+            template:           FotoJoinUserBundle:Email:Registration.email.twig
+        form:
+            type:               FotoJoin\UserBundle\Form\RegistrationType
+            name:               fotojoin_user_registration_form
+            validation_groups:  [FotoJoinRegistration]
+    resetting:
+        token_ttl: 86400
+        email:
+            from_email:
+                address:        recuperacion.fotojoin@izarus.cl
+                sender_name:    FotoJoin
+            template:           FotoJoinUserBundle:Email:Resetting.email.twig
+        form:
+            type:               FotoJoin\UserBundle\Form\ResettingType
+            name:               fotojoin_user_resetting_form
+            validation_groups:  [ResetPassword, Default]

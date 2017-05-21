@@ -1,0 +1,45 @@
+{% block extends %}
+{{ "{% extends ':Admin:base.html.twig' %}" }}
+{% endblock extends %}
+
+{% block body %}
+{{ "{% block title %}" }}{{ "{{ '" ~ entity_singularized ~ ".new'|trans }}" }}{{ "{% endblock %}" }}
+
+{{ "{% block body %}" }}
+    <div id="page-wrapper">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">{{ "{% include ':Admin:icon.html.twig' %}" }}{{ "{{ '" ~ entity_singularized|lower ~ ".new'|trans }}" }}</h1>
+                {{ "{% include ':Admin:flashbag.html.twig' %}" }}
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
+
+        <!-- /.row -->
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="panel panel-default">
+
+                    {%- set hide_edit, hide_delete = true, true -%}
+                    {{- include('crud/views/others/record_actions.html.twig.twig') }}
+                    <div class="panel-body">
+                        {{ "{{ form_start(form, { 'style': 'horizontal' }) }}" }}
+                            {{ '{{ form_widget(form) }}' }}
+                                <div class="form-group"><div class="col-lg-offset-2 col-lg-10">
+                                    <button type="submit" class="btn btn-primary">{{ "{{ icon('save') }}&nbsp;{{ '" ~ entity_singularized|lower ~ ".register'|trans }}" }}</button>
+                                </div></div>
+                        {{ '{{ form_end(form) }}' }}
+
+                    </div>
+                </div>
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
+        <!-- /.row -->
+    </div>
+    <!-- /#page-wrapper -->
+
+{{ "{% endblock %}" }}
+{% endblock body %}
+
+

@@ -1,0 +1,37 @@
+services:
+    foto_join_user.form.type.user_level:
+        class: FotoJoin\UserBundle\Form\UserLevelType
+        arguments:
+            - %user_level%
+        tags:
+            - { name: form.type, alias: user_level }
+
+    foto_join_user.form.type.user_exigency:
+        class: FotoJoin\UserBundle\Form\UserExigencyType
+        arguments:
+            - %user_exigency%
+        tags:
+            - { name: form.type, alias: user_exigency }
+
+    foto_join_user.form.type.profile_photo:
+        class: FotoJoin\UserBundle\Form\ProfilePhotoType
+        arguments: ['@vich_uploader.storage', '@vich_uploader.upload_handler', '@translator']
+        tags:
+            - { name: form.type, alias: profile_photo }
+
+    foto_join_user.twig.type.city:
+        class: FotoJoin\UserBundle\Form\CityType
+        arguments: ['@doctrine']
+        tags:
+            - { name: form.type }
+
+    foto_join_user.twig.country_extension:
+        class: FotoJoin\UserBundle\Twig\CountryExtension
+        tags:
+            - { name: twig.extension }
+
+    foto_join_user.form.profile:
+        class: FotoJoin\UserBundle\Form\ProfileType
+        arguments: ['@security.authorization_checker', '%user_level%', '%user_exigency%']
+        tags:
+            - { name: form.type, alias: fotojoin_user_profile }

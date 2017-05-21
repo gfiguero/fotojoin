@@ -1,0 +1,19 @@
+fos_user_registration_register:
+    path:     /author/{author}
+    defaults: { _controller: "FotoJoinUserBundle:Registration:register", author: false }
+    methods: [GET|POST]
+
+fos_user_registration_check_email:
+    path:     /check-email
+    defaults: { _controller: "FotoJoinUserBundle:Registration:checkEmail" }
+    methods: [GET]
+
+fos_user_registration_confirm:
+    path:     /confirm/{token}
+    defaults: { _controller: "FotoJoinUserBundle:Registration:confirm" }
+    methods: [GET]
+
+fos_user_registration_confirmed:
+    path:     /confirmed
+    defaults: { _controller: "FotoJoinUserBundle:Registration:confirmed" }
+    methods: [GET]

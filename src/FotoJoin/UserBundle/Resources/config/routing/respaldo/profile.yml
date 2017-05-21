@@ -1,0 +1,8 @@
+user_profile_show:
+    path:     /
+    defaults: { _controller: "FotoJoinUserBundle:Profile:show" }
+
+user_profile_edit:
+    path:     /edit
+    defaults: { _controller: "FotoJoinUserBundle:Profile:edit" }
+    methods: [GET|POST]

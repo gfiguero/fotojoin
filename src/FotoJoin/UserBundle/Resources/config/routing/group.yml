@@ -1,0 +1,25 @@
+user_group_list:
+    path:     /list
+    defaults: { _controller: "FotoJoinUserBundle:Profile:list" }
+    methods: [GET]
+
+user_group_new:
+    path:     /new
+    defaults: { _controller: "FotoJoinUserBundle:Profile:new" }
+    methods: [GET|POST]
+
+user_group_show:
+    path:     /{groupname}
+    defaults: { _controller: "FotoJoinUserBundle:Profile:show" }
+    methods: [GET]
+
+user_group_edit:
+    path:     /{groupname}/edit
+    defaults: { _controller: "FotoJoinUserBundle:Profile:edit" }
+    methods: [GET|POST]
+
+user_group_delete:
+    path:     /{groupname}/delete
+    defaults: { _controller: "FotoJoinUserBundle:Profile:delete" }
+    methods: [GET]
+

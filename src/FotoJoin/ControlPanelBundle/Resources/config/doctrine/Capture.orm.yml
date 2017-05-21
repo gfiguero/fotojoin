@@ -1,0 +1,52 @@
+FotoJoin\ControlPanelBundle\Entity\Capture:
+    type: entity
+    table: Capture
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        brand:
+            type: string
+            length: 100
+            nullable: true
+        model:
+            type: string
+            length: 100
+            nullable: true
+        lens:
+            type: string
+            length: 30
+            nullable: true
+        sensibility:
+            type: string
+            length: 30
+            nullable: true
+        aperture:
+            type: string
+            length: 30
+            nullable: true
+        shutter:
+            type: string
+            length: 30
+            nullable: true
+        createdAt:
+            type: datetime
+            gedmo:
+                timestampable:
+                    on: create
+        updatedAt:
+            type: datetime
+            gedmo:
+                timestampable:
+                    on: update
+        deletedAt:
+            type: datetime
+            nullable: true
+    gedmo:
+        soft_deleteable:
+            field_name: deletedAt
+            time_aware: false
+    lifecycleCallbacks: {  }

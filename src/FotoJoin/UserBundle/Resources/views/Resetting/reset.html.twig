@@ -1,0 +1,32 @@
+{% extends "FotoJoinFrontPageBundle::base.html.twig" %}
+
+{% trans_default_domain 'FotoJoinUserBundle' %}
+
+{% block title %}{{ 'resetting.reset.title'|trans }}{% endblock %}
+
+{% block body %}
+
+<div class="section fill" id="resseting">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 col-lg-offset-3">
+                <div class="transparent-square">
+                    <h1 class="page-header">{{ 'resetting.reset.title'|trans }}</h1>
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            {{ form_start(form, { 'action': path('fos_user_resetting_reset', {'token': token}), 'attr': { 'class': 'fos_user_resetting_reset' } }) }}
+                                {{ form_widget(form) }}
+                                <button type="submit" class="btn btn-primary btn-block">{{ icon('save') }}&nbsp;{{ 'resetting.reset.submit'|trans }}</button>
+                            {{ form_end(form) }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="push"></div>
+</div>
+
+{% include ':FrontPage:footer.html.twig' %}
+
+{% endblock body %}

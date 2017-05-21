@@ -1,0 +1,14 @@
+user_security_login:
+    path:     /login
+    defaults: { _controller: "FotoJoinUserBundle:Security:login" }
+    methods: [GET|POST]
+
+user_security_check:
+    path:     /login_check
+    defaults: { _controller: "FotoJoinUserBundle:Security:check" }
+    methods: [POST]
+
+user_security_logout:
+    path:     /logout
+    defaults: { _controller: "FotoJoinUserBundle:Security:logout" }
+    methods: [GET]

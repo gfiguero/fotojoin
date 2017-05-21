@@ -1,0 +1,30 @@
+FotoJoin\ControlPanelBundle\Entity\Album:
+    type: entity
+    table: Album
+    manyToOne:
+#        author:
+#            targetEntity: FotoJoin\UserBundle\Entity\Author
+        user:
+            targetEntity: FotoJoin\UserBundle\Entity\User
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        name:
+            type: string
+            length: 100
+            nullable: true
+        createdAt:
+            type: datetime
+            gedmo:
+                timestampable:
+                    on: create
+        updatedAt:
+            type: datetime
+            gedmo:
+                timestampable:
+                    on: update
+    lifecycleCallbacks: {  }

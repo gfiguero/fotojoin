@@ -1,0 +1,66 @@
+# Assetic Configuration
+assetic:
+    debug:          "%kernel.debug%"
+    use_controller: false
+    bundles:        [ ]
+    #java: /usr/bin/java
+    filters:
+        cssrewrite: ~
+        less:
+            node: %kernel.root_dir%/../bin/node
+            node_paths: [%kernel.root_dir%/../node_modules]
+            apply_to: "\.less$"
+            formatter: "compressed"
+            preserve_comments: false
+    read_from: %kernel.root_dir%/
+    write_to: %kernel.root_dir%/../web
+    assets:
+
+        fotojoin_css:
+            inputs:
+                - Resources/less/fotojoin/build.less
+            filters:
+                - less
+                - cssrewrite
+            output: css/FotoJoin.css
+
+        frontpage_css:
+            inputs:
+                - Resources/less/fotojoin/frontpage.less
+            filters:
+                - less
+                - cssrewrite
+            output: css/FrontPage.css
+
+        controlpanel_css:
+            inputs:
+                - Resources/less/fotojoin/controlpanel.less
+            filters:
+                - less
+                - cssrewrite
+            output: css/ControlPanel.css
+
+        fotojoin_js:
+            inputs: 
+                - Resources/js/custom.js
+            output: js/FotoJoin.js
+
+        frontpage_js:
+            inputs: 
+                - Resources/js/frontpage.js
+            output: js/FotoJoinFrontPage.js
+        controlpanel_js:
+            inputs: 
+                - Resources/js/controlpanel.js
+            output: js/FotoJoinControlPanel.js
+#        admin_css:
+#            inputs:
+#                - Resources/less/admin/build.less
+#            filters:
+#                - less
+#                - cssrewrite
+#            output: css/FotoJoinAdmin.css
+#        bc_bootstrap_collection_js:
+#            inputs: 
+#                - ../vendor/braincrafted/bootstrap-bundle/Braincrafted/Bundle/BootstrapBundle/Resources/js/bc-bootstrap-collection.js
+#            output: js/bc-bootstrap-collection.js

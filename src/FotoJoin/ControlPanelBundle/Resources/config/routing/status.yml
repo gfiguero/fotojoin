@@ -1,0 +1,8 @@
+foto_join_control_panel_homepage:
+    path:     /
+    defaults: { _controller: "FotoJoinControlPanelBundle:ControlPanel:status" }
+    methods:  GET
+
+foto_join_control_panel_self_set_author:
+    path:     /selfsetauthor
+    defaults: { _controller: "FotoJoinControlPanelBundle:ControlPanel:selfSetAuthor" }

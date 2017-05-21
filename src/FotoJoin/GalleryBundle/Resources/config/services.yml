@@ -1,0 +1,13 @@
+services:
+    foto_join_gallery.form.type.gallery_order:
+        class: FotoJoin\GalleryBundle\Form\GalleryOrderType
+        arguments:
+            - %gallery_order%
+        tags:
+            - { name: form.type, alias: gallery_order }
+    foto_join_gallery.form.type.gallery:
+        class: FotoJoin\GalleryBundle\Form\GalleryType
+        arguments:
+            - "@doctrine"
+        tags:
+            - { name: form.type, alias: gallery }

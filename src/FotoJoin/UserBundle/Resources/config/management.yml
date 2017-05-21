@@ -1,0 +1,19 @@
+fotojoin_user_security:
+    resource: "@FotoJoinUserBundle/Resources/config/routing/security.yml"
+
+fotojoin_user_profile:
+    resource: "@FotoJoinUserBundle/Resources/config/routing/profile.yml"
+    prefix: /panel/profile
+
+fotojoin_user_register:
+    resource: "@FotoJoinUserBundle/Resources/config/routing/registration.yml"
+    prefix: /register
+
+fotojoin_user_resetting:
+    resource: "@FotoJoinUserBundle/Resources/config/routing/resetting.yml"
+    prefix: /resetting
+
+fotojoin_user_change_password:
+    resource: "@FotoJoinUserBundle/Resources/config/routing/change_password.yml"
+    prefix: /panel/profile
+

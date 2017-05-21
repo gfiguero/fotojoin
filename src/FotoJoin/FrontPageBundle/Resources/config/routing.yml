@@ -1,0 +1,15 @@
+foto_join_front_page_contact:
+    path:     /contact
+    defaults: { _controller: FotoJoinFrontPageBundle:Contact:index }
+
+foto_join_front_page_signup:
+    path:     /signup
+    defaults: { _controller: FotoJoinFrontPageBundle:FrontPage:signup }
+
+foto_join_front_page_homepage:
+    path:     /
+    defaults: { _controller: FotoJoinFrontPageBundle:FrontPage:index }
+
+foto_join_front_page_homepage:
+    path:     /profile/{email}
+    defaults: { _controller: FotoJoinFrontPageBundle:FrontPage:profile }

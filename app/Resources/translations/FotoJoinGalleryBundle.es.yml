@@ -1,0 +1,27 @@
+link:
+    gallery: 'Galería Fotográfica'
+
+gallery:
+    categories: 'Categorías'
+    authors: 'Fotógrafos'
+    cities: 'Ciudades'
+    order:
+        random: 'Orden Aleatorio'
+        evaluation: 'Ordenado por Evaluación'
+        relevance: 'Ordenado por Relevancia'
+        date: 'Ordenado por Fecha'
+
+filter:
+    send:
+        post: 'Filtrar Galería'
+
+photography:
+    appraisement:
+        title: Valoración
+        average: 'Valor'
+        weighted: 'Valor Ponderado'
+        quantity: 'Votos Recibidos'
+    user:
+        title: Información del Fotógrafo
+    share:
+        title: Compartir

@@ -1,0 +1,12 @@
+foto_join_gallery_homepage:
+    path:     /
+    defaults: { _controller: FotoJoinGalleryBundle:Gallery:index }
+
+foto_join_gallery_join:
+    path:     /join
+    defaults: { _controller: FotoJoinGalleryBundle:Join:index }
+
+foto_join_gallery_share:
+    path:     /{id}/share
+    defaults: { _controller: FotoJoinGalleryBundle:Gallery:share }
+    methods:  GET
