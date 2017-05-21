@@ -12,14 +12,13 @@ namespace FotoJoin\AdminGeneratorBundle\Generator;
 
 
 use Symfony\Component\Console\Output\ConsoleOutput;
-use Sensio\Bundle\GeneratorBundle\Generator as BaseGenerator;
 
 /**
  * Generator is the base class for all generators.
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-class Generator extends BaseGenerator
+class Generator
 {
     private $skeletonDirs;
     private static $output;
