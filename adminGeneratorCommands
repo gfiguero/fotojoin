@@ -1,0 +1,2 @@
+php app/console fotojoin:admingenerate:crud --entity=FotoJoinAdminBundle:Category --format=yml --with-write --overwrite --no-interaction --route-prefix=admin_category
+php app/console fotojoin:admingenerate:crud --entity=FotoJoinAdminBundle:City --format=yml --with-write --overwrite --no-interaction --route-prefix=admin_city

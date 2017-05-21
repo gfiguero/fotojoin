@@ -1,60 +1,75 @@
 {% block extends %}
-{{ "{% extends ':Admin:base.html.twig' %}" }}
+{{ "{% extends 'FotoJoinAdminBundle:Base:base.html.twig' %}" }}
+{{ "{% use 'FotoJoinAdminBundle:Base:navbar.html.twig' %}" }}
+{{ "{% use 'FotoJoinAdminBundle:Base:sidebar.html.twig' %}" }}
+{{ "{% use 'FotoJoinAdminBundle:Base:icons.html.twig' %}" }}
 {% endblock extends %}
 
 {% block body %}
-{{ "{% block title %}" }}{{ "{{ '" ~ entity_singularized ~ ".show'|trans }}" }}{{ "{% endblock %}" }}
+{{ "{% set translation_domain = '" ~ bundle ~ "' %}" }}
+{{ "{% trans_default_domain translation_domain %}" }}
+
+{{ "{% block title %}" }}{{ "{{ '" ~ entity_singularized|lower ~ ".title.index'|trans }}" }}{{ "{% endblock %}" }}
 
 {{ "{% block body %}" }}
     <div id="page-wrapper">
-        <div class="row">
+        <div class="row" id="page-header">
             <div class="col-lg-12">
-                <h1 class="page-header">{{ "{% include ':Admin:icon.html.twig' %}" }}{{ "{{ '" ~ entity_singularized|lower ~ ".show'|trans }}" }}</h1>
-                {{ "{% include ':Admin:flashbag.html.twig' %}" }}
+                <h1 class="page-header">{{ "{% block icons %}{{ parent() }}{% endblock %}{{ '" ~ entity_singularized|lower ~ ".title.index'|trans }}" }}</h1>
+                {{ "{% include 'FotoJoinAdminBundle:Base:flashbag.html.twig' with { 'translation_domain': translation_domain } %}" }}
             </div>
-            <!-- /.col-lg-12 -->
         </div>
-        <!-- /.row -->
-        <div class="row">
+        <!-- /#page-header -->
+
+        <div class="row" id="page-toolbar">
+            <div class="col-lg-12">
+                <div class="btn-toolbar">
+                    <a type="button" class="btn btn-default" href="{{ "{{ path('" ~ route_name_prefix ~ "_index') }}" }}">{{ "{{ icon('list') }}" }}&nbsp;{{ "{{ '" ~ entity_singularized|lower ~ ".list.link'|trans }}" }}</a>
+                    <a type="button" class="btn btn-primary" href="{{ "{{ path('" ~ route_name_prefix ~ "_edit', { 'id': " ~ entity_singularized|lower ~ "." ~ identifier ~ " }) }}" }}">{{ "{{ icon('edit') }}" }}&nbsp;{{ "{{ '" ~ entity_singularized|lower ~ ".new.link'|trans }}" }}</a>
+{#}                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalEdit">{{ "{{ icon('pencil') }}" }}&nbsp;{{ "{{ '" ~ entity_singularized|lower ~ ".edit.link'|trans }}" }}</button>{#}
+                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modalDelete">{{ "{{ icon('trash-o') }}" }}&nbsp;{{ "{{ '" ~ entity_singularized|lower ~ ".delete.link'|trans }}" }}</button>
+                </div>
+            </div>
+        </div>
+        <!-- /#page-toolbar -->
+
+        <div class="row" id="page-show">
             <div class="col-lg-12">
                 <div class="panel panel-default">
-                    {% set hide_edit, hide_delete = false, false %}
-                    {{ include('crud/views/others/record_actions.html.twig.twig') -}}
+                    <div class="panel-heading">
+                        <h2 class="panel-title">{{ "{{ '" ~ entity_singularized|lower ~ ".show.properties'|trans }}" }}</h2>
+                    </div>
                     <div class="panel-body">
                         <dl class="dl-horizontal dl-horizontal-sm dl-horizontal-md dl-horizontal-lg">
-                        {%- for field, metadata in fields %}
+                        {%- for field, metadata in fields if field not in ['deletedAt'] %}
 
-                            {%- if field not in ['id', 'deletedAt', 'path'] %}
-
-                                <dt>{{ "{{ '" }}{{ entity_singularized|lower ~ "." ~ field }}{{ "'|trans }}" }}</dt>
+                            <dt>{{ "{{ '" }}{{ entity_singularized|lower ~ ".form." ~ field }}{{ "'|trans }}" }}</dt>
 
                                 {%- if metadata.type in ['date'] %}
 
-                                    <dd>{{ '{% if ' ~ entity_singularized ~ '.' ~ field|replace({'_': ''}) ~ ' %}{{ ' ~ entity_singularized ~ '.' ~ field|replace({'_': ''}) ~ '|localizeddate(\'full\', \'full\', \'es_ES\', \'America/Santiago\', "d \'de\' LLLL \'de\' Y") }}{% endif %}' }}</dd>
+                                <dd>{{ '{% if ' ~ entity_singularized ~ '.' ~ field|replace({'_': ''}) ~ ' %}{{ ' ~ entity_singularized ~ '.' ~ field|replace({'_': ''}) ~ '|localizeddate(\'full\', \'full\', \'es_ES\', \'America/Santiago\', "d \'de\' LLLL \'de\' Y") }}{% endif %}' }}</dd>
 
                                 {%- elseif metadata.type in ['time'] %}
 
-                                    <dd>{{ '{% if ' ~ entity_singularized ~ '.' ~ field|replace({'_': ''}) ~ ' %}{{ ' ~ entity_singularized ~ '.' ~ field|replace({'_': ''}) ~ '|localizeddate(\'full\', \'full\', \'es_ES\', \'America/Santiago\', "HH:mm") }}{% endif %}' }}</dd>
+                                <dd>{{ '{% if ' ~ entity_singularized ~ '.' ~ field|replace({'_': ''}) ~ ' %}{{ ' ~ entity_singularized ~ '.' ~ field|replace({'_': ''}) ~ '|localizeddate(\'full\', \'full\', \'es_ES\', \'America/Santiago\', "HH:mm") }}{% endif %}' }}</dd>
 
                                 {%- elseif metadata.type in ['datetime'] %}
 
-                                    <dd>{{ '{% if ' ~ entity_singularized ~ '.' ~ field|replace({'_': ''}) ~ ' %}{{ ' ~ entity_singularized ~ '.' ~ field|replace({'_': ''}) ~ '|localizeddate(\'full\', \'full\', \'es_ES\', \'America/Santiago\', "d \'de\' LLLL \'de\' Y - HH:mm") }}{% endif %}' }}</dd>
+                                <dd>{{ '{% if ' ~ entity_singularized ~ '.' ~ field|replace({'_': ''}) ~ ' %}{{ ' ~ entity_singularized ~ '.' ~ field|replace({'_': ''}) ~ '|localizeddate(\'full\', \'full\', \'es_ES\', \'America/Santiago\', "d \'de\' LLLL \'de\' Y - HH:mm") }}{% endif %}' }}</dd>
 
                                 {%- elseif metadata.type in ['array'] %}
 
-                                    <dd>{{ '{% if ' ~ entity_singularized ~ '.' ~ field|replace({'_': ''}) ~ ' %}{{ ' ~ entity_singularized ~ '.' ~ field|replace({'_': ''}) ~ '|join(\', \') }}{% endif %}' }}</dd>
+                                <dd>{{ '{% if ' ~ entity_singularized ~ '.' ~ field|replace({'_': ''}) ~ ' %}{{ ' ~ entity_singularized ~ '.' ~ field|replace({'_': ''}) ~ '|join(\', \') }}{% endif %}' }}</dd>
 
                                 {%- elseif metadata.type in ['boolean'] %}
 
-                                    <dd>{{ '{% if ' ~ entity_singularized ~ '.' ~ field|replace({'_': ''}) ~ " %}{{ 'Si' }}{% else %}{{ 'No' }}{% endif %}" }}</dd>
+                                <dd>{{ '{% if ' ~ entity_singularized ~ '.' ~ field|replace({'_': ''}) ~ " %}{{ 'Si' }}{% else %}{{ 'No' }}{% endif %}" }}</dd>
 
                                 {%- else %}
 
-                                    <dd>{{ '{% if ' ~ entity_singularized ~ '.' ~ field|replace({'_': ''}) ~ ' %}{{ ' ~ entity_singularized ~ '.' ~ field|replace({'_': ''}) ~ ' }}{% endif %}' }}</dd>
+                                <dd>{{ '{% if ' ~ entity_singularized ~ '.' ~ field|replace({'_': ''}) ~ ' %}{{ ' ~ entity_singularized ~ '.' ~ field|replace({'_': ''}) ~ ' }}{% endif %}' }}</dd>
 
                                 {%- endif %}
-
-                            {%- endif %}
 
                         {%- endfor %}
 
@@ -62,9 +77,35 @@
                     </div>
                 </div>
             </div>
-            <!-- /.col-lg-12 -->
         </div>
-        <!-- /.row -->
+        <!-- /#page-show -->
+
+        <div id="page-modal">
+            <div class="modal fade" id="modalDelete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                <div class="modal-dialog modal-sm" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">{{ "{{ icon('times') }}" }}</button>
+                            <h4 class="modal-title" id="myModalLabel">{{ "{{ '" ~ entity_singularized|lower ~ ".delete.title'|trans }}" }}</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col-xs-2 text-center">{{ "{{ icon('exclamation-triangle fa-5x') }}" }}</div>
+                                <div class="col-xs-10"><p>{{ "{{ '" ~ entity_singularized|lower ~ ".delete.message'|trans }}" }}</p></div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            {{ '{{ form_start(deleteForm) }}' }}
+                                <button type="submit" class="btn btn-danger pull-right">{{ "{{ icon('trash-o') }}&nbsp;{{ '" ~ entity_singularized|lower ~ ".delete.submit'|trans }}" }}</button>
+                            {{ '{{ form_end(deleteForm) }}' }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <!-- /#page-modal -->
+
     </div>
     <!-- /#page-wrapper -->
 {{ "{% endblock %}" }}

@@ -103,6 +103,11 @@ class Photography
         $this->categories = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
+    public function __toString()
+    {
+        return $this->filename;
+    }
+
     /**
      * Get id
      *

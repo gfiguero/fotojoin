@@ -2,12 +2,10 @@
 
 namespace FotoJoin\AdminBundle\Controller;
 
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use FOS\UserBundle\Model\UserInterface;
-
 use FotoJoin\AdminBundle\Entity\Category;
 use FotoJoin\AdminBundle\Form\CategoryType;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Category controller.
@@ -15,41 +13,31 @@ use FotoJoin\AdminBundle\Form\CategoryType;
  */
 class CategoryController extends Controller
 {
+
     /**
      * Lists all Category entities.
      *
      */
     public function indexAction(Request $request)
     {
-        $user = $this->getUser();
-        if (!is_object($user) || !$user instanceof UserInterface) {
-            throw new AccessDeniedException('This user does not have access to this section.');
-        }
         $sort = $request->query->get('sort');
         $direction = $request->query->get('direction');
         $em = $this->getDoctrine()->getManager();
         if($sort) $categories = $em->getRepository('FotoJoinAdminBundle:Category')->findBy(array(), array($sort => $direction));
         else $categories = $em->getRepository('FotoJoinAdminBundle:Category')->findAll();
         $paginator = $this->get('knp_paginator');
-        $categories = $paginator->paginate($categories, $request->query->getInt('page', 1), 10);
+        $categories = $paginator->paginate($categories, $request->query->getInt('page', 1), 100);
 
-        $category = new Category();
-        $newForm = $this->createForm('FotoJoin\AdminBundle\Form\CategoryType', $category, array('action' => $this->generateUrl('category_new')))->createView();
-        $editForms = array();
         $deleteForms = array();
-        foreach ($categories as $category) {
+        foreach($categories as $key => $category) {
             $deleteForms[] = $this->createDeleteForm($category)->createView();
-            $editForms[] = $this->createEditForm($category)->createView();
         }
 
-        return $this->render('FotoJoinAdminBundle:Admin:category.html.twig', array(
-            'user' => $user,
+        return $this->render('FotoJoinAdminBundle:Category:index.html.twig', array(
             'categories' => $categories,
             'direction' => $direction,
             'sort' => $sort,
-            'newForm' => $newForm,
             'deleteForms' => $deleteForms,
-            'editForms' => $editForms,
         ));
     }
 
@@ -60,20 +48,52 @@ class CategoryController extends Controller
     public function newAction(Request $request)
     {
         $category = new Category();
-        $newForm = $this->createForm('FotoJoin\AdminBundle\Form\CategoryType', $category);
+        $newForm = $this->createNewForm($category);
         $newForm->handleRequest($request);
 
-        if ($newForm->isSubmitted() && $newForm->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($category);
-            $em->flush();
-            $request->getSession()->getFlashBag()->add( 'success', 'category.created' );    
-
-            return $this->redirect($request->headers->get('referer'));
+        if ($newForm->isSubmitted()) {
+            if($newForm->isValid()) {
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($category);
+                $em->flush();
+                $request->getSession()->getFlashBag()->add( 'success', 'category.new.flash' );
+                return $this->redirect($this->generateUrl('admin_category_index'));
+            }
         }
 
-        return $this->redirect($request->headers->get('referer'));
+        return $this->render('FotoJoinAdminBundle:Category:new.html.twig', array(
+            'newForm' => $newForm->createView(),
+        ));
+    }
 
+    /**
+     * Creates a form to create a new Category entity.
+     *
+     * @param Category $category The Category entity
+     *
+     * @return \Symfony\Component\Form\Form The form
+     */
+    private function createNewForm(Category $category)
+    {
+        return $this->createForm('FotoJoin\AdminBundle\Form\CategoryType', $category, array(
+            'action' => $this->generateUrl('admin_category_new'),
+        ));
+    }
+
+    /**
+     * Finds and displays a Category entity.
+     *
+     */
+    public function showAction(Category $category)
+    {
+        $editForm = $this->createEditForm($category);
+        $deleteForm = $this->createDeleteForm($category);
+
+        return $this->render('FotoJoinAdminBundle:Category:show.html.twig', array(
+            'category' => $category,
+            'editForm' => $editForm->createView(),
+            'deleteForm' => $deleteForm->createView(),
+        ));
     }
 
     /**
@@ -82,28 +102,40 @@ class CategoryController extends Controller
      */
     public function editAction(Request $request, Category $category)
     {
-        $editForm = $this->createForm('FotoJoin\AdminBundle\Form\CategoryType', $category);
+        $editForm = $this->createEditForm($category);
+        $deleteForm = $this->createDeleteForm($category);
         $editForm->handleRequest($request);
 
-        if ($editForm->isSubmitted() && $editForm->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($category);
-            $em->flush();
-            $request->getSession()->getFlashBag()->add( 'success', 'category.edited' );    
-
-            return $this->redirect($request->headers->get('referer'));
+        if ($editForm->isSubmitted()) {
+            if($editForm->isValid()) {
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($category);
+                $em->flush();
+                $request->getSession()->getFlashBag()->add( 'success', 'category.edit.flash' );
+                return $this->redirect($this->generateUrl('admin_category_index'));
+            }
         }
 
-        return $this->redirect($request->headers->get('referer'));
-    }
-
-    private function createEditForm(Category $category)
-    {
-        return $this->createForm('FotoJoin\AdminBundle\Form\CategoryType', $category, array(
-            'action' => $this->generateUrl('category_edit', array('id' => $category->getId()))
+        return $this->render('FotoJoinAdminBundle:Category:edit.html.twig', array(
+            'category' => $category,
+            'editForm' => $editForm->createView(),
+            'deleteForm' => $deleteForm->createView(),
         ));
     }
 
+    /**
+     * Creates a form to edit a Category entity.
+     *
+     * @param Category $category The Category entity
+     *
+     * @return \Symfony\Component\Form\Form The form
+     */
+    private function createEditForm(Category $category)
+    {
+        return $this->createForm('FotoJoin\AdminBundle\Form\CategoryType', $category, array(
+            'action' => $this->generateUrl('admin_category_edit', array('id' => $category->getId())),
+        ));
+    }
 
     /**
      * Deletes a Category entity.
@@ -118,10 +150,10 @@ class CategoryController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->remove($category);
             $em->flush();
-            $request->getSession()->getFlashBag()->add( 'danger', 'category.deleted' );    
+            $request->getSession()->getFlashBag()->add( 'danger', 'category.delete.flash' );
         }
 
-        return $this->redirectToRoute('category_index');
+        return $this->redirect($this->generateUrl('admin_category_index'));
     }
 
     /**
@@ -134,7 +166,7 @@ class CategoryController extends Controller
     private function createDeleteForm(Category $category)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('category_delete', array('id' => $category->getId())))
+            ->setAction($this->generateUrl('admin_category_delete', array('id' => $category->getId())))
             ->setMethod('DELETE')
             ->getForm()
         ;

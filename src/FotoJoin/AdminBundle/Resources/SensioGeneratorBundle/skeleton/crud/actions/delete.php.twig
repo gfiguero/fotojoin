@@ -16,19 +16,19 @@
 {% endblock method_definition %}
     {
 {% block method_body %}
-        $form = $this->createDeleteForm(${{ entity_singularized }});
-        $form->handleRequest($request);
+        $deleteForm = $this->createDeleteForm(${{ entity_singularized }});
+        $deleteForm->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($deleteForm->isSubmitted() && $deleteForm->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $em->remove(${{ entity_singularized }});
             $em->flush();
-            $request->getSession()->getFlashBag()->add( 'danger', '{{ entity_singularized ~ '.deleted' }}' );    
+            $request->getSession()->getFlashBag()->add( 'danger', '{{ entity_singularized ~ '.delete.flash' }}' );
         }
 {% endblock method_body %}
 
 {% block method_return %}
-        return $this->redirectToRoute('{{ route_name_prefix }}_index');
+        return $this->redirect($this->generateUrl('{{ route_name_prefix }}_index'));
 {% endblock method_return %}
     }
 

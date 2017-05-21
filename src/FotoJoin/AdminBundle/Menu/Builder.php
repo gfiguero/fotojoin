@@ -40,6 +40,9 @@ class Builder implements ContainerAwareInterface
         $menu->setChildrenAttribute('id', 'side-menu');
 
         $menu->addChild('admin.dashboard', array('route' => 'dashboard_index'))->setAttribute('icon', 'dashboard fa-fw');
+        $menu->addChild('admin.category', array('route' => 'admin_category_index'))->setAttribute('icon', 'check-square fa-fw');
+        $menu->addChild('admin.city', array('route' => 'admin_city_index'))->setAttribute('icon', 'map-marker fa-fw');
+
 //        $menu->addChild('dashboard')->setAttribute('icon', 'dashboard fa-fw');
 //        $menu['dashboard']->setChildrenAttribute('class', 'nav nav-second-level collapse');
 //        $menu['dashboard']->addChild('dashboard.stadistics', array('route' => 'foto_join_admin_homepage'));
@@ -49,14 +52,12 @@ class Builder implements ContainerAwareInterface
 //        $menu->addChild('admin.author', array('route' => 'author_index'))->setAttribute('icon', 'copyright fa-fw');
 //        $menu->addChild('admin.appraisement', array('route' => 'appraisement_index'))->setAttribute('icon', 'star-half-o fa-fw');
 //        $menu->addChild('admin.capture', array('route' => 'capture_index'))->setAttribute('icon', 'camera fa-fw');
-        $menu->addChild('admin.category', array('route' => 'category_index'))->setAttribute('icon', 'check-square fa-fw');
 //        $menu->addChild('admin.datetime', array('route' => 'datetime_index'))->setAttribute('icon', 'calendar fa-fw');
 //        $menu->addChild('admin.place', array('route' => 'place_index'))->setAttribute('icon', 'map-marker fa-fw');
 //        $menu->addChild('admin.tag', array('route' => 'tag_index'))->setAttribute('icon', 'tags fa-fw');
 //        $menu->addChild('admin.album', array('route' => 'album_index'))->setAttribute('icon', 'picture-o fa-fw');
 //        $menu->addChild('admin.photography', array('route' => 'photography_index'))->setAttribute('icon', 'picture-o fa-fw');
 //        $menu->addChild('admin.gallery', array('route' => 'gallery_index'))->setAttribute('icon', 'picture-o fa-fw');
-        $menu->addChild('admin.city', array('route' => 'city_index'))->setAttribute('icon', 'map-marker fa-fw');
 
 
 //        $menu->addChild('appraisement', array('route' => 'foto_join_admin_homepage'))->setAttribute('icon', 'star-half-o fa-fw');

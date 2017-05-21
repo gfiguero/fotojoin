@@ -1,3 +1,0 @@
-foto_join_admin_generator_homepage:
-    path:     /
-    defaults: { _controller: FotoJoinAdminGeneratorBundle:Default:index }

@@ -1,0 +1,106 @@
+{% extends 'FotoJoinAdminBundle:Base:base.html.twig' %}
+{% use 'FotoJoinAdminBundle:Base:navbar.html.twig' %}
+{% use 'FotoJoinAdminBundle:Base:sidebar.html.twig' %}
+{% use 'FotoJoinAdminBundle:Base:icons.html.twig' %}
+
+{% set translation_domain = 'FotoJoinAdminBundle' %}
+{% trans_default_domain translation_domain %}
+
+{% block title %}{{ 'category.title.index'|trans }}{% endblock %}
+
+{% block body %}
+    <div id="page-wrapper">
+        <div class="row" id="page-header">
+            <div class="col-lg-12">
+                <h1 class="page-header">{% block icons %}{{ parent() }}{% endblock %}{{ 'category.title.index'|trans }}</h1>
+                {% include 'FotoJoinAdminBundle:Base:flashbag.html.twig' with { 'translation_domain': translation_domain } %}
+            </div>
+        </div>
+        <!-- /#page-header -->
+
+        <div class="row" id="page-toolbar">
+            <div class="col-lg-12">
+                <div class="btn-toolbar">
+                    <a type="button" class="btn btn-success" href="{{ path('admin_category_new') }}">{{ icon('plus') }}&nbsp;{{ 'category.new.link'|trans }}</a>
+                </div>
+            </div>
+        </div>
+        <!-- /#page-toolbar -->
+
+        <div class="row" id="page-list">
+            <div class="col-lg-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h2 class="panel-title">{{ 'category.index.list'|trans }}</h2>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="records_list table table-striped table-hover">
+                            <thead>
+                                <tr>
+                                    <th>{{ 'category.form.actions'|trans }}</th>
+                                    <th>{{ knp_pagination_sortable(categories, 'category.form.id'|trans, 'id') }}{% if sort == 'id' %}{% if direction == 'desc' %}{{ icon('caret-down') }}{% else %}{{ icon('caret-up') }}{% endif %}{% endif %}</th>
+                                    <th>{{ knp_pagination_sortable(categories, 'category.form.name'|trans, 'name') }}{% if sort == 'name' %}{% if direction == 'desc' %}{{ icon('caret-down') }}{% else %}{{ icon('caret-up') }}{% endif %}{% endif %}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            {% for key, category in categories %}
+                                <tr>
+                                    <td>
+                                        <div class="btn-toolbar">
+                                            <div class="btn-group" role="group">
+                                                <a type="button" class="btn btn-sm btn-warning" href="{{ path('admin_category_show', { 'id': category.id }) }}" aria-label="{{ 'category.show.link'|trans }}">{{ icon('search') }}</a>
+                                                <a type="button" class="btn btn-sm btn-primary" href="{{ path('admin_category_edit', { 'id': category.id }) }}" aria-label="{{ 'category.show.link'|trans }}">{{ icon('edit') }}</a>
+                                                <button type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#modalDelete{{ category.id }}">{{ icon('trash') }}</button>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>{% if category.id %}{{ category.id }}{% endif %}</td>
+                                    <td>{% if category.name %}{{ category.name }}{% endif %}</td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="panel-footer">
+                        <div class="text-center">
+                            {{ knp_pagination_render(categories) }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /#page-list -->
+
+        <div id="page-modal">
+            {% for key, category in categories %}
+            <div class="modal fade" id="modalDelete{{ category.id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                <div class="modal-dialog modal-sm" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">{{ icon('times') }}</button>
+                            <h4 class="modal-title" id="myModalLabel">{{ 'category.delete.title'|trans }}</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col-xs-2 text-center">{{ icon('exclamation-triangle fa-5x') }}</div>
+                                <div class="col-xs-10"><p>{{ 'category.delete.message'|trans }}</p></div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            {% set deleteForm = attribute(deleteForms, key) %}
+                            {{ form_start(deleteForm) }}
+                                {{ form_widget(deleteForm) }}
+                                <button type="submit" class="btn btn-danger pull-right">{{ icon('trash') }}&nbsp;{{ 'category.delete.submit'|trans }}</button>
+                            {{ form_end(deleteForm) }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <!-- /#page-modal -->
+
+    </div>
+    <!-- /#page-wrapper -->
+
+{% endblock %}

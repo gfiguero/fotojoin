@@ -1,11 +1,3 @@
-foto_join_admin_generator:
-    resource: "@FotoJoinAdminGeneratorBundle/Resources/config/routing.yml"
-    prefix:   /
-
-foto_join_generator:
-    resource: "@FotoJoinGeneratorBundle/Resources/config/routing.yml"
-    prefix:   /
-
 foto_join_gallery:
     resource: "@FotoJoinGalleryBundle/Resources/config/routing.yml"
     prefix:   /

@@ -9,28 +9,26 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 class CityType extends AbstractType
 {
     /**
-     * @param FormBuilderInterface $builder
-     * @param array $options
+     * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder
-            ->add('country', 'country', array(
-                'label' => 'city.country',
-                'preferred_choices' => array('CL'),
-                'translation_domain' => 'FotoJoinAdminBundle',
-                'attr' => array('label_col' => 4, 'widget_col' => 8 ),
-            ))
+        $builder 
             ->add('name', null, array(
-                'label' => 'city.name',
+                'label' => 'city.form.name',
+                'attr'  => array( 'label_col' => 4, 'widget_col' => 8 ),
                 'translation_domain' => 'FotoJoinAdminBundle',
-                'attr' => array('label_col' => 4, 'widget_col' => 8 ),
+            )) 
+            ->add('country', null, array(
+                'label' => 'city.form.country',
+                'attr'  => array( 'label_col' => 4, 'widget_col' => 8 ),
+                'translation_domain' => 'FotoJoinAdminBundle',
             ))
         ;
     }
     
     /**
-     * @param OptionsResolver $resolver
+     * {@inheritdoc}
      */
     public function configureOptions(OptionsResolver $resolver)
     {
@@ -38,4 +36,14 @@ class CityType extends AbstractType
             'data_class' => 'FotoJoin\AdminBundle\Entity\City'
         ));
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getBlockPrefix()
+    {
+        return 'fotojoin_adminbundle_city';
+    }
+
+
 }

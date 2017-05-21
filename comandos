@@ -3,8 +3,8 @@ setfacl -R -m u:"$HTTPDUSER":rwX -m u:`whoami`:rwX app/cache app/logs
 setfacl -dR -m u:"$HTTPDUSER":rwX -m u:`whoami`:rwX app/cache app/logs
 
 HTTPDUSER=`ps axo user,comm | grep -E '[a]pache|[h]ttpd|[_]www|[w]ww-data|[n]ginx' | grep -v root | head -1 | cut -d\  -f1`
-setfacl -R -m u:"$HTTPDUSER":rwX -m u:`whoami`:rwX app/cache app/logs web/uploads web/media
-setfacl -dR -m u:"$HTTPDUSER":rwX -m u:`whoami`:rwX app/cache app/logs web/uploads web/media
+setfacl -R -m u:"$HTTPDUSER":rwX -m u:`whoami`:rwX web/uploads web/media
+setfacl -dR -m u:"$HTTPDUSER":rwX -m u:`whoami`:rwX web/uploads web/media
 
 HTTPDUSER=`ps axo user,comm | grep -E '[a]pache|[h]ttpd|[_]www|[w]ww-data|[n]ginx' | grep -v root | head -1 | cut -d\  -f1`
 setfacl -R -m u:"$HTTPDUSER":rwX -m u:`whoami`:rwX web/media

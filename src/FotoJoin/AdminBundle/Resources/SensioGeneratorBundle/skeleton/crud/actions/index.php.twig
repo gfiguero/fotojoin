@@ -1,3 +1,4 @@
+
     /**
 {% block phpdoc_method_header %}
      * Lists all {{ entity }} entities.
@@ -21,14 +22,20 @@
         if($sort) ${{ entity_pluralized }} = $em->getRepository('{{ bundle }}:{{ entity }}')->findBy(array(), array($sort => $direction));
         else ${{ entity_pluralized }} = $em->getRepository('{{ bundle }}:{{ entity }}')->findAll();
         $paginator = $this->get('knp_paginator');
-        ${{ entity_pluralized }} = $paginator->paginate(${{ entity_pluralized }}, $request->query->getInt('page', 1), 10);
+        ${{ entity_pluralized }} = $paginator->paginate(${{ entity_pluralized }}, $request->query->getInt('page', 1), 100);
+
+        $deleteForms = array();
+        foreach(${{ entity_pluralized }} as $key => ${{ entity_singularized }}) {
+            $deleteForms[] = $this->createDeleteForm(${{ entity_singularized }})->createView();
+        }
 {% endblock method_body %}
 
 {% block method_return %}
-        return $this->render('{{ entity|lower|replace({'\\': '/'}) }}/index.html.twig', array(
+        return $this->render('{{ bundle }}:{{ entity }}:index.html.twig', array(
             '{{ entity_pluralized }}' => ${{ entity_pluralized }},
             'direction' => $direction,
             'sort' => $sort,
+            'deleteForms' => $deleteForms,
         ));
 {% endblock method_return %}
     }

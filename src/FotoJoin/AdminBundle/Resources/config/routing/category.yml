@@ -1,24 +1,24 @@
-category_index:
+admin_category_index:
     path:     /
     defaults: { _controller: "FotoJoinAdminBundle:Category:index" }
     methods:  GET
 
-category_show:
+admin_category_show:
     path:     /{id}/show
     defaults: { _controller: "FotoJoinAdminBundle:Category:show" }
     methods:  GET
 
-category_new:
+admin_category_new:
     path:     /new
     defaults: { _controller: "FotoJoinAdminBundle:Category:new" }
     methods:  [GET, POST]
 
-category_edit:
+admin_category_edit:
     path:     /{id}/edit
     defaults: { _controller: "FotoJoinAdminBundle:Category:edit" }
     methods:  [GET, POST]
 
-category_delete:
+admin_category_delete:
     path:     /{id}/delete
     defaults: { _controller: "FotoJoinAdminBundle:Category:delete" }
     methods:  DELETE

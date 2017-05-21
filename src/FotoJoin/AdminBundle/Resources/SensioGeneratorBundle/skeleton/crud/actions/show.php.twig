@@ -16,16 +16,18 @@
 {% endblock method_definition %}
     {
 {% block method_body %}
+        $editForm = $this->createEditForm(${{ entity_singularized }});
 {% if 'delete' in actions %}
         $deleteForm = $this->createDeleteForm(${{ entity_singularized }});
 {% endif %}
 {% endblock method_body %}
 
 {% block method_return %}
-        return $this->render('{{ entity|lower|replace({'\\': '/'}) }}/show.html.twig', array(
+        return $this->render('{{ bundle }}:{{ entity }}:show.html.twig', array(
             '{{ entity_singularized }}' => ${{ entity_singularized }},
+            'editForm' => $editForm->createView(),
 {% if 'delete' in actions %}
-            'delete_form' => $deleteForm->createView(),
+            'deleteForm' => $deleteForm->createView(),
 {% endif %}
         ));
 {% endblock method_return %}
