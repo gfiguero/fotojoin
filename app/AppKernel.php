@@ -30,8 +30,6 @@ class AppKernel extends Kernel
             new FotoJoin\GalleryBundle\FotoJoinGalleryBundle(),
             new HWI\Bundle\OAuthBundle\HWIOAuthBundle(),
             new Oneup\UploaderBundle\OneupUploaderBundle(),
-            new FotoJoin\GeneratorBundle\FotoJoinGeneratorBundle(),
-            new FotoJoin\AdminGeneratorBundle\FotoJoinAdminGeneratorBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'), true)) {
@@ -39,6 +37,7 @@ class AppKernel extends Kernel
             $bundles[] = new Symfony\Bundle\WebProfilerBundle\WebProfilerBundle();
             $bundles[] = new Sensio\Bundle\DistributionBundle\SensioDistributionBundle();
             $bundles[] = new Sensio\Bundle\GeneratorBundle\SensioGeneratorBundle();
+            $bundles[] = new FotoJoin\AdminGeneratorBundle\FotoJoinAdminGeneratorBundle();
         }
 
         return $bundles;

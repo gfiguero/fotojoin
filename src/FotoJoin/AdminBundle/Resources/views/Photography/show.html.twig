@@ -1,0 +1,76 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Photography</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ photography.id }}</td>
+            </tr>
+            <tr>
+                <th>Filename</th>
+                <td>{{ photography.filename }}</td>
+            </tr>
+            <tr>
+                <th>Value</th>
+                <td>{{ photography.value }}</td>
+            </tr>
+            <tr>
+                <th>Published</th>
+                <td>{% if photography.published %}Yes{% else %}No{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Makemodel</th>
+                <td>{{ photography.MakeModel }}</td>
+            </tr>
+            <tr>
+                <th>Datetimeoriginal</th>
+                <td>{% if photography.DateTimeOriginal %}{{ photography.DateTimeOriginal|date('Y-m-d') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Exposuretime</th>
+                <td>{{ photography.ExposureTime }}</td>
+            </tr>
+            <tr>
+                <th>Focallength</th>
+                <td>{{ photography.FocalLength }}</td>
+            </tr>
+            <tr>
+                <th>Fnumber</th>
+                <td>{{ photography.FNumber }}</td>
+            </tr>
+            <tr>
+                <th>Isospeedratings</th>
+                <td>{{ photography.ISOSpeedRatings }}</td>
+            </tr>
+            <tr>
+                <th>Createdat</th>
+                <td>{% if photography.createdAt %}{{ photography.createdAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Updatedat</th>
+                <td>{% if photography.updatedAt %}{{ photography.updatedAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Deletedat</th>
+                <td>{% if photography.deletedAt %}{{ photography.deletedAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('admin_photography_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('admin_photography_edit', { 'id': photography.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

@@ -1,0 +1,61 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Photographies list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Filename</th>
+                <th>Value</th>
+                <th>Published</th>
+                <th>Makemodel</th>
+                <th>Datetimeoriginal</th>
+                <th>Exposuretime</th>
+                <th>Focallength</th>
+                <th>Fnumber</th>
+                <th>Isospeedratings</th>
+                <th>Createdat</th>
+                <th>Updatedat</th>
+                <th>Deletedat</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for photography in photographies %}
+            <tr>
+                <td><a href="{{ path('admin_photography_show', { 'id': photography.id }) }}">{{ photography.id }}</a></td>
+                <td>{{ photography.filename }}</td>
+                <td>{{ photography.value }}</td>
+                <td>{% if photography.published %}Yes{% else %}No{% endif %}</td>
+                <td>{{ photography.MakeModel }}</td>
+                <td>{% if photography.DateTimeOriginal %}{{ photography.DateTimeOriginal|date('Y-m-d') }}{% endif %}</td>
+                <td>{{ photography.ExposureTime }}</td>
+                <td>{{ photography.FocalLength }}</td>
+                <td>{{ photography.FNumber }}</td>
+                <td>{{ photography.ISOSpeedRatings }}</td>
+                <td>{% if photography.createdAt %}{{ photography.createdAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if photography.updatedAt %}{{ photography.updatedAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if photography.deletedAt %}{{ photography.deletedAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('admin_photography_show', { 'id': photography.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('admin_photography_edit', { 'id': photography.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('admin_photography_new') }}">Create a new photography</a>
+        </li>
+    </ul>
+{% endblock %}
