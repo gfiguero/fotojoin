@@ -1,6 +1,6 @@
 <?php
 
-namespace FotoJoin\AdminBundle\Form;
+namespace FotoJoin\ControlPanelBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -9,36 +9,30 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 class PhotographyType extends AbstractType
 {
     /**
-     * @param FormBuilderInterface $builder
-     * @param array $options
+     * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder
-            ->add('file', 'file', array(
-                'label' => 'photography.file',
-                'data_class' => null,
-                'required' => false,
-            ))
-            ->add('author', null, array(
-                'label' => 'photography.author',
-            ))
-            ->add('place', null, array(
-                'label' => 'photography.place',
-            ))
-            ->add('categories', null, array(
-                'label' => 'photography.categories',
-            ))
-        ;
+        $builder->add('filename')->add('value')->add('published')->add('MakeModel')->add('DateTimeOriginal')->add('ExposureTime')->add('FocalLength')->add('FNumber')->add('ISOSpeedRatings')->add('createdAt')->add('updatedAt')->add('deletedAt')->add('user')->add('album')->add('categories');
     }
     
     /**
-     * @param OptionsResolver $resolver
+     * {@inheritdoc}
      */
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'FotoJoin\AdminBundle\Entity\Photography'
+            'data_class' => 'FotoJoin\ControlPanelBundle\Entity\Photography'
         ));
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getBlockPrefix()
+    {
+        return 'fotojoin_controlpanelbundle_photography';
+    }
+
+
 }
