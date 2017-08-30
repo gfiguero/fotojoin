@@ -1,4 +1,4 @@
-{% extends 'FotoJoinControlPanelBundle::base.html.twig' %}
+{% extends 'FotoJoinControlPanelBundle:Base:base.html.twig' %}
 
 {% block stylesheet %}{% endblock %}
 
@@ -8,7 +8,7 @@
     <div class="row">
         <div class="col-lg-12">
             <h1 class="page-header">{{ icon('check fa-fw') }}{{ 'status.index'|trans({}, 'FotoJoinControlPanelBundle') }}</h1>
-            {% include 'FotoJoinControlPanelBundle::flashbag.html.twig' %}
+            {% include 'FotoJoinControlPanelBundle:Base:flashbag.html.twig' %}
             <div class="panel panel-default">
                 <div class="panel-body">
                     <h3>{{ icon('gift fa-fw') }}Participación</h3>

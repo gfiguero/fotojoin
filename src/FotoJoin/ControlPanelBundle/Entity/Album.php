@@ -27,6 +27,10 @@ class Album
      */
     private $updatedAt;
 
+    public function __toString()
+    {
+        return $this->name;
+    }
 
     /**
      * Get id
@@ -138,5 +142,51 @@ class Album
     public function getUser()
     {
         return $this->user;
+    }
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $photographies;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->photographies = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add photography
+     *
+     * @param \FotoJoin\ControlPanelBundle\Entity\Photography $photography
+     *
+     * @return Album
+     */
+    public function addPhotography(\FotoJoin\ControlPanelBundle\Entity\Photography $photography)
+    {
+        $this->photographies[] = $photography;
+
+        return $this;
+    }
+
+    /**
+     * Remove photography
+     *
+     * @param \FotoJoin\ControlPanelBundle\Entity\Photography $photography
+     */
+    public function removePhotography(\FotoJoin\ControlPanelBundle\Entity\Photography $photography)
+    {
+        $this->photographies->removeElement($photography);
+    }
+
+    /**
+     * Get photographies
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getPhotographies()
+    {
+        return $this->photographies;
     }
 }

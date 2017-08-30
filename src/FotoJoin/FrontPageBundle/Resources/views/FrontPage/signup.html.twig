@@ -1,4 +1,6 @@
-{% extends "FotoJoinFrontPageBundle::base.html.twig" %}
+{% extends "FotoJoinFrontPageBundle:Base:base.html.twig" %}
+{% use 'FotoJoinFrontPageBundle:Base:navbar.html.twig' %}
+{% use 'FotoJoinFrontPageBundle:Base:footer.html.twig' %}
 
 {% trans_default_domain 'FotoJoinUserBundle' %}
 
@@ -7,18 +9,34 @@
 {% block stylesheet %}
     <link href="{{ asset('css/bootstrap-social/bootstrap-social.css') }}" rel="stylesheet">
     <style type="text/css">
-        .panel,
-        .panel .panel-heading,
-        .panel .panel-body,
-        .panel .panel-footer {
-            background: rgba(25, 25, 25, .5);
+        #register {
+            margin-top: 130px;
         }
     </style>
 {% endblock %}
 
 {% block body %}
+{% block navbar %}{{ parent() }}{% endblock %}
 
-<div class="section fill table" id="register">
+<div class="section" id="register">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6 col-sm-offset-3">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                    {{ form_start(authorForm) }}
+                        {{ form_widget(authorForm) }}
+                        <button type="submit" class="btn btn-primary btn-block">{{ icon('check fa-fw') }}Registrar</button>
+                    {{ form_end(authorForm) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{#}
+<div class="section" id="register">
     <div class="container">
         <div class="row">
             <div class="col-sm-8 col-sm-offset-2">
@@ -30,57 +48,16 @@
                         <div class="row">
                             <div class="col-sm-6">
                                 <button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#modalAuthor">
-                                    <h1 class="text-center">{{ icon('camera fa-4x') }}</h1>
+                                    <h1 class="text-center">{{ icon('camera fa-3x') }}</h1>
                                     <h1 class="text-center">Fotógrafo</h1>
                                 </button>
-                                <div class="modal fade" id="modalAuthor" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-                                    <div class="modal-dialog modal-sm" role="document">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                                <h4 class="modal-title" id="myModalLabel">Registrarme como Fotógrafo</h4>
-                                            </div>
-                                            <div class="modal-body">
-                                                <div class="row">
-                                                    <div class="col-xs-12">
-                                                        {{ form_start(authorForm) }}
-                                                            {{ form_widget(authorForm) }}
-                                                            <button type="submit" class="btn btn-primary btn-block">{{ icon('check fa-fw') }}Registrar</button>
-                                                        {{ form_end(authorForm) }}
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
 
                             </div>
                             <div class="col-sm-6">
                                 <button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#modalUser">
-                                    <h1 class="text-center">{{ icon('star-half-o fa-4x') }}</h1>
+                                    <h1 class="text-center">{{ icon('star-half-o fa-3x') }}</h1>
                                     <h1 class="text-center">Evaluador</h1>
                                 </button>
-                                <div class="modal fade" id="modalUser" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-                                    <div class="modal-dialog modal-sm" role="document">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                                <h4 class="modal-title" id="myModalLabel">Registrarme como Evaluador</h4>
-                                            </div>
-                                            <div class="modal-body">
-                                                <div class="row">
-                                                    <div class="col-xs-12">
-                                                        {{ form_start(userForm) }}
-                                                            {{ form_widget(userForm) }}
-                                                            <button type="submit" class="btn btn-primary btn-block">{{ icon('check fa-fw') }}Registrar</button>
-                                                        {{ form_end(userForm) }}
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
                             </div>
                         </div>
                     </div>
@@ -88,9 +65,55 @@
             </div>
         </div>
     </div>
-    <div id="push"></div>
 </div>
 
-{% include 'FotoJoinFrontPageBundle::footer.html.twig' %}
+<div id="modal-page">
+
+    <div class="modal fade" id="modalAuthor" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Registrarme como Fotógrafo</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            {{ form_start(authorForm) }}
+                                {{ form_widget(authorForm) }}
+                                <button type="submit" class="btn btn-primary btn-block">{{ icon('check fa-fw') }}Registrar</button>
+                            {{ form_end(authorForm) }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modalUser" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Registrarme como Evaluador</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            {{ form_start(userForm) }}
+                                {{ form_widget(userForm) }}
+                                <button type="submit" class="btn btn-primary btn-block">{{ icon('check fa-fw') }}Registrar</button>
+                            {{ form_end(userForm) }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+{#}
+
+{% include 'FotoJoinFrontPageBundle:Base:footer.html.twig' %}
 
 {% endblock body %}

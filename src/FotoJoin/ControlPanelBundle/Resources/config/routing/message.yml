@@ -1,0 +1,29 @@
+message_index:
+    path:     /
+    defaults: { _controller: "FotoJoinControlPanelBundle:Message:index" }
+    methods:  GET
+
+message_show:
+    path:     /{id}/show
+    defaults: { _controller: "FotoJoinControlPanelBundle:Message:show" }
+    methods:  GET
+
+message_new:
+    path:     /new
+    defaults: { _controller: "FotoJoinControlPanelBundle:Message:new" }
+    methods:  [GET, POST]
+
+message_contact:
+    path:     /{transmitter}/contact
+    defaults: { _controller: "FotoJoinControlPanelBundle:Message:contact" }
+    methods:  [GET, POST]
+
+message_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "FotoJoinControlPanelBundle:Message:edit" }
+    methods:  [GET, POST]
+
+message_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "FotoJoinControlPanelBundle:Message:delete" }
+    methods:  DELETE

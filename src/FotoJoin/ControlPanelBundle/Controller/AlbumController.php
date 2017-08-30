@@ -10,6 +10,7 @@ use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use FOS\UserBundle\Model\UserInterface;
 use Vich\UploaderBundle\Handler\UploadHandle;
 use Vich\UploaderBundle\Form\DataTransformer\FileTransformer;
+use Doctrine\Common\Collections\ArrayCollection;
 
 use FotoJoin\ControlPanelBundle\Entity\Album;
 use FotoJoin\ControlPanelBundle\Form\AlbumType;
@@ -46,7 +47,7 @@ class AlbumController extends Controller
         $album = new Album();
         $albumForm = $this->createForm('FotoJoin\ControlPanelBundle\Form\AlbumType', $album, array('action' => $this->generateUrl('album_new')))->createView();
 
-        return $this->render('FotoJoinControlPanelBundle:Album:album.html.twig', array(
+        return $this->render('FotoJoinControlPanelBundle:Album:index.html.twig', array(
             'albums' => $albums,
             'direction' => $direction,
             'sort' => $sort,
@@ -66,10 +67,10 @@ class AlbumController extends Controller
             throw new AccessDeniedException('This user does not have access to this section.');
         }
         $album = new Album();
-        $form = $this->createForm('FotoJoin\ControlPanelBundle\Form\AlbumType', $album);
-        $form->handleRequest($request);
+        $newForm = $this->createForm('FotoJoin\ControlPanelBundle\Form\NewAlbumType', $album);
+        $newForm->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($newForm->isSubmitted() && $newForm->isValid()) {
             $album->setUser($user);
             $em = $this->getDoctrine()->getManager();
             $em->persist($album);
@@ -79,7 +80,10 @@ class AlbumController extends Controller
             return $this->redirectToRoute('album_edit', array('id' => $album->getId()));
         }
 
-        return $this->redirectToRoute('album_index');
+        return $this->render('FotoJoinControlPanelBundle:Album:new.html.twig', array(
+            'user' => $user,
+            'newForm' => $newForm->createView(),
+        ));
     }
 
     public function dropzoneAction(Request $request, Album $album)
@@ -109,6 +113,30 @@ class AlbumController extends Controller
         }
     }
 
+    public function addAction(Request $request, Album $album)
+    {
+        $user = $this->getUser();
+        if (!is_object($user) || !$user instanceof UserInterface) {
+            throw new AccessDeniedException('This user does not have access to this section.');
+        }
+        $deleteForm = $this->createDeleteForm($album);
+        $addForm = $this->createForm('FotoJoin\ControlPanelBundle\Form\DropzoneType', $album, array(
+            'action' => $this->generateUrl('album_dropzone', array('id' => $album->getId())),
+        ));
+
+        $em = $this->getDoctrine()->getManager();
+        $photographies = $em->getRepository('FotoJoinControlPanelBundle:Photography')->findByAlbum($album);
+
+        return $this->render('FotoJoinControlPanelBundle:Album:add.html.twig', array(
+            'album' => $album,
+            'photographies' => $photographies,
+            'add_form' => $addForm->createView(),
+            'delete_form' => $deleteForm->createView(),
+            'user' => $user,
+        ));
+    }
+
+
     /**
      * Displays a form to edit an existing Album entity.
      *
@@ -119,15 +147,26 @@ class AlbumController extends Controller
         if (!is_object($user) || !$user instanceof UserInterface) {
             throw new AccessDeniedException('This user does not have access to this section.');
         }
+
+        $originalPhotographies = new ArrayCollection();
+        foreach ($album->getPhotographies() as $photography) {
+            $originalPhotographies->add($photography);
+        }
+
         $deleteForm = $this->createDeleteForm($album);
-        $editForm = $this->createForm('FotoJoin\ControlPanelBundle\Form\AlbumType', $album, array(
-            'action' => $this->generateUrl('album_dropzone', array('id' => $album->getId())),
-        ));
-        $editForm->remove('name');
+        $editForm = $this->createForm('FotoJoin\ControlPanelBundle\Form\AlbumType', $album);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $em = $this->getDoctrine()->getManager();
+
+            $newPhotographies = $album->getPhotographies();
+            foreach ($originalPhotographies as $originalPhotography) {
+                if (false === $newPhotographies->contains($originalPhotography)) {
+                    $em->remove($originalPhotography);
+                }
+            }
+
             $em->persist($album);
             $em->flush();
             $request->getSession()->getFlashBag()->add( 'success', 'album.edited' );
@@ -135,8 +174,8 @@ class AlbumController extends Controller
             return $this->redirectToRoute('album_edit', array('id' => $album->getId()));
         }
 
-        $em = $this->getDoctrine()->getManager();
-        $photographies = $em->getRepository('FotoJoinControlPanelBundle:Photography')->findByAlbum($album);
+//        $em = $this->getDoctrine()->getManager();
+//        $photographies = $em->getRepository('FotoJoinControlPanelBundle:Photography')->findByAlbum($album);
 //        $files = array();
 //        foreach ($photographies as $key => $photography) { $files[] = $photography->getFile(); }
 //        $photographyCollectionForm = $this->createForm('FotoJoin\ControlPanelBundle\Form\PhotographyCollectionType', $files);
@@ -144,7 +183,6 @@ class AlbumController extends Controller
 
         return $this->render('FotoJoinControlPanelBundle:Album:edit.html.twig', array(
             'album' => $album,
-            'photographies' => $photographies,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
             'user' => $user,

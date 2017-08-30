@@ -2,18 +2,19 @@
 {% use 'FotoJoinAdminBundle:Base:navbar.html.twig' %}
 {% use 'FotoJoinAdminBundle:Base:sidebar.html.twig' %}
 {% use 'FotoJoinAdminBundle:Base:icons.html.twig' %}
+{% use 'FotoJoinAdminBundle:Base:flashbag.html.twig' %}
 
-{% set translation_domain = 'FotoJoinAdminBundle' %}
-{% trans_default_domain translation_domain %}
+{% trans_default_domain 'FotoJoinAdminBundle' %}
 
-{% block title %}{{ 'city.title.index'|trans }}{% endblock %}
+{% block title %}{{ 'city.show.title'|trans({'%id%':city.id}) }}{% endblock %}
 
 {% block body %}
+    
     <div id="page-wrapper">
         <div class="row" id="page-header">
             <div class="col-lg-12">
-                <h1 class="page-header">{% block icons %}{{ parent() }}{% endblock %}{{ 'city.title.index'|trans }}</h1>
-                {% include 'FotoJoinAdminBundle:Base:flashbag.html.twig' with { 'translation_domain': translation_domain } %}
+                <h1 class="page-header">{% block icons %}{{ parent() }}{% endblock %}{{ 'city.show.title'|trans({'%id%':city.id}) }}</h1>
+                {% block flashbag %}{{ parent() }}{% endblock %}
             </div>
         </div>
         <!-- /#page-header -->
@@ -21,8 +22,8 @@
         <div class="row" id="page-toolbar">
             <div class="col-lg-12">
                 <div class="btn-toolbar">
-                    <a type="button" class="btn btn-default" href="{{ path('admin_city_index') }}">{{ icon('list') }}&nbsp;{{ 'city.list.link'|trans }}</a>
-                    <a type="button" class="btn btn-primary" href="{{ path('admin_city_edit', { 'id': city.id }) }}">{{ icon('edit') }}&nbsp;{{ 'city.new.link'|trans }}</a>
+                    <a type="button" class="btn btn-default" href="{{ path('admin_city_index') }}">{{ icon('list') }}&nbsp;{{ 'city.index.link'|trans }}</a>
+                    <a type="button" class="btn btn-primary" href="{{ path('admin_city_edit', { 'id': city.id }) }}">{{ icon('edit') }}&nbsp;{{ 'city.edit.link'|trans }}</a>
                     <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modalDelete">{{ icon('trash-o') }}&nbsp;{{ 'city.delete.link'|trans }}</button>
                 </div>
             </div>
@@ -33,22 +34,25 @@
             <div class="col-lg-12">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <h2 class="panel-title">{{ 'city.show.properties'|trans }}</h2>
+                        <h2 class="panel-title">{{ 'city.show.data'|trans }}</h2>
                     </div>
                     <div class="panel-body">
-                        <dl class="dl-horizontal dl-horizontal-sm dl-horizontal-md dl-horizontal-lg">
+                        <dl>
                             <dt>{{ 'city.form.id'|trans }}</dt>
                                 <dd>{% if city.id %}{{ city.id }}{% endif %}</dd>
                             <dt>{{ 'city.form.name'|trans }}</dt>
                                 <dd>{% if city.name %}{{ city.name }}{% endif %}</dd>
                             <dt>{{ 'city.form.country'|trans }}</dt>
-                                <dd>{% if city.country %}{{ city.country }}{% endif %}</dd>
-                        </dl>
+                                <dd>{% if city.country %}{{ city.country }}{% endif %}</dd>                        </dl>
                     </div>
                 </div>
             </div>
         </div>
         <!-- /#page-show -->
+
+        
+        
+        
 
         <div id="page-modal">
             <div class="modal fade" id="modalDelete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">

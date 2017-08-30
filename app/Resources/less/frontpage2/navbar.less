@@ -1,0 +1,77 @@
+// Custom Navigation Bar
+
+.navbar-default {
+    background-color: @gray-darker;
+    border-color: transparent;
+    .navbar-brand {
+        .heading-font;
+        line-height: 25px;
+        color: darken(white, 15%);
+        &:hover,
+        &:focus,
+        &:active,
+        &.active {
+            color: white;
+        }
+    }
+    .navbar-collapse {
+        border-color: fade(white, 2%);
+    }
+    .navbar-toggle {
+        .heading-font;
+        background-color: transparent;
+        border-color: fade(white, 10%);
+        border-radius: 0;
+        color: darken(white, 25%);
+        &:hover,
+        &:focus {
+            background-color: fade(black, 80%);
+        }
+    }
+    .nav {
+        li {
+            a {
+                .heading-font;
+                font-size: 1.3em;
+                line-height: 25px;
+                letter-spacing: 1px;
+                color: darken(white, 25%);
+                &:hover,
+                &:focus {
+                    color: white;
+                    outline: none;
+                }
+            }
+        }
+    }
+    .navbar-nav>.active>a {
+        border-radius: 0;
+        color: white;
+        background-color: @theme-primary;
+    }
+    .navbar-nav>.active>a:hover,
+    .navbar-nav>.active>a:focus {
+        color: white;
+        background-color: darken(@theme-primary, 10%);
+    }
+}
+
+@media(min-width:768px) {
+    .navbar-default {
+        .transition-all;
+        background-color: transparent;
+        padding: 25px 0;
+        border: none;
+        .navbar-brand {
+            font-size: 2em;
+        }
+    }
+    .navbar-default.affix {
+        background-color: fade(black, 50%);
+        padding: 10px 0;
+        .navbar-brand {
+            font-size: 1.5em;
+        }
+    }
+}
+

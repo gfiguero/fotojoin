@@ -1,24 +1,24 @@
 admin_photography_index:
     path:     /
-    defaults: { _controller: "FotoJoinControlPanelBundle:Photography:index" }
+    defaults: { _controller: "FotoJoinAdminBundle:Photography:index" }
     methods:  GET
 
 admin_photography_show:
     path:     /{id}/show
-    defaults: { _controller: "FotoJoinControlPanelBundle:Photography:show" }
+    defaults: { _controller: "FotoJoinAdminBundle:Photography:show" }
     methods:  GET
 
 admin_photography_new:
     path:     /new
-    defaults: { _controller: "FotoJoinControlPanelBundle:Photography:new" }
+    defaults: { _controller: "FotoJoinAdminBundle:Photography:new" }
     methods:  [GET, POST]
 
 admin_photography_edit:
     path:     /{id}/edit
-    defaults: { _controller: "FotoJoinControlPanelBundle:Photography:edit" }
+    defaults: { _controller: "FotoJoinAdminBundle:Photography:edit" }
     methods:  [GET, POST]
 
 admin_photography_delete:
     path:     /{id}/delete
-    defaults: { _controller: "FotoJoinControlPanelBundle:Photography:delete" }
+    defaults: { _controller: "FotoJoinAdminBundle:Photography:delete" }
     methods:  DELETE

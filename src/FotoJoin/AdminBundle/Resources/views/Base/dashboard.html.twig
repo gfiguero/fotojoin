@@ -1,31 +1,24 @@
-{% extends ':Admin:base.html.twig' %}
+{% extends 'FotoJoinAdminBundle:Base:base.html.twig' %}
+{% use 'FotoJoinAdminBundle:Base:navbar.html.twig' %}
+{% use 'FotoJoinAdminBundle:Base:sidebar.html.twig' %}
+{% use 'FotoJoinAdminBundle:Base:icons.html.twig' %}
 
-{% block stylesheet %}{% endblock %}
+{% set translation_domain = 'FotoJoinAdminBundle' %}
+{% trans_default_domain translation_domain %}
+
+{% block title %}{{ 'dashboard.index.title'|trans }}{% endblock %}
 
 {% block body %}
-
     <div id="page-wrapper">
-
-        <div class="row">
+        <div class="row" id="page-header">
             <div class="col-lg-12">
-                <h1 class="page-header">{% include ':Admin:icon.html.twig' %}{{ 'admin.dashboard'|trans }}</h1>
-                {% include ':Admin:flashbag.html.twig' %}
+                <h1 class="page-header">{% block icons %}{{ parent() }}{% endblock %}{{ 'dashboard.index.title'|trans }}</h1>
+                {% include 'FotoJoinAdminBundle:Base:flashbag.html.twig' with { 'translation_domain': translation_domain } %}
             </div>
-            <!-- /.col-lg-12 -->
         </div>
-        <!-- /.row -->
+        <!-- /#page-header -->
 
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="panel panel-default">
-                </div>
-            </div>
-            <!-- /.col-lg-12 -->
-        </div>
-        <!-- /.row -->
     </div>
     <!-- /#page-wrapper -->
 
 {% endblock %}
-
-{% block javascript %}{% endblock %}

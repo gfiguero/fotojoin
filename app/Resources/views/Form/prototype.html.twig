@@ -1,0 +1,34 @@
+{% block _album_photographies_widget %}
+    {% spaceless %}
+        {% if prototype is defined %}
+            {% set prototype_vars = {} %}
+            {% if style is defined %}
+                {% set prototype_vars = prototype_vars|merge({'style': 'inline', 'label_col' : 0}) %}
+            {% endif %}
+            {% set prototype_html = '<td><a href="#" class="btn btn-danger btn-sm" data-removefield="collection" data-field="__id__">' ~ icon('times fa-fw') ~ '</a></td>' %}
+            {% set prototype_html = prototype_html ~ '<td>' ~ form_widget(prototype.categories) ~ '</td>' %}
+            {% set attr = attr|merge({'data-prototype': prototype_html }) %}
+            {% set attr = attr|merge({'data-prototype-name': prototype_name }) %}
+        {% endif %}
+        <div class="panel panel-default">
+        <div {{ block('widget_container_attributes') }} >
+            <table class="table table-middle">
+                <thead>
+                    <tr>
+                        <th width="20"><a href="#" class="btn btn-default btn-sm disabled">{{ icon('times fa-fw') }}</a></th>
+                        <th width="300">{{'item.form.photography'|trans({}, translation_domain) }}</th>
+                        <th>{{'item.form.categories'|trans({}, translation_domain) }}</th>
+                    </tr>
+                </thead>
+                {% for field in form %}
+                    <tr>
+                        <td><a href="#" class="btn btn-danger btn-sm" data-removefield="collection" data-field="{{ field.vars.id }}">{{ icon('times fa-fw') }}</a></td>
+                        <td><img class="img-responsive center-block" src="{{ vich_uploader_asset(field.vars.data, 'file', 'FotoJoin\\ControlPanelBundle\\Entity\\Photography')|imagine_filter('controlpanel_photography_preview') }}" /></td>
+                        <td>{{ form_widget(field) }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+        </div>
+    {% endspaceless %}
+{% endblock _album_photographies_widget %}

@@ -8,6 +8,7 @@ twig:
             - :Form:vich.html.twig
             - :Form:profilephoto.html.twig
             - :Form:photography.html.twig
+            - :Form:prototype.html.twig
     globals:
         user_level: "%user_level%"
         contact_reason: "%contact_reason%"

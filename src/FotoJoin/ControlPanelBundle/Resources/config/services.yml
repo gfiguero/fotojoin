@@ -14,4 +14,9 @@ services:
         arguments: ['@doctrine.orm.entity_manager']
         tags:
             - { name: form.type, alias: entity_hidden }
+    foto_join_control_panel.form.type.photography_filter:
+        class: FotoJoin\ControlPanelBundle\Form\PhotographyFilterType
+        arguments: ['@security.token_storage']
+        tags:
+            - { name: form.type, alias: photography_filter }
 

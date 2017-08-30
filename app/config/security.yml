@@ -8,7 +8,7 @@ security:
 #        Symfony\Component\Security\Core\User\User: plaintext
 
     role_hierarchy:
-        ROLE_AUTHOR:      ROLE_USER
+        ROLE_USER:      ROLE_AUTHOR
         ROLE_ADMIN:       ROLE_USER
         ROLE_SUPER_ADMIN: ROLE_ADMIN
 
@@ -57,12 +57,14 @@ security:
 
 
     access_control:
-        - { path: ^/gallery, roles: [IS_AUTHENTICATED_ANONYMOUSLY] }
-        - { path: ^/gallery/join, roles: [ROLE_ADMIN] }
-        - { path: ^/login, roles: [IS_AUTHENTICATED_ANONYMOUSLY] }
-        - { path: ^/register, roles: [IS_AUTHENTICATED_ANONYMOUSLY] }
-        - { path: ^/resetting, roles: [IS_AUTHENTICATED_ANONYMOUSLY] }
-        - { path: ^/panel, roles: [ROLE_USER] }
-        - { path: ^/panel/photography/, roles: [ROLE_AUTHOR] }
-        - { path: ^/admin, roles: [IS_AUTHENTICATED_ANONYMOUSLY] }
+        - { path: ^/, roles: [IS_AUTHENTICATED_ANONYMOUSLY] }
+        #- { path: ^/gallery, roles: [IS_AUTHENTICATED_ANONYMOUSLY] }
+        #- { path: ^/gallery/join, roles: [ROLE_ADMIN] }
+        #- { path: ^/login, roles: [IS_AUTHENTICATED_ANONYMOUSLY] }
+        #- { path: ^/register, roles: [IS_AUTHENTICATED_ANONYMOUSLY] }
+        #- { path: ^/resetting, roles: [IS_AUTHENTICATED_ANONYMOUSLY] }
+        #- { path: ^/panel, roles: [ROLE_USER] }
+        #- { path: ^/panel/photography/, roles: [ROLE_AUTHOR] }
+        #- { path: ^/panel/message/, roles: [ROLE_USER] }
+        #- { path: ^/admin, roles: [IS_AUTHENTICATED_ANONYMOUSLY] }
         # Include the following line to also secure the /admin path itself

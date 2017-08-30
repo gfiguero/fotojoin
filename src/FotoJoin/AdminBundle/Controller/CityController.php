@@ -75,7 +75,7 @@ class CityController extends Controller
      */
     private function createNewForm(City $city)
     {
-        return $this->createForm('FotoJoin\AdminBundle\Form\CityType', $city, array(
+        return $this->createForm(new CityType(), $city, array(
             'action' => $this->generateUrl('admin_city_new'),
         ));
     }
@@ -132,7 +132,7 @@ class CityController extends Controller
      */
     private function createEditForm(City $city)
     {
-        return $this->createForm('FotoJoin\AdminBundle\Form\CityType', $city, array(
+        return $this->createForm(new CityType(), $city, array(
             'action' => $this->generateUrl('admin_city_edit', array('id' => $city->getId())),
         ));
     }

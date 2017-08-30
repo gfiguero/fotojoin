@@ -2,11 +2,10 @@
 
 namespace FotoJoin\AdminBundle\Controller;
 
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-
-use FotoJoin\AdminBundle\Entity\Album;
+use FotoJoin\ControlPanelBundle\Entity\Album;
 use FotoJoin\AdminBundle\Form\AlbumType;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Album controller.
@@ -14,6 +13,7 @@ use FotoJoin\AdminBundle\Form\AlbumType;
  */
 class AlbumController extends Controller
 {
+
     /**
      * Lists all Album entities.
      *
@@ -23,15 +23,21 @@ class AlbumController extends Controller
         $sort = $request->query->get('sort');
         $direction = $request->query->get('direction');
         $em = $this->getDoctrine()->getManager();
-        if($sort) $albums = $em->getRepository('FotoJoinAdminBundle:Album')->findBy(array(), array($sort => $direction));
-        else $albums = $em->getRepository('FotoJoinAdminBundle:Album')->findAll();
+        if($sort) $albums = $em->getRepository('FotoJoinControlPanelBundle:Album')->findBy(array(), array($sort => $direction));
+        else $albums = $em->getRepository('FotoJoinControlPanelBundle:Album')->findAll();
         $paginator = $this->get('knp_paginator');
-        $albums = $paginator->paginate($albums, $request->query->getInt('page', 1), 10);
+        $albums = $paginator->paginate($albums, $request->query->getInt('page', 1), 100);
 
-        return $this->render('album/index.html.twig', array(
+        $deleteForms = array();
+        foreach($albums as $key => $album) {
+            $deleteForms[] = $this->createDeleteForm($album)->createView();
+        }
+
+        return $this->render('FotoJoinAdminBundle:Album:index.html.twig', array(
             'albums' => $albums,
             'direction' => $direction,
             'sort' => $sort,
+            'deleteForms' => $deleteForms,
         ));
     }
 
@@ -42,21 +48,35 @@ class AlbumController extends Controller
     public function newAction(Request $request)
     {
         $album = new Album();
-        $form = $this->createForm('FotoJoin\AdminBundle\Form\AlbumType', $album);
-        $form->handleRequest($request);
+        $newForm = $this->createNewForm($album);
+        $newForm->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($album);
-            $em->flush();
-            $request->getSession()->getFlashBag()->add( 'success', 'album.created' );    
-
-            return $this->redirectToRoute('album_show', array('id' => $album->getId()));
+        if ($newForm->isSubmitted()) {
+            if($newForm->isValid()) {
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($album);
+                $em->flush();
+                $request->getSession()->getFlashBag()->add( 'success', 'album.new.flash' );
+                return $this->redirect($this->generateUrl('admin_album_index'));
+            }
         }
 
-        return $this->render('album/new.html.twig', array(
-            'album' => $album,
-            'form' => $form->createView(),
+        return $this->render('FotoJoinAdminBundle:Album:new.html.twig', array(
+            'newForm' => $newForm->createView(),
+        ));
+    }
+
+    /**
+     * Creates a form to create a new Album entity.
+     *
+     * @param Album $album The Album entity
+     *
+     * @return \Symfony\Component\Form\Form The form
+     */
+    private function createNewForm(Album $album)
+    {
+        return $this->createForm(new AlbumType(), $album, array(
+            'action' => $this->generateUrl('admin_album_new'),
         ));
     }
 
@@ -66,11 +86,13 @@ class AlbumController extends Controller
      */
     public function showAction(Album $album)
     {
+        $editForm = $this->createEditForm($album);
         $deleteForm = $this->createDeleteForm($album);
 
-        return $this->render('album/show.html.twig', array(
+        return $this->render('FotoJoinAdminBundle:Album:show.html.twig', array(
             'album' => $album,
-            'delete_form' => $deleteForm->createView(),
+            'editForm' => $editForm->createView(),
+            'deleteForm' => $deleteForm->createView(),
         ));
     }
 
@@ -80,23 +102,38 @@ class AlbumController extends Controller
      */
     public function editAction(Request $request, Album $album)
     {
+        $editForm = $this->createEditForm($album);
         $deleteForm = $this->createDeleteForm($album);
-        $editForm = $this->createForm('FotoJoin\AdminBundle\Form\AlbumType', $album);
         $editForm->handleRequest($request);
 
-        if ($editForm->isSubmitted() && $editForm->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($album);
-            $em->flush();
-            $request->getSession()->getFlashBag()->add( 'success', 'album.edited' );    
-
-            return $this->redirectToRoute('album_edit', array('id' => $album->getId()));
+        if ($editForm->isSubmitted()) {
+            if($editForm->isValid()) {
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($album);
+                $em->flush();
+                $request->getSession()->getFlashBag()->add( 'success', 'album.edit.flash' );
+                return $this->redirect($this->generateUrl('admin_album_index'));
+            }
         }
 
-        return $this->render('album/edit.html.twig', array(
+        return $this->render('FotoJoinAdminBundle:Album:edit.html.twig', array(
             'album' => $album,
-            'edit_form' => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
+            'editForm' => $editForm->createView(),
+            'deleteForm' => $deleteForm->createView(),
+        ));
+    }
+
+    /**
+     * Creates a form to edit a Album entity.
+     *
+     * @param Album $album The Album entity
+     *
+     * @return \Symfony\Component\Form\Form The form
+     */
+    private function createEditForm(Album $album)
+    {
+        return $this->createForm(new AlbumType(), $album, array(
+            'action' => $this->generateUrl('admin_album_edit', array('id' => $album->getId())),
         ));
     }
 
@@ -106,17 +143,17 @@ class AlbumController extends Controller
      */
     public function deleteAction(Request $request, Album $album)
     {
-        $form = $this->createDeleteForm($album);
-        $form->handleRequest($request);
+        $deleteForm = $this->createDeleteForm($album);
+        $deleteForm->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($deleteForm->isSubmitted() && $deleteForm->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $em->remove($album);
             $em->flush();
-            $request->getSession()->getFlashBag()->add( 'danger', 'album.deleted' );    
+            $request->getSession()->getFlashBag()->add( 'danger', 'album.delete.flash' );
         }
 
-        return $this->redirectToRoute('album_index');
+        return $this->redirect($this->generateUrl('admin_album_index'));
     }
 
     /**
@@ -129,7 +166,7 @@ class AlbumController extends Controller
     private function createDeleteForm(Album $album)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('album_delete', array('id' => $album->getId())))
+            ->setAction($this->generateUrl('admin_album_delete', array('id' => $album->getId())))
             ->setMethod('DELETE')
             ->getForm()
         ;

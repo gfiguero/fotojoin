@@ -11,6 +11,15 @@ FotoJoin\UserBundle\Entity\User:
         photographies:
             targetEntity: FotoJoin\ControlPanelBundle\Entity\Photography
             mappedBy: user
+        albums:
+            targetEntity: FotoJoin\ControlPanelBundle\Entity\Album
+            mappedBy: user
+        transmitted_messages:
+            targetEntity: FotoJoin\ControlPanelBundle\Entity\Message
+            mappedBy: transmitter
+        received_messages:
+            targetEntity: FotoJoin\ControlPanelBundle\Entity\Message
+            mappedBy: receiver
     manyToOne:
         city1:
             targetEntity: FotoJoin\AdminBundle\Entity\City

@@ -1,0 +1,243 @@
+sidemenu:
+    dashboard: Resumen
+    category: Categorías
+    city: Ciudades
+    user: Usuarios
+    photography: Fotos
+    album: Álbumes
+    appraisement: Evaluaciones
+
+category:
+    index:
+        title: Categorías
+        list: Lista de Categorías
+        link: Índice de Categorías
+    new:
+        title: Nueva Categoría
+        link: Crear nueva Categoría
+        form: Formulario de registro
+        submit: Guardar
+        flash: Nueva Categoría registrada satisfactoriamente
+    edit:
+        title: Editar Categoría
+        link: Editar
+        submit: Guardar
+        form: Formulario de edición
+        flash: Los cambios han sido guardados exitosamente
+    show:
+        title: Ver Categoría
+        link: Detalles
+        data: Datos
+    delete:
+        link: Eliminar
+        title: Eliminación de Categoría
+        message: Los datos eliminados no podrán ser recuperados
+        submit: Eliminar
+        flash: La Categoría ha sido eliminada
+    form:
+        id: ID
+        photographies: Fotos
+        name: Nombre
+
+appraisement:
+    index:
+        title: Evaluaciones
+        list: Lista de Evaluaciones
+        link: Índice de Evaluaciones
+    new:
+        title: Nueva Evaluación
+        link: Crear nueva Evaluación
+        form: Formulario de registro
+        submit: Guardar
+        flash: Nueva Evaluación registrada satisfactoriamente
+    edit:
+        title: Editar Evaluación
+        link: Editar
+        submit: Guardar
+        form: Formulario de edición
+        flash: Los cambios han sido guardados exitosamente
+    show:
+        title: Ver Evaluación
+        link: Detalles
+        data: Datos
+        breadcrumb: Evaluación %id%
+    delete:
+        link: Eliminar
+        title: Eliminación de Evaluación
+        message: Los datos eliminados no podrán ser recuperados
+        submit: Eliminar
+        flash: La Evaluación ha sido eliminada
+    form:
+        id: ID
+        photography: Foto
+        user: Usuario
+        value: Valor
+        score: Puntaje
+        delay: Demora
+        ip: IP
+        createdAt: Creado
+        updatedAt: Actualizado
+        name: Nombre
+
+city:
+    index:
+        title: Ciudades
+        list: Lista de Ciudades
+        link: Índice de Ciudades
+    new:
+        title: Nueva Ciudad
+        link: Crear nueva Ciudad
+        form: Formulario de registro
+        submit: Guardar
+        flash: Nueva Ciudad registrada satisfactoriamente
+    edit:
+        title: Editar Ciudad
+        link: Editar
+        submit: Guardar
+        form: Formulario de edición
+        flash: Los cambios han sido guardados exitosamente
+    show:
+        title: Ver Ciudad
+        link: Detalles
+        data: Datos
+    delete:
+        link: Eliminar
+        title: Eliminación de Ciudad
+        message: Los datos eliminados no podrán ser recuperados
+        submit: Eliminar
+        flash: La Ciudad ha sido eliminada
+    form:
+        id: ID
+        name: Nombre
+        country: País
+
+user:
+    index:
+        title: Usuarios
+        list: Lista de Usuarios
+        link: Índice de Usuarios
+    new:
+        title: Nueva Usuario
+        link: Crear nueva Usuario
+        form: Formulario de registro
+        submit: Guardar
+        flash: Nuevo Usuario registrado satisfactoriamente
+    edit:
+        title: Editar Usuario %id%
+        link: Editar
+        submit: Guardar
+        form: Formulario de edición
+        flash: Los cambios han sido guardados exitosamente
+    show:
+        title: Ver Usuario %id%
+        link: Detalles
+        data: Datos
+        breadcrumb: Usuario %id%
+    delete:
+        link: Eliminar
+        title: Eliminación de Usuario
+        message: Los datos eliminados no podrán ser recuperados
+        submit: Eliminar
+        flash: El Usuario ha sido eliminado
+    form:
+        id: ID
+        level: Nivel
+        description: Descripción
+        publiccontact: Contacto
+        exigency: Exigencia
+        facebookid: Facebook ID
+        facebookaccesstoken: Facebook AT
+        facebookshare: Compartir
+        googleid: Google ID
+        googleaccesstoken: Google AT
+        twitterid: Twitter ID
+        twitteraccesstoken: Twitter AT
+        name: Nombre
+        birthdate: Nacimiento
+        profilephotofilename: Foto
+        city1: Ciudad 1
+        city2: Ciudad 2
+        city3: Ciudad 3
+        createdAt: Registrado
+        updatedAt: Actualizado
+
+
+photography:
+    index:
+        title: Fotos
+        list: Lista de Fotos
+        link: Índice de Fotos
+    new:
+        title: Nueva Foto
+        link: Crear nueva Foto
+        form: Formulario de registro
+        submit: Guardar
+        flash: Nueva Foto registrada satisfactoriamente
+    edit:
+        title: Editar Foto %id%
+        link: Editar
+        submit: Guardar
+        form: Formulario de edición
+        flash: Los cambios han sido guardados exitosamente
+    show:
+        title: Ver Foto %id%
+        link: Detalles
+        data: Datos
+        breadcrumb: Foto %id%
+    delete:
+        link: Eliminar
+        title: Eliminación de Foto
+        message: Los datos eliminados no podrán ser recuperados
+        submit: Eliminar
+        flash: La Foto ha sido eliminada
+    form:
+        id: ID
+        value: Valorización
+        filename: Archivo
+        published: Publicada
+        MakeModel: Cámara
+        DateTimeOriginal: Fecha Original
+        ExposureTime: Exposición
+        FocalLength: Distancia Focal
+        FNumber: FNumber
+        ISOSpeedRatings: ISO
+        user: Usuario
+        album: Álbum
+        categories: Categorías
+        createdAt: Creado
+        updatedAt: Actualizado
+
+album:
+    index:
+        title: Álbumes
+        list: Lista de Álbumes
+        link: Índice de Álbumes
+    new:
+        title: Nueva Álbum
+        link: Crear nueva Álbum
+        form: Formulario de registro
+        submit: Guardar
+        flash: Nuevo Álbum registrado satisfactoriamente
+    edit:
+        title: Editar Álbum %id%
+        link: Editar
+        submit: Guardar
+        form: Formulario de edición
+        flash: Los cambios han sido guardados exitosamente
+    show:
+        title: Ver Álbum %id%
+        link: Detalles
+        data: Datos
+        breadcrumb: Álbum %id%
+    delete:
+        link: Eliminar
+        title: Eliminación de Álbum
+        message: Los datos eliminados no podrán ser recuperados
+        submit: Eliminar
+        flash: El Álbum ha sido eliminado
+    form:
+        id: ID
+        user: Usuario
+        name: Nombre
+        createdAt: Creado
+        updatedAt: Actualizado

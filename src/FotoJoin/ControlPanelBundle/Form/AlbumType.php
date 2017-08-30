@@ -26,10 +26,13 @@ class AlbumType extends AbstractType
             ->add('user', 'entity_hidden', array(
                 'class' => 'FotoJoin\UserBundle\Entity\User'
             ))
-            ->add('file', 'photography_collection', array(
+            ->add('photographies', 'bootstrap_collection', array(
                 'label' => false,
-                'required' => false,
-                'mapped' => false,
+                'attr'  => array( 'label_col' => 0, 'widget_col' => 12 ),
+                'translation_domain' => 'FotoJoinControlPanelBundle',
+                'entry_type' => 'FotoJoin\ControlPanelBundle\Form\PhotographyAlbumType',
+                'allow_delete' => true,
+                'by_reference' => false,
             ))
         ;
     }

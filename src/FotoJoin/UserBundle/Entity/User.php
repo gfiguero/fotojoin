@@ -763,4 +763,121 @@ class User extends BaseUser
     {
         return $this->twitteraccesstoken;
     }
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $albums;
+
+
+    /**
+     * Add album
+     *
+     * @param \FotoJoin\ControlPanelBundle\Entity\Album $album
+     *
+     * @return User
+     */
+    public function addAlbum(\FotoJoin\ControlPanelBundle\Entity\Album $album)
+    {
+        $this->albums[] = $album;
+
+        return $this;
+    }
+
+    /**
+     * Remove album
+     *
+     * @param \FotoJoin\ControlPanelBundle\Entity\Album $album
+     */
+    public function removeAlbum(\FotoJoin\ControlPanelBundle\Entity\Album $album)
+    {
+        $this->albums->removeElement($album);
+    }
+
+    /**
+     * Get albums
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getAlbums()
+    {
+        return $this->albums;
+    }
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $transmitted_messages;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $received_messages;
+
+
+    /**
+     * Add transmittedMessage
+     *
+     * @param \FotoJoin\ControlPanelBundle\Entity\Message $transmittedMessage
+     *
+     * @return User
+     */
+    public function addTransmittedMessage(\FotoJoin\ControlPanelBundle\Entity\Message $transmittedMessage)
+    {
+        $this->transmitted_messages[] = $transmittedMessage;
+
+        return $this;
+    }
+
+    /**
+     * Remove transmittedMessage
+     *
+     * @param \FotoJoin\ControlPanelBundle\Entity\Message $transmittedMessage
+     */
+    public function removeTransmittedMessage(\FotoJoin\ControlPanelBundle\Entity\Message $transmittedMessage)
+    {
+        $this->transmitted_messages->removeElement($transmittedMessage);
+    }
+
+    /**
+     * Get transmittedMessages
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getTransmittedMessages()
+    {
+        return $this->transmitted_messages;
+    }
+
+    /**
+     * Add receivedMessage
+     *
+     * @param \FotoJoin\ControlPanelBundle\Entity\Message $receivedMessage
+     *
+     * @return User
+     */
+    public function addReceivedMessage(\FotoJoin\ControlPanelBundle\Entity\Message $receivedMessage)
+    {
+        $this->received_messages[] = $receivedMessage;
+
+        return $this;
+    }
+
+    /**
+     * Remove receivedMessage
+     *
+     * @param \FotoJoin\ControlPanelBundle\Entity\Message $receivedMessage
+     */
+    public function removeReceivedMessage(\FotoJoin\ControlPanelBundle\Entity\Message $receivedMessage)
+    {
+        $this->received_messages->removeElement($receivedMessage);
+    }
+
+    /**
+     * Get receivedMessages
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getReceivedMessages()
+    {
+        return $this->received_messages;
+    }
 }

@@ -11,11 +11,10 @@ class FrontPageController extends Controller
 {
     public function indexAction(Request $request)
     {
-        $form = $this->createForm('FotoJoin\FrontPageBundle\Form\ContactType');
+        $form = $this->createForm(new ContactType());
+/*
         $form->handleRequest($request);
-
         if ($form->isSubmitted() && $form->isValid()) {
-
             $message = \Swift_Message::newInstance()
                 ->setSubject('Contacto')
                 ->setFrom($form->get('email')->getData())
@@ -34,8 +33,8 @@ class FrontPageController extends Controller
 
             return $this->redirectToRoute('foto_join_front_page_homepage');
         }
-
-        return $this->render('FotoJoinFrontPageBundle:FrontPage:frontpage.html.twig', array(
+*/
+        return $this->render('FotoJoinFrontPageBundle:Base:index.html.twig', array(
             'form' => $form->createView(),
             'userForm' => $this->createUserForm()->createView(),
             'authorForm' => $this->createAuthorForm()->createView(),

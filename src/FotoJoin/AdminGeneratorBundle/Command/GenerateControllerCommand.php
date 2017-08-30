@@ -17,7 +17,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\ConfirmationQuestion;
 use Symfony\Component\Console\Question\Question;
 use Sensio\Bundle\GeneratorBundle\Command\Helper\QuestionHelper;
-use Sensio\Bundle\GeneratorBundle\Generator\ControllerGenerator;
+use FotoJoin\AdminGeneratorBundle\Generator\ControllerGenerator;
 
 /**
  * Generates controllers.

@@ -1,0 +1,59 @@
+{% block timeline %}
+    <!-- About Section -->
+    <section id="timeline">
+        <div class="container">
+            <div class="row" id="timeline-header">
+                <div class="col-xs-12 text-center">
+                    <h2 class="text-center">{{'Funcionamiento'|upper}}</h2>
+                    <h4 class="text-center">Todo lo que necesitas para <b>ser contratado en base a estadísticas.</b></h4>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <ul class="timeline">
+                        <li>
+                            <div class="timeline-image">
+                                <img class="img-responsive" src="{{ 'img/fotografo.jpg' | imagine_filter('frontpage_timeline') }}" alt="">
+                            </div>
+                            <div class="timeline-panel">
+                                <div class="timeline-heading">
+                                    <h3>{{'Fotógrafos'|upper}}</h3>
+                                </div>
+                                <div class="timeline-body">
+                                    <p class="text-muted">El fotógrafo podrá subir tomas, definir su exigencia interna para la posterior exhibición de estas tras haber sido evaluadas por múltiples personas y eventualmente ser contactado en base a las evaluaciones recibidas.</p>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="timeline-inverted">
+                            <div class="timeline-image">
+                                <img class="img-responsive" src="{{ 'img/evaluador.jpg' | imagine_filter('frontpage_timeline') }}" alt="">
+                            </div>
+                            <div class="timeline-panel">
+                                <div class="timeline-heading">
+                                    <h3>{{'Juega y Participa'|upper}}</h3>
+                                </div>
+                                <div class="timeline-body">
+                                    <p class="text-muted">Aquellas personas amantes de la fotografía podrán evaluar cuantas fotos quieran, mientras más certeras sean tus evaluaciones respecto al histórico registrado de cada foto, más puntos podrás ganar y eventualmente canjear.</p>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="timeline-image">
+                                <img class="img-responsive" src="{{ 'img/contrato.jpg' | imagine_filter('frontpage_timeline') }}" alt="">
+                            </div>
+                            <div class="timeline-panel">
+                                <div class="timeline-heading">
+                                    <h3>{{'Contratación'|upper}}</h3>
+                                </div>
+                                <div class="timeline-body">
+                                    <p class="text-muted">Esta sección permitirá al fotógrafo ser contactado, contratado y posteriormente podrá vender fotos en base a las evaluaciones recibidas</p>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}

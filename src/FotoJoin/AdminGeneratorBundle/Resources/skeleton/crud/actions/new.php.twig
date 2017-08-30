@@ -1,7 +1,7 @@
 
     /**
 {% block phpdoc_method_header %}
-     * Creates a new {{ entity_singularized }} entity.
+     * Creates a new {{ entity }} entity.
 {% endblock phpdoc_method_header %}
      *
 {% block phpdoc_method_annotations %}
@@ -16,32 +16,40 @@
 {% endblock method_definition %}
     {
 {% block method_body %}
-        ${{ entity_singularized }} = new {{ entity_singularized|capitalize }}();
-        {% if use_form_type_instance -%}
-            $form = $this->createForm(new {{ entity_singularized|capitalize }}Type(), ${{ entity_singularized }});
-        {% else -%}
-            $form = $this->createForm('{{ namespace }}\Form\{{ entity }}Type', ${{ entity_singularized }});
-        {% endif -%}
-        $form->handleRequest($request);
+        ${{ entity_singularized }} = new {{ entity_class }}();
+        $newForm = $this->createNewForm(${{ entity_singularized }});
+        $newForm->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist(${{ entity_singularized }});
-            $em->flush();
-
-            {% if 'show' in actions -%}
-                return $this->redirectToRoute('{{ route_name_prefix }}_show', array('{{ identifier }}' => ${{ entity_singularized }}->get{{ identifier|capitalize }}()));
-            {%- else -%}
-                return $this->redirectToRoute('{{ route_name_prefix }}_index'));
-            {%- endif %}
-
+        if ($newForm->isSubmitted()) {
+            if($newForm->isValid()) {
+                $em = $this->getDoctrine()->getManager();
+                $em->persist(${{ entity_singularized }});
+                $em->flush();
+                $request->getSession()->getFlashBag()->add( 'success', '{{ entity_singularized ~ '.new.flash' }}' );
+                return $this->redirect($this->generateUrl('{{ route_name_prefix }}_index'));
+            }
         }
 {% endblock method_body %}
 
 {% block method_return %}
-        return $this->render('{{ entity|lower|replace({'\\': '/'}) }}/new.html.twig', array(
-            '{{ entity_singularized }}' => ${{ entity_singularized }},
-            'form' => $form->createView(),
+        return $this->render('FotoJoinAdminBundle:{{ entity }}:new.html.twig', array(
+            'newForm' => $newForm->createView(),
         ));
 {% endblock method_return %}
     }
+
+{% block form %}
+    /**
+     * Creates a form to create a new {{ entity }} entity.
+     *
+     * @param {{ entity_class }} ${{ entity_singularized }} The {{ entity }} entity
+     *
+     * @return \Symfony\Component\Form\Form The form
+     */
+    private function createNewForm({{ entity_class }} ${{ entity_singularized }})
+    {
+        return $this->createForm(new {{ entity_class }}Type(), ${{ entity_singularized }}, array(
+            'action' => $this->generateUrl('{{ route_name_prefix }}_new'),
+        ));
+    }
+{% endblock form %}

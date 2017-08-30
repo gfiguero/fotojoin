@@ -38,6 +38,7 @@ class PhotographyType extends AbstractType
                 'attr' => array('label_col' => 3, 'widget_col' => 9, 'class' => 'photography_categories' ),
                 'translation_domain' => 'FotoJoinControlPanelBundle',
             ))
+/*
             ->add('album', 'entity', array(
                 'label' => 'photography.album',
                 'class' => 'FotoJoinControlPanelBundle:Album',
@@ -47,6 +48,7 @@ class PhotographyType extends AbstractType
                 'translation_domain' => 'FotoJoinControlPanelBundle',
                 'placeholder' => 'Ninguno',
             ))
+*/
 /**********************************************************/
             ->add('MakeModel', null, array(
                 'label' => 'photography.capture.MakeModel',

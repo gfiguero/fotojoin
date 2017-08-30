@@ -6,6 +6,12 @@ FotoJoin\ControlPanelBundle\Entity\Album:
 #            targetEntity: FotoJoin\UserBundle\Entity\Author
         user:
             targetEntity: FotoJoin\UserBundle\Entity\User
+            inversedBy: albums
+    oneToMany:
+        photographies:
+            targetEntity: FotoJoin\ControlPanelBundle\Entity\Photography
+            mappedBy: album
+            cascade: ['persist', merge]
     id:
         id:
             type: integer

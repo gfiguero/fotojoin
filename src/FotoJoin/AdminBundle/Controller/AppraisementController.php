@@ -2,11 +2,10 @@
 
 namespace FotoJoin\AdminBundle\Controller;
 
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-
-use FotoJoin\AdminBundle\Entity\Appraisement;
+use FotoJoin\GalleryBundle\Entity\Appraisement;
 use FotoJoin\AdminBundle\Form\AppraisementType;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Appraisement controller.
@@ -14,6 +13,7 @@ use FotoJoin\AdminBundle\Form\AppraisementType;
  */
 class AppraisementController extends Controller
 {
+
     /**
      * Lists all Appraisement entities.
      *
@@ -23,15 +23,21 @@ class AppraisementController extends Controller
         $sort = $request->query->get('sort');
         $direction = $request->query->get('direction');
         $em = $this->getDoctrine()->getManager();
-        if($sort) $appraisements = $em->getRepository('FotoJoinAdminBundle:Appraisement')->findBy(array(), array($sort => $direction));
-        else $appraisements = $em->getRepository('FotoJoinAdminBundle:Appraisement')->findAll();
+        if($sort) $appraisements = $em->getRepository('FotoJoinGalleryBundle:Appraisement')->findBy(array(), array($sort => $direction));
+        else $appraisements = $em->getRepository('FotoJoinGalleryBundle:Appraisement')->findAll();
         $paginator = $this->get('knp_paginator');
-        $appraisements = $paginator->paginate($appraisements, $request->query->getInt('page', 1), 10);
+        $appraisements = $paginator->paginate($appraisements, $request->query->getInt('page', 1), 100);
 
-        return $this->render('appraisement/index.html.twig', array(
+        $deleteForms = array();
+        foreach($appraisements as $key => $appraisement) {
+            $deleteForms[] = $this->createDeleteForm($appraisement)->createView();
+        }
+
+        return $this->render('FotoJoinAdminBundle:Appraisement:index.html.twig', array(
             'appraisements' => $appraisements,
             'direction' => $direction,
             'sort' => $sort,
+            'deleteForms' => $deleteForms,
         ));
     }
 
@@ -42,21 +48,35 @@ class AppraisementController extends Controller
     public function newAction(Request $request)
     {
         $appraisement = new Appraisement();
-        $form = $this->createForm('FotoJoin\AdminBundle\Form\AppraisementType', $appraisement);
-        $form->handleRequest($request);
+        $newForm = $this->createNewForm($appraisement);
+        $newForm->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($appraisement);
-            $em->flush();
-            $request->getSession()->getFlashBag()->add( 'success', 'appraisement.created' );    
-
-            return $this->redirectToRoute('appraisement_show', array('id' => $appraisement->getId()));
+        if ($newForm->isSubmitted()) {
+            if($newForm->isValid()) {
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($appraisement);
+                $em->flush();
+                $request->getSession()->getFlashBag()->add( 'success', 'appraisement.new.flash' );
+                return $this->redirect($this->generateUrl('admin_appraisement_index'));
+            }
         }
 
-        return $this->render('appraisement/new.html.twig', array(
-            'appraisement' => $appraisement,
-            'form' => $form->createView(),
+        return $this->render('FotoJoinAdminBundle:Appraisement:new.html.twig', array(
+            'newForm' => $newForm->createView(),
+        ));
+    }
+
+    /**
+     * Creates a form to create a new Appraisement entity.
+     *
+     * @param Appraisement $appraisement The Appraisement entity
+     *
+     * @return \Symfony\Component\Form\Form The form
+     */
+    private function createNewForm(Appraisement $appraisement)
+    {
+        return $this->createForm(new AppraisementType(), $appraisement, array(
+            'action' => $this->generateUrl('admin_appraisement_new'),
         ));
     }
 
@@ -66,11 +86,13 @@ class AppraisementController extends Controller
      */
     public function showAction(Appraisement $appraisement)
     {
+        $editForm = $this->createEditForm($appraisement);
         $deleteForm = $this->createDeleteForm($appraisement);
 
-        return $this->render('appraisement/show.html.twig', array(
+        return $this->render('FotoJoinAdminBundle:Appraisement:show.html.twig', array(
             'appraisement' => $appraisement,
-            'delete_form' => $deleteForm->createView(),
+            'editForm' => $editForm->createView(),
+            'deleteForm' => $deleteForm->createView(),
         ));
     }
 
@@ -80,23 +102,38 @@ class AppraisementController extends Controller
      */
     public function editAction(Request $request, Appraisement $appraisement)
     {
+        $editForm = $this->createEditForm($appraisement);
         $deleteForm = $this->createDeleteForm($appraisement);
-        $editForm = $this->createForm('FotoJoin\AdminBundle\Form\AppraisementType', $appraisement);
         $editForm->handleRequest($request);
 
-        if ($editForm->isSubmitted() && $editForm->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($appraisement);
-            $em->flush();
-            $request->getSession()->getFlashBag()->add( 'success', 'appraisement.edited' );    
-
-            return $this->redirectToRoute('appraisement_edit', array('id' => $appraisement->getId()));
+        if ($editForm->isSubmitted()) {
+            if($editForm->isValid()) {
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($appraisement);
+                $em->flush();
+                $request->getSession()->getFlashBag()->add( 'success', 'appraisement.edit.flash' );
+                return $this->redirect($this->generateUrl('admin_appraisement_index'));
+            }
         }
 
-        return $this->render('appraisement/edit.html.twig', array(
+        return $this->render('FotoJoinAdminBundle:Appraisement:edit.html.twig', array(
             'appraisement' => $appraisement,
-            'edit_form' => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
+            'editForm' => $editForm->createView(),
+            'deleteForm' => $deleteForm->createView(),
+        ));
+    }
+
+    /**
+     * Creates a form to edit a Appraisement entity.
+     *
+     * @param Appraisement $appraisement The Appraisement entity
+     *
+     * @return \Symfony\Component\Form\Form The form
+     */
+    private function createEditForm(Appraisement $appraisement)
+    {
+        return $this->createForm(new AppraisementType(), $appraisement, array(
+            'action' => $this->generateUrl('admin_appraisement_edit', array('id' => $appraisement->getId())),
         ));
     }
 
@@ -106,17 +143,17 @@ class AppraisementController extends Controller
      */
     public function deleteAction(Request $request, Appraisement $appraisement)
     {
-        $form = $this->createDeleteForm($appraisement);
-        $form->handleRequest($request);
+        $deleteForm = $this->createDeleteForm($appraisement);
+        $deleteForm->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($deleteForm->isSubmitted() && $deleteForm->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $em->remove($appraisement);
             $em->flush();
-            $request->getSession()->getFlashBag()->add( 'danger', 'appraisement.deleted' );    
+            $request->getSession()->getFlashBag()->add( 'danger', 'appraisement.delete.flash' );
         }
 
-        return $this->redirectToRoute('appraisement_index');
+        return $this->redirect($this->generateUrl('admin_appraisement_index'));
     }
 
     /**
@@ -129,7 +166,7 @@ class AppraisementController extends Controller
     private function createDeleteForm(Appraisement $appraisement)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('appraisement_delete', array('id' => $appraisement->getId())))
+            ->setAction($this->generateUrl('admin_appraisement_delete', array('id' => $appraisement->getId())))
             ->setMethod('DELETE')
             ->getForm()
         ;

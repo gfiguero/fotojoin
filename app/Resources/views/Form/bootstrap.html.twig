@@ -246,18 +246,27 @@
             {% set style = attr.style %}
         {% endif %}
 
-        {% set class = '' %}
-        {% if align_with_widget is defined or attr.align_with_widget is defined %}
+        {% if style == 'horizontal' %}
             {% set widget_col = widget_col|default(bootstrap_get_widget_col()) %}
             {% set label_col = label_col|default(bootstrap_get_label_col()) %}
             {% set class = 'col-' ~ col_size ~ '-' ~ widget_col ~ ' col-' ~ col_size ~ '-offset-' ~ label_col %}
             <div class="form-group {% if form.vars.errors|length > 0 %} has-error{% endif %}">
             <div class="{{ class }}">
-        {% elseif no_form_group is not defined or no_form_group == false %}
-            <div class="form-group{% if form.vars.errors|length > 0 %} has-error{% endif %}">
+        {% else %}
+            {% set class = '' %}
+            {% if align_with_widget is defined or attr.align_with_widget is defined %}
+                {% set widget_col = widget_col|default(bootstrap_get_widget_col()) %}
+                {% set label_col = label_col|default(bootstrap_get_label_col()) %}
+                {% set class = 'col-' ~ col_size ~ '-' ~ widget_col ~ ' col-' ~ col_size ~ '-offset-' ~ label_col %}
+                <div class="form-group {% if form.vars.errors|length > 0 %} has-error{% endif %}">
+                <div class="{{ class }}">
+            {% elseif no_form_group is not defined or no_form_group == false %}
+                <div class="form-group{% if form.vars.errors|length > 0 %} has-error{% endif %}">
+            {% endif %}
+
         {% endif %}
 
-        {%set checkboxdata %}
+        {% set checkboxdata %}
         {% if label is not same as (false) %}
             {% if not compound %}
                 {% set label_attr = label_attr|merge({'for': id}) %}
@@ -283,20 +292,26 @@
 
         {% if inline is defined and inline %}
             {{ checkboxdata|raw }}
-        {% else%}
+        {% else %}
             <div class="checkbox">{{ checkboxdata|raw }}</div>
         {% endif %}
 
         {{ block('form_help') }}
 
-        {% if align_with_widget is defined or attr.align_with_widget is defined %}
+        {% if style == 'horizontal' %}
             </div>
             </div>
-        {% elseif no_form_group is not defined or no_form_group == false %}
-            </div>
+        {% elseif style == 'inline' %}
+            &nbsp;
+        {% else %}
+            {% if align_with_widget is defined or attr.align_with_widget is defined %}
+                </div>
+                </div>
+            {% elseif no_form_group is not defined or no_form_group == false %}
+                </div>
+            {% endif %}
         {% endif %}
 
-        {% if style == 'inline' %}&nbsp;{% endif %}
     {% endspaceless %}
 {% endblock checkbox_row %}
 

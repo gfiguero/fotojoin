@@ -27,11 +27,10 @@ class Album
      */
     private $updatedAt;
 
-    /**
-     * @var \DateTime
-     */
-    private $deletedAt;
-
+    public function __toString()
+    {
+        return $this->name;
+    }
 
     /**
      * Get id
@@ -116,26 +115,78 @@ class Album
     }
 
     /**
-     * Set deletedAt
+     * @var \FotoJoin\UserBundle\Entity\User
+     */
+    private $user;
+
+
+    /**
+     * Set user
      *
-     * @param \DateTime $deletedAt
+     * @param \FotoJoin\UserBundle\Entity\User $user
      *
      * @return Album
      */
-    public function setDeletedAt($deletedAt)
+    public function setUser(\FotoJoin\UserBundle\Entity\User $user = null)
     {
-        $this->deletedAt = $deletedAt;
+        $this->user = $user;
 
         return $this;
     }
 
     /**
-     * Get deletedAt
+     * Get user
      *
-     * @return \DateTime
+     * @return \FotoJoin\UserBundle\Entity\User
      */
-    public function getDeletedAt()
+    public function getUser()
     {
-        return $this->deletedAt;
+        return $this->user;
+    }
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $photographies;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->photographies = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add photography
+     *
+     * @param \FotoJoin\GalleryBundle\Entity\Photography $photography
+     *
+     * @return Album
+     */
+    public function addPhotography(\FotoJoin\GalleryBundle\Entity\Photography $photography)
+    {
+        $this->photographies[] = $photography;
+
+        return $this;
+    }
+
+    /**
+     * Remove photography
+     *
+     * @param \FotoJoin\GalleryBundle\Entity\Photography $photography
+     */
+    public function removePhotography(\FotoJoin\GalleryBundle\Entity\Photography $photography)
+    {
+        $this->photographies->removeElement($photography);
+    }
+
+    /**
+     * Get photographies
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getPhotographies()
+    {
+        return $this->photographies;
     }
 }

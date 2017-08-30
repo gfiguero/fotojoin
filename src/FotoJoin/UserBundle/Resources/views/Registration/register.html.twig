@@ -1,4 +1,6 @@
-{% extends "FotoJoinFrontPageBundle::base.html.twig" %}
+{% extends "FotoJoinFrontPageBundle:Base:base.html.twig" %}
+{% use 'FotoJoinFrontPageBundle:Base:navbar.html.twig' %}
+{% use 'FotoJoinFrontPageBundle:Base:footer.html.twig' %}
 
 {% trans_default_domain 'FotoJoinUserBundle' %}
 
@@ -7,21 +9,41 @@
 {% block stylesheet %}
     <link href="{{ asset('css/bootstrap-social/bootstrap-social.css') }}" rel="stylesheet">
     <style type="text/css">
-        .panel,
-        .panel .panel-heading,
-        .panel .panel-body,
-        .panel .panel-footer {
-            background: rgba(25, 25, 25, .5);
+        #register {
+            margin-top: 130px;
         }
     </style>
 {% endblock %}
 
 {% block body %}
+{% block navbar %}{{ parent() }}{% endblock %}
 
+<div class="section" id="register">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-4 col-sm-offset-4">
+                <div class="panel panel-default text-center">
+                    <div class="panel-heading">
+                        <h2 class="panel-title">Formulario de registro</h2>
+                    </div>
+                    <div class="panel-body">
+                        {{ form_start(form) }}
+                            {{ form_widget(form) }}
+                            <button type="submit" class="btn btn-primary btn-block">{{ icon('check fa-fw') }}Registrar</button>
+                        {{ form_end(form) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% block footer %}{{ parent() }}{% endblock %}
+
+{#}
 <div class="section fill table" id="register">
     <div class="container">
         <div class="row">
-{#}
             <div class="col-xs-12">
                 <div class="row">
                     <div class="col-xs-12 col-sm-4 col-sm-offset-2">
@@ -45,13 +67,16 @@
 
             <h1>Quiero registrarme como</h1>
 {#}
+{#}
             <div class="col-sm-8 col-sm-offset-2">
                 <div class="panel panel-default">
+{#}
                         {#}
                     <div class="panel-heading text-center">
                         <h1>{{ 'registration.title'|trans }}</h1>
                     </div>
                         {#}
+{#}
                     <div class="panel-body">
                         <h1 class="text-center">Busco registrarme como</h1>
                     </div>
@@ -71,24 +96,26 @@
                             </div>
                         </div>
 {#}
+{#}
                         {{ form_start(form, { 'style': 'horizontal' }) }}
                             {{ form_widget(form) }}
                             <button type="submit" class="btn btn-primary btn-block">{{ icon('pencil-square-o') }}&nbsp;{{ 'registration.submit'|trans }}</button>
                         {{ form_end(form) }}
 {#}
+{#}
                     </div>
+{#}
 {#}
                     <div class="panel-footer text-center">
                         <a href="{{ path('fos_user_security_login') }}">{{ 'security.login.goback'|trans }}</a>
                     </div>
 {#}
+{#}
                 </div>
             </div>
         </div>
     </div>
-    <div id="push"></div>
 </div>
-
-{% include 'FotoJoinFrontPageBundle::footer.html.twig' %}
+{#}
 
 {% endblock body %}

@@ -1,17 +1,109 @@
 {% block extends %}
-{{ "{% extends 'base.html.twig' %}" }}
+{{ "{% extends 'FotoJoinAdminBundle:Base:base.html.twig' %}" }}
+{{ "{% use 'FotoJoinAdminBundle:Base:navbar.html.twig' %}" }}
+{{ "{% use 'FotoJoinAdminBundle:Base:sidebar.html.twig' %}" }}
+{{ "{% use 'FotoJoinAdminBundle:Base:icons.html.twig' %}" }}
+{{ "{% use 'FotoJoinAdminBundle:Base:flashbag.html.twig' %}" }}
 {% endblock extends %}
 
 {% block body %}
+{{ "{% trans_default_domain 'FotoJoinAdminBundle' %}" }}
+
+{{ "{% block title %}" }}{{ "{{ '" ~ entity_singularized|lower ~ ".edit.title'|trans({'%id%':" ~ entity_singularized|lower ~ ".id}) }}" }}{{ "{% endblock %}" }}
+
 {{ "{% block body %}" }}
-    <h1>{{ entity_singularized|capitalize }} edit</h1>
+    {% if entity in ['User', 'Album', 'Photography', 'Appraisement'] -%}
+    <div class="row" id="page-breadcrumb">
+        <div class="col-lg-12">
+            <ol class="breadcrumb">
+            {% if entity == 'User' -%}
+                <li class="active">{{ "{{'user.show.breadcrumb'|trans({'%id%':user.id}) }}" }}</li>
+            {%- elseif entity == 'Album' -%}
+                <li><a href='{{ "{{ path('admin_user_show', { 'id' : album.user.id }) }}" }}'>{{ "{{'user.show.breadcrumb'|trans({'%id%':album.user.id}) }}" }}</a></li>
+                <li class="active">{{ "{{'album.show.breadcrumb'|trans({'%id%':album.id}) }}" }}</li>
+            {%- elseif entity == 'Photography' %}
+                <li><a href='{{ "{{ path('admin_user_show', { 'id' : photography.album.user.id }) }}" }}'>{{ "{{'user.show.breadcrumb'|trans({'%id%':photography.album.user.id}) }}" }}</a></li>
+                <li><a href='{{ "{{ path('admin_album_show', { 'id' : photography.album.id }) }}" }}'>{{ "{{'album.show.breadcrumb'|trans({'%id%':photography.album.id}) }}" }}</a></li>
+                <li class="active">{{ "{{'photography.show.breadcrumb'|trans({'%id%':photography.id}) }}" }}</li>
+            {%- elseif entity == 'Appraisement' %}
+                <li><a href='{{ "{{ path('admin_user_show', { 'id' : appraisement.photography.album.user.id }) }}" }}'>{{ "{{'user.show.breadcrumb'|trans({'%id%':appraisement.photography.album.user.id}) }}" }}</a></li>
+                <li><a href='{{ "{{ path('admin_album_show', { 'id' : appraisement.photography.album.id }) }}" }}'>{{ "{{'album.show.breadcrumb'|trans({'%id%':appraisement.photography.album.id}) }}" }}</a></li>
+                <li><a href='{{ "{{ path('admin_photography_show', { 'id' : appraisement.photography.id }) }}" }}'>{{ "{{'photography.show.breadcrumb'|trans({'%id%':appraisement.photography.id}) }}" }}</a></li>
+                <li class="active">{{ "{{'appraisement.show.breadcrumb'|trans({'%id%':appraisement.id}) }}" }}</li>
+            {%- endif %}
 
-    {{ '{{ form_start(edit_form) }}' }}
-        {{ '{{ form_widget(edit_form) }}' }}
-        <input type="submit" value="Edit" />
-    {{ '{{ form_end(edit_form) }}' }}
+            </ol>
+        </div>
+    </div>
+    <!-- /#page-breadcrumb -->
+    {% endif %}
 
-{% set hide_edit, hide_delete = true, false %}
-{{ include('crud/views/others/record_actions.html.twig.twig') -}}
+    <div id="page-wrapper">
+        <div class="row" id="page-header">
+            <div class="col-lg-12">
+                <h1 class="page-header">{{ "{% block icons %}{{ parent() }}{% endblock %}{{ '" ~ entity_singularized|lower ~ ".edit.title'|trans({'%id%':" ~ entity_singularized|lower ~ ".id}) }}" }}</h1>
+                {{ "{% block flashbag %}{{ parent() }}{% endblock %}" }}
+            </div>
+        </div>
+        <!-- /#page-header -->
+
+        <div class="row" id="page-toolbar">
+            <div class="col-lg-12">
+                <div class="btn-toolbar">
+                    <a type="button" class="btn btn-default" href="{{ "{{ path('" ~ route_name_prefix ~ "_index') }}" }}">{{ "{{ icon('list') }}" }}&nbsp;{{ "{{ '" ~ entity_singularized|lower ~ ".index.link'|trans }}" }}</a>
+                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modalDelete">{{ "{{ icon('trash-o') }}" }}&nbsp;{{ "{{ '" ~ entity_singularized|lower ~ ".delete.link'|trans }}" }}</button>
+                </div>
+            </div>
+        </div>
+        <!-- /#page-toolbar -->
+
+        <div class="row" id="page-edit">
+            <div class="col-lg-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h2 class="panel-title">{{ "{{ '" ~ entity_singularized|lower ~ ".edit.form'|trans }}" }}</h2>
+                    </div>
+                    <div class="panel-body">
+                        {{ "{{ form_start(editForm, { 'style': 'horizontal' }) }}" }}
+                            {{ '{{ form_widget(editForm) }}' }}
+                                <div class="form-group"><div class="col-lg-offset-4 col-lg-8">
+                                    <button type="submit" class="btn btn-primary">{{ "{{ icon('save') }}&nbsp;{{ '" ~ entity_singularized|lower ~ ".edit.submit'|trans }}" }}</button>
+                                </div></div>
+                        {{ '{{ form_end(editForm) }}' }}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /#page-edit -->
+
+        <div id="page-modal">
+            <div class="modal fade" id="modalDelete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                <div class="modal-dialog modal-sm" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">{{ "{{ icon('times') }}" }}</button>
+                            <h4 class="modal-title" id="myModalLabel">{{ "{{ '" ~ entity_singularized|lower ~ ".delete.title'|trans }}" }}</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col-xs-2 text-center">{{ "{{ icon('exclamation-triangle fa-5x') }}" }}</div>
+                                <div class="col-xs-10"><p>{{ "{{ '" ~ entity_singularized|lower ~ ".delete.message'|trans }}" }}</p></div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            {{ "{{ form_start(deleteForm) }}" }}
+                                <button type="submit" class="btn btn-danger pull-right">{{ "{{ icon('trash') }}" }}&nbsp;{{ "{{ '" ~ entity_singularized|lower ~ ".delete.submit'|trans }}" }}</button>
+                            {{ "{{ form_end(deleteForm) }}" }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /#page-modal -->
+
+    </div>
+    <!-- /#page-wrapper -->
+
 {{ "{% endblock %}" }}
 {% endblock body %}
+

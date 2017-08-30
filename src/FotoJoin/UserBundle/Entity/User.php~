@@ -705,4 +705,101 @@ class User extends BaseUser
     {
         return $this->googleaccesstoken;
     }
+    /**
+     * @var string
+     */
+    private $twitterid;
+
+    /**
+     * @var string
+     */
+    private $twitteraccesstoken;
+
+
+    /**
+     * Set twitterid
+     *
+     * @param string $twitterid
+     *
+     * @return User
+     */
+    public function setTwitterid($twitterid)
+    {
+        $this->twitterid = $twitterid;
+
+        return $this;
+    }
+
+    /**
+     * Get twitterid
+     *
+     * @return string
+     */
+    public function getTwitterid()
+    {
+        return $this->twitterid;
+    }
+
+    /**
+     * Set twitteraccesstoken
+     *
+     * @param string $twitteraccesstoken
+     *
+     * @return User
+     */
+    public function setTwitteraccesstoken($twitteraccesstoken)
+    {
+        $this->twitteraccesstoken = $twitteraccesstoken;
+
+        return $this;
+    }
+
+    /**
+     * Get twitteraccesstoken
+     *
+     * @return string
+     */
+    public function getTwitteraccesstoken()
+    {
+        return $this->twitteraccesstoken;
+    }
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $albums;
+
+
+    /**
+     * Add album
+     *
+     * @param \FotoJoin\ControlPanelBundle\Entity\Album $album
+     *
+     * @return User
+     */
+    public function addAlbum(\FotoJoin\ControlPanelBundle\Entity\Album $album)
+    {
+        $this->albums[] = $album;
+
+        return $this;
+    }
+
+    /**
+     * Remove album
+     *
+     * @param \FotoJoin\ControlPanelBundle\Entity\Album $album
+     */
+    public function removeAlbum(\FotoJoin\ControlPanelBundle\Entity\Album $album)
+    {
+        $this->albums->removeElement($album);
+    }
+
+    /**
+     * Get albums
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getAlbums()
+    {
+        return $this->albums;
+    }
 }

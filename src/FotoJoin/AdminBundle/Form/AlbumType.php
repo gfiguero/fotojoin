@@ -9,28 +9,41 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 class AlbumType extends AbstractType
 {
     /**
-     * @param FormBuilderInterface $builder
-     * @param array $options
+     * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder
+        $builder 
             ->add('name', null, array(
-                'label' => 'album.name',
-            ))
-            ->add('photographies', null, array(
-                'label' => 'album.photographies',
+                'label' => 'album.form.name',
+                'attr'  => array( 'label_col' => 4, 'widget_col' => 8 ),
+                'translation_domain' => 'FotoJoinAdminBundle',
+            )) 
+            ->add('user', null, array(
+                'label' => 'album.form.user',
+                'attr'  => array( 'label_col' => 4, 'widget_col' => 8 ),
+                'translation_domain' => 'FotoJoinAdminBundle',
             ))
         ;
     }
     
     /**
-     * @param OptionsResolver $resolver
+     * {@inheritdoc}
      */
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'FotoJoin\AdminBundle\Entity\Album'
+            'data_class' => 'FotoJoin\ControlPanelBundle\Entity\Album'
         ));
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getBlockPrefix()
+    {
+        return 'fotojoin_controlpanelbundle_album';
+    }
+
+
 }

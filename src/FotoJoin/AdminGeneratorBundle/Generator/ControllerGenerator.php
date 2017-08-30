@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sensio\Bundle\GeneratorBundle\Generator;
+namespace FotoJoin\AdminGeneratorBundle\Generator;
 
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpKernel\Bundle\BundleInterface;
@@ -31,6 +31,7 @@ class ControllerGenerator extends Generator
     public function generate(BundleInterface $bundle, $controller, $routeFormat, $templateFormat, array $actions = array())
     {
         $dir = $bundle->getPath();
+
         $controllerFile = $dir.'/Controller/'.$controller.'Controller.php';
         if (file_exists($controllerFile)) {
             throw new \RuntimeException(sprintf('Controller "%s" already exists', $controller));

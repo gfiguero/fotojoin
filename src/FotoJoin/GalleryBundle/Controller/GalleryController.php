@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Doctrine\ORM\Query\Expr;
+use FOS\UserBundle\Model\UserInterface;
 
 use Symfony\Component\Serializer\Serializer;
 use Symfony\Component\Serializer\Encoder\XmlEncoder;
@@ -19,6 +20,7 @@ use FotoJoin\GalleryBundle\Entity\Appraisement;
 use FotoJoin\GalleryBundle\Form\AppraisementType;
 
 use FotoJoin\ControlPanelBundle\Entity\Photography;
+use FotoJoin\ControlPanelBundle\Entity\Message;
 
 class GalleryController extends Controller
 {
@@ -39,11 +41,14 @@ class GalleryController extends Controller
 
         $photographies = $this->getDoctrine()->getRepository('FotoJoinControlPanelBundle:Photography')->getPhotographies($gallery);
 
+        $user = $this->getUser();
+
         return $this->render('FotoJoinGalleryBundle:Gallery:gallery.html.twig', array(
             'photographies'          => $photographies['photographies'],
             'appraisementAverages'   => $photographies['appraisementAverages'],
             'appraisementQuantities' => $photographies['appraisementQuantities'],
             'form'                   => $form->createView(),
+            'user'                   => $user,
         ));
 
     }

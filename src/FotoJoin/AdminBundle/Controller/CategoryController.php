@@ -75,7 +75,7 @@ class CategoryController extends Controller
      */
     private function createNewForm(Category $category)
     {
-        return $this->createForm('FotoJoin\AdminBundle\Form\CategoryType', $category, array(
+        return $this->createForm(new CategoryType(), $category, array(
             'action' => $this->generateUrl('admin_category_new'),
         ));
     }
@@ -132,7 +132,7 @@ class CategoryController extends Controller
      */
     private function createEditForm(Category $category)
     {
-        return $this->createForm('FotoJoin\AdminBundle\Form\CategoryType', $category, array(
+        return $this->createForm(new CategoryType(), $category, array(
             'action' => $this->generateUrl('admin_category_edit', array('id' => $category->getId())),
         ));
     }

@@ -35,6 +35,7 @@ class Builder implements ContainerAwareInterface
 
             $menu['Panel']->addChild('status.index', array('route' => 'foto_join_control_panel_homepage'))->setAttribute('icon', 'check fa-fw')->setAttribute('translation_domain', 'FotoJoinControlPanelBundle');
             $menu['Panel']->addChild('profile.show.link', array('route' => 'fos_user_profile_show'))->setAttribute('icon', 'user fa-fw')->setAttribute('translation_domain', 'FotoJoinUserBundle');
+            $menu['Panel']->addChild('message.list', array('route' => 'message_index'))->setAttribute('icon', 'envelope fa-fw')->setAttribute('translation_domain', 'FotoJoinControlPanelBundle');
 
             if($securityContext->isGranted('ROLE_AUTHOR')) $menu['Panel']->addChild('photography.list', array('route' => 'photography_index'))->setAttribute('icon', 'picture-o fa-fw')->setAttribute('translation_domain', 'FotoJoinControlPanelBundle');
             if($securityContext->isGranted('ROLE_AUTHOR')) $menu['Panel']->addChild('album.list', array('route' => 'album_index'))->setAttribute('icon', 'book fa-fw')->setAttribute('translation_domain', 'FotoJoinControlPanelBundle');
@@ -73,9 +74,10 @@ class Builder implements ContainerAwareInterface
 //        $menu->addChild('panel.link', array('route' => 'foto_join_control_panel_homepage'))->setAttribute('icon', 'square-o fa-fw')->setAttribute('translation_domain', 'FotoJoinControlPanelBundle');
         $menu->addChild('status.index', array('route' => 'foto_join_control_panel_homepage'))->setAttribute('icon', 'check fa-fw')->setAttribute('translation_domain', 'FotoJoinControlPanelBundle');
         $menu->addChild('profile.show.link', array('route' => 'fos_user_profile_show'))->setAttribute('icon', 'user fa-fw')->setAttribute('translation_domain', 'FotoJoinUserBundle');
+        $menu->addChild('message.list', array('route' => 'message_index'))->setAttribute('icon', 'envelope fa-fw')->setAttribute('translation_domain', 'FotoJoinControlPanelBundle');
         if($securityContext->isGranted('ROLE_AUTHOR')) {
-            $menu->addChild('photography.list', array('route' => 'photography_index'))->setAttribute('icon', 'picture-o fa-fw')->setAttribute('translation_domain', 'FotoJoinControlPanelBundle');
             $menu->addChild('album.list', array('route' => 'album_index'))->setAttribute('icon', 'book fa-fw')->setAttribute('translation_domain', 'FotoJoinControlPanelBundle');
+            $menu->addChild('photography.list', array('route' => 'photography_index'))->setAttribute('icon', 'picture-o fa-fw')->setAttribute('translation_domain', 'FotoJoinControlPanelBundle');
         }
 //        $menu->addChild('photo.index', array('route' => 'member_index'))->setAttribute('icon', 'photo fa-fw');
 //        $menu->addChild('process_index', array('route' => 'member_index'))->setAttribute('icon', 'paper-plane fa-fw');

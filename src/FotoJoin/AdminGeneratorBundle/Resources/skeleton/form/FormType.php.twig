@@ -1,6 +1,6 @@
 <?php
 
-namespace {{ namespace }}\Form{{ entity_namespace ? '\\' ~ entity_namespace : '' }};
+namespace FotoJoin\AdminBundle\Form{{ entity_namespace ? '\\' ~ entity_namespace : '' }};
 
 {% block use_statements %}
 use Symfony\Component\Form\AbstractType;
@@ -20,11 +20,21 @@ class {{ form_class }} extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            {%- for field in fields -%}
 
-                ->add('{{ field }}')
+        {%- for field in fields -%}
+            {%- if field not in ['createdAt', 'updatedAt', 'deletedAt'] %} {# excluding unnecessary fields #}
 
-            {%- endfor %};
+            ->add('{{ field }}', null, array(
+                'label' => '{{ entity_class|lower ~ '.form.' ~ field }}',
+                'attr'  => array( 'label_col' => 4, 'widget_col' => 8 ),
+                'translation_domain' => 'FotoJoinAdminBundle',
+            ))
+
+            {%- endif -%}
+
+        {%- endfor %}
+
+        ;
     }
     {% endif %}
 

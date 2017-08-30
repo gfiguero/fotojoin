@@ -1,89 +1,150 @@
 {% block extends %}
-{{ "{% extends 'base.html.twig' %}" }}
+{{ "{% extends 'FotoJoinAdminBundle:Base:base.html.twig' %}" }}
+{{ "{% use 'FotoJoinAdminBundle:Base:navbar.html.twig' %}" }}
+{{ "{% use 'FotoJoinAdminBundle:Base:sidebar.html.twig' %}" }}
+{{ "{% use 'FotoJoinAdminBundle:Base:icons.html.twig' %}" }}
+{{ "{% use 'FotoJoinAdminBundle:Base:flashbag.html.twig' %}" }}
 {% endblock extends %}
 
 {% block body %}
+{{ "{% trans_default_domain 'FotoJoinAdminBundle' %}" }}
+
+{{ "{% block title %}" }}{{ "{{ '" ~ entity_singularized|lower ~ ".index.title'|trans }}" }}{{ "{% endblock %}" }}
+
 {{ "{% block body %}" }}
-    <h1>{{ entity_pluralized|capitalize }} list</h1>
+    <div id="page-wrapper">
+        <div class="row" id="page-header">
+            <div class="col-lg-12">
+                <h1 class="page-header">{{ "{% block icons %}{{ parent() }}{% endblock %}{{ '" ~ entity_singularized|lower ~ ".index.title'|trans }}" }}</h1>
+                {{ "{% block flashbag %}{{ parent() }}{% endblock %}" }}
+            </div>
+        </div>
+        <!-- /#page-header -->
 
-    <table>
-        <thead>
-            <tr>
-            {%- for field, metadata in fields %}
+        <div class="row" id="page-toolbar">
+            <div class="col-lg-12">
+                <div class="btn-toolbar">
+                    <a type="button" class="btn btn-success" href="{{ "{{ path('" ~ route_name_prefix ~ "_new') }}" }}">{{ "{{ icon('plus') }}" }}&nbsp;{{ "{{ '" ~ entity_singularized|lower ~ ".new.link'|trans }}" }}</a>
+                </div>
+            </div>
+        </div>
+        <!-- /#page-toolbar -->
 
-                <th>{{ field|capitalize }}</th>
+        {% set activefields = ['id', 'value', 'score', 'name', 'filename', 'updatedAt', 'createdAt'] -%}
+        <div class="row" id="page-list">
+            <div class="col-lg-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h2 class="panel-title">{{ "{{ '" ~ entity_singularized|lower ~ ".index.list'|trans }}" }}</h2>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="records_list table table-striped table-hover">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        <div class="btn-group" role="group"><a type="button" class="btn btn-xs btn-default disabled">{{ "{{ icon('search fa-fw') }}" }}</a></div>
+                                        <div class="btn-group" role="group"><a type="button" class="btn btn-xs btn-default disabled">{{ "{{ icon('edit fa-fw') }}" }}</a></div>
+                                        <div class="btn-group" role="group"><a type="button" class="btn btn-xs btn-default disabled">{{ "{{ icon('trash fa-fw') }}" }}</a></div>
+                                    </th>
 
-            {%- endfor %}
+                                {%- for field, metadata in fields %}
 
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {{ '{% for ' ~ entity_singularized ~ ' in ' ~ entity_pluralized ~ ' %}' }}
-            <tr>
+                                    {%- if field in activefields %}
 
-        {%- for field, metadata in fields %}
-            {%- if loop.first and ('show' in actions) %}
+                                    <th>{{ "{{ knp_pagination_sortable(" ~ entity_pluralized ~ ", '" ~ entity|lower ~ ".form." ~ field ~ "'|trans, '" ~ field ~ "') }}" }}{{ "{% if sort == '" ~ field ~ "' %}{% if direction == 'desc' %}{{ icon('caret-down') }}{% else %}{{ icon('caret-up') }}{% endif %}{% endif %}" }}</th>
 
-                <td><a href="{{ "{{ path('" ~ route_name_prefix ~ "_show', { '"~ identifier ~"': " ~ entity_singularized ~ "."~ identifier ~" }) }}" }}">{{ '{{ ' ~ entity_singularized ~ '.' ~ field|replace({'_': ''}) ~ ' }}' }}</a></td>
+                                    {%- endif %}
 
-            {%- elseif metadata.type in ['datetime'] %}
+                                {%- endfor %}
 
-                <td>{{ '{% if ' ~ entity_singularized ~ '.' ~ field|replace({'_': ''}) ~ ' %}{{ ' ~ entity_singularized ~ '.' ~ field|replace({'_': ''}) ~ '|date(\'Y-m-d H:i:s\') }}{% endif %}' }}</td>
-            
-            {%- elseif metadata.type in ['date'] %}
+                                </tr>
+                            </thead>
+                            <tbody>
+                            {{ '{% for key, ' ~ entity_singularized|lower ~ ' in ' ~ entity_pluralized ~ ' %}' }}
+                                <tr>
+                                    <td>
+                                        <div class="btn-group" role="group"><a type="button" class="btn btn-xs btn-primary" href="{{ "{{ path('" ~ route_name_prefix ~ "_show', { 'id': " ~ entity_singularized|lower ~ "." ~ identifier ~ " }) }}" }}">{{ "{{ icon('search fa-fw') }}" }}</a></div>
+                                        <div class="btn-group" role="group"><a type="button" class="btn btn-xs btn-primary" href="{{ "{{ path('" ~ route_name_prefix ~ "_edit', { 'id': " ~ entity_singularized|lower ~ "." ~ identifier ~ " }) }}" }}">{{ "{{ icon('edit fa-fw') }}" }}</a></div>
+                                        <div class="btn-group" role="group"><button type="button" class="btn btn-xs btn-danger" data-toggle="modal" data-target="#modalDelete{{ "{{ " ~ entity_singularized|lower ~ ".id }}" }}">{{ "{{ icon('trash fa-fw') }}" }}</button></div>
+                                    </td>
+                            {%- for field, metadata in fields %}
 
-                <td>{{ '{% if ' ~ entity_singularized ~ '.' ~ field|replace({'_': ''}) ~ ' %}{{ ' ~ entity_singularized ~ '.' ~ field|replace({'_': ''}) ~ '|date(\'Y-m-d\') }}{% endif %}' }}</td>
-          
-            {%- elseif metadata.type in ['time'] %}
+                            {%- if field in activefields %}
+                                {%- if metadata.type in ['boolean'] %}
 
-                <td>{{ '{% if ' ~ entity_singularized ~ '.' ~ field|replace({'_': ''}) ~ ' %}{{ ' ~ entity_singularized ~ '.' ~ field|replace({'_': ''}) ~ '|date(\'H:i:s\') }}{% endif %}' }}</td>
+                                    <td>{{ '{% if ' ~ entity_singularized|lower ~ '.' ~ field|replace({'_': ''}) ~ ' %}' }}{{ "{{ 'Si' }}{% else %}{{ 'No' }}{% endif %}" }}</td>
 
-            {%- elseif metadata.type in ['array'] %}
+                                {%- elseif metadata.type in ['array'] %}
 
-                <td>{{ '{% if ' ~ entity_singularized ~ '.' ~ field|replace({'_': ''}) ~ ' %}{{ ' ~ entity_singularized ~ '.' ~ field|replace({'_': ''}) ~ '|join(\', \') }}{% endif %}' }}</td>
+                                    <td>{{ '{% if ' ~ entity_singularized|lower ~ '.' ~ field|replace({'_': ''}) ~ ' %}{{ ' ~ entity_singularized|lower ~ '.' ~ field|replace({'_': ''}) ~ '|join(\', \') }}{% endif %}' }}</td>
 
-            {%- elseif metadata.type in ['boolean'] %}
+                                {%- elseif metadata.type in ['date'] %}
 
-                <td>{{ '{% if ' ~ entity_singularized ~ '.' ~ field|replace({'_': ''}) ~ ' %}Yes{% else %}No{% endif %}' }}</td>
+                                    <td>{{ '{% if ' ~ entity_singularized|lower ~ '.' ~ field|replace({'_': ''}) ~ ' %}{{ ' ~ entity_singularized|lower ~ '.' ~ field|replace({'_': ''}) ~ '|localizeddate(\'full\', \'full\', \'es_ES\', \'America/Santiago\', "dd-LLL-Y") }}{% endif %}' }}</td>
 
-            {%- else %}
+                                {%- elseif metadata.type in ['time'] %}
 
-                <td>{{ '{{ ' ~ entity_singularized ~ '.' ~ field|replace({'_': ''}) ~ ' }}' }}</td>
+                                    <td>{{ '{% if ' ~ entity_singularized|lower ~ '.' ~ field|replace({'_': ''}) ~ ' %}{{ ' ~ entity_singularized|lower ~ '.' ~ field|replace({'_': ''}) ~ '|localizeddate(\'full\', \'full\', \'es_ES\', \'America/Santiago\', "HH:mm") }}{% endif %}' }}</td>
 
-            {%- endif %}
+                                {%- elseif metadata.type in ['datetime'] %}
 
-            {%- if loop.last %}
+                                    <td>{{ '{% if ' ~ entity_singularized|lower ~ '.' ~ field|replace({'_': ''}) ~ ' %}{{ ' ~ entity_singularized|lower ~ '.' ~ field|replace({'_': ''}) ~ '|localizeddate(\'full\', \'full\', \'es_ES\', \'America/Santiago\', "dd-LLL-Y - HH:mm") }}{% endif %}' }}</td>
 
-                <td>
-                    <ul>
+                                {%- else %}
 
-                    {%- for action in record_actions %}
+                                    <td>{{ '{% if ' ~ entity_singularized|lower ~ '.' ~ field|replace({'_': ''}) ~ ' %}' }}{{ '{{ ' ~ entity_singularized|lower ~ '.' ~ field|replace({'_': ''}) ~ ' }}{% endif %}' }}</td>
 
-                        <li>
-                            <a href="{{ "{{ path('" ~ route_name_prefix ~ "_" ~ action ~ "', { '"~ identifier ~"': " ~ entity_singularized ~ "."~ identifier ~" }) }}" }}">{{ action }}</a>
-                        </li>
+                                {%- endif %}
+                            {%- endif %}
 
-                    {%- endfor %}
+                            {%- endfor %}
 
-                    </ul>
-                </td>
+                                </tr>
+                            {{ '{% endfor %}' }}
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="panel-footer">
+                        <div class="text-center">
+                            {{ '{{ knp_pagination_render(' ~ entity_pluralized ~ ') }}' }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /#page-list -->
 
-            {%- endif %}
-        {%- endfor %}
+        <div id="page-modal">
+            {{ '{% for key, ' ~ entity_singularized|lower ~ ' in ' ~ entity_pluralized ~ ' %}' }}
+            <div class="modal fade" id="modalDelete{{ '{{ ' ~ entity_singularized|lower ~ '.id }}' }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                <div class="modal-dialog modal-sm" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">{{ "{{ icon('times') }}" }}</button>
+                            <h4 class="modal-title" id="myModalLabel">{{ "{{ '" ~ entity_singularized|lower ~ ".delete.title'|trans }}" }}</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col-xs-2 text-center">{{ "{{ icon('exclamation-triangle fa-5x') }}" }}</div>
+                                <div class="col-xs-10"><p>{{ "{{ '" ~ entity_singularized|lower ~ ".delete.message'|trans }}" }}</p></div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            {{ "{% set deleteForm = attribute(deleteForms, key) %}" }}
+                            {{ "{{ form_start(deleteForm) }}" }}
+                                {{ "{{ form_widget(deleteForm) }}" }}
+                                <button type="submit" class="btn btn-danger pull-right">{{ "{{ icon('trash') }}" }}&nbsp;{{ "{{ '" ~ entity_singularized|lower ~ ".delete.submit'|trans }}" }}</button>
+                            {{ "{{ form_end(deleteForm) }}" }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {{ '{% endfor %}' }}
+        </div>
+        <!-- /#page-modal -->
 
-            </tr>
-        {{ '{% endfor %}' }}
-        </tbody>
-    </table>
-
-    {% if 'new' in actions -%}
-    <ul>
-        <li>
-            <a href="{{ "{{ path('" ~ route_name_prefix ~ "_new') }}" }}">Create a new {{ entity_singularized }}</a>
-        </li>
-    </ul>
-    {%- endif %}
+    </div>
+    <!-- /#page-wrapper -->
 
 {{ "{% endblock %}" }}
 {% endblock body %}

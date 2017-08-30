@@ -1,0 +1,38 @@
+FotoJoin\ControlPanelBundle\Entity\Message:
+    type: entity
+    table: Message
+    manyToOne:
+        transmitter:
+            targetEntity: FotoJoin\UserBundle\Entity\User
+            inversedBy: transmitted_messages
+        receiver:
+            targetEntity: FotoJoin\UserBundle\Entity\User
+            inversedBy: received_messages
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        content:
+            type: text
+            nullable: true
+        createdAt:
+            type: datetime
+            gedmo:
+                timestampable:
+                    on: create
+        updatedAt:
+            type: datetime
+            gedmo:
+                timestampable:
+                    on: update
+        deletedAt:
+            type: datetime
+            nullable: true
+    gedmo:
+        soft_deleteable:
+            field_name: deletedAt
+            time_aware: false
+    lifecycleCallbacks: {  }

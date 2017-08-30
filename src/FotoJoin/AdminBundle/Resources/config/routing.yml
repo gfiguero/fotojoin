@@ -1,3 +1,19 @@
+foto_join_admin_user:
+    resource: "@FotoJoinAdminBundle/Resources/config/routing/user.yml"
+    prefix:   /user
+
+foto_join_admin_photography:
+    resource: "@FotoJoinAdminBundle/Resources/config/routing/photography.yml"
+    prefix:   /photography
+
+foto_join_admin_album:
+    resource: "@FotoJoinAdminBundle/Resources/config/routing/album.yml"
+    prefix:   /album
+
+foto_join_admin_appraisement:
+    resource: "@FotoJoinAdminBundle/Resources/config/routing/appraisement.yml"
+    prefix:   /appraisement
+
 foto_join_admin_city:
     resource: "@FotoJoinAdminBundle/Resources/config/routing/city.yml"
     prefix:   /city

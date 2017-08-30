@@ -9,18 +9,16 @@ hwi_oauth:
             facebook:    facebookid
     resource_owners:
         facebook:
-            type:                facebook
-            client_id:           '208058259362524'
-            client_secret:       'd00623e1f02711dee568dfe75c0740ed'
-            scope:               email
-#            options:
-#                display: popup #dialog is optimized for popup window
-#                auth_type: rerequest # Re-asking for Declined Permissions
+            type: facebook
+            client_id: '127814224492163'
+            client_secret: 'fb164f697e187bd9c74ed2235ed6c18d'
+            scope: email
+            infos_url: https://graph.facebook.com/me?fields=id,name,email,first_name,last_name,gender
         google:
             type: google
             client_id: '487809298108-utsg239g8siij8fast8ncvgvqq26pfc9.apps.googleusercontent.com'
             client_secret: 'qlASIGKQr8JuMJdRARiOGklB'
-            scope: email 
+            scope: email
         twitter:
             type: twitter
             client_id: 'EAlJkN8QKXvEpiSim7hpShaYk'

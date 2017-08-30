@@ -1,12 +1,12 @@
 
     /**
 {% block phpdoc_method_header %}
-     * Deletes a {{ entity_singularized }} entity.
+     * Deletes a {{ entity }} entity.
 {% endblock phpdoc_method_header %}
      *
 {% block phpdoc_method_annotations %}
 {% if 'annotation' == format %}
-     * @Route("/{{ '{' ~ identifier ~ '}' }}", name="{{ route_name_prefix }}_delete")
+     * @Route("/{id}", name="{{ route_name_prefix }}_delete")
      * @Method("DELETE")
 {% endif %}
 {% endblock phpdoc_method_annotations %}
@@ -16,33 +16,34 @@
 {% endblock method_definition %}
     {
 {% block method_body %}
-        $form = $this->createDeleteForm(${{ entity_singularized }});
-        $form->handleRequest($request);
+        $deleteForm = $this->createDeleteForm(${{ entity_singularized }});
+        $deleteForm->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($deleteForm->isSubmitted() && $deleteForm->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $em->remove(${{ entity_singularized }});
             $em->flush();
+            $request->getSession()->getFlashBag()->add( 'danger', '{{ entity_singularized ~ '.delete.flash' }}' );
         }
 {% endblock method_body %}
 
 {% block method_return %}
-        return $this->redirectToRoute('{{ route_name_prefix }}_index');
+        return $this->redirect($this->generateUrl('{{ route_name_prefix }}_index'));
 {% endblock method_return %}
     }
 
 {% block form %}
     /**
-     * Creates a form to delete a {{ entity_singularized }} entity.
+     * Creates a form to delete a {{ entity }} entity.
      *
-     * @param {{ entity_class }} ${{ entity_singularized }} The {{ entity_singularized }} entity
+     * @param {{ entity_class }} ${{ entity_singularized }} The {{ entity }} entity
      *
      * @return \Symfony\Component\Form\Form The form
      */
     private function createDeleteForm({{ entity_class }} ${{ entity_singularized }})
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('{{ route_name_prefix }}_delete', array('{{ identifier }}' => ${{ entity_singularized }}->get{{ identifier|capitalize }}())))
+            ->setAction($this->generateUrl('{{ route_name_prefix }}_delete', array('id' => ${{ entity_singularized }}->getId())))
             ->setMethod('DELETE')
             ->getForm()
         ;

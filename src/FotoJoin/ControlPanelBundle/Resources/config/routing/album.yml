@@ -23,6 +23,11 @@ album_delete:
     defaults: { _controller: "FotoJoinControlPanelBundle:Album:delete" }
     methods:  DELETE
 
+album_add:
+    path:     /{id}/add
+    defaults: { _controller: "FotoJoinControlPanelBundle:Album:add" }
+    methods:  [GET, POST]
+
 album_dropzone:
     path:     /{id}/dropzone
     defaults: { _controller: "FotoJoinControlPanelBundle:Album:dropzone" }

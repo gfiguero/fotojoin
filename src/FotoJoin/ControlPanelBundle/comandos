@@ -1,0 +1,16 @@
+find src/FotoJoin/ControlPanelBundle/* -type f -print0 | xargs -0 sed -i 's/FotoJoinControlPanelBundle::/FotoJoinControlPanelBundle:Base:/g'
+find src/* -type f -print0 | xargs -0 sed -i 's/FotoJoinControlPanelBundle::/FotoJoinControlPanelBundle:Base:/g'
+
+php app/console doctrine:generate:entities FotoJoinControlPanelBundle:Photography --path=src
+php app/console doctrine:generate:entities FotoJoinControlPanelBundle:Capture --path=src
+php app/console doctrine:generate:entities FotoJoinControlPanelBundle:Album --path=src
+php app/console doctrine:generate:entities FotoJoinControlPanelBundle:Message --path=src
+
+php app/console doctrine:schema:drop --force
+php app/console doctrine:schema:create
+php app/console doctrine:schema:update --force
+
+php app/console generate:doctrine:crud --entity=FotoJoinControlPanelBundle:Album --format=yml --with-write --overwrite --no-interaction --route-prefix=album
+php app/console generate:doctrine:crud --entity=FotoJoinControlPanelBundle:Capture --format=yml --with-write --overwrite --no-interaction --route-prefix=capture
+php app/console generate:doctrine:crud --entity=FotoJoinControlPanelBundle:Message --format=yml --with-write --overwrite --no-interaction --route-prefix=message
+php app/console generate:doctrine:crud --entity=FotoJoinControlPanelBundle:Photography --format=yml --with-write --overwrite --no-interaction --route-prefix=photography

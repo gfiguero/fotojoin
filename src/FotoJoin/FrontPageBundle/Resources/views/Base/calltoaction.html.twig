@@ -1,0 +1,34 @@
+{% block calltoaction %}
+    <section id="calltoaction">
+        <div class="container">
+            <div class="row">
+                <div class="actions">
+                    <div class="action">
+                        <div class="action-panel">
+                            <img class="img-responsive center-block" src="{{ 'img/camara.jpg' | imagine_filter('frontpage_calltoaction') }}">
+                            <h2>Trabaja con nosotros</h2>
+                            <p>Sube tus fotos y ofrece tu talento fotográfico</p>
+                        </div>
+                        <a type="button" class="btn btn-primary btn-lg" href="{{ path("fos_user_security_login") }}">Empezar</a>
+                    </div>
+                    <div class="action">
+                        <div class="action-panel">
+                            <img class="img-responsive center-block" src="{{ 'img/toque.jpg' | imagine_filter('frontpage_calltoaction') }}">
+                            <h2>Participa y gana</h2>
+                            <p>Obtendrás puntos y podrás canjearlos por sesiones gratis</p>
+                        </div>
+                        <a type="button" class="btn btn-primary btn-lg" href="{{ path("fos_user_security_login") }}">Empezar</a>
+                    </div>
+                    <div class="action">
+                        <div class="action-panel">
+                            <img class="img-responsive center-block" src="{{ 'img/tablet.jpg' | imagine_filter('frontpage_calltoaction') }}">
+                            <h2>Explora la galería</h2>
+                            <p>Podrás conocer fotógrafos y evaluar su trabajo</p>
+                        </div>
+                        <a type="button" class="btn btn-primary btn-lg" href="{{ path('foto_join_gallery_homepage') }}">Ir a la galería</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

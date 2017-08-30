@@ -2,10 +2,13 @@
 
 {% block stylesheet %}
 <style type="text/css">
+.loadingimage { position: relative; }
+{#}
 .loadingimage {
     background-image:url("{{ vich_uploader_asset(photography, 'file', 'FotoJoin\\ControlPanelBundle\\Entity\\Photography')|imagine_filter('frontpage_join_placeholder') }}");
     background-size: cover;
 }    
+{#}
 </style>
 {% endblock %}
 

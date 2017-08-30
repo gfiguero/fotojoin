@@ -232,6 +232,8 @@ EOT
 
     protected function updateRouting(QuestionHelper $questionHelper, InputInterface $input, OutputInterface $output, BundleInterface $bundle, $format, $entity, $prefix)
     {
+        $adminBundle = $this->getContainer()->get('kernel')->getBundle('FotoJoinAdminBundle');
+
         $auto = true;
         if ($input->isInteractive()) {
             $question = new ConfirmationQuestion($questionHelper->getQuestion('Confirm automatic update of the Routing', 'yes', '?'), true);
@@ -239,25 +241,25 @@ EOT
         }
 
         $output->write('Importing the CRUD routes: ');
-        $this->getContainer()->get('filesystem')->mkdir($bundle->getPath().'/Resources/config/');
+        $this->getContainer()->get('filesystem')->mkdir($adminBundle->getPath().'/Resources/config/');
 
         // first, import the routing file from the bundle's main routing.yml file
-        $routing = new RoutingManipulator($bundle->getPath().'/Resources/config/routing.yml');
+        $routing = new RoutingManipulator($adminBundle->getPath().'/Resources/config/routing.yml');
         try {
-            $ret = $auto ? $routing->addResource($bundle->getName(), $format, '/'.$prefix, 'routing/'.strtolower(str_replace('\\', '_', $entity))) : false;
+            $ret = $auto ? $routing->addResource($adminBundle->getName(), $format, '/'.strtolower(str_replace('\\', '_', $entity)), 'routing/'.strtolower(str_replace('\\', '_', $entity))) : false;
         } catch (\RuntimeException $exc) {
             $ret = false;
         }
 
         if (!$ret) {
-            $help = sprintf("        <comment>resource: \"@%s/Resources/config/routing/%s.%s\"</comment>\n", $bundle->getName(), strtolower(str_replace('\\', '_', $entity)), $format);
-            $help .= sprintf("        <comment>prefix:   /%s</comment>\n", $prefix);
+            $help = sprintf("        <comment>resource: \"@FotoJoinAdminBundle/Resources/config/routing/%s.%s\"</comment>\n", strtolower(str_replace('\\', '_', $entity)), $format);
+            $help .= sprintf("        <comment>prefix:   /%s</comment>\n", strtolower(str_replace('\\', '_', $entity)));
 
             return array(
                 '- Import the bundle\'s routing resource in the bundle routing file',
-                sprintf('  (%s).', $bundle->getPath().'/Resources/config/routing.yml'),
+                sprintf('  (%s).', $adminBundle->getPath().'/Resources/config/routing.yml'),
                 '',
-                sprintf('    <comment>%s:</comment>', $routing->getImportedResourceYamlKey($bundle->getName(), $prefix)),
+                sprintf('    <comment>%s:</comment>', $routing->getImportedResourceYamlKey($adminBundle->getName(), strtolower(str_replace('\\', '_', $entity)))),
                 $help,
                 '',
             );
@@ -287,7 +289,7 @@ EOT
                 '- Import the bundle\'s routing.yml file in the application routing.yml file',
                 sprintf('# app/config/routing.yml'),
                 sprintf('%s:', $bundle->getName()),
-                sprintf('    <comment>resource: "@%s/Resources/config/routing.yml"</comment>', $bundle->getName()),
+                sprintf('    <comment>resource: "@%s/../AdminBundle/Resources/config/routing.yml"</comment>', $bundle->getName()),
                 '',
                 '# ...',
                 '',

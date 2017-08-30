@@ -2,18 +2,18 @@
 {% use 'FotoJoinAdminBundle:Base:navbar.html.twig' %}
 {% use 'FotoJoinAdminBundle:Base:sidebar.html.twig' %}
 {% use 'FotoJoinAdminBundle:Base:icons.html.twig' %}
+{% use 'FotoJoinAdminBundle:Base:flashbag.html.twig' %}
 
-{% set translation_domain = 'FotoJoinAdminBundle' %}
-{% trans_default_domain translation_domain %}
+{% trans_default_domain 'FotoJoinAdminBundle' %}
 
-{% block title %}{{ 'city.title.index'|trans }}{% endblock %}
+{% block title %}{{ 'city.index.title'|trans }}{% endblock %}
 
 {% block body %}
     <div id="page-wrapper">
         <div class="row" id="page-header">
             <div class="col-lg-12">
-                <h1 class="page-header">{% block icons %}{{ parent() }}{% endblock %}{{ 'city.title.index'|trans }}</h1>
-                {% include 'FotoJoinAdminBundle:Base:flashbag.html.twig' with { 'translation_domain': translation_domain } %}
+                <h1 class="page-header">{% block icons %}{{ parent() }}{% endblock %}{{ 'city.index.title'|trans }}</h1>
+                {% block flashbag %}{{ parent() }}{% endblock %}
             </div>
         </div>
         <!-- /#page-header -->
@@ -37,27 +37,25 @@
                         <table class="records_list table table-striped table-hover">
                             <thead>
                                 <tr>
-                                    <th>{{ 'city.form.actions'|trans }}</th>
+                                    <th>
+                                        <div class="btn-group" role="group"><a type="button" class="btn btn-xs btn-default disabled">{{ icon('search fa-fw') }}</a></div>
+                                        <div class="btn-group" role="group"><a type="button" class="btn btn-xs btn-default disabled">{{ icon('edit fa-fw') }}</a></div>
+                                        <div class="btn-group" role="group"><a type="button" class="btn btn-xs btn-default disabled">{{ icon('trash fa-fw') }}</a></div>
+                                    </th>
                                     <th>{{ knp_pagination_sortable(cities, 'city.form.id'|trans, 'id') }}{% if sort == 'id' %}{% if direction == 'desc' %}{{ icon('caret-down') }}{% else %}{{ icon('caret-up') }}{% endif %}{% endif %}</th>
                                     <th>{{ knp_pagination_sortable(cities, 'city.form.name'|trans, 'name') }}{% if sort == 'name' %}{% if direction == 'desc' %}{{ icon('caret-down') }}{% else %}{{ icon('caret-up') }}{% endif %}{% endif %}</th>
-                                    <th>{{ knp_pagination_sortable(cities, 'city.form.country'|trans, 'country') }}{% if sort == 'country' %}{% if direction == 'desc' %}{{ icon('caret-down') }}{% else %}{{ icon('caret-up') }}{% endif %}{% endif %}</th>
                                 </tr>
                             </thead>
                             <tbody>
                             {% for key, city in cities %}
                                 <tr>
                                     <td>
-                                        <div class="btn-toolbar">
-                                            <div class="btn-group" role="group">
-                                                <a type="button" class="btn btn-sm btn-warning" href="{{ path('admin_city_show', { 'id': city.id }) }}" aria-label="{{ 'city.show.link'|trans }}">{{ icon('search') }}</a>
-                                                <a type="button" class="btn btn-sm btn-primary" href="{{ path('admin_city_edit', { 'id': city.id }) }}" aria-label="{{ 'city.show.link'|trans }}">{{ icon('edit') }}</a>
-                                                <button type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#modalDelete{{ city.id }}">{{ icon('trash') }}</button>
-                                            </div>
-                                        </div>
+                                        <div class="btn-group" role="group"><a type="button" class="btn btn-xs btn-primary" href="{{ path('admin_city_show', { 'id': city.id }) }}">{{ icon('search fa-fw') }}</a></div>
+                                        <div class="btn-group" role="group"><a type="button" class="btn btn-xs btn-primary" href="{{ path('admin_city_edit', { 'id': city.id }) }}">{{ icon('edit fa-fw') }}</a></div>
+                                        <div class="btn-group" role="group"><button type="button" class="btn btn-xs btn-danger" data-toggle="modal" data-target="#modalDelete{{ city.id }}">{{ icon('trash fa-fw') }}</button></div>
                                     </td>
                                     <td>{% if city.id %}{{ city.id }}{% endif %}</td>
                                     <td>{% if city.name %}{{ city.name }}{% endif %}</td>
-                                    <td>{% if city.country %}{{ city.country }}{% endif %}</td>
                                 </tr>
                             {% endfor %}
                             </tbody>

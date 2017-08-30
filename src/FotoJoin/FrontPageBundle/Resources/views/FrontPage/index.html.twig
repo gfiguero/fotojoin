@@ -1,0 +1,9 @@
+{% extends 'FotoJoinFrontPageBundle:Base:base.html.twig' %}
+{% use 'FotoJoinFrontPageBundle:Base:navbar.html.twig' %}
+{% use 'FotoJoinFrontPageBundle:Base:features.html.twig' %}
+{% use 'FotoJoinFrontPageBundle:Base:pricing.html.twig' %}
+{% use 'FotoJoinFrontPageBundle:Base:footer.html.twig' %}
+
+{% block body %}
+    {% block navbar %}{{ parent() }}{% endblock %}
+{% endblock %}

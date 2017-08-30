@@ -7,9 +7,14 @@ liip_imagine:
     loaders:
         default:
             filesystem:
-                data_root: %kernel.root_dir%/../web/
+                data_root: %kernel.root_dir%/../web
     filter_sets:
         cache: ~
+        controlpanel_photography_preview:
+            quality: 75
+            filters:
+                upscale: { min: [320, 180] }
+                thumbnail: { size: [320, 180], mode: outbound }
         controlpanel_photography_small:
             quality: 75
             filters:
@@ -30,7 +35,7 @@ liip_imagine:
             filters:
                 upscale: { min: [1600, 900] }
                 thumbnail: { size: [1600, 900], mode: outbound }
-                watermark: { image: '../web/uploads/photography/fotojoin2.png', size: 1, position: center }
+                watermark: { image: '../web/img/fotojoin.png', size: 1, position: center }
 
 ##############################################################
         album_dropzone:
@@ -71,12 +76,20 @@ liip_imagine:
             filters:
                 upscale: { min: [1600, 900] }
                 thumbnail: { size: [1600, 900], mode: outbound }
-                watermark: { image: '../web/uploads/photography/fotojoin2.png', size: 1, position: center }
+                watermark: { image: '../web/img/fotojoin.png', size: 1, position: center }
         frontpage_join_placeholder:
             quality: 5
             filters:
                 upscale: { min: [1280, 720] }
                 thumbnail: { size: [1280, 720], mode: outbound }
-                    
-                    
-                    
+
+        frontpage_calltoaction:
+            quality: 75
+            filters:
+                upscale: { min: [600, 600] }
+                thumbnail: { size: [600, 600], mode: inset }
+        frontpage_timeline:
+            quality: 75
+            filters:
+                upscale: { min: [800, 800] }
+                thumbnail: { size: [800, 800], mode: inset }

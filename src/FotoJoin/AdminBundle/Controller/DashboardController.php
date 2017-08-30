@@ -8,6 +8,6 @@ class DashboardController extends Controller
 {
     public function indexAction()
     {
-        return $this->render(':Admin:dashboard.html.twig');
+        return $this->render('FotoJoinAdminBundle:Base:dashboard.html.twig');
     }
 }

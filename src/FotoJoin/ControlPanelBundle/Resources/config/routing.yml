@@ -6,6 +6,10 @@ foto_join_control_panel_album:
     resource: "@FotoJoinControlPanelBundle/Resources/config/routing/album.yml"
     prefix:   /album
 
+foto_join_control_panel_message:
+    resource: "@FotoJoinControlPanelBundle/Resources/config/routing/message.yml"
+    prefix:   /message
+
 foto_join_control_panel_status:
     resource: "@FotoJoinControlPanelBundle/Resources/config/routing/status.yml"
     prefix:   /status

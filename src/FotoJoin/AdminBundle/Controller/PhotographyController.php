@@ -1,8 +1,9 @@
 <?php
 
-namespace FotoJoin\ControlPanelBundle\Controller;
+namespace FotoJoin\AdminBundle\Controller;
 
 use FotoJoin\ControlPanelBundle\Entity\Photography;
+use FotoJoin\AdminBundle\Form\PhotographyType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -12,104 +13,153 @@ use Symfony\Component\HttpFoundation\Request;
  */
 class PhotographyController extends Controller
 {
+
     /**
-     * Lists all photography entities.
+     * Lists all Photography entities.
      *
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
+        $sort = $request->query->get('sort');
+        $direction = $request->query->get('direction');
         $em = $this->getDoctrine()->getManager();
+        if($sort) $photographies = $em->getRepository('FotoJoinControlPanelBundle:Photography')->findBy(array(), array($sort => $direction));
+        else $photographies = $em->getRepository('FotoJoinControlPanelBundle:Photography')->findAll();
+        $paginator = $this->get('knp_paginator');
+        $photographies = $paginator->paginate($photographies, $request->query->getInt('page', 1), 100);
 
-        $photographies = $em->getRepository('FotoJoinControlPanelBundle:Photography')->findAll();
+        $deleteForms = array();
+        foreach($photographies as $key => $photography) {
+            $deleteForms[] = $this->createDeleteForm($photography)->createView();
+        }
 
-        return $this->render('photography/index.html.twig', array(
+        return $this->render('FotoJoinAdminBundle:Photography:index.html.twig', array(
             'photographies' => $photographies,
+            'direction' => $direction,
+            'sort' => $sort,
+            'deleteForms' => $deleteForms,
         ));
     }
 
     /**
-     * Creates a new photography entity.
+     * Creates a new Photography entity.
      *
      */
     public function newAction(Request $request)
     {
         $photography = new Photography();
-        $form = $this->createForm('FotoJoin\ControlPanelBundle\Form\PhotographyType', $photography);
-        $form->handleRequest($request);
+        $newForm = $this->createNewForm($photography);
+        $newForm->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($photography);
-            $em->flush();
-
-            return $this->redirectToRoute('admin_photography_show', array('id' => $photography->getId()));
+        if ($newForm->isSubmitted()) {
+            if($newForm->isValid()) {
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($photography);
+                $em->flush();
+                $request->getSession()->getFlashBag()->add( 'success', 'photography.new.flash' );
+                return $this->redirect($this->generateUrl('admin_photography_index'));
+            }
         }
 
-        return $this->render('photography/new.html.twig', array(
-            'photography' => $photography,
-            'form' => $form->createView(),
+        return $this->render('FotoJoinAdminBundle:Photography:new.html.twig', array(
+            'newForm' => $newForm->createView(),
         ));
     }
 
     /**
-     * Finds and displays a photography entity.
+     * Creates a form to create a new Photography entity.
+     *
+     * @param Photography $photography The Photography entity
+     *
+     * @return \Symfony\Component\Form\Form The form
+     */
+    private function createNewForm(Photography $photography)
+    {
+        return $this->createForm(new PhotographyType(), $photography, array(
+            'action' => $this->generateUrl('admin_photography_new'),
+        ));
+    }
+
+    /**
+     * Finds and displays a Photography entity.
      *
      */
     public function showAction(Photography $photography)
     {
+        $editForm = $this->createEditForm($photography);
         $deleteForm = $this->createDeleteForm($photography);
 
-        return $this->render('photography/show.html.twig', array(
+        return $this->render('FotoJoinAdminBundle:Photography:show.html.twig', array(
             'photography' => $photography,
-            'delete_form' => $deleteForm->createView(),
+            'editForm' => $editForm->createView(),
+            'deleteForm' => $deleteForm->createView(),
         ));
     }
 
     /**
-     * Displays a form to edit an existing photography entity.
+     * Displays a form to edit an existing Photography entity.
      *
      */
     public function editAction(Request $request, Photography $photography)
     {
+        $editForm = $this->createEditForm($photography);
         $deleteForm = $this->createDeleteForm($photography);
-        $editForm = $this->createForm('FotoJoin\ControlPanelBundle\Form\PhotographyType', $photography);
         $editForm->handleRequest($request);
 
-        if ($editForm->isSubmitted() && $editForm->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
-
-            return $this->redirectToRoute('admin_photography_edit', array('id' => $photography->getId()));
+        if ($editForm->isSubmitted()) {
+            if($editForm->isValid()) {
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($photography);
+                $em->flush();
+                $request->getSession()->getFlashBag()->add( 'success', 'photography.edit.flash' );
+                return $this->redirect($this->generateUrl('admin_photography_index'));
+            }
         }
 
-        return $this->render('photography/edit.html.twig', array(
+        return $this->render('FotoJoinAdminBundle:Photography:edit.html.twig', array(
             'photography' => $photography,
-            'edit_form' => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
+            'editForm' => $editForm->createView(),
+            'deleteForm' => $deleteForm->createView(),
         ));
     }
 
     /**
-     * Deletes a photography entity.
+     * Creates a form to edit a Photography entity.
+     *
+     * @param Photography $photography The Photography entity
+     *
+     * @return \Symfony\Component\Form\Form The form
+     */
+    private function createEditForm(Photography $photography)
+    {
+        return $this->createForm(new PhotographyType(), $photography, array(
+            'action' => $this->generateUrl('admin_photography_edit', array('id' => $photography->getId())),
+        ));
+    }
+
+    /**
+     * Deletes a Photography entity.
      *
      */
     public function deleteAction(Request $request, Photography $photography)
     {
-        $form = $this->createDeleteForm($photography);
-        $form->handleRequest($request);
+        $deleteForm = $this->createDeleteForm($photography);
+        $deleteForm->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($deleteForm->isSubmitted() && $deleteForm->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $em->remove($photography);
             $em->flush();
+            $request->getSession()->getFlashBag()->add( 'danger', 'photography.delete.flash' );
         }
 
-        return $this->redirectToRoute('admin_photography_index');
+        return $this->redirect($this->generateUrl('admin_photography_index'));
     }
 
     /**
-     * Creates a form to delete a photography entity.
+     * Creates a form to delete a Photography entity.
      *
-     * @param Photography $photography The photography entity
+     * @param Photography $photography The Photography entity
      *
      * @return \Symfony\Component\Form\Form The form
      */

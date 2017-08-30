@@ -8,8 +8,7 @@ FotoJoin\ControlPanelBundle\Entity\Photography:
             inversedBy: photographies
         album:
             targetEntity: FotoJoin\ControlPanelBundle\Entity\Album
-            joinColumn:
-                onDelete: "SET NULL"
+            inversedBy: photographies
     oneToMany:
         appraisements:
             targetEntity: FotoJoin\GalleryBundle\Entity\Appraisement

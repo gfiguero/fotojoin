@@ -1,52 +1,269 @@
 {% block extends %}
-{{ "{% extends 'base.html.twig' %}" }}
+{{ "{% extends 'FotoJoinAdminBundle:Base:base.html.twig' %}" }}
+{{ "{% use 'FotoJoinAdminBundle:Base:navbar.html.twig' %}" }}
+{{ "{% use 'FotoJoinAdminBundle:Base:sidebar.html.twig' %}" }}
+{{ "{% use 'FotoJoinAdminBundle:Base:icons.html.twig' %}" }}
+{{ "{% use 'FotoJoinAdminBundle:Base:flashbag.html.twig' %}" }}
 {% endblock extends %}
 
 {% block body %}
+{{ "{% trans_default_domain 'FotoJoinAdminBundle' %}" }}
+
+{{ "{% block title %}" }}{{ "{{ '" ~ entity_singularized|lower ~ ".show.title'|trans({'%id%':" ~ entity_singularized|lower ~ ".id}) }}" }}{{ "{% endblock %}" }}
+
 {{ "{% block body %}" }}
-    <h1>{{ entity_singularized|capitalize }}</h1>
-
-    <table>
-        <tbody>
-        {%- for field, metadata in fields %}
-
-            <tr>
-                <th>{{ field|capitalize }}</th>
-
-            {%- if metadata.type in ['datetime'] %}
-
-                <td>{{ '{% if ' ~ entity_singularized ~ '.' ~ field|replace({'_': ''}) ~ ' %}{{ ' ~ entity_singularized ~ '.' ~ field|replace({'_': ''}) ~ '|date(\'Y-m-d H:i:s\') }}{% endif %}' }}</td>
-
-            {%- elseif metadata.type in ['date'] %}
-
-                <td>{{ '{% if ' ~ entity_singularized ~ '.' ~ field|replace({'_': ''}) ~ ' %}{{ ' ~ entity_singularized ~ '.' ~ field|replace({'_': ''}) ~ '|date(\'Y-m-d\') }}{% endif %}' }}</td>
-
-            {%- elseif metadata.type in ['time'] %}
-
-                <td>{{ '{% if ' ~ entity_singularized ~ '.' ~ field|replace({'_': ''}) ~ ' %}{{ ' ~ entity_singularized ~ '.' ~ field|replace({'_': ''}) ~ '|date(\'H:i:s\') }}{% endif %}' }}</td>
-
-            {%- elseif metadata.type in ['array'] %}
-
-                <td>{{ '{% if ' ~ entity_singularized ~ '.' ~ field|replace({'_': ''}) ~ ' %}{{ ' ~ entity_singularized ~ '.' ~ field|replace({'_': ''}) ~ '|join(\', \') }}{% endif %}' }}</td>
-
-            {%- elseif metadata.type in ['boolean'] %}
-
-                <td>{{ '{% if ' ~ entity_singularized ~ '.' ~ field|replace({'_': ''}) ~ ' %}Yes{% else %}No{% endif %}' }}</td>
-
-            {%- else %}
-
-                <td>{{ '{{ ' ~ entity_singularized ~ '.' ~ field|replace({'_': ''}) ~ ' }}' }}</td>
-
+    {% if entity in ['User', 'Album', 'Photography', 'Appraisement'] -%}
+    <div class="row" id="page-breadcrumb">
+        <div class="col-lg-12">
+            <ol class="breadcrumb">
+            {% if entity == 'User' -%}
+                <li class="active">{{ "{{'user.show.breadcrumb'|trans({'%id%':user.id}) }}" }}</li>
+            {%- elseif entity == 'Album' -%}
+                <li><a href='{{ "{{ path('admin_user_show', { 'id' : album.user.id }) }}" }}'>{{ "{{'user.show.breadcrumb'|trans({'%id%':album.user.id}) }}" }}</a></li>
+                <li class="active">{{ "{{'album.show.breadcrumb'|trans({'%id%':album.id}) }}" }}</li>
+            {%- elseif entity == 'Photography' %}
+                <li><a href='{{ "{{ path('admin_user_show', { 'id' : photography.album.user.id }) }}" }}'>{{ "{{'user.show.breadcrumb'|trans({'%id%':photography.album.user.id}) }}" }}</a></li>
+                <li><a href='{{ "{{ path('admin_album_show', { 'id' : photography.album.id }) }}" }}'>{{ "{{'album.show.breadcrumb'|trans({'%id%':photography.album.id}) }}" }}</a></li>
+                <li class="active">{{ "{{'photography.show.breadcrumb'|trans({'%id%':photography.id}) }}" }}</li>
+            {%- elseif entity == 'Appraisement' %}
+                <li><a href='{{ "{{ path('admin_user_show', { 'id' : appraisement.photography.album.user.id }) }}" }}'>{{ "{{'user.show.breadcrumb'|trans({'%id%':appraisement.photography.album.user.id}) }}" }}</a></li>
+                <li><a href='{{ "{{ path('admin_album_show', { 'id' : appraisement.photography.album.id }) }}" }}'>{{ "{{'album.show.breadcrumb'|trans({'%id%':appraisement.photography.album.id}) }}" }}</a></li>
+                <li><a href='{{ "{{ path('admin_photography_show', { 'id' : appraisement.photography.id }) }}" }}'>{{ "{{'photography.show.breadcrumb'|trans({'%id%':appraisement.photography.id}) }}" }}</a></li>
+                <li class="active">{{ "{{'appraisement.show.breadcrumb'|trans({'%id%':appraisement.id}) }}" }}</li>
             {%- endif %}
 
-            </tr>
+            </ol>
+        </div>
+    </div>
+    <!-- /#page-breadcrumb -->
+    {% endif %}
 
-        {%- endfor %}
+    <div id="page-wrapper">
+        <div class="row" id="page-header">
+            <div class="col-lg-12">
+                <h1 class="page-header">{{ "{% block icons %}{{ parent() }}{% endblock %}{{ '" ~ entity_singularized|lower ~ ".show.title'|trans({'%id%':" ~ entity_singularized|lower ~ ".id}) }}" }}</h1>
+                {{ "{% block flashbag %}{{ parent() }}{% endblock %}" }}
+            </div>
+        </div>
+        <!-- /#page-header -->
 
-        </tbody>
-    </table>
+        <div class="row" id="page-toolbar">
+            <div class="col-lg-12">
+                <div class="btn-toolbar">
+                    <a type="button" class="btn btn-default" href="{{ "{{ path('" ~ route_name_prefix ~ "_index') }}" }}">{{ "{{ icon('list') }}" }}&nbsp;{{ "{{ '" ~ entity_singularized|lower ~ ".index.link'|trans }}" }}</a>
+                    <a type="button" class="btn btn-primary" href="{{ "{{ path('" ~ route_name_prefix ~ "_edit', { 'id': " ~ entity_singularized|lower ~ "." ~ identifier ~ " }) }}" }}">{{ "{{ icon('edit') }}" }}&nbsp;{{ "{{ '" ~ entity_singularized|lower ~ ".edit.link'|trans }}" }}</a>
+                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modalDelete">{{ "{{ icon('trash-o') }}" }}&nbsp;{{ "{{ '" ~ entity_singularized|lower ~ ".delete.link'|trans }}" }}</button>
+                </div>
+            </div>
+        </div>
+        <!-- /#page-toolbar -->
 
-{% set hide_edit, hide_delete = false, false %}
-{{ include('crud/views/others/record_actions.html.twig.twig') -}}
+        <div class="row" id="page-show">
+            <div class="col-lg-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h2 class="panel-title">{{ "{{ '" ~ entity_singularized|lower ~ ".show.data'|trans }}" }}</h2>
+                    </div>
+                    <div class="panel-body">
+                        <dl>
+                        {%- for field, metadata in fields if field not in ['deletedAt'] %}
+
+                            <dt>{{ "{{ '" }}{{ entity_singularized|lower ~ ".form." ~ field }}{{ "'|trans }}" }}</dt>
+
+                                {%- if metadata.type in ['date'] %}
+
+                                <dd>{{ '{% if ' ~ entity_singularized ~ '.' ~ field|replace({'_': ''}) ~ ' %}{{ ' ~ entity_singularized ~ '.' ~ field|replace({'_': ''}) ~ '|localizeddate(\'full\', \'full\', \'es_ES\', \'America/Santiago\', "d \'de\' LLLL \'de\' Y") }}{% endif %}' }}</dd>
+
+                                {%- elseif metadata.type in ['time'] %}
+
+                                <dd>{{ '{% if ' ~ entity_singularized ~ '.' ~ field|replace({'_': ''}) ~ ' %}{{ ' ~ entity_singularized ~ '.' ~ field|replace({'_': ''}) ~ '|localizeddate(\'full\', \'full\', \'es_ES\', \'America/Santiago\', "HH:mm") }}{% endif %}' }}</dd>
+
+                                {%- elseif metadata.type in ['datetime'] %}
+
+                                <dd>{{ '{% if ' ~ entity_singularized ~ '.' ~ field|replace({'_': ''}) ~ ' %}{{ ' ~ entity_singularized ~ '.' ~ field|replace({'_': ''}) ~ '|localizeddate(\'full\', \'full\', \'es_ES\', \'America/Santiago\', "d \'de\' LLLL \'de\' Y - HH:mm") }}{% endif %}' }}</dd>
+
+                                {%- elseif metadata.type in ['array'] %}
+
+                                <dd>{{ '{% if ' ~ entity_singularized ~ '.' ~ field|replace({'_': ''}) ~ ' %}{{ ' ~ entity_singularized ~ '.' ~ field|replace({'_': ''}) ~ '|join(\', \') }}{% endif %}' }}</dd>
+
+                                {%- elseif metadata.type in ['boolean'] %}
+
+                                <dd>{{ '{% if ' ~ entity_singularized ~ '.' ~ field|replace({'_': ''}) ~ " %}{{ 'Si' }}{% else %}{{ 'No' }}{% endif %}" }}</dd>
+
+                                {%- else %}
+
+                                <dd>{{ '{% if ' ~ entity_singularized ~ '.' ~ field|replace({'_': ''}) ~ ' %}{{ ' ~ entity_singularized ~ '.' ~ field|replace({'_': ''}) ~ ' }}{% endif %}' }}</dd>
+
+                                {%- endif %}
+
+                        {%- endfor %}
+                        </dl>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /#page-show -->
+
+        {% if entity == 'User' -%}
+        <div class="row" id="page-list">
+            <div class="col-lg-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h2 class="panel-title">{{ "{{ 'album.index.list'|trans }}" }}</h2>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="records_list table table-striped table-hover">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        <div class="btn-group" role="group"><a type="button" class="btn btn-xs btn-default disabled">{{ "{{ icon('search fa-fw') }}" }}</a></div>
+                                        <div class="btn-group" role="group"><a type="button" class="btn btn-xs btn-default disabled">{{ "{{ icon('edit fa-fw') }}" }}</a></div>
+                                    </th>
+                                    <th>{{ "{{ 'album.form.id'|trans }}" }}</th>
+                                    <th>{{ "{{ 'album.form.name'|trans }}" }}</th>
+                                    <th>{{ "{{ 'album.form.createdAt'|trans }}" }}</th>
+                                    <th>{{ "{{ 'album.form.updatedAt'|trans }}" }}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            {{ "{% for key, album in user.albums %}" }}
+                                <tr>
+                                    <td>
+                                        <div class="btn-group" role="group"><a type="button" class="btn btn-xs btn-primary" href='{{ "{{ path('admin_album_show', { 'id': album.id }) }}" }}'>{{ "{{ icon('search fa-fw') }}" }}</a></div>
+                                        <div class="btn-group" role="group"><a type="button" class="btn btn-xs btn-primary" href='{{ "{{ path('admin_album_edit', { 'id': album.id }) }}" }}'>{{ "{{ icon('edit fa-fw') }}" }}</a></div>
+                                    </td>
+                                    <td>{{ "{% if album.id %}{{ album.id }}{% endif %}" }}</td>
+                                    <td>{{ "{% if album.name %}{{ album.name }}{% endif %}" }}</td>
+                                    <td>{{ "{% if album.createdAt %}{{ album.createdAt|localizeddate('full', 'full', 'es_ES', 'America/Santiago', 'dd-LLL-Y - HH:mm') }}{% endif %}" }}</td>
+                                    <td>{{ "{% if album.updatedAt %}{{ album.updatedAt|localizeddate('full', 'full', 'es_ES', 'America/Santiago', 'dd-LLL-Y - HH:mm') }}{% endif %}" }}</td>
+                                </tr>
+                            {{ "{% endfor %}" }}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /#page-list -->
+        {% endif %}
+
+        {% if entity == 'Album' -%}
+        <div class="row" id="page-list">
+            <div class="col-lg-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h2 class="panel-title">{{ "{{ 'photography.index.list'|trans }}" }}</h2>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="records_list table table-striped table-hover">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        <div class="btn-group" role="group"><a type="button" class="btn btn-xs btn-default disabled">{{ "{{ icon('search fa-fw') }}" }}</a></div>
+                                        <div class="btn-group" role="group"><a type="button" class="btn btn-xs btn-default disabled">{{ "{{ icon('edit fa-fw') }}" }}</a></div>
+                                    </th>
+                                    <th>{{ "{{ 'photography.form.id'|trans }}" }}</th>
+                                    <th>{{ "{{ 'photography.form.filename'|trans }}" }}</th>
+                                    <th>{{ "{{ 'photography.form.createdAt'|trans }}" }}</th>
+                                    <th>{{ "{{ 'photography.form.updatedAt'|trans }}" }}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            {{ "{% for key, photography in album.photographies %}" }}
+                                <tr>
+                                    <td>
+                                        <div class="btn-group" role="group"><a type="button" class="btn btn-xs btn-primary" href='{{ "{{ path('admin_photography_show', { 'id': photography.id }) }}" }}'>{{ "{{ icon('search fa-fw') }}" }}</a></div>
+                                        <div class="btn-group" role="group"><a type="button" class="btn btn-xs btn-primary" href='{{ "{{ path('admin_photography_edit', { 'id': photography.id }) }}" }}'>{{ "{{ icon('edit fa-fw') }}" }}</a></div>
+                                    </td>
+                                    <td>{{ "{% if photography.id %}{{ photography.id }}{% endif %}" }}</td>
+                                    <td>{{ "{% if photography.filename %}{{ photography.filename }}{% endif %}" }}</td>
+                                    <td>{{ "{% if photography.createdAt %}{{ photography.createdAt|localizeddate('full', 'full', 'es_ES', 'America/Santiago', 'dd-LLL-Y - HH:mm') }}{% endif %}" }}</td>
+                                    <td>{{ "{% if photography.updatedAt %}{{ photography.updatedAt|localizeddate('full', 'full', 'es_ES', 'America/Santiago', 'dd-LLL-Y - HH:mm') }}{% endif %}" }}</td>
+                                </tr>
+                            {{ "{% endfor %}" }}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /#page-list -->
+        {% endif %}
+
+        {% if entity == 'Photography' -%}
+        <div class="row" id="page-list">
+            <div class="col-lg-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h2 class="panel-title">{{ "{{ 'appraisement.index.list'|trans }}" }}</h2>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="records_list table table-striped table-hover">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        <div class="btn-group" role="group"><a type="button" class="btn btn-xs btn-default disabled">{{ "{{ icon('search fa-fw') }}" }}</a></div>
+                                        <div class="btn-group" role="group"><a type="button" class="btn btn-xs btn-default disabled">{{ "{{ icon('edit fa-fw') }}" }}</a></div>
+                                    </th>
+                                    <th>{{ "{{ 'appraisement.form.id'|trans }}" }}</th>
+                                    <th>{{ "{{ 'appraisement.form.value'|trans }}" }}</th>
+                                    <th>{{ "{{ 'appraisement.form.score'|trans }}" }}</th>
+                                    <th>{{ "{{ 'appraisement.form.delay'|trans }}" }}</th>
+                                    <th>{{ "{{ 'appraisement.form.createdAt'|trans }}" }}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            {{ "{% for key, appraisement in photography.appraisements %}" }}
+                                <tr>
+                                    <td>
+                                        <div class="btn-group" role="group"><a type="button" class="btn btn-xs btn-primary" href='{{ "{{ path('admin_appraisement_show', { 'id': appraisement.id }) }}" }}'>{{ "{{ icon('search fa-fw') }}" }}</a></div>
+                                        <div class="btn-group" role="group"><a type="button" class="btn btn-xs btn-primary" href='{{ "{{ path('admin_appraisement_edit', { 'id': appraisement.id }) }}" }}'>{{ "{{ icon('edit fa-fw') }}" }}</a></div>
+                                    </td>
+                                    <td>{{ "{% if appraisement.id %}{{ appraisement.id }}{% endif %}" }}</td>
+                                    <td>{{ "{% if appraisement.value %}{{ appraisement.value }}{% endif %}" }}</td>
+                                    <td>{{ "{% if appraisement.score %}{{ appraisement.score }}{% endif %}" }}</td>
+                                    <td>{{ "{% if appraisement.delay %}{{ appraisement.delay }}{% endif %}" }}</td>
+                                    <td>{{ "{% if appraisement.createdAt %}{{ appraisement.createdAt|localizeddate('full', 'full', 'es_ES', 'America/Santiago', 'dd-LLL-Y - HH:mm') }}{% endif %}" }}</td>
+                                </tr>
+                            {{ "{% endfor %}" }}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /#page-list -->
+        {% endif %}
+
+
+        <div id="page-modal">
+            <div class="modal fade" id="modalDelete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                <div class="modal-dialog modal-sm" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">{{ "{{ icon('times') }}" }}</button>
+                            <h4 class="modal-title" id="myModalLabel">{{ "{{ '" ~ entity_singularized|lower ~ ".delete.title'|trans }}" }}</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col-xs-2 text-center">{{ "{{ icon('exclamation-triangle fa-5x') }}" }}</div>
+                                <div class="col-xs-10"><p>{{ "{{ '" ~ entity_singularized|lower ~ ".delete.message'|trans }}" }}</p></div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            {{ '{{ form_start(deleteForm) }}' }}
+                                <button type="submit" class="btn btn-danger pull-right">{{ "{{ icon('trash-o') }}&nbsp;{{ '" ~ entity_singularized|lower ~ ".delete.submit'|trans }}" }}</button>
+                            {{ '{{ form_end(deleteForm) }}' }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <!-- /#page-modal -->
+
+    </div>
+    <!-- /#page-wrapper -->
 {{ "{% endblock %}" }}
+
 {% endblock body %}

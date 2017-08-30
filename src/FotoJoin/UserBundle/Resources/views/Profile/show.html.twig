@@ -1,4 +1,4 @@
-{% extends "FotoJoinControlPanelBundle::base.html.twig" %}
+{% extends "FotoJoinControlPanelBundle:Base:base.html.twig" %}
 
 {% trans_default_domain 'FotoJoinUserBundle' %}
 
@@ -10,7 +10,7 @@
     <div class="row">
         <div class="col-lg-12">
             <h1 class="page-header">{{ icon('square-o fa-fw') }}{{ 'profile.show.title'|trans }}</h1>
-            {% include 'FotoJoinControlPanelBundle::flashbag.html.twig' %}
+            {% include 'FotoJoinControlPanelBundle:Base:flashbag.html.twig' %}
             <div class="panel panel-default">
                 <div class="panel-body">
                     <h3>{{ icon('user fa-fw') }}Información Personal</h3>

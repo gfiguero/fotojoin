@@ -1,0 +1,78 @@
+{% extends 'FotoJoinControlPanelBundle:Base:base.html.twig' %}
+
+{% block title %}{{ 'album.new'|trans({}, 'FotoJoinControlPanelBundle') }}{% endblock %}
+
+{% block body %}
+    <div id="page-wrapper">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">{% include 'FotoJoinControlPanelBundle:Base:icon.html.twig' %}{{ 'album.new'|trans({}, 'FotoJoinControlPanelBundle') }}</h1>
+                {% include 'FotoJoinControlPanelBundle:Base:flashbag.html.twig' %}
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
+        <!-- /.row -->
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <div class="btn-toolbar">
+                            <a type="button" class="btn btn-default" href="{{ path('album_index') }}">{{ icon('list') }}&nbsp;{{ 'album.list'|trans({}, 'FotoJoinControlPanelBundle') }}</a>
+                        </div>
+                    </div>
+{#}
+                    <div class="panel-body">
+                        <form id="my-dropzone" name="album" method="post" action="{{ path('album_dropzone', { 'id' : album.id }) }}" class="dropzone" role="form" enctype="multipart/form-data"></form>
+                    </div>
+{#}
+                </div>
+                {{ form_start(newForm, { 'style': 'horizontal' }) }}
+                    {{ form_row(newForm.name) }}
+                    <div class="form-group"><div class="col-lg-offset-4 col-lg-8">
+                        <button type="submit" class="btn btn-primary">{{ icon('plus') }}&nbsp;{{ 'album.register'|trans({}, 'FotoJoinControlPanelBundle') }}</button>
+                    </div></div>
+                {{ form_end(newForm) }}
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
+        <!-- /.row -->
+    </div>
+    <!-- /#page-wrapper -->
+
+{% endblock %}
+
+{% block javascript %}
+    <script src="{{ asset('js/album.photography.js') }}"></script>
+    <script type="text/javascript">
+    var optionsCategories = {
+        enableClickableOptGroups: true,
+        enableCollapsibleOptGroups: true,
+        enableFiltering: true,
+        includeSelectAllOption: true,
+        buttonWidth: '100%',
+        allSelectedText: 'Todas las Categorías',
+        nonSelectedText: 'Ninguna Categoría Seleccionada',
+        nSelectedText: 'Categorías seleccionadas',
+        delimiterText: ', ',
+        selectAllText: 'Seleccionar Todo',
+        filterPlaceholder: 'Buscar',
+        disableIfEmpty: true,
+    };
+    $('.photography_categories').multiselect(optionsCategories);
+    </script>
+    <script src="{{ asset('js/dropzone/dropzone.js') }}"></script>
+    <script type="text/javascript">
+        Dropzone.options.myDropzone = {
+//        $("#dropzone").dropzone({
+            dictDefaultMessage: 'Arrastre sus fotos aquí para iniciar la carga',
+            addRemoveLinks: false,
+            maxFilesize: 20,
+            paramName: 'photography',
+            init: function () {
+                var dropzone = this;
+                var mockFile;
+                var imageUrl;
+            }            
+        };
+    </script>
+{% endblock %}

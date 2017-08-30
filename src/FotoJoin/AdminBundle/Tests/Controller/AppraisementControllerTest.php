@@ -1,6 +1,6 @@
 <?php
 
-namespace FotoJoin\AdminBundle\Tests\Controller;
+namespace FotoJoin\GalleryBundle\Tests\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
@@ -13,13 +13,13 @@ class AppraisementControllerTest extends WebTestCase
         $client = static::createClient();
 
         // Create a new entry in the database
-        $crawler = $client->request('GET', '/appraisement/');
-        $this->assertEquals(200, $client->getResponse()->getStatusCode(), "Unexpected HTTP status code for GET /appraisement/");
+        $crawler = $client->request('GET', '/admin_appraisement/');
+        $this->assertEquals(200, $client->getResponse()->getStatusCode(), "Unexpected HTTP status code for GET /admin_appraisement/");
         $crawler = $client->click($crawler->selectLink('Create a new entry')->link());
 
         // Fill in the form and submit it
         $form = $crawler->selectButton('Create')->form(array(
-            'fotojoin_adminbundle_appraisement[field_name]'  => 'Test',
+            'fotojoin_gallerybundle_appraisement[field_name]'  => 'Test',
             // ... other fields to fill
         ));
 
@@ -33,7 +33,7 @@ class AppraisementControllerTest extends WebTestCase
         $crawler = $client->click($crawler->selectLink('Edit')->link());
 
         $form = $crawler->selectButton('Update')->form(array(
-            'fotojoin_adminbundle_appraisement[field_name]'  => 'Foo',
+            'fotojoin_gallerybundle_appraisement[field_name]'  => 'Foo',
             // ... other fields to fill
         ));
 

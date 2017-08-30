@@ -25,4 +25,14 @@ class DropzoneType extends AbstractType
             ))
         ;
     }
+
+    /**
+     * @param OptionsResolver $resolver
+     */
+    public function configureOptions(OptionsResolver $resolver)
+    {
+        $resolver->setDefaults(array(
+            'data_class' => 'FotoJoin\ControlPanelBundle\Entity\Album'
+        ));
+    }
 }

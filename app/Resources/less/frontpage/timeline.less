@@ -1,0 +1,121 @@
+// Timeline
+
+#timeline-header {
+    h2 {
+        font-weight: 600;
+        font-size: 32px;
+        color: white;
+        margin: 50px 0 20px;
+    }
+    h4 {
+        color: white;
+    }
+}
+
+.timeline {
+    margin-top: 50px;
+    list-style: none;
+    padding: 0;
+    position: relative;
+    &:before {
+        top: 0;
+        bottom: 0;
+        position: absolute;
+        content: "";
+        width: 2px;
+        background-color: #bbb;
+        left: 20px;
+    }
+    > li {
+        margin-bottom: 50px;
+        position: relative;
+        min-height: 50px;
+        &:before,
+        &:after {
+            content: " ";
+            display: table;
+        }
+        &:after {
+            clear: both;
+        }
+        .timeline-panel {
+            width: 100%;
+            float: right;
+            padding: 0 20px 0 40px;
+            position: relative;
+            text-align: left;
+            &:before {
+                content: '';
+                display: inline-block;
+                width: 12px;
+                height: 12px;
+                -moz-border-radius: 6px;
+                -webkit-border-radius: 6px;
+                border-radius: 6px;
+                background-color: #bbb;
+                position: absolute;
+                left: 15px;
+                top: 50px;
+            }
+        }
+        .timeline-image {
+            width: 100%;
+            padding: 0 0 30px;
+        }
+        &.timeline-inverted > .timeline-panel {
+            float: right;
+            text-align: left;
+            padding: 0 20px 0 40px;
+        }
+    }
+    .timeline-heading {
+        h3 {
+            margin-top: 0;
+            color: white;
+        }
+    }
+    .timeline-body {
+        > p,
+        > ul {
+            margin-bottom: 0;
+        }
+    }
+}
+
+@media(min-width:768px) {
+    .timeline {
+        &:before {
+            left: 50%;
+        }
+        > li {
+            margin-bottom: 100px;
+            min-height: 100px;
+            .timeline-panel {
+                width: 50%;
+                float: left;
+                padding: 40px 40px 40px 120px;
+                text-align: right;
+                &:before {
+                    right: -7px;
+                    left: initial;
+                }
+            }
+            .timeline-image {
+                width: 50%;
+                float: right;
+                padding: 0 40px 40px;
+            }
+            &.timeline-inverted > .timeline-panel {
+                float: right;
+                padding: 40px 120px 40px 40px;
+                text-align: left;
+                &:before {
+                    left: -5px;
+                }
+            }
+            &.timeline-inverted > .timeline-image {
+                float: left;
+            }
+        }
+    }
+}
