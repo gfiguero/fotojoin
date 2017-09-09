@@ -6,7 +6,7 @@ fos_user:
     use_username_form_type:     true
     model_manager_name:         null
     from_email:
-        address:                admin.fotojoin@izarus.cl
+        address:                admin@fotojoin.com
         sender_name:            FotoJoin
     profile:
         form:
@@ -27,7 +27,7 @@ fos_user:
     registration:
         confirmation:
             from_email: # Use this node only if you don't want the global email address for the confirmation email
-                address:        registro.fotojoin@izarus.cl
+                address:        registro@fotojoin.com
                 sender_name:    FotoJoin
             enabled:            true
             template:           FotoJoinUserBundle:Email:Registration.email.twig
@@ -39,7 +39,7 @@ fos_user:
         token_ttl: 86400
         email:
             from_email:
-                address:        recuperacion.fotojoin@izarus.cl
+                address:        recuperacion@fotojoin.com
                 sender_name:    FotoJoin
             template:           FotoJoinUserBundle:Email:Resetting.email.twig
         form:

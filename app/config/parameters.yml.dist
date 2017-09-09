@@ -17,3 +17,6 @@ parameters:
 
     # A secret key that's used to generate certain security-related tokens
     secret:            ThisTokenIsNotSoSecretChangeIt
+    root_password: changeme
+    node_bin_path: /usr/bin/nodejs
+    node_lib_path: /usr/local/lib/node_modules
