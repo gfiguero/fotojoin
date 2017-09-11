@@ -10,6 +10,11 @@ HTTPDUSER=`ps axo user,comm | grep -E '[a]pache|[h]ttpd|[_]www|[w]ww-data|[n]gin
 setfacl -R -m u:"$HTTPDUSER":rwX -m u:`whoami`:rwX web/media
 setfacl -dR -m u:"$HTTPDUSER":rwX -m u:`whoami`:rwX web/media
 
+setfacl -R -m u:fotojoin:rwX -m u:gfiguero:rwX app/cache app/logs
+setfacl -dR -m u:fotojoin:rwX -m u:gfiguero:rwX app/cache app/logs
+setfacl -R -m u:fotojoin:rwX -m u:gfiguero:rwX web/uploads web/media
+setfacl -dR -m u:fotojoin:rwX -m u:gfiguero:rwX web/uploads web/media
+
 php app/console generate:bundle --namespace FotoJoin/FrontPageBundle --dir src --bundle-name FotoJoinFrontPageBundle --format yml --shared --no-interaction
 php app/console generate:bundle --namespace FotoJoin/GalleryBundle --dir src --bundle-name FotoJoinGalleryBundle --format yml --shared --no-interaction
 php app/console generate:bundle --namespace FotoJoin/ControlPanelBundle --dir src --bundle-name FotoJoinControlPanelBundle --format yml --shared --no-interaction

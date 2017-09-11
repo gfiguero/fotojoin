@@ -6,7 +6,7 @@ fos_user:
     use_username_form_type:     true
     model_manager_name:         null
     from_email:
-        address:                admin@fotojoin.com
+        address:                contacto@fotojoin.com
         sender_name:            FotoJoin
     profile:
         form:
