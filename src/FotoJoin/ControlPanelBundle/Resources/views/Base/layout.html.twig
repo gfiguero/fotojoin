@@ -1,0 +1,21 @@
+{% extends 'FotoJoinControlPanelBundle:Base:base.html.twig' %}
+{% use 'FotoJoinControlPanelBundle:Base:navbar.html.twig' %}
+{% use 'FotoJoinControlPanelBundle:Base:credential.html.twig' %}
+{% use 'FotoJoinControlPanelBundle:Base:sidebar.html.twig' %}
+{% use 'FotoJoinControlPanelBundle:Base:icon.html.twig' %}
+
+{% block body %}
+    {% block navbar %}{{ parent() }}{% endblock %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-3 col-sm-4">
+                {% block credential %}{{ parent() }}{% endblock %}
+                {% block sidebar %}{{ parent() }}{% endblock %}
+            </div>
+            <div class="col-md-9 col-sm-8">
+                {% block controlpanel %}{% endblock %}
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

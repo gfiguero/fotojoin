@@ -60,7 +60,7 @@ class PhotographyController extends Controller
             $editForms[] = $this->createEditForm($photography)->createView();
         }
 
-        return $this->render('FotoJoinControlPanelBundle:Photography:photography.html.twig', array(
+        return $this->render('FotoJoinControlPanelBundle:Photography:index.html.twig', array(
             'photographies' => $photographies,
             'direction' => $direction,
             'sort' => $sort,

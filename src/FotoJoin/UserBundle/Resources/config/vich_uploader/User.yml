@@ -1,4 +1,0 @@
-FotoJoin\UserBundle\Entity\User:
-    profilephoto:
-        mapping:           profilephoto_mapping
-        filename_property: profilephotofilename

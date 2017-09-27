@@ -20,10 +20,8 @@ FotoJoin\GalleryBundle\Entity\Appraisement:
             type: integer
             nullable: true
         score:
-            type: decimal
+            type: integer
             nullable: true
-            precision: 4
-            scale: 3
         delay:
             type: integer
             nullable: true

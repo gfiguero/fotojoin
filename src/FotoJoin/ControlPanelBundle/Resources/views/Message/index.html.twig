@@ -1,8 +1,8 @@
-{% extends 'FotoJoinControlPanelBundle:Base:base.html.twig' %}
+{% extends 'FotoJoinControlPanelBundle:Base:layout.html.twig' %}
 
 {% block title %}{{ 'message.index'|trans({}, 'FotoJoinControlPanelBundle') }}{% endblock %}
 
-{% block body %}
+{% block controlpanel %}
     <div id="page-wrapper">
         <div class="row">
             <div class="col-lg-12">
@@ -24,17 +24,17 @@
                         <table class="records_list table table-striped table-hover">
                             <thead>
                                 <tr>
+                                    <th>{{ knp_pagination_sortable(messages, 'message.transmitter'|trans({}, 'FotoJoinControlPanelBundle'), 'transmitter') }}{% if sort == 'transmitter' %}{% if direction == 'desc' %}{{ icon('caret-down') }}{% else %}{{ icon('caret-up') }}{% endif %}{% endif %}</th>
                                     <th>{{ knp_pagination_sortable(messages, 'message.content'|trans({}, 'FotoJoinControlPanelBundle'), 'content') }}{% if sort == 'content' %}{% if direction == 'desc' %}{{ icon('caret-down') }}{% else %}{{ icon('caret-up') }}{% endif %}{% endif %}</th>
                                     <th>{{ knp_pagination_sortable(messages, 'message.createdAt'|trans({}, 'FotoJoinControlPanelBundle'), 'createdAt') }}{% if sort == 'createdAt' %}{% if direction == 'desc' %}{{ icon('caret-down') }}{% else %}{{ icon('caret-up') }}{% endif %}{% endif %}</th>
-                                    <th>{{ knp_pagination_sortable(messages, 'message.updatedAt'|trans({}, 'FotoJoinControlPanelBundle'), 'updatedAt') }}{% if sort == 'updatedAt' %}{% if direction == 'desc' %}{{ icon('caret-down') }}{% else %}{{ icon('caret-up') }}{% endif %}{% endif %}</th>
                                 </tr>
                             </thead>
                             <tbody>
                             {% for message in messages %}
-                                <tr class='clickableRow' href="{{ path('message_edit', { 'id': message.id }) }}">
+                                <tr href="{{ path('message_edit', { 'id': message.id }) }}">
+                                    <td>{% if message.transmitter %}{{ message.transmitter }}{% endif %}</td>
                                     <td>{% if message.content %}{{ message.content }}{% endif %}</td>
                                     <td>{% if message.createdAt %}{{ message.createdAt|localizeddate('full', 'full', 'es_ES', 'America/Santiago', "dd-LLL-Y - HH:mm") }}{% endif %}</td>
-                                    <td>{% if message.updatedAt %}{{ message.updatedAt|localizeddate('full', 'full', 'es_ES', 'America/Santiago', "dd-LLL-Y - HH:mm") }}{% endif %}</td>
                                 </tr>
                             {% endfor %}
                             </tbody>

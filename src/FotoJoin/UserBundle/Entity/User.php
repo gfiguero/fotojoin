@@ -5,10 +5,11 @@ namespace FotoJoin\UserBundle\Entity;
 use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
-use Vich\UploaderBundle\Mapping\PropertyMapping as Vich;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * User
+ * @Vich\Uploadable
  */
 class User extends BaseUser
 {
@@ -237,6 +238,7 @@ class User extends BaseUser
     private $profilephotofilename;
     /**
      * @var File $image
+     * @Vich\UploadableField(mapping="profilephoto", fileNameProperty="profilephotofilename")
      */
     private $profilephoto;
 

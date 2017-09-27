@@ -1,72 +1,68 @@
-{% extends 'FotoJoinControlPanelBundle:Base:base.html.twig' %}
+{% extends 'FotoJoinControlPanelBundle:Base:layout.html.twig' %}
 
-{% block stylesheet %}{% endblock %}
+{% block controlpanel %}
 
-{% block body %}
-
-<div id="page-wrapper">
-    <div class="row">
-        <div class="col-lg-12">
-            <h1 class="page-header">{{ icon('check fa-fw') }}{{ 'status.index'|trans({}, 'FotoJoinControlPanelBundle') }}</h1>
-            {% include 'FotoJoinControlPanelBundle:Base:flashbag.html.twig' %}
-            <div class="panel panel-default">
-                <div class="panel-body">
-                    <h3>{{ icon('gift fa-fw') }}Participación</h3>
-                    <dl class="dl-horizontal dl-horizontal-sm dl-horizontal-md dl-horizontal-lg">
-                        <dt>Votos Emitidos</dt><dd>{{ joinPointsQuantity }}</dd>
-                        {% if joinPointsScore %}<dt>Puntos A Obtenidos</dt><dd>{{ joinPointsScore }}</dd>{% endif %}
-                    </dl>
-                    <hr>
-                    <h3>{{ icon('star fa-fw') }}Apreciación</h3>
-                    <dl class="dl-horizontal dl-horizontal-sm dl-horizontal-md dl-horizontal-lg">
-                        <dt>Votos Recibidos</dt><dd>{{ photoPointsQuantity }}</dd>
-                        {% if photoPointsScore %}<dt>Puntos B Obtenidos</dt><dd>{{ photoPointsScore }}</dd>{% endif %}
-                        {% if photoPointsAverage %}<dt>Apreciación Promedio</dt><dd>{{ photoPointsAverage }}</dd>{% endif %}
-                    </dl>
-{#}
-                    <hr>
-                    <h3>{{ icon('camera fa-fw') }}Ranking</h3>
-                    <hr>
-                    <dl class="dl-horizontal dl-horizontal-sm dl-horizontal-md dl-horizontal-lg">
-                        <dt>Posición</dt>
-                        <dd>14</dd>
-                        <dt>Precio Promedio</dt>
-                        <dd>$890</dd>
-                    </dl>
-{#}
-{#}
-                    <hr>
-                    <h3>{{ icon('shopping-cart fa-fw') }}Cuenta</h3>
-                    <hr>
-                    <dl class="dl-horizontal dl-horizontal-sm dl-horizontal-md dl-horizontal-lg">
-                        <dt>Tipo de Usuario</dt>
-                        <dd>Fotógrafo</dd>
-                        <dt>Nivel</dt>
-                        <dd>Profesional</dd>
-                        <dt>Tipo de Cuenta</dt>
-                        <dd>Entusiasta</dd>
-                        <dt>Estado de Pago</dt>
-                        <dd>Ok</dd>
-                    </dl>
-                </div>
-{#}
-{#}
-                <div class="panel-footer">
-                    <div class="btn-toolbar">
-                        <a type="button" class="btn btn-primary" href="#">{{ icon('camera fa-fw') }}Convertirme en Fotógrafo</a>
-                        <a type="button" class="btn btn-primary" href="#">{{ icon('level-up fa-fw') }}Mejorar Cuenta</a>
-                        <a type="button" class="btn btn-success" href="#">{{ icon('gift fa-fw') }}Canjear Puntos</a>
+    <div id="page-wrapper">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">{{ icon('check fa-fw') }}{{ 'status.index'|trans({}, 'FotoJoinControlPanelBundle') }}</h1>
+                {% include 'FotoJoinControlPanelBundle:Base:flashbag.html.twig' %}
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <h3>{{ icon('gift fa-fw') }}Participación</h3>
+                        <dl class="dl-horizontal dl-horizontal-sm dl-horizontal-md dl-horizontal-lg">
+                            <dt>Votos Emitidos</dt><dd>{{ joinPointsQuantity }}</dd>
+                            {% if joinPointsScore %}<dt>Puntos A Obtenidos</dt><dd>{{ joinPointsScore }}</dd>{% endif %}
+                        </dl>
+                        <hr>
+                        <h3>{{ icon('star fa-fw') }}Apreciación</h3>
+                        <dl class="dl-horizontal dl-horizontal-sm dl-horizontal-md dl-horizontal-lg">
+                            <dt>Votos Recibidos</dt><dd>{{ photoPointsQuantity }}</dd>
+                            {% if photoPointsScore %}<dt>Puntos B Obtenidos</dt><dd>{{ photoPointsScore }}</dd>{% endif %}
+                            {% if photoPointsAverage %}<dt>Apreciación Promedio</dt><dd>{{ photoPointsAverage }}</dd>{% endif %}
+                        </dl>
+    {#}
+                        <hr>
+                        <h3>{{ icon('camera fa-fw') }}Ranking</h3>
+                        <hr>
+                        <dl class="dl-horizontal dl-horizontal-sm dl-horizontal-md dl-horizontal-lg">
+                            <dt>Posición</dt>
+                            <dd>14</dd>
+                            <dt>Precio Promedio</dt>
+                            <dd>$890</dd>
+                        </dl>
+    {#}
+    {#}
+                        <hr>
+                        <h3>{{ icon('shopping-cart fa-fw') }}Cuenta</h3>
+                        <hr>
+                        <dl class="dl-horizontal dl-horizontal-sm dl-horizontal-md dl-horizontal-lg">
+                            <dt>Tipo de Usuario</dt>
+                            <dd>Fotógrafo</dd>
+                            <dt>Nivel</dt>
+                            <dd>Profesional</dd>
+                            <dt>Tipo de Cuenta</dt>
+                            <dd>Entusiasta</dd>
+                            <dt>Estado de Pago</dt>
+                            <dd>Ok</dd>
+                        </dl>
                     </div>
+    {#}
+    {#}
+                    <div class="panel-footer">
+                        <div class="btn-toolbar">
+                            <a type="button" class="btn btn-primary" href="#">{{ icon('camera fa-fw') }}Convertirme en Fotógrafo</a>
+                            <a type="button" class="btn btn-primary" href="#">{{ icon('level-up fa-fw') }}Mejorar Cuenta</a>
+                            <a type="button" class="btn btn-success" href="#">{{ icon('gift fa-fw') }}Canjear Puntos</a>
+                        </div>
+                    </div>
+    {#}
                 </div>
-{#}
             </div>
+            <!-- /.col-lg-12 -->
         </div>
-        <!-- /.col-lg-12 -->
+        <!-- /.row -->
     </div>
-    <!-- /.row -->
-</div>
-<!-- /#page-wrapper -->
+    <!-- /#page-wrapper -->
 
 {% endblock %}
-
-{% block javascript %}{% endblock %}

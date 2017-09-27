@@ -3,10 +3,11 @@
 namespace FotoJoin\ControlPanelBundle\Entity;
 
 use Symfony\Component\HttpFoundation\File\File;
-use Vich\UploaderBundle\Mapping\PropertyMapping as Vich;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * Photography
+ * @Vich\Uploadable
  */
 class Photography
 {
@@ -17,6 +18,7 @@ class Photography
 
     /**
      * @var File $file
+     * @Vich\UploadableField(mapping="photography", fileNameProperty="filename")
      */
     private $file;
 
@@ -146,7 +148,6 @@ class Photography
      * Set file
      *
      * @param \File $file
-     *
      * @return Photography
      */
     public function setFile(File $file = null)

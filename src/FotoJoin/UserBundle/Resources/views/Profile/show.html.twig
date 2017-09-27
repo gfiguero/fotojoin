@@ -1,10 +1,10 @@
-{% extends "FotoJoinControlPanelBundle:Base:base.html.twig" %}
+{% extends "FotoJoinControlPanelBundle:Base:layout.html.twig" %}
 
 {% trans_default_domain 'FotoJoinUserBundle' %}
 
 {% block title %}{{ 'profile.show.title'|trans }}{% endblock %}
 
-{% block body %}
+{% block controlpanel %}
 
 <div id="page-wrapper">
     <div class="row">
@@ -75,4 +75,4 @@
     </div>
 </div>
 
-{% endblock body %}
+{% endblock %}

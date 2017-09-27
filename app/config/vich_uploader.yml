@@ -17,7 +17,7 @@ vich_uploader:
             delete_on_update:   true
             delete_on_remove:   true
 
-        profilephoto_mapping:
+        profilephoto:
             uri_prefix: uploads/profilephoto
             upload_destination: %kernel.root_dir%/../web/uploads/profilephoto
             namer: vich_uploader.namer_origname

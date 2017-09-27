@@ -13,17 +13,24 @@ assetic:
             formatter: "compressed"
             preserve_comments: false
     read_from: %kernel.root_dir%/
-    write_to: %kernel.root_dir%/../web/
+    write_to: %kernel.root_dir%/../
     assets:
 
         frontpage_css:
             inputs:
-                - Resources/less/frontpage/build.less
+                - '@FotoJoinFrontPageBundle/Resources/less/build.less'
             filters:
                 - less
                 - cssrewrite
-            output: css/FotoJoinFrontPage.css
+            output: 'src/FotoJoin/FrontPageBundle/Resources/public/css/FotoJoinFrontPage.css'
 
+        controlpanel_bootswatch_css:
+            inputs:
+                - '@FotoJoinControlPanelBundle/Resources/less/bootswatch.less'
+            filters:
+                - less
+                - cssrewrite
+            output: 'src/FotoJoin/ControlPanelBundle/Resources/public/css/bootswatch.css'
 #        admin_css:
 #            inputs:
 #                - Resources/less/admin/build.less
@@ -40,6 +47,7 @@ assetic:
 #                - cssrewrite
 #            output: css/FotoJoin.css
 #
+
 
 #        controlpanel_css:
 #            inputs:

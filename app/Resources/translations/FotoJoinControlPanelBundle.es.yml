@@ -47,5 +47,14 @@ album:
 status:
     index: 'Mi FotoJoin'
 
+message:
+    list: Mensajes
+    index: Mensajes
+    content: Contenido
+    createdAt: Enviado
+    updatedAt: Actualizado
+    transmitter: Remitente
+
+
 Deleted records can not be recovered.: 'Los datos eliminados no podrán ser recuperados.'
 Are you sure?: '¿Estás Seguro?'

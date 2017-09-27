@@ -1,5 +1,9 @@
-{% block iconos %}
+{% block icon %}
     {% if app.request.attributes.get( '_route' ) starts with 'member' %}{{ icon('users fa-fw') }}
-    {% elseif app.request.attributes.get( '_route' ) starts with 'photo' %}{{ icon('photo fa-fw') }}
+    {% elseif app.request.attributes.get( '_route' ) starts with 'photography_' %}{{ icon('photo fa-fw') }}
+    {% elseif app.request.attributes.get( '_route' ) starts with 'message_' %}{{ icon('envelope fa-fw') }}
+    {% elseif app.request.attributes.get( '_route' ) starts with 'album_' %}{{ icon('book fa-fw') }}
+    {% elseif app.request.attributes.get( '_route' ) starts with 'photo_' %}{{ icon('photo fa-fw') }}
+    {% elseif app.request.attributes.get( '_route' ) starts with 'photo_' %}{{ icon('photo fa-fw') }}
     {% endif %}
 {% endblock %}
