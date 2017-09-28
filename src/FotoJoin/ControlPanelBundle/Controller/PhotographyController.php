@@ -51,7 +51,7 @@ class PhotographyController extends Controller
             else $photographies = $em->getRepository('FotoJoinControlPanelBundle:Photography')->findBy(array('user' => $user));
         }
         $paginator = $this->get('knp_paginator');
-        $photographies = $paginator->paginate($photographies, $request->query->getInt('page', 1), 24);
+        $photographies = $paginator->paginate($photographies, $request->query->getInt('page', 1), 64);
 
         $deleteForms = array();
         $editForms = array();
