@@ -13,8 +13,8 @@ liip_imagine:
         controlpanel_photography_preview:
             quality: 75
             filters:
-                upscale: { min: [320, 180] }
-                thumbnail: { size: [320, 180], mode: outbound }
+                upscale: { min: [160, 90] }
+                thumbnail: { size: [160, 90], mode: outbound }
         controlpanel_photography_small:
             quality: 75
             filters:

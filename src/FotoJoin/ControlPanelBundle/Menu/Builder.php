@@ -56,12 +56,12 @@ class Builder implements ContainerAwareInterface
                 'icon' => 'envelope fa-fw',
                 'translation_domain' => 'FotoJoinControlPanelBundle',
             ));
-            $menu['Panel']->addChild('photography.list', array('route' => 'photography_index'))->setExtras(array(
-                'icon' => 'picture-o fa-fw',
-                'translation_domain' => 'FotoJoinControlPanelBundle',
-            ));
             $menu['Panel']->addChild('album.list', array('route' => 'album_index'))->setExtras(array(
                 'icon' => 'book fa-fw',
+                'translation_domain' => 'FotoJoinControlPanelBundle',
+            ));
+            $menu['Panel']->addChild('photography.list', array('route' => 'photography_index'))->setExtras(array(
+                'icon' => 'picture-o fa-fw',
                 'translation_domain' => 'FotoJoinControlPanelBundle',
             ));
             $menu['Panel']->addChild('security.logout.link', array('route' => 'fos_user_security_logout'))->setExtras(array(

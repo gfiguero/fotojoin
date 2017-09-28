@@ -25,13 +25,13 @@ class PhotographyType extends AbstractType
                 'class' => 'FotoJoinUserBundle:Author',
             ))
             ->add('file', 'photography_file', array(
-                'label' => 'photography.file.label',
+                'label' => 'photography.form.file',
                 'translation_domain' => 'FotoJoinControlPanelBundle',
                 'attr' => array('label_col' => 3, 'widget_col' => 9 ),
                 'required' => false,
             ))
             ->add('categories', 'entity', array(
-                'label' => 'photography.categories',
+                'label' => 'photography.form.categories',
                 'class' => 'FotoJoinAdminBundle:Category',
                 'multiple' => true,
                 'required' => false,
@@ -51,32 +51,32 @@ class PhotographyType extends AbstractType
 */
 /**********************************************************/
             ->add('MakeModel', null, array(
-                'label' => 'photography.capture.MakeModel',
+                'label' => 'photography.form.makemodel',
                 'attr' => array('label_col' => 3, 'widget_col' => 9 ),
                 'translation_domain' => 'FotoJoinControlPanelBundle',
             ))
             ->add('DateTimeOriginal', null, array(
-                'label' => 'photography.capture.DateTimeOriginal',
+                'label' => 'photography.form.datetimeoriginal',
                 'attr' => array('label_col' => 3, 'widget_col' => 9 ),
                 'translation_domain' => 'FotoJoinControlPanelBundle',
             ))
             ->add('ExposureTime', null, array(
-                'label' => 'photography.capture.ExposureTime',
+                'label' => 'photography.form.exposuretime',
                 'attr' => array('label_col' => 3, 'widget_col' => 9 ),
                 'translation_domain' => 'FotoJoinControlPanelBundle',
             ))
             ->add('FocalLength', null, array(
-                'label' => 'photography.capture.FocalLength',
+                'label' => 'photography.form.focallength',
                 'attr' => array('label_col' => 3, 'widget_col' => 9 ),
                 'translation_domain' => 'FotoJoinControlPanelBundle',
             ))
             ->add('FNumber', null, array(
-                'label' => 'photography.capture.FNumber',
+                'label' => 'photography.form.fnumber',
                 'attr' => array('label_col' => 3, 'widget_col' => 9 ),
                 'translation_domain' => 'FotoJoinControlPanelBundle',
             ))
             ->add('ISOSpeedRatings', null, array(
-                'label' => 'photography.capture.ISOSpeedRatings',
+                'label' => 'photography.form.isospeedratings',
                 'attr' => array('label_col' => 3, 'widget_col' => 9 ),
                 'translation_domain' => 'FotoJoinControlPanelBundle',
             ))

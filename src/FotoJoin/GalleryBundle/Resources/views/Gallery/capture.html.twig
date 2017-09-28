@@ -1,35 +1,35 @@
 {% block captioncapture %}
     <div id="capture">
-        <h3>{{ icon('camera fa-fw') }}{{ 'photography.capture.title'|trans({}, 'FotoJoinControlPanelBundle') }}</h3>
+        <h3>{{ icon('camera fa-fw') }}{{ 'photography.form.capture'|trans({}, 'FotoJoinControlPanelBundle') }}</h3>
         <dl class="dl-horizontal-caption">
 
         {% if photography.DateTimeOriginal %}
-            <dt>{{ 'photography.capture.datetimeoriginal'|trans({}, 'FotoJoinControlPanelBundle') }}</dt>
+            <dt>{{ 'photography.form.datetimeoriginal'|trans({}, 'FotoJoinControlPanelBundle') }}</dt>
             <dd>{{ photography.DateTimeOriginal|localizeddate('full', 'full', 'es_ES', 'America/Santiago', "dd 'de' LLLL 'de' Y") }}</dd>
         {% endif %}
 
         {% if photography.MakeModel %}
-            <dt>{{ 'photography.capture.makemodel'|trans({}, 'FotoJoinControlPanelBundle') }}</dt>
+            <dt>{{ 'photography.form.makemodel'|trans({}, 'FotoJoinControlPanelBundle') }}</dt>
             <dd>{{ photography.MakeModel }}</dd>
         {% endif %}
 
         {% if photography.ExposureTime %}
-            <dt>{{ 'photography.capture.exposuretime'|trans({}, 'FotoJoinControlPanelBundle') }}</dt>
+            <dt>{{ 'photography.form.exposuretime'|trans({}, 'FotoJoinControlPanelBundle') }}</dt>
             <dd>{{ photography.ExposureTime }}</dd>
         {% endif %}
 
         {% if photography.FocalLength %}
-            <dt>{{ 'photography.capture.focallength'|trans({}, 'FotoJoinControlPanelBundle') }}</dt>
+            <dt>{{ 'photography.form.focallength'|trans({}, 'FotoJoinControlPanelBundle') }}</dt>
             <dd>{{ photography.FocalLength }}</dd>
         {% endif %}
 
         {% if photography.FNumber %}
-            <dt>{{ 'photography.capture.fnumber'|trans({}, 'FotoJoinControlPanelBundle') }}</dt>
+            <dt>{{ 'photography.form.fnumber'|trans({}, 'FotoJoinControlPanelBundle') }}</dt>
             <dd>{{ photography.FNumber }}</dd>
         {% endif %}
 
         {% if photography.ISOSpeedRatings %}
-            <dt>{{ 'photography.capture.isospeedratings'|trans({}, 'FotoJoinControlPanelBundle') }}</dt>
+            <dt>{{ 'photography.form.isospeedratings'|trans({}, 'FotoJoinControlPanelBundle') }}</dt>
             <dd>{{ photography.ISOSpeedRatings }}</dd>
         {% endif %}
 

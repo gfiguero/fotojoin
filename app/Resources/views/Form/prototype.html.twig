@@ -13,17 +13,19 @@
         <div class="panel panel-default">
         <div {{ block('widget_container_attributes') }} >
             <table class="table table-middle">
+{#}
                 <thead>
                     <tr>
                         <th width="20"><a href="#" class="btn btn-default btn-sm disabled">{{ icon('times fa-fw') }}</a></th>
-                        <th width="300">{{'item.form.photography'|trans({}, translation_domain) }}</th>
-                        <th>{{'item.form.categories'|trans({}, translation_domain) }}</th>
+                        <th width="300">{{'photography.image'|trans({}, translation_domain) }}</th>
+                        <th>{{'photography.categories'|trans({}, translation_domain) }}</th>
                     </tr>
                 </thead>
+{#}
                 {% for field in form %}
                     <tr>
-                        <td><a href="#" class="btn btn-danger btn-sm" data-removefield="collection" data-field="{{ field.vars.id }}">{{ icon('times fa-fw') }}</a></td>
-                        <td><img class="img-responsive center-block" src="{{ vich_uploader_asset(field.vars.data, 'file', 'FotoJoin\\ControlPanelBundle\\Entity\\Photography')|imagine_filter('controlpanel_photography_preview') }}" /></td>
+                        <td width="60"><a href="#" class="btn btn-danger btn-sm" data-removefield="collection" data-field="{{ field.vars.id }}">{{ icon('times fa-fw') }}</a></td>
+                        <td width="160"><img class="img-responsive center-block" src="{{ vich_uploader_asset(field.vars.data, 'file', 'FotoJoin\\ControlPanelBundle\\Entity\\Photography')|imagine_filter('controlpanel_photography_preview') }}" /></td>
                         <td>{{ form_widget(field) }}</td>
                     </tr>
                 {% endfor %}

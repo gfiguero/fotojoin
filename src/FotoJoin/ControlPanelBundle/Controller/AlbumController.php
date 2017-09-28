@@ -169,7 +169,7 @@ class AlbumController extends Controller
 
             $em->persist($album);
             $em->flush();
-            $request->getSession()->getFlashBag()->add( 'success', 'album.edited' );
+            $request->getSession()->getFlashBag()->add( 'success', 'album.edit.flash' );
 
             return $this->redirectToRoute('album_edit', array('id' => $album->getId()));
         }

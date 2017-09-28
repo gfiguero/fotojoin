@@ -20,7 +20,9 @@ photography:
     appraisement:
         title: Valoración
         average: Promedio
-    capture:
+    form:
+        file: Archivo
+        categories: 'Categorías Fotográficas'
         title: 'Captura Fotográfica'
         datetimeoriginal: 'Fecha de Captura'
         makemodel: 'Cámara - Modelo'
@@ -28,19 +30,26 @@ photography:
         focallength: 'Distancia Focal'
         fnumber: 'Relación Focal'
         isospeedratings: ISO
-    categories: 'Categorías Fotográficas'
+        capture: Captura fotográfica
     album: 'Álbum'
+    image: Imagen
 
 album:
     index: 'Álbumes'
     list: 'Álbumes'
-    new: 'Nuevo Álbum'
-    show: 'Ver datos de Álbum'
-    name: 'Nombre de Álbum'
-    register: 'Crear Álbum'
-    edit: 'Editar Álbum'
-    save: 'Guardar Álbum'
-    delete: 'Eliminar Álbum'
+    new: 'Nuevo álbum'
+    show: 'Ver datos de álbum'
+    add:
+        link: Agregar fotografías
+        title: 'Agregar fotografías: %name%'
+    name: 'Nombre de álbum'
+    register: 'Crear álbum'
+    edit:
+        link: 'Editar álbum'
+        title: 'Editar álbum: %name%'
+        flash: 'Cambios realizados'
+    save: 'Guardar álbum'
+    delete: 'Eliminar álbum'
     createdAt: 'Creado'
     updatedAt: 'Actualizado'
 
