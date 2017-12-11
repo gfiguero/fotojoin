@@ -21,4 +21,4 @@ admin_photography_edit:
 admin_photography_delete:
     path:     /{id}/delete
     defaults: { _controller: "FotoJoinAdminBundle:Photography:delete" }
-    methods:  DELETE
+    methods:  [GET, DELETE]

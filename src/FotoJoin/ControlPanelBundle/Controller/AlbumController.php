@@ -95,13 +95,15 @@ class AlbumController extends Controller
 
         if($request->isXmlHttpRequest()) {
 
+            dump($this->getRequest());
             $file = $this->getRequest()->files->get('photography');
-            $exif = exif_read_data($file);
             $photography = new Photography();
+            if(exif_imagetype($file)) {
+                $photography->setExif(exif_read_data($file));
+            }
             $photography->setUser($user);
             $photography->setAlbum($album);
             $photography->setFile($file);
-            $photography->setExif($exif);
             $em = $this->getDoctrine()->getManager();
             $em->persist($photography);
             $em->flush();

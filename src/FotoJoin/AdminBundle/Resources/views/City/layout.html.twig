@@ -1,0 +1,7 @@
+{% extends 'FotoJoinAdminBundle:Base:layout.html.twig' %}
+{% use 'FotoJoinAdminBundle:City:toolbar.html.twig' %}
+
+{% block admin %}
+    {% block toolbar %}{{ parent() }}{% endblock %}
+    {% block city %}{% endblock %}
+{% endblock %}

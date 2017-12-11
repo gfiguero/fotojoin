@@ -28,16 +28,10 @@ class CategoryController extends Controller
         $paginator = $this->get('knp_paginator');
         $categories = $paginator->paginate($categories, $request->query->getInt('page', 1), 100);
 
-        $deleteForms = array();
-        foreach($categories as $key => $category) {
-            $deleteForms[] = $this->createDeleteForm($category)->createView();
-        }
-
         return $this->render('FotoJoinAdminBundle:Category:index.html.twig', array(
             'categories' => $categories,
             'direction' => $direction,
             'sort' => $sort,
-            'deleteForms' => $deleteForms,
         ));
     }
 
@@ -103,7 +97,6 @@ class CategoryController extends Controller
     public function editAction(Request $request, Category $category)
     {
         $editForm = $this->createEditForm($category);
-        $deleteForm = $this->createDeleteForm($category);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted()) {
@@ -119,7 +112,6 @@ class CategoryController extends Controller
         return $this->render('FotoJoinAdminBundle:Category:edit.html.twig', array(
             'category' => $category,
             'editForm' => $editForm->createView(),
-            'deleteForm' => $deleteForm->createView(),
         ));
     }
 
@@ -146,14 +138,20 @@ class CategoryController extends Controller
         $deleteForm = $this->createDeleteForm($category);
         $deleteForm->handleRequest($request);
 
-        if ($deleteForm->isSubmitted() && $deleteForm->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->remove($category);
-            $em->flush();
-            $request->getSession()->getFlashBag()->add( 'danger', 'category.delete.flash' );
+        if ($deleteForm->isSubmitted()) {
+            if($deleteForm->isValid()) {
+                $em = $this->getDoctrine()->getManager();
+                $em->remove($category);
+                $em->flush();
+                $request->getSession()->getFlashBag()->add( 'danger', 'category.delete.flash' );
+                return $this->redirect($this->generateUrl('admin_category_index'));
+            }
         }
 
-        return $this->redirect($this->generateUrl('admin_category_index'));
+        return $this->render('FotoJoinAdminBundle:Category:delete.html.twig', array(
+            'category' => $category,
+            'deleteForm' => $deleteForm->createView(),
+        ));
     }
 
     /**

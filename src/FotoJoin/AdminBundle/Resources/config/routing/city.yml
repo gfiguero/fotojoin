@@ -21,4 +21,4 @@ admin_city_edit:
 admin_city_delete:
     path:     /{id}/delete
     defaults: { _controller: "FotoJoinAdminBundle:City:delete" }
-    methods:  DELETE
+    methods:  [GET, DELETE]

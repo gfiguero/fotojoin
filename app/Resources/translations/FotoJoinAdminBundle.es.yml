@@ -22,10 +22,10 @@ category:
         title: Editar Categoría
         link: Editar
         submit: Guardar
-        form: Formulario de edición
+        form: Edición de Categoría
         flash: Los cambios han sido guardados exitosamente
     show:
-        title: Ver Categoría
+        title: Datos de Categoría
         link: Detalles
         data: Datos
     delete:
@@ -33,6 +33,7 @@ category:
         title: Eliminación de Categoría
         message: Los datos eliminados no podrán ser recuperados
         submit: Eliminar
+        cancel: Cancelar
         flash: La Categoría ha sido eliminada
     form:
         id: ID

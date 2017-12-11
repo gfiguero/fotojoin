@@ -67,12 +67,14 @@ class ProfilePhotoType extends AbstractType
             if (null === $object || null === $storage->resolveUri($object, $form->getName())) {
                 return;
             }
+/*
             $form->add('delete', 'checkbox', array(
                 'label' => 'form.profilephoto.delete',
                 'translation_domain' => 'FotoJoinUserBundle',
                 'required' => false,
                 'mapped' => false,
             ));
+*/
         });
         // delete file if needed
         $handler = $this->handler;

@@ -28,16 +28,10 @@ class CityController extends Controller
         $paginator = $this->get('knp_paginator');
         $cities = $paginator->paginate($cities, $request->query->getInt('page', 1), 100);
 
-        $deleteForms = array();
-        foreach($cities as $key => $city) {
-            $deleteForms[] = $this->createDeleteForm($city)->createView();
-        }
-
         return $this->render('FotoJoinAdminBundle:City:index.html.twig', array(
             'cities' => $cities,
             'direction' => $direction,
             'sort' => $sort,
-            'deleteForms' => $deleteForms,
         ));
     }
 
@@ -103,7 +97,6 @@ class CityController extends Controller
     public function editAction(Request $request, City $city)
     {
         $editForm = $this->createEditForm($city);
-        $deleteForm = $this->createDeleteForm($city);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted()) {
@@ -119,7 +112,6 @@ class CityController extends Controller
         return $this->render('FotoJoinAdminBundle:City:edit.html.twig', array(
             'city' => $city,
             'editForm' => $editForm->createView(),
-            'deleteForm' => $deleteForm->createView(),
         ));
     }
 
@@ -146,14 +138,20 @@ class CityController extends Controller
         $deleteForm = $this->createDeleteForm($city);
         $deleteForm->handleRequest($request);
 
-        if ($deleteForm->isSubmitted() && $deleteForm->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->remove($city);
-            $em->flush();
-            $request->getSession()->getFlashBag()->add( 'danger', 'city.delete.flash' );
+        if ($deleteForm->isSubmitted()) {
+            if($deleteForm->isValid()) {
+                $em = $this->getDoctrine()->getManager();
+                $em->remove($city);
+                $em->flush();
+                $request->getSession()->getFlashBag()->add( 'danger', 'city.delete.flash' );
+                return $this->redirect($this->generateUrl('admin_city_index'));
+            }
         }
 
-        return $this->redirect($this->generateUrl('admin_city_index'));
+        return $this->render('FotoJoinAdminBundle:City:delete.html.twig', array(
+            'city' => $city,
+            'deleteForm' => $deleteForm->createView(),
+        ));
     }
 
     /**

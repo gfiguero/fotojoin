@@ -26,18 +26,19 @@ assetic:
 
         controlpanel_bootswatch_css:
             inputs:
-                - '@FotoJoinControlPanelBundle/Resources/less/bootswatch.less'
+                - '@FotoJoinControlPanelBundle/Resources/less/build.less'
             filters:
                 - less
                 - cssrewrite
-            output: 'src/FotoJoin/ControlPanelBundle/Resources/public/css/bootswatch.css'
-#        admin_css:
-#            inputs:
-#                - Resources/less/admin/build.less
-#            filters:
-#                - less
-#                - cssrewrite
-#            output: css/FotoJoinAdmin.css
+            output: 'src/FotoJoin/ControlPanelBundle/Resources/public/css/fotojoin.css'
+
+        admin_css:
+            inputs:
+                - '@FotoJoinAdminBundle/Resources/less/build.less'
+            filters:
+                - less
+                - cssrewrite
+            output: 'src/FotoJoin/AdminBundle/Resources/public/css/fotojoin.css'
 
 #        fotojoin_css:
 #            inputs:

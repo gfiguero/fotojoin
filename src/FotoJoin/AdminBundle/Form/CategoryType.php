@@ -18,11 +18,6 @@ class CategoryType extends AbstractType
                 'label' => 'category.form.name',
                 'attr'  => array( 'label_col' => 4, 'widget_col' => 8 ),
                 'translation_domain' => 'FotoJoinAdminBundle',
-            )) 
-            ->add('photographies', null, array(
-                'label' => 'category.form.photographies',
-                'attr'  => array( 'label_col' => 4, 'widget_col' => 8 ),
-                'translation_domain' => 'FotoJoinAdminBundle',
             ))
         ;
     }

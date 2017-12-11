@@ -1,4 +1,4 @@
-{% block iconos %}
+{% block icons %}
     {% if app.request.attributes.get( '_route' ) starts with 'member' %}{{ icon('users fa-fw') }}
     {% elseif app.request.attributes.get( '_route' ) starts with 'photo' %}{{ icon('photo fa-fw') }}
     {% endif %}

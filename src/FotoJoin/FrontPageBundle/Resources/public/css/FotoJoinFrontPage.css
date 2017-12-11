@@ -7443,10 +7443,6 @@ section.contact ul.list-social li.social-google-plus a:hover {
   margin-top: 0;
   color: white;
 }
-.timeline .timeline-body > p,
-.timeline .timeline-body > ul {
-  margin-bottom: 0;
-}
 @media (min-width: 768px) {
   .timeline:before {
     left: 50%;

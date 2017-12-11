@@ -27,7 +27,9 @@
                     <hr>
                     <h3>{{ icon('camera fa-fw') }}&nbsp;Información Fotográfica</h3>
                     {{ form_row(form.level) }}
+{#}
                     {{ form_row(form.exigency) }}
+{#}
                     {{ form_row(form.description) }}
                     {{ form_row(form.facebookshare) }}
                 {% endif %}
@@ -42,7 +44,7 @@
 </div>
 
 {% endblock %}
-
+{#}
 {% block javascript %}
     <script type="text/javascript">
     var optionsCountry = {
@@ -82,3 +84,4 @@
     $('#fotojoin_user_profile_form_city3').multiselect(optionsCity);
     </script>
 {% endblock %}
+{#}

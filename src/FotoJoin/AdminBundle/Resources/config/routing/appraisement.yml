@@ -21,4 +21,4 @@ admin_appraisement_edit:
 admin_appraisement_delete:
     path:     /{id}/delete
     defaults: { _controller: "FotoJoinAdminBundle:Appraisement:delete" }
-    methods:  DELETE
+    methods:  [GET, DELETE]

@@ -1,0 +1,35 @@
+{% extends 'FotoJoinAdminBundle:Category:layout.html.twig' %}
+
+{% trans_default_domain 'FotoJoinAdminBundle' %}
+
+{% block title %}{{ 'category.delete.title'|trans }}{% endblock %}
+
+{% block category %}
+
+    <div class="row" id="page-delete">
+        <div class="col-lg-6">
+            <div class="panel panel-danger">
+                <div class="panel-heading">
+                    <h2 class="panel-title">{{ 'category.delete.title'|trans }}</h2>
+                </div>
+                <div class="panel-body">
+                    <dl class="dl-horizontal">
+                        <dt>{{ 'category.form.id'|trans }}</dt><dd>{% if category.id %}{{ category.id }}{% endif %}</dd>
+                        <dt>{{ 'category.form.name'|trans }}</dt><dd>{% if category.name %}{{ category.name }}{% endif %}</dd>
+                    </dl>
+                </div>
+            </div>
+        </div>
+        {{ form_start(deleteForm) }}
+        {{ form_widget(deleteForm) }}
+        <div class="col-md-6">
+            <div class="btn-toolbar">
+                <div class="btn-group"><button type="submit" class="btn btn-danger">{{ icon('times fa-fw') }}&nbsp;{{ 'category.delete.submit'|trans }}</button></div>
+                <div class="btn-group"><a type="button" class="btn btn-default" href="{{ path('admin_category_show', {'id' : category.id}) }}">{{ icon('times fa-fw') }}&nbsp;{{ 'category.delete.cancel'|trans }}</a></div>
+            </div>
+        </div>
+        {{ form_end(deleteForm) }}
+    </div>
+    <!-- /#page-delete -->
+
+{% endblock %}

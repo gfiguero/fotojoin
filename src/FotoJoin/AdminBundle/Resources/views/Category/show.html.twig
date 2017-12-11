@@ -1,84 +1,33 @@
-{% extends 'FotoJoinAdminBundle:Base:base.html.twig' %}
-{% use 'FotoJoinAdminBundle:Base:navbar.html.twig' %}
-{% use 'FotoJoinAdminBundle:Base:sidebar.html.twig' %}
-{% use 'FotoJoinAdminBundle:Base:icons.html.twig' %}
-{% use 'FotoJoinAdminBundle:Base:flashbag.html.twig' %}
+{% extends 'FotoJoinAdminBundle:Category:layout.html.twig' %}
 
 {% trans_default_domain 'FotoJoinAdminBundle' %}
 
-{% block title %}{{ 'category.show.title'|trans({'%id%':category.id}) }}{% endblock %}
+{% block title %}{{ 'category.show.title'|trans }}{% endblock %}
 
-{% block body %}
-    
-    <div id="page-wrapper">
-        <div class="row" id="page-header">
-            <div class="col-lg-12">
-                <h1 class="page-header">{% block icons %}{{ parent() }}{% endblock %}{{ 'category.show.title'|trans({'%id%':category.id}) }}</h1>
-                {% block flashbag %}{{ parent() }}{% endblock %}
-            </div>
-        </div>
-        <!-- /#page-header -->
+{% block category %}
 
-        <div class="row" id="page-toolbar">
-            <div class="col-lg-12">
-                <div class="btn-toolbar">
-                    <a type="button" class="btn btn-default" href="{{ path('admin_category_index') }}">{{ icon('list') }}&nbsp;{{ 'category.index.link'|trans }}</a>
-                    <a type="button" class="btn btn-primary" href="{{ path('admin_category_edit', { 'id': category.id }) }}">{{ icon('edit') }}&nbsp;{{ 'category.edit.link'|trans }}</a>
-                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modalDelete">{{ icon('trash-o') }}&nbsp;{{ 'category.delete.link'|trans }}</button>
+    <div class="row" id="page-show">
+        <div class="col-lg-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h2 class="panel-title">{{ 'category.show.title'|trans }}</h2>
+                </div>
+                <div class="panel-body">
+                    <dl class="dl-horizontal">
+                        <dt>{{ 'category.form.id'|trans }}</dt><dd>{% if category.id %}{{ category.id }}{% endif %}</dd>
+                        <dt>{{ 'category.form.name'|trans }}</dt><dd>{% if category.name %}{{ category.name }}{% endif %}</dd>
+                    </dl>
                 </div>
             </div>
         </div>
-        <!-- /#page-toolbar -->
-
-        <div class="row" id="page-show">
-            <div class="col-lg-12">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h2 class="panel-title">{{ 'category.show.data'|trans }}</h2>
-                    </div>
-                    <div class="panel-body">
-                        <dl>
-                            <dt>{{ 'category.form.id'|trans }}</dt>
-                                <dd>{% if category.id %}{{ category.id }}{% endif %}</dd>
-                            <dt>{{ 'category.form.name'|trans }}</dt>
-                                <dd>{% if category.name %}{{ category.name }}{% endif %}</dd>                        </dl>
-                    </div>
-                </div>
+        <div class="col-md-6">
+            <div class="btn-toolbar">
+                <div class="btn-group"><a type="button" class="btn btn-warning" href="{{ path('admin_category_edit', {'id' : category.id}) }}">{{ icon('edit fa-fw') }}&nbsp;{{ 'category.edit.link'|trans }}</a></div>
+                <div class="btn-group"><a type="button" class="btn btn-danger" href="{{ path('admin_category_delete', {'id' : category.id}) }}">{{ icon('times fa-fw') }}&nbsp;{{ 'category.delete.link'|trans }}</a></div>
             </div>
         </div>
-        <!-- /#page-show -->
-
-        
-        
-        
-
-        <div id="page-modal">
-            <div class="modal fade" id="modalDelete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-                <div class="modal-dialog modal-sm" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">{{ icon('times') }}</button>
-                            <h4 class="modal-title" id="myModalLabel">{{ 'category.delete.title'|trans }}</h4>
-                        </div>
-                        <div class="modal-body">
-                            <div class="row">
-                                <div class="col-xs-2 text-center">{{ icon('exclamation-triangle fa-5x') }}</div>
-                                <div class="col-xs-10"><p>{{ 'category.delete.message'|trans }}</p></div>
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            {{ form_start(deleteForm) }}
-                                <button type="submit" class="btn btn-danger pull-right">{{ icon('trash-o') }}&nbsp;{{ 'category.delete.submit'|trans }}</button>
-                            {{ form_end(deleteForm) }}
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-        <!-- /#page-modal -->
-
     </div>
-    <!-- /#page-wrapper -->
+    <!-- /#page-show -->
+
 {% endblock %}
 

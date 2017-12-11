@@ -36,7 +36,9 @@
                     <hr><h3>{{ icon('camera fa-fw') }}Información Fotográfica</h3>
                     <dl class="dl-horizontal dl-horizontal-sm dl-horizontal-md dl-horizontal-lg">
                         {% if user.level is not null %}<dt>{{ 'form.level.type'|trans }}</dt><dd>{{ user_level[user.level]|trans }}</dd>{% endif %}
+{#}
                         {% if user.exigency is not null %}<dt>{{ 'form.exigency.type'|trans }}</dt><dd>{{ user.exigency }}</dd>{% endif %}
+{#}
                         {% if user.description %}<dt>{{ 'form.description'|trans }}</dt><dd>{{ user.description }}</dd>{% endif %}
                     </dl>
                     {% endif %}

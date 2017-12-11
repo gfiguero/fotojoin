@@ -1,0 +1,7 @@
+{% block aside %}
+<div class="row">
+    <div class="sidebar-nav collapse navbar-collapse" id="navbar-collapse-side">
+        {{ knp_menu_render('FotoJoinControlPanelBundle:Builder:sideMenu', {'currentClass': 'active', 'ancestorClass': 'active', 'leaf_class': 'leaf'}) }}
+    </div>
+</div>
+{% endblock %}

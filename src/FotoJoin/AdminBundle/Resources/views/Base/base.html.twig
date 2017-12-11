@@ -12,10 +12,9 @@
     <meta name="author" content="Izarus">
     <meta name="language" content="es">
     <title>FotoJoin {#% block title %}{% endblock %#}</title>
-    <link href="{{ asset('css/font-awesome/font-awesome.min.css') }}" rel="stylesheet" type="text/css" />
-    <link href="{{ asset('css/jqueryui/jquery-ui.min.css') }}" rel="stylesheet" />
-    <link href="{{ asset('css/metismenu/metisMenu.min.css') }}" rel="stylesheet" type="text/css" />
-    <link href="{{ asset('css/FotoJoinAdmin.css') }}" rel="stylesheet" />
+    <link href="{{ asset('vendor/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('vendor/jquery-ui/themes/base/jquery-ui.min.css') }}" rel="stylesheet" />
+    <link href="{{ asset('bundles/fotojoinadmin/css/fotojoin.css') }}" rel="stylesheet" />
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -25,24 +24,10 @@
     {% block stylesheet %}{% endblock %}
 </head>
 <body>
-    {% block navbar %}{% endblock %}
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-2">
-                {% block sidebar %}{% endblock %}
-            </div>
-            <div class="col-md-10">
-                <div class="row">
-                    {% block body %}{% endblock %}
-                </div>
-            </div>
-        </div>
-    </div>
-    <script src="{{ asset('js/jquery/jquery.min.js') }}"></script>
-    <script src="{{ asset('js/jqueryui/jquery-ui.min.js') }}"></script>
-    <script src="{{ asset('js/bootstrap/bootstrap.min.js') }}"></script>
-    <script src="{{ asset('js/metismenu/metisMenu.min.js') }}"></script>
-    <script src="{{ asset('js/FotoJoinAdmin.js') }}"></script>
+    {% block body %}{% endblock %}
+    <script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>
+    <script src="{{ asset('vendor/jquery-ui/jquery-ui.min.js') }}"></script>
+    <script src="{{ asset('vendor/bootstrap/js/bootstrap.min.js') }}"></script>
     {% block javascript %}{% endblock %}
 </body>
 </html>

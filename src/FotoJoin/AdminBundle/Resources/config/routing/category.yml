@@ -21,4 +21,4 @@ admin_category_edit:
 admin_category_delete:
     path:     /{id}/delete
     defaults: { _controller: "FotoJoinAdminBundle:Category:delete" }
-    methods:  DELETE
+    methods:  [GET, DELETE]

@@ -28,16 +28,10 @@ class AlbumController extends Controller
         $paginator = $this->get('knp_paginator');
         $albums = $paginator->paginate($albums, $request->query->getInt('page', 1), 100);
 
-        $deleteForms = array();
-        foreach($albums as $key => $album) {
-            $deleteForms[] = $this->createDeleteForm($album)->createView();
-        }
-
         return $this->render('FotoJoinAdminBundle:Album:index.html.twig', array(
             'albums' => $albums,
             'direction' => $direction,
             'sort' => $sort,
-            'deleteForms' => $deleteForms,
         ));
     }
 
@@ -103,7 +97,6 @@ class AlbumController extends Controller
     public function editAction(Request $request, Album $album)
     {
         $editForm = $this->createEditForm($album);
-        $deleteForm = $this->createDeleteForm($album);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted()) {
@@ -119,7 +112,6 @@ class AlbumController extends Controller
         return $this->render('FotoJoinAdminBundle:Album:edit.html.twig', array(
             'album' => $album,
             'editForm' => $editForm->createView(),
-            'deleteForm' => $deleteForm->createView(),
         ));
     }
 
@@ -146,14 +138,20 @@ class AlbumController extends Controller
         $deleteForm = $this->createDeleteForm($album);
         $deleteForm->handleRequest($request);
 
-        if ($deleteForm->isSubmitted() && $deleteForm->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->remove($album);
-            $em->flush();
-            $request->getSession()->getFlashBag()->add( 'danger', 'album.delete.flash' );
+        if ($deleteForm->isSubmitted()) {
+            if($deleteForm->isValid()) {
+                $em = $this->getDoctrine()->getManager();
+                $em->remove($album);
+                $em->flush();
+                $request->getSession()->getFlashBag()->add( 'danger', 'album.delete.flash' );
+                return $this->redirect($this->generateUrl('admin_album_index'));
+            }
         }
 
-        return $this->redirect($this->generateUrl('admin_album_index'));
+        return $this->render('FotoJoinAdminBundle:Album:delete.html.twig', array(
+            'album' => $album,
+            'deleteForm' => $deleteForm->createView(),
+        ));
     }
 
     /**

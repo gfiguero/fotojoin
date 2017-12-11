@@ -1,6 +1,6 @@
 /*!
- * Bootstrap v3.3.7 (http://getbootstrap.com)
- * Copyright 2011-2016 Twitter, Inc.
+ * Bootstrap v3.3.6 (http://getbootstrap.com)
+ * Copyright 2011-2015 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */
 /*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */
@@ -5958,7 +5958,7 @@ button.close {
 }
 @media (min-width: 992px) {
   .modal-lg {
-    width: 1200px;
+    width: 900px;
   }
 }
 .tooltip {
@@ -7014,6 +7014,15 @@ a.list-group-item-danger.active:focus {
 }
 .panel-default > .panel-heading {
   background-color: #464545;
+}
+.table-middle > thead > tr > th,
+.table-middle > tbody > tr > th,
+.table-middle > tfoot > tr > th,
+.table-middle > thead > tr > td,
+.table-middle > tbody > tr > td,
+.table-middle > tfoot > tr > td {
+  padding: 5px;
+  vertical-align: middle;
 }
 /**
  * Additional styles for BraincraftedBootstrapBundle

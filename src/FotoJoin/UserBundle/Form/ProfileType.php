@@ -89,9 +89,8 @@ class ProfileType extends AbstractType
                 'translation_domain' => 'FotoJoinUserBundle',
                 'attr' => array('label_col' => 3, 'widget_col' => 9 ),
             ))
-        ;
-
-        if($this->authorizationChecker->isGranted('ROLE_AUTHOR')) $builder
+//        ;
+//        if($this->authorizationChecker->isGranted('ROLE_AUTHOR')) $builder
             ->add('level', 'user_level', array(
                 'label' => 'form.level.type',
                 'translation_domain' => 'FotoJoinUserBundle',
@@ -99,6 +98,7 @@ class ProfileType extends AbstractType
                 'required' => false,
                 'placeholder' => 'Seleccione su nivel',
             ))
+/*
             ->add('exigency', 'user_exigency', array(
                 'label' => 'form.exigency.type',
                 'translation_domain' => 'FotoJoinUserBundle',
@@ -106,6 +106,7 @@ class ProfileType extends AbstractType
                 'required' => false,
                 'placeholder' => 'Seleccione su nivel de exigencia',
             ))
+*/
             ->add('description', 'textarea', array(
                 'label' => 'form.description',
                 'translation_domain' => 'FotoJoinUserBundle',
