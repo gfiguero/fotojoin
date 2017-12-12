@@ -8,6 +8,10 @@ use Symfony\Component\Validator\Constraints\IsTrue;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use FOS\UserBundle\Util\LegacyFormHelper;
 
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+
 class RegistrationType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
@@ -17,7 +21,7 @@ class RegistrationType extends AbstractType
             ->remove('name')
             ->remove('email')
             ->remove('plainPassword')
-            ->add('email', LegacyFormHelper::getType('Symfony\Component\Form\Extension\Core\Type\EmailType'), array(
+            ->add('email', EmailType::class, array(
                 'label' => false,
                 'translation_domain' => 'FotoJoinUserBundle',
                 'attr' => array(
@@ -41,8 +45,8 @@ class RegistrationType extends AbstractType
                     ),
                 ),
             ))
-            ->add('plainPassword', LegacyFormHelper::getType('Symfony\Component\Form\Extension\Core\Type\RepeatedType'), array(
-                'type' => LegacyFormHelper::getType('Symfony\Component\Form\Extension\Core\Type\PasswordType'),
+            ->add('plainPassword', RepeatedType::class, array(
+                'type' => PasswordType::class,
                 'options' => array('translation_domain' => 'FotoJoinUserBundle'),
                 'first_options' => array(
                     'label' => false,

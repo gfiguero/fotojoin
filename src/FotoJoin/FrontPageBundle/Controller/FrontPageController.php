@@ -36,8 +36,8 @@ class FrontPageController extends Controller
 */
         return $this->render('FotoJoinFrontPageBundle:Base:index.html.twig', array(
             'form' => $form->createView(),
-            'userForm' => $this->createUserForm()->createView(),
-            'authorForm' => $this->createAuthorForm()->createView(),
+//            'userForm' => $this->createUserForm()->createView(),
+//            'authorForm' => $this->createAuthorForm()->createView(),
         ));
     }
 
