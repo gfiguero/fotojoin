@@ -1,0 +1,7 @@
+{% extends 'FotoJoinControlPanelBundle:Base:layout.html.twig' %}
+{% use 'FotoJoinControlPanelBundle:Photography:albumfinder.html.twig' %}
+
+{% block controlpanel %}
+    {% block albumfinder %}{{ parent() }}{% endblock %}
+    {% block photography %}{% endblock %}
+{% endblock %}

@@ -1,0 +1,6 @@
+{% block albumfinder %}
+    {% trans_default_domain 'FotoJoinUserBundle' %}
+    {% set menu = knp_menu_get('FotoJoinControlPanelBundle:Builder:albumFinder', [], {'albums': albums} ) %}
+    {{ knp_menu_render(menu, {'currentClass': 'active', 'ancestorClass': 'active', 'leaf_class': 'leaf'}) }}
+    <p></p>
+{% endblock %}
