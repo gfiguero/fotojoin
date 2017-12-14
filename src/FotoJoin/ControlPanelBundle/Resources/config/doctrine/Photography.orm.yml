@@ -50,15 +50,16 @@ FotoJoin\ControlPanelBundle\Entity\Photography:
             length: 20
             nullable: true
         FocalLength:
-            type: integer
+            type: string
+            length: 20
             nullable: true
         FNumber:
-            type: decimal
-            precision: 6
-            scale: 2
+            type: string
+            length: 20
             nullable: true
         ISOSpeedRatings:
-            type: integer
+            type: string
+            length: 20
             nullable: true
 #        date:
 #            type: date
