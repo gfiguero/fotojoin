@@ -25,27 +25,20 @@ class PhotographyController extends Controller
      * Lists all Photography entities.
      *
      */
-    public function indexAction(Request $request)
+    public function indexAction(Request $request, Album $album = null)
     {
         $user = $this->getUser();
         if (!is_object($user) || !$user instanceof UserInterface) {
             throw new AccessDeniedException('This user does not have access to this section.');
         }
         $session = $request->getSession();
-        $albumForm = $this->createForm('FotoJoin\ControlPanelBundle\Form\PhotographyFilterType');
-        if('POST' === $request->getMethod() && $request->request->has('photography_filter')) {
-            $albumForm->handleRequest($request);
-            if ($albumForm->isSubmitted() && $albumForm->isValid()) {
-                $album = $request->request->get('photography_filter')['album'];
-                $session->set('album', $album);
-            }
-        }
+
         $sort = $request->query->get('sort');
         $direction = $request->query->get('direction');
         $em = $this->getDoctrine()->getManager();
-        if ($session->has('album')) {
-            if ($sort) $photographies = $em->getRepository('FotoJoinControlPanelBundle:Photography')->findBy(array('user' => $user,'album' => $session->get('album')), array($sort => $direction));
-            else $photographies = $em->getRepository('FotoJoinControlPanelBundle:Photography')->findBy(array('user' => $user,'album' => $session->get('album')));
+        if ($album) {
+            if ($sort) $photographies = $em->getRepository('FotoJoinControlPanelBundle:Photography')->findBy(array('user' => $user,'album' => $album), array($sort => $direction));
+            else $photographies = $em->getRepository('FotoJoinControlPanelBundle:Photography')->findBy(array('user' => $user,'album' => $album));
         } else {
             if ($sort) $photographies = $em->getRepository('FotoJoinControlPanelBundle:Photography')->findBy(array('user' => $user), array($sort => $direction));
             else $photographies = $em->getRepository('FotoJoinControlPanelBundle:Photography')->findBy(array('user' => $user));
@@ -53,21 +46,14 @@ class PhotographyController extends Controller
         $paginator = $this->get('knp_paginator');
         $photographies = $paginator->paginate($photographies, $request->query->getInt('page', 1), 64);
 
-        $deleteForms = array();
-        $editForms = array();
-        foreach ($photographies as $key => $photography) {
-            $deleteForms[] = $this->createDeleteForm($photography)->createView();
-            $editForms[] = $this->createEditForm($photography)->createView();
-        }
+        $albums = $em->getRepository('FotoJoinControlPanelBundle:Album')->findBy(array('user' => $user));
 
         return $this->render('FotoJoinControlPanelBundle:Photography:index.html.twig', array(
             'photographies' => $photographies,
+            'albums' => $albums,
             'direction' => $direction,
             'sort' => $sort,
             'user' => $user,
-            'deleteForms' => $deleteForms,
-            'editForms' => $editForms,
-            'albumForm' => $albumForm->createView(),
         ));
     }
 

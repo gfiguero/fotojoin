@@ -1,7 +1,9 @@
 photography_index:
-    path:     /
-    defaults: { _controller: "FotoJoinControlPanelBundle:Photography:index" }
-    methods:  [GET, POST]
+    path:     /{album}
+    defaults: { _controller: "FotoJoinControlPanelBundle:Photography:index", album: '' }
+    methods:  GET
+    requirements:
+        album: '\d+|'
 
 photography_show:
     path:     /{id}/show

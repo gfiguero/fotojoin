@@ -95,7 +95,6 @@ class AlbumController extends Controller
 
         if($request->isXmlHttpRequest()) {
 
-            dump($this->getRequest());
             $file = $this->getRequest()->files->get('photography');
             $photography = new Photography();
             if(exif_imagetype($file)) {

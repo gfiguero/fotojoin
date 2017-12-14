@@ -154,4 +154,28 @@ class Builder implements ContainerAwareInterface
 
     }
 
+    public function albumFinder(FactoryInterface $factory, array $options)
+    {
+
+        $albumFinder = $factory->createItem('root');
+        $albumFinder->setChildrenAttribute('class', 'nav nav-pills');
+        $albumFinder->setChildrenAttribute('id', 'album-finder');
+
+        $albumFinder->addChild('photography_index', array(
+            'label' => 'Todos',
+            'route' => 'photography_index',
+            'routeParameters' => array('album' => ''),
+        ));
+        foreach ($options['albums'] as $album) {
+            $albumFinder->addChild($album->getId(), array(
+                'label' => $album->getName(),
+                'route' => 'photography_index',
+                'routeParameters' => array('album' => $album->getId()),
+            ));
+        }
+
+        return $albumFinder;
+
+    }
+
 }
