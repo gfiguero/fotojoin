@@ -1,0 +1,7 @@
+{% extends "FotoJoinControlPanelBundle:Base:layout.html.twig" %}
+{% use "FotoJoinUserBundle:Profile:tools.html.twig" %}
+
+{% block controlpanel %}
+    {% block tools %}{{ parent() }}{% endblock %}
+    {% block profile %}{% endblock %}
+{% endblock %}

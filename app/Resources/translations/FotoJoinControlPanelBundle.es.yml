@@ -1,3 +1,9 @@
+sidemenu:
+    status: Mi Fotojoin
+    profile: Pefil de usuario
+    message: Mensajes
+    album: Álbumes
+    photography: Fotografías
 photography:
     list: 'Fotografías'
     index: 'Fotografías'

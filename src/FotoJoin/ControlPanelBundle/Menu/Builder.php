@@ -92,31 +92,31 @@ class Builder implements ContainerAwareInterface
         $menu->setChildrenAttribute('class', 'nav nav-pills nav-stacked');
         $menu->setChildrenAttribute('id', 'side-menu');
 
-        $menu->addChild('status.index', array('route' => 'foto_join_control_panel_homepage'))->setExtras(array(
+        $menu->addChild('sidemenu.status', array('route' => 'foto_join_control_panel_homepage'))->setExtras(array(
             'icon' => 'check fa-fw',
             'translation_domain' => 'FotoJoinControlPanelBundle',
             'routes' => array('foto_join_control_panel_homepage'),
         ));
 
-        $menu->addChild('profile.show.link', array('route' => 'fos_user_profile_show'))->setExtras(array(
-            'icon' => 'user fa-fw',
-            'translation_domain' => 'FotoJoinUserBundle',
-            'routes' => array('fos_user_profile_show'),
-        ));
+        $menu->addChild('sidemenu.profile', array('route' => 'fos_user_profile_show'))->setExtras(array('icon' => 'user fa-fw', 'translation_domain' => 'FotoJoinControlPanelBundle', 'routes' => array(
+            'fos_user_profile_show',
+            'fos_user_profile_edit',
+            'fos_user_change_password',
+        )));
 
-        $menu->addChild('message.list', array('route' => 'message_index'))->setExtras(array(
+        $menu->addChild('sidemenu.message', array('route' => 'message_index'))->setExtras(array(
             'icon' => 'envelope fa-fw',
             'translation_domain' => 'FotoJoinControlPanelBundle',
             'routes' => array('message_index'),
         ));
 
-        $menu->addChild('album.list', array('route' => 'album_index'))->setExtras(array(
+        $menu->addChild('sidemenu.album', array('route' => 'album_index'))->setExtras(array(
             'icon' => 'book fa-fw',
             'translation_domain' => 'FotoJoinControlPanelBundle',
             'routes' => array('album_index'),
         ));
 
-        $menu->addChild('photography.list', array('route' => 'photography_index'))->setExtras(array(
+        $menu->addChild('sidemenu.photography', array('route' => 'photography_index'))->setExtras(array(
             'icon' => 'picture-o fa-fw',
             'translation_domain' => 'FotoJoinControlPanelBundle',
             'routes' => array('photography_index'),
@@ -128,6 +128,29 @@ class Builder implements ContainerAwareInterface
         $menu->addChild('photography.list', array('route' => 'photography_index'))->setAttribute('icon', 'picture-o fa-fw')->setAttribute('translation_domain', 'FotoJoinControlPanelBundle');
 */
         return $menu;
+
+    }
+
+    public function profileTools(FactoryInterface $factory, array $options)
+    {
+
+        $profileTools = $factory->createItem('root');
+        $profileTools->setChildrenAttribute('class', 'nav nav-pills');
+        $profileTools->setChildrenAttribute('id', 'profile-tools');
+
+        $profileTools->addChild('profile.show.link', array('route' => 'fos_user_profile_show'))->setExtras(array('translation_domain' => 'FotoJoinUserBundle', 'routes' => array(
+            'fos_user_profile_show',
+        )));
+
+        $profileTools->addChild('profile.edit.link', array('route' => 'fos_user_profile_edit'))->setExtras(array('translation_domain' => 'FotoJoinUserBundle', 'routes' => array(
+            'fos_user_profile_edit',
+        )));
+
+        $profileTools->addChild('change_password.link', array('route' => 'fos_user_change_password'))->setExtras(array('translation_domain' => 'FotoJoinUserBundle', 'routes' => array(
+            'fos_user_change_password',
+        )));
+
+        return $profileTools;
 
     }
 

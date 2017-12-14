@@ -7,19 +7,22 @@ use Symfony\Component\Form\FormBuilderInterface;
 use FOS\UserBundle\Util\LegacyFormHelper;
 use Symfony\Component\Security\Core\Validator\Constraints\UserPassword;
 
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
+
 class ChangePasswordType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('current_password', LegacyFormHelper::getType('Symfony\Component\Form\Extension\Core\Type\PasswordType'), array(
+        $builder->add('current_password', PasswordType::class, array(
             'label' => 'form.current_password',
             'translation_domain' => 'FotoJoinUserBundle',
             'attr' => array('label_col' => 3, 'widget_col' => 9 ),
             'mapped' => false,
             'constraints' => new UserPassword(),
         ));
-        $builder->add('plainPassword', LegacyFormHelper::getType('Symfony\Component\Form\Extension\Core\Type\RepeatedType'), array(
-            'type' => LegacyFormHelper::getType('Symfony\Component\Form\Extension\Core\Type\PasswordType'),
+        $builder->add('plainPassword', RepeatedType::class, array(
+            'type' => PasswordType::class,
             'options' => array('translation_domain' => 'FotoJoinUserBundle'),
             'first_options' => array('label' => 'form.new_password'),
             'second_options' => array('label' => 'form.new_password_confirmation'),

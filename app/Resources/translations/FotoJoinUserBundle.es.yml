@@ -72,7 +72,7 @@ security:
 profile:
     show:
         title: 'Perfil de Usuario'
-        link: 'Perfil de Usuario'
+        link: Ver Perfil
         username: 'Nombre de Usuario'
         email: 'Email'
     edit:

@@ -1,0 +1,5 @@
+{% block tools %}
+    {% trans_default_domain 'FotoJoinUserBundle' %}
+    {{ knp_menu_render('FotoJoinControlPanelBundle:Builder:profileTools', {'currentClass': 'active', 'ancestorClass': 'active', 'leaf_class': 'leaf'}) }}
+    <p></p>
+{% endblock %}
