@@ -19,9 +19,9 @@ class Builder implements ContainerAwareInterface
         $menu->setChildrenAttribute('class', 'nav navbar-nav navbar-right');
         $menu->setChildrenAttribute('id', 'top-menu');
 //        $menu->addChild('link.timeline', array('route' => '#timeline'))->setAttribute('translation_domain', 'FotoJoinFrontPageBundle');
-        $menu->addChild('link.gallery', array('route' => 'foto_join_gallery_homepage'))->setAttribute('translation_domain', 'FotoJoinFrontPageBundle');
-        $menu->addChild('link.login', array('route' => 'fos_user_security_login'))->setAttribute('translation_domain', 'FotoJoinFrontPageBundle');
-        $menu->addChild('link.signup', array('route' => 'fos_user_registration_register'))->setAttribute('translation_domain', 'FotoJoinFrontPageBundle');
+        $menu->addChild('link.gallery', array('route' => 'foto_join_gallery_homepage'))->setExtra('translation_domain', 'FotoJoinFrontPageBundle');
+        $menu->addChild('link.login', array('route' => 'fos_user_security_login'))->setExtra('translation_domain', 'FotoJoinFrontPageBundle');
+        $menu->addChild('link.signup', array('route' => 'fos_user_registration_register'))->setExtra('translation_domain', 'FotoJoinFrontPageBundle');
         return $menu;
 
     }
