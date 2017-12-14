@@ -22,6 +22,7 @@
                                 </th>
                                 <th>{{ knp_pagination_sortable(albums, 'album.form.id'|trans, 'id') }}{% if sort == 'id' %}{% if direction == 'desc' %}{{ icon('caret-down') }}{% else %}{{ icon('caret-up') }}{% endif %}{% endif %}</th>
                                 <th>{{ knp_pagination_sortable(albums, 'album.form.name'|trans, 'name') }}{% if sort == 'name' %}{% if direction == 'desc' %}{{ icon('caret-down') }}{% else %}{{ icon('caret-up') }}{% endif %}{% endif %}</th>
+                                <th>{{ knp_pagination_sortable(albums, 'album.form.user'|trans, 'user') }}{% if sort == 'user' %}{% if direction == 'desc' %}{{ icon('caret-down') }}{% else %}{{ icon('caret-up') }}{% endif %}{% endif %}</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -34,6 +35,7 @@
                                 </td>
                                 <td>{% if album.id %}{{ album.id }}{% endif %}</td>
                                 <td>{% if album.name %}{{ album.name }}{% endif %}</td>
+                                <td>{% if album.user %}{{ album.user }}{% endif %}</td>
                             </tr>
                         {% endfor %}
                         </tbody>

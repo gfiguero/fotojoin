@@ -21,6 +21,10 @@
                                     <div class="btn-group" role="group"><a type="button" class="btn btn-xs btn-default disabled">{{ icon('trash fa-fw') }}</a></div>
                                 </th>
                                 <th>{{ knp_pagination_sortable(photographies, 'photography.form.id'|trans, 'id') }}{% if sort == 'id' %}{% if direction == 'desc' %}{{ icon('caret-down') }}{% else %}{{ icon('caret-up') }}{% endif %}{% endif %}</th>
+                                <th>{{ knp_pagination_sortable(photographies, 'photography.form.user'|trans, 'user') }}{% if sort == 'user' %}{% if direction == 'desc' %}{{ icon('caret-down') }}{% else %}{{ icon('caret-up') }}{% endif %}{% endif %}</th>
+                                <th>{{ knp_pagination_sortable(photographies, 'photography.form.album'|trans, 'album') }}{% if sort == 'album' %}{% if direction == 'desc' %}{{ icon('caret-down') }}{% else %}{{ icon('caret-up') }}{% endif %}{% endif %}</th>
+                                <th>{{ knp_pagination_sortable(photographies, 'photography.form.value'|trans, 'value') }}{% if sort == 'value' %}{% if direction == 'desc' %}{{ icon('caret-down') }}{% else %}{{ icon('caret-up') }}{% endif %}{% endif %}</th>
+                                <th>{{ knp_pagination_sortable(photographies, 'photography.form.published'|trans, 'published') }}{% if sort == 'published' %}{% if direction == 'desc' %}{{ icon('caret-down') }}{% else %}{{ icon('caret-up') }}{% endif %}{% endif %}</th>
                                 <th>{{ knp_pagination_sortable(photographies, 'photography.form.filename'|trans, 'filename') }}{% if sort == 'filename' %}{% if direction == 'desc' %}{{ icon('caret-down') }}{% else %}{{ icon('caret-up') }}{% endif %}{% endif %}</th>
                             </tr>
                         </thead>
@@ -33,6 +37,10 @@
                                     <div class="btn-group" role="group"><a type="button" class="btn btn-xs btn-danger" href="{{ path('admin_photography_delete', { 'id': photography.id }) }}">{{ icon('trash fa-fw') }}</a></div>
                                 </td>
                                 <td>{% if photography.id %}{{ photography.id }}{% endif %}</td>
+                                <td>{% if photography.user %}{{ photography.user }}{% endif %}</td>
+                                <td>{% if photography.album %}{{ photography.album }}{% endif %}</td>
+                                <td>{% if photography.value %}{{ photography.value }}{% endif %}</td>
+                                <td>{% if photography.published %}{{ photography.published }}{% endif %}</td>
                                 <td>{% if photography.filename %}{{ photography.filename }}{% endif %}</td>
                             </tr>
                         {% endfor %}

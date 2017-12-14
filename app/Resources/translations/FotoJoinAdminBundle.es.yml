@@ -181,7 +181,7 @@ photography:
         form: Formulario de edición
         flash: Los cambios han sido guardados exitosamente
     show:
-        title: Ver Foto %id%
+        title: Datos de Fotografía
         link: Detalles
         data: Datos
         breadcrumb: Foto %id%
