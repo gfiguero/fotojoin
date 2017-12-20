@@ -1,6 +1,8 @@
 {% extends 'FotoJoinControlPanelBundle:Photography:layout.html.twig' %}
 
-{% block title %}{{ 'photography.index'|trans({}, 'FotoJoinControlPanelBundle') }}{% endblock %}
+{% trans_default_domain 'FotoJoinControlPanelBundle' %}
+
+{% block title %}{{ 'photography.index.title'|trans }}{% endblock %}
 
 {% block photography %}
     {% include 'FotoJoinControlPanelBundle:Base:flashbag.html.twig' %}
@@ -8,16 +10,17 @@
     <!-- /.row -->
     <div class="row">
         <div class="col-lg-12">
-            <div class="panel panel-default">
+            <div class="panel panel-primary">
                 <div class="panel-body">
                     {% for key, photography in photographies %}
                     <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
                         <div class="thumbnail">
-                            <img class="img-responsive" src="{{ vich_uploader_asset(photography, 'file', 'FotoJoin\\ControlPanelBundle\\Entity\\Photography')|imagine_filter('controlpanel_photography_small') }}" alt="{{ 1 }}" />
+                            <img class="img-responsive" src="{{ vich_uploader_asset(photography, 'file')|imagine_filter('controlpanel_photography_small') }}" alt="{{ 1 }}" />
                             <div class="caption">
-                                <button type="button" class="btn btn-default btn-xs">{{ icon('search fa-fw') }}</button>
-                                <button type="button" class="btn btn-primary btn-xs">{{ icon('edit fa-fw') }}</button>
-                                <button type="button" class="btn btn-danger btn-xs">{{ icon('trash-o fa-fw') }}</button>
+                                <a href="{{ path('photography_show', {id: photography.id}) }}" type="button" class="btn btn-default btn-xs">{{ icon('image fa-fw') }}</a>
+                                <a href="{{ path('photography_index', {album: photography.album.id}) }}" type="button" class="btn btn-primary btn-xs">{{ icon('book fa-fw') }}</a>
+                                <a href="{{ path('photography_edit', {id: photography.id}) }}" type="button" class="btn btn-warning btn-xs">{{ icon('edit fa-fw') }}</a>
+                                <a href="{{ path('photography_delete', {id: photography.id}) }}" type="button" class="btn btn-danger btn-xs">{{ icon('trash-o fa-fw') }}</a>
                             </div>
                         </div>
                     </div>

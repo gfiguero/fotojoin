@@ -95,6 +95,21 @@ class PhotographyController extends Controller
         ));
     }
 
+    public function showAction(Request $request, Photography $photography)
+    {
+        $user = $this->getUser();
+        if (!is_object($user) || !$user instanceof UserInterface) {
+            throw new AccessDeniedException('This user does not have access to this section.');
+        }
+        $em = $this->getDoctrine()->getManager();
+        $albums = $em->getRepository('FotoJoinControlPanelBundle:Album')->findBy(array('user' => $user));
+        return $this->render('FotoJoinControlPanelBundle:Photography:show.html.twig', array(
+            'photography' => $photography,
+            'albums' => $albums,
+            'user' => $user,
+        ));
+    }
+
     /**
      * Displays a form to edit an existing Photography entity.
      *
@@ -110,18 +125,24 @@ class PhotographyController extends Controller
         }
         $editForm = $this->createEditForm($photography);
         $editForm->handleRequest($request);
+        $em = $this->getDoctrine()->getManager();
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
-
-            $em = $this->getDoctrine()->getManager();
             $em->persist($photography);
             $em->flush();
-            $request->getSession()->getFlashBag()->add( 'success', 'photography.edited' );    
-
-            return $this->redirect($request->headers->get('referer'));
+            $request->getSession()->getFlashBag()->add( 'success', 'photography.edited' );
+            return $this->redirectToRoute('photography_show', array('id' => $photography->getId()));
         }
 
-        return $this->redirectToRoute('photography_index');
+        $albums = $em->getRepository('FotoJoinControlPanelBundle:Album')->findBy(array('user' => $user));
+
+        return $this->render('FotoJoinControlPanelBundle:Photography:edit.html.twig', array(
+            'photography' => $photography,
+            'albums' => $albums,
+            'editForm' => $editForm->createView(),
+            'user' => $user,
+        ));
+
     }
 
     /**
@@ -148,17 +169,24 @@ class PhotographyController extends Controller
         if (!is_object($user) || !$user instanceof UserInterface) {
             throw new AccessDeniedException('This user does not have access to this section.');
         }
-        $form = $this->createDeleteForm($photography);
-        $form->handleRequest($request);
+        $deleteForm = $this->createDeleteForm($photography);
+        $deleteForm->handleRequest($request);
+        $em = $this->getDoctrine()->getManager();
+        $albums = $em->getRepository('FotoJoinControlPanelBundle:Album')->findBy(array('user' => $user));
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
+        if ($deleteForm->isSubmitted() && $deleteForm->isValid()) {
             $em->remove($photography);
             $em->flush();
-            $request->getSession()->getFlashBag()->add( 'danger', 'photography.deleted' );    
+            $request->getSession()->getFlashBag()->add( 'danger', 'photography.deleted' );
+            return $this->redirectToRoute('photography_index', array('album' => $photography->getAlbum()->getId()));
         }
 
-        return $this->redirect($request->headers->get('referer'));
+        return $this->render('FotoJoinControlPanelBundle:Photography:delete.html.twig', array(
+            'photography' => $photography,
+            'albums' => $albums,
+            'user' => $user,
+            'deleteForm' => $deleteForm->createView(),
+        ));
     }
 
     /**

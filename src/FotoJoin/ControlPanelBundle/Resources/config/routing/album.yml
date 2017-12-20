@@ -21,7 +21,7 @@ album_edit:
 album_delete:
     path:     /{id}/delete
     defaults: { _controller: "FotoJoinControlPanelBundle:Album:delete" }
-    methods:  DELETE
+    methods:  [GET, DELETE]
 
 album_add:
     path:     /{id}/add

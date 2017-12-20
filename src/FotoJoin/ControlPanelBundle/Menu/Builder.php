@@ -110,17 +110,19 @@ class Builder implements ContainerAwareInterface
             'routes' => array('message_index'),
         ));
 
-        $menu->addChild('sidemenu.album', array('route' => 'album_index'))->setExtras(array(
-            'icon' => 'book fa-fw',
-            'translation_domain' => 'FotoJoinControlPanelBundle',
-            'routes' => array('album_index'),
-        ));
+        $menu->addChild('sidemenu.album', array('route' => 'album_index'))->setExtras(array('icon' => 'book fa-fw', 'translation_domain' => 'FotoJoinControlPanelBundle', 'routes' => array(
+            'album_index',
+            'album_show',
+            'album_edit',
+            'album_delete',
+        )));
 
-        $menu->addChild('sidemenu.photography', array('route' => 'photography_index'))->setExtras(array(
-            'icon' => 'picture-o fa-fw',
-            'translation_domain' => 'FotoJoinControlPanelBundle',
-            'routes' => array('photography_index'),
-        ));
+        $menu->addChild('sidemenu.photography', array('route' => 'photography_index'))->setExtras(array('icon' => 'picture-o fa-fw', 'translation_domain' => 'FotoJoinControlPanelBundle', 'routes' => array(
+            'photography_index',
+            'photography_show',
+            'photography_edit',
+            'photography_delete',
+        )));
 /*
         $menu->addChild('profile.show.link', array('route' => 'fos_user_profile_show'))->setAttribute('icon', 'user fa-fw')->setAttribute('translation_domain', 'FotoJoinUserBundle');
         $menu->addChild('message.list', array('route' => 'message_index'))->setAttribute('icon', 'envelope fa-fw')->setAttribute('translation_domain', 'FotoJoinControlPanelBundle');
@@ -162,15 +164,17 @@ class Builder implements ContainerAwareInterface
         $albumFinder->setChildrenAttribute('id', 'album-finder');
 
         $albumFinder->addChild('photography_index', array(
-            'label' => 'Todos',
+            'label' => 'Todas las fotos',
             'route' => 'photography_index',
             'routeParameters' => array('album' => ''),
+            'extras' => array('icon' => 'image fa-fw')
         ));
         foreach ($options['albums'] as $album) {
             $albumFinder->addChild($album->getId(), array(
                 'label' => $album->getName(),
                 'route' => 'photography_index',
                 'routeParameters' => array('album' => $album->getId()),
+                'extras' => array('icon' => 'book fa-fw')
             ));
         }
 

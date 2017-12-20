@@ -23,7 +23,7 @@ photography_edit:
 photography_delete:
     path:     /{id}/delete
     defaults: { _controller: "FotoJoinControlPanelBundle:Photography:delete" }
-    methods:  DELETE
+    methods:  [GET, DELETE]
 
 photography_dropzone:
     path:     /dropzone

@@ -21,10 +21,10 @@ class PhotographyAlbumType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+/*
             ->add('author', 'entity_hidden', array(
                 'class' => 'FotoJoinUserBundle:Author',
             ))
-/*
             ->add('file', 'photography_file', array(
                 'label' => 'photography.file.label',
                 'translation_domain' => 'FotoJoinControlPanelBundle',
@@ -33,11 +33,11 @@ class PhotographyAlbumType extends AbstractType
             ))
 */
             ->add('categories', 'entity', array(
-                'label' => 'photography.categories',
+                'label' => false,
                 'class' => 'FotoJoinAdminBundle:Category',
                 'multiple' => true,
                 'required' => false,
-                'attr' => array('label_col' => 3, 'widget_col' => 9, 'class' => 'photography_categories' ),
+                'attr' => array('label_col' => 0, 'widget_col' => 12, 'class' => 'photography_categories' ),
                 'translation_domain' => 'FotoJoinControlPanelBundle',
             ))
 /*

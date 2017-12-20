@@ -262,6 +262,11 @@ class Photography
         return $this->author;
     }
 
+    public function setCategory(\FotoJoin\AdminBundle\Entity\Category $category)
+    {
+        return $this->addCategory($category);
+    }
+
     /**
      * Add category
      *

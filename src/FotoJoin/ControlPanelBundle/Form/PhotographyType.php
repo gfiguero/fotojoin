@@ -30,33 +30,19 @@ class PhotographyType extends AbstractType
                 'attr' => array('label_col' => 3, 'widget_col' => 9 ),
                 'required' => false,
             ))
-            ->add('categories', 'entity', array(
-                'label' => 'photography.form.categories',
-                'class' => 'FotoJoinAdminBundle:Category',
-                'multiple' => true,
+            ->add('categories', null, array(
+                'label' => 'photography.form.category',
                 'required' => false,
                 'attr' => array('label_col' => 3, 'widget_col' => 9, 'class' => 'photography_categories' ),
                 'translation_domain' => 'FotoJoinControlPanelBundle',
             ))
-/*
-            ->add('album', 'entity', array(
-                'label' => 'photography.album',
-                'class' => 'FotoJoinControlPanelBundle:Album',
-                'choice_label' => 'name',
-                'required' => false,
-                'attr' => array('label_col' => 3, 'widget_col' => 9, 'class' => 'photography_album' ),
-                'translation_domain' => 'FotoJoinControlPanelBundle',
-                'placeholder' => 'Ninguno',
-            ))
-*/
-/**********************************************************/
-            ->add('MakeModel', null, array(
-                'label' => 'photography.form.makemodel',
+            ->add('DateTimeOriginal', null, array(
+                'label' => 'photography.form.datetimeoriginal',
                 'attr' => array('label_col' => 3, 'widget_col' => 9 ),
                 'translation_domain' => 'FotoJoinControlPanelBundle',
             ))
-            ->add('DateTimeOriginal', null, array(
-                'label' => 'photography.form.datetimeoriginal',
+            ->add('MakeModel', null, array(
+                'label' => 'photography.form.makemodel',
                 'attr' => array('label_col' => 3, 'widget_col' => 9 ),
                 'translation_domain' => 'FotoJoinControlPanelBundle',
             ))

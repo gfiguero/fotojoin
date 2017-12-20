@@ -13,6 +13,7 @@ use Vich\UploaderBundle\Form\DataTransformer\FileTransformer;
 use Doctrine\Common\Collections\ArrayCollection;
 
 use FotoJoin\ControlPanelBundle\Entity\Album;
+use FotoJoin\ControlPanelBundle\Form\NewAlbumType;
 use FotoJoin\ControlPanelBundle\Form\AlbumType;
 
 use FotoJoin\ControlPanelBundle\Entity\Photography;
@@ -56,6 +57,19 @@ class AlbumController extends Controller
         ));
     }
 
+    public function showAction(Request $request, Album $album)
+    {
+        $user = $this->getUser();
+        if (!is_object($user) || !$user instanceof UserInterface) {
+            throw new AccessDeniedException('This user does not have access to this section.');
+        }
+
+        return $this->render('FotoJoinControlPanelBundle:Album:show.html.twig', array(
+            'user' => $user,
+            'album' => $album,
+        ));
+    }
+
     /**
      * Creates a new Album entity.
      *
@@ -67,7 +81,7 @@ class AlbumController extends Controller
             throw new AccessDeniedException('This user does not have access to this section.');
         }
         $album = new Album();
-        $newForm = $this->createForm('FotoJoin\ControlPanelBundle\Form\NewAlbumType', $album);
+        $newForm = $this->createForm(new NewAlbumType(), $album);
         $newForm->handleRequest($request);
 
         if ($newForm->isSubmitted() && $newForm->isValid()) {
@@ -149,25 +163,25 @@ class AlbumController extends Controller
             throw new AccessDeniedException('This user does not have access to this section.');
         }
 
+/*
         $originalPhotographies = new ArrayCollection();
         foreach ($album->getPhotographies() as $photography) {
             $originalPhotographies->add($photography);
         }
-
-        $deleteForm = $this->createDeleteForm($album);
+*/
         $editForm = $this->createForm('FotoJoin\ControlPanelBundle\Form\AlbumType', $album);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $em = $this->getDoctrine()->getManager();
-
+/*
             $newPhotographies = $album->getPhotographies();
             foreach ($originalPhotographies as $originalPhotography) {
                 if (false === $newPhotographies->contains($originalPhotography)) {
                     $em->remove($originalPhotography);
                 }
             }
-
+*/
             $em->persist($album);
             $em->flush();
             $request->getSession()->getFlashBag()->add( 'success', 'album.edit.flash' );
@@ -185,7 +199,6 @@ class AlbumController extends Controller
         return $this->render('FotoJoinControlPanelBundle:Album:edit.html.twig', array(
             'album' => $album,
             'edit_form' => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
             'user' => $user,
         ));
     }
@@ -200,17 +213,22 @@ class AlbumController extends Controller
         if (!is_object($user) || !$user instanceof UserInterface) {
             throw new AccessDeniedException('This user does not have access to this section.');
         }
-        $form = $this->createDeleteForm($album);
-        $form->handleRequest($request);
+        $deleteForm = $this->createDeleteForm($album);
+        $deleteForm->handleRequest($request);
+        $em = $this->getDoctrine()->getManager();
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
+        if ($deleteForm->isSubmitted() && $deleteForm->isValid()) {
             $em->remove($album);
             $em->flush();
-            $request->getSession()->getFlashBag()->add( 'danger', 'album.deleted' );    
+            $request->getSession()->getFlashBag()->add( 'danger', 'album.deleted' );
+            return $this->redirectToRoute('album_index');
         }
 
-        return $this->redirectToRoute('album_index');
+        return $this->render('FotoJoinControlPanelBundle:Album:delete.html.twig', array(
+            'album' => $album,
+            'user' => $user,
+            'deleteForm' => $deleteForm->createView(),
+        ));
     }
 
     /**

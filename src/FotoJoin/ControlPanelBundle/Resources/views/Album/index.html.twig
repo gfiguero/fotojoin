@@ -1,76 +1,74 @@
-{% extends 'FotoJoinControlPanelBundle:Base:layout.html.twig' %}
+{% extends 'FotoJoinControlPanelBundle:Album:layout.html.twig' %}
 
-{% block title %}{{ 'album.index'|trans({}, 'FotoJoinControlPanelBundle') }}{% endblock %}
+{% trans_default_domain 'FotoJoinControlPanelBundle' %}
 
-{% block controlpanel %}
-    <div id="page-wrapper">
-        <div class="row">
-            <div class="col-lg-12">
-                <h1 class="page-header">{% include 'FotoJoinControlPanelBundle:Base:icon.html.twig' %}{{ 'album.list'|trans({}, 'FotoJoinControlPanelBundle') }}</h1>
-                {% include 'FotoJoinControlPanelBundle:Base:flashbag.html.twig' %}
+{% block title %}{{ 'album.index.title'|trans }}{% endblock %}
+
+{% block album %}
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+                <div class="table-responsive">
+                    <table class="records_list table table-striped table-hover table-middle">
+                        <thead>
+                            <tr>
+                                <th style="min-width: 110px;">
+                                    <div class="btn-group"><a href="#" class="btn btn-xs btn-default disabled">{{ icon('search fa-fw') }}</a></div>
+                                    <div class="btn-group"><a href="#" class="btn btn-xs btn-default disabled">{{ icon('edit fa-fw') }}</a></div>
+                                    <div class="btn-group"><a href="#" class="btn btn-xs btn-default disabled">{{ icon('times fa-fw') }}</a></div>
+                                </th>
+                                <th>{{ knp_pagination_sortable(albums, 'album.form.name'|trans, 'name') }}{% if sort == 'name' %}{% if direction == 'desc' %}{{ icon('caret-down') }}{% else %}{{ icon('caret-up') }}{% endif %}{% endif %}</th>
+                                <th>{{ knp_pagination_sortable(albums, 'album.form.createdAt'|trans, 'createdAt') }}{% if sort == 'createdAt' %}{% if direction == 'desc' %}{{ icon('caret-down') }}{% else %}{{ icon('caret-up') }}{% endif %}{% endif %}</th>
+                                <th>{{ knp_pagination_sortable(albums, 'album.form.updatedAt'|trans, 'updatedAt') }}{% if sort == 'updatedAt' %}{% if direction == 'desc' %}{{ icon('caret-down') }}{% else %}{{ icon('caret-up') }}{% endif %}{% endif %}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {% for album in albums %}
+                            <tr>
+                                <td>
+                                    <div class="btn-group"><a href="{{ path('album_show', {'id' : album.id}) }}" class="btn btn-xs btn-default">{{ icon('search fa-fw') }}</a></div>
+                                    <div class="btn-group"><a href="{{ path('album_edit', {'id' : album.id}) }}" class="btn btn-xs btn-warning">{{ icon('edit fa-fw') }}</a></div>
+                                    <div class="btn-group"><a href="{{ path('album_delete', {'id' : album.id}) }}" class="btn btn-xs btn-danger">{{ icon('times fa-fw') }}</a></div>
+                                </td>
+                                <td>{% if album.name %}{{ album.name }}{% endif %}</td>
+                                <td>{% if album.createdAt %}{{ album.createdAt|localizeddate('full', 'full', 'es_ES', 'America/Santiago', "dd-LLL-Y - HH:mm") }}{% endif %}</td>
+                                <td>{% if album.updatedAt %}{{ album.updatedAt|localizeddate('full', 'full', 'es_ES', 'America/Santiago', "dd-LLL-Y - HH:mm") }}{% endif %}</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="panel-footer">
+                    <div class="text-center">
+                        {{ knp_pagination_render(albums) }}
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
             </div>
-            <!-- /.col-lg-12 -->
-        </div>
-        <!-- /.row -->
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <a type="button" class="btn btn-primary" href="{{ path('album_new') }}">{{ icon('file') }}&nbsp;{{ 'album.new'|trans({}, 'FotoJoinControlPanelBundle') }}</a>
-{#}                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal">{{ icon('file') }}&nbsp;{{ 'album.new'|trans({}, 'FotoJoinControlPanelBundle') }}</button>{#}
-                    </div>
-                    <div class="table-responsive">
-                        <table class="records_list table table-striped table-hover">
-                            <thead>
-                                <tr>
-                                    <th>{{ knp_pagination_sortable(albums, 'album.name'|trans({}, 'FotoJoinControlPanelBundle'), 'name') }}{% if sort == 'name' %}{% if direction == 'desc' %}{{ icon('caret-down') }}{% else %}{{ icon('caret-up') }}{% endif %}{% endif %}</th>
-                                    <th>{{ knp_pagination_sortable(albums, 'album.createdAt'|trans({}, 'FotoJoinControlPanelBundle'), 'createdAt') }}{% if sort == 'createdAt' %}{% if direction == 'desc' %}{{ icon('caret-down') }}{% else %}{{ icon('caret-up') }}{% endif %}{% endif %}</th>
-                                    <th>{{ knp_pagination_sortable(albums, 'album.updatedAt'|trans({}, 'FotoJoinControlPanelBundle'), 'updatedAt') }}{% if sort == 'updatedAt' %}{% if direction == 'desc' %}{{ icon('caret-down') }}{% else %}{{ icon('caret-up') }}{% endif %}{% endif %}</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                            {% for album in albums %}
-                                <tr class='clickableRow' href="{{ path('album_edit', { 'id': album.id }) }}">
-                                    <td>{% if album.name %}{{ album.name }}{% endif %}</td>
-                                    <td>{% if album.createdAt %}{{ album.createdAt|localizeddate('full', 'full', 'es_ES', 'America/Santiago', "dd-LLL-Y - HH:mm") }}{% endif %}</td>
-                                    <td>{% if album.updatedAt %}{{ album.updatedAt|localizeddate('full', 'full', 'es_ES', 'America/Santiago', "dd-LLL-Y - HH:mm") }}{% endif %}</td>
-                                </tr>
-                            {% endfor %}
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="panel-footer">
-                        <div class="text-center">
-                            {{ knp_pagination_render(albums) }}
+{#}
+            <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                <div class="modal-dialog modal-sm" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="myModalLabel">Nuevo Álbum</h4>
                         </div>
-                        <div class="clearfix"></div>
+                        <div class="modal-body">
+                            {{ form_start(albumForm, { 'style': 'horizontal' }) }}
+                            {{ form_row(albumForm.name) }}
+                                <div class="form-group"><div class="col-lg-offset-4 col-lg-8">
+                                    <button type="submit" class="btn btn-primary">{{ icon('plus') }}&nbsp;{{ 'album.register'|trans }}</button>
+                                </div></div>
+                            {{ form_end(albumForm) }}
+                        </div>
                     </div>
                 </div>
-{#}
-                <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-                    <div class="modal-dialog modal-sm" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                <h4 class="modal-title" id="myModalLabel">Nuevo Álbum</h4>
-                            </div>
-                            <div class="modal-body">
-                                {{ form_start(albumForm, { 'style': 'horizontal' }) }}
-                                {{ form_row(albumForm.name) }}
-                                    <div class="form-group"><div class="col-lg-offset-4 col-lg-8">
-                                        <button type="submit" class="btn btn-primary">{{ icon('plus') }}&nbsp;{{ 'album.register'|trans({}, 'FotoJoinControlPanelBundle') }}</button>
-                                    </div></div>
-                                {{ form_end(albumForm) }}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-{#}
             </div>
-            <!-- /.col-lg-12 -->
+{#}
         </div>
-        <!-- /.row -->
+        <!-- /.col-lg-12 -->
     </div>
-    <!-- /#page-wrapper -->
+    <!-- /.row -->
 
 {% endblock %}

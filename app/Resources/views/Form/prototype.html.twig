@@ -1,19 +1,16 @@
 {% block _album_photographies_widget %}
     {% spaceless %}
-        {% if prototype is defined %}
-            {% set prototype_vars = {} %}
-            {% if style is defined %}
-                {% set prototype_vars = prototype_vars|merge({'style': 'inline', 'label_col' : 0}) %}
-            {% endif %}
-            {% set prototype_html = '<td><a href="#" class="btn btn-danger btn-sm" data-removefield="collection" data-field="__id__">' ~ icon('times fa-fw') ~ '</a></td>' %}
-            {% set prototype_html = prototype_html ~ '<td>' ~ form_widget(prototype.categories) ~ '</td>' %}
-            {% set attr = attr|merge({'data-prototype': prototype_html }) %}
-            {% set attr = attr|merge({'data-prototype-name': prototype_name }) %}
-        {% endif %}
-        <div class="panel panel-default">
+        <div class="form-group">
+            {% for field in form %}
+                <div class="col-md-6 col-lg-4">
+                    <img class="img-thumbnail" src="{{ vich_uploader_asset(field.vars.data, 'file')|imagine_filter('controlpanel_photography_small') }}" />
+                    {{ form_widget(field) }}
+                </div>
+            {% endfor %}
+        </div>
+{#}
         <div {{ block('widget_container_attributes') }} >
             <table class="table table-middle">
-{#}
                 <thead>
                     <tr>
                         <th width="20"><a href="#" class="btn btn-default btn-sm disabled">{{ icon('times fa-fw') }}</a></th>
@@ -21,16 +18,15 @@
                         <th>{{'photography.categories'|trans({}, translation_domain) }}</th>
                     </tr>
                 </thead>
-{#}
                 {% for field in form %}
                     <tr>
-                        <td width="60"><a href="#" class="btn btn-danger btn-sm" data-removefield="collection" data-field="{{ field.vars.id }}">{{ icon('times fa-fw') }}</a></td>
-                        <td width="160"><img class="img-responsive center-block" src="{{ vich_uploader_asset(field.vars.data, 'file', 'FotoJoin\\ControlPanelBundle\\Entity\\Photography')|imagine_filter('controlpanel_photography_preview') }}" /></td>
-                        <td>{{ form_widget(field) }}</td>
+                        <td class="col-md-4"><img class="img-thumbnail" src="{{ vich_uploader_asset(field.vars.data, 'file')|imagine_filter('controlpanel_photography_preview') }}" /></td>
+                        <td class="col-md-8">{{ form_widget(field) }}</td>
+                        <td class="col-md-1"><div class="form-group"><a href="#" class="btn btn-danger" data-removefield="collection" data-field="{{ field.vars.id }}">{{ icon('times fa-fw') }}</a></td></div>
                     </tr>
                 {% endfor %}
             </table>
         </div>
-        </div>
+{#}
     {% endspaceless %}
 {% endblock _album_photographies_widget %}

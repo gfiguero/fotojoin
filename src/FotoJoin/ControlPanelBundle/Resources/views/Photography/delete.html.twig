@@ -1,0 +1,35 @@
+{% extends 'FotoJoinControlPanelBundle:Photography:layout.html.twig' %}
+
+{% trans_default_domain 'FotoJoinControlPanelBundle' %}
+
+{% block title %}{{ 'photography.delete'|trans }}{% endblock %}
+
+{% block photography %}
+    {% include 'FotoJoinControlPanelBundle:Base:flashbag.html.twig' %}
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-danger">
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-4"><img class="img-thumbnail" src="{{ vich_uploader_asset(photography, 'file')|imagine_filter('controlpanel_photography_small') }}" /></div>
+                        <div class="col-md-8">
+                            {{ form_start(deleteForm, { 'style': 'horizontal' }) }}
+                                {{ form_widget(deleteForm) }}
+                                <div class="form-group">
+                                    <div class="col-md-12">
+                                        <h4>{{ icon('exclamation-triangle fa-3x fa-fw') }}{{ 'photography.delete.message'|trans }}</h4>
+                                        <a type="button" class="btn btn-default" href="{{ path('photography_show', { 'id': photography.id }) }}">{{ icon('reply fa-fw') }}&nbsp;{{ 'photography.delete.cancel'|trans }}</a>
+                                        <button type="submit" class="btn btn-danger">{{ icon('times fa-fw') }}&nbsp;{{ 'photography.delete.submit'|trans }}</button>
+                                    </div>
+                                </div>
+                            {{ form_end(deleteForm) }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /.col-lg-12 -->
+    </div>
+    <!-- /.row -->
+{% endblock %}
+

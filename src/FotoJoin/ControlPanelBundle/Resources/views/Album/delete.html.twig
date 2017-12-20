@@ -1,0 +1,30 @@
+{% extends 'FotoJoinControlPanelBundle:Album:layout.html.twig' %}
+
+{% trans_default_domain 'FotoJoinControlPanelBundle' %}
+
+{% block title %}{{ 'album.delete'|trans }}{% endblock %}
+
+{% block album %}
+    {% include 'FotoJoinControlPanelBundle:Base:flashbag.html.twig' %}
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-danger">
+                <div class="panel-body">
+                    {{ form_start(deleteForm, { 'style': 'horizontal' }) }}
+                        {{ form_widget(deleteForm) }}
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <h4>{{ icon('exclamation-triangle fa-3x fa-fw') }}{{ 'album.delete.message'|trans }}</h4>
+                                <a type="button" class="btn btn-default" href="{{ path('album_show', { 'id': album.id }) }}">{{ icon('reply fa-fw') }}&nbsp;{{ 'album.delete.cancel'|trans }}</a>
+                                <button type="submit" class="btn btn-danger">{{ icon('times fa-fw') }}&nbsp;{{ 'album.delete.submit'|trans }}</button>
+                            </div>
+                        </div>
+                    {{ form_end(deleteForm) }}
+                </div>
+            </div>
+        </div>
+        <!-- /.col-lg-12 -->
+    </div>
+    <!-- /.row -->
+{% endblock %}
+

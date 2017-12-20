@@ -5,8 +5,13 @@ sidemenu:
     album: Álbumes
     photography: Fotografías
 photography:
+    show:
+        link: Detalles
+        title:
     list: 'Fotografías'
-    index: 'Fotografías'
+    index:
+        album: Ver otras fotos del álbum
+        link: 'Lista de fotografías'
     new: 'Subir Fotografía'
     massiveupload: 'Subir varias Fotografías'
     show: 'Ver datos de Fotografía'
@@ -29,10 +34,11 @@ photography:
     form:
         file: Archivo
         categories: 'Categorías Fotográficas'
+        category: Categoría
         title: 'Captura Fotográfica'
         datetimeoriginal: 'Fecha de Captura'
         makemodel: 'Cámara - Modelo'
-        exposuretime: 'Tiempo'
+        exposuretime: 'Tiempo de exposición'
         focallength: 'Distancia Focal'
         fnumber: 'Relación Focal'
         isospeedratings: ISO
@@ -41,23 +47,24 @@ photography:
     image: Imagen
 
 album:
-    index: 'Álbumes'
-    list: 'Álbumes'
-    new: 'Nuevo álbum'
-    show: 'Ver datos de álbum'
-    add:
-        link: Agregar fotografías
-        title: 'Agregar fotografías: %name%'
-    name: 'Nombre de álbum'
-    register: 'Crear álbum'
+    index:
+        link: 'Álbumes'
+        list: 'Álbumes'
+    new:
+        link: 'Nuevo álbum'
+    show:
+        link: 'Ver datos de álbum'
+    delete:
+        link: 'Eliminar álbum'
     edit:
         link: 'Editar álbum'
         title: 'Editar álbum: %name%'
         flash: 'Cambios realizados'
-    save: 'Guardar álbum'
-    delete: 'Eliminar álbum'
-    createdAt: 'Creado'
-    updatedAt: 'Actualizado'
+    form:
+        name: 'Nombre de álbum'
+        sumbit: 'Guardar álbum'
+        createdAt: 'Creado'
+        updatedAt: 'Actualizado'
 
 status:
     index: 'Mi FotoJoin'

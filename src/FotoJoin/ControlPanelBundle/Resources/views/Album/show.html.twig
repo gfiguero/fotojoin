@@ -1,0 +1,23 @@
+{% extends 'FotoJoinControlPanelBundle:Album:layout.html.twig' %}
+
+{% trans_default_domain 'FotoJoinControlPanelBundle' %}
+
+{% block title %}{{ 'album.show.title'|trans }}{% endblock %}
+
+{% block album %}
+    {% include 'FotoJoinControlPanelBundle:Base:flashbag.html.twig' %}
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <dl class="dl-horizontal">
+                        {% if album.name %}<dt>{{ 'album.name'|trans }}</dt><dd>{{ album.name }}</dd>{% endif %}
+                    </dl>
+                </div>
+            </div>
+        </div>
+        <!-- /.col-lg-12 -->
+    </div>
+    <!-- /.row -->
+{% endblock %}
+

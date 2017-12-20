@@ -1,0 +1,14 @@
+{% block tools %}
+    {% trans_default_domain 'FotoJoinControlPanelBundle' %}
+    <ul class="nav nav-pills">
+        <li><a type="button" class="btn btn-primary" href="{{ path('album_index') }}">{{ icon('book fa-fw') }}&nbsp;{{ 'album.index.link'|trans }}</a></li>
+        <li><a type="button" class="btn btn-success" href="{{ path('album_new') }}">{{ icon('plus fa-fw') }}&nbsp;{{ 'album.new.link'|trans }}</a></li>
+        {% if album is defined %}
+        <li><a type="button" class="btn btn-default" href="{{ path('album_show', { 'id': album.id }) }}">{{ icon('image fa-fw') }}&nbsp;{{ 'album.show.link'|trans }}</a></li>
+        <li><a type="button" class="btn btn-warning" href="{{ path('album_edit', { 'id': album.id }) }}">{{ icon('edit fa-fw') }}&nbsp;{{ 'album.edit.link'|trans }}</a></li>
+        <li><a type="button" class="btn btn-danger" href="{{ path('album_delete', { 'id': album.id }) }}">{{ icon('trash fa-fw') }}&nbsp;{{ 'album.delete.link'|trans }}</a></li>
+        {% else %}
+        {% endif %}
+    </ul>
+    <p></p>
+{% endblock %}
