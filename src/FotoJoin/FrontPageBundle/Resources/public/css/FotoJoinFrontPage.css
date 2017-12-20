@@ -4954,7 +4954,8 @@ fieldset[disabled] .navbar-inverse .btn-link:focus {
   line-height: 30px;
   height: 60px;
   font-size: 24px;
-  color: #d9d9d9;
+  color: #f2f2f2;
+  text-shadow: 2px 2px 4px #000000;
 }
 .navbar-default .navbar-brand:hover,
 .navbar-default .navbar-brand:focus,
@@ -4982,7 +4983,8 @@ fieldset[disabled] .navbar-inverse .btn-link:focus {
   font-size: 1.3em;
   line-height: 25px;
   letter-spacing: 1px;
-  color: #bfbfbf;
+  text-shadow: 2px 2px 4px #000000;
+  color: #f2f2f2;
 }
 .navbar-default .nav li a:hover,
 .navbar-default .nav li a:focus {
@@ -7252,7 +7254,7 @@ section.contact ul.list-social li.social-google-plus a:hover {
 #pricing {
   padding-top: 100px;
   min-height: 100vh;
-  background: url("../../../../../img/bg-lago.jpg");
+  background: url("../../../../../img/matrimonio.jpg");
   background-size: cover;
   overflow-y: hidden;
   color: white;
@@ -7312,7 +7314,7 @@ section.contact ul.list-social li.social-google-plus a:hover {
 #header {
   width: 100%;
   min-height: 100%;
-  background: url("../../../../../img/bg-santiago.jpg");
+  background: url("../../../../../img/fiesta.jpg");
   background-size: cover;
   overflow-y: hidden;
   color: white;
