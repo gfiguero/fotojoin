@@ -8,13 +8,13 @@
     {% include 'FotoJoinControlPanelBundle:Base:flashbag.html.twig' %}
     <div class="row">
         <div class="col-md-12">
-            <div class="panel panel-default">
+            <div class="panel panel-warning">
                 <div class="panel-body">
                     {{ form_start(edit_form, { 'style': 'horizontal' }) }}
                         {{ form_row(edit_form.name) }}
                         {{ form_row(edit_form.photographies) }}
-                        <div class="form-group"><div class="col-xs-12">
-                            <button type="submit" class="btn btn-primary">{{ icon('save') }}&nbsp;{{ 'album.save'|trans }}</button>
+                        <div class="form-group"><div class="col-xs-12 col-md-offset-4">
+                            <button type="submit" class="btn btn-primary">{{ icon('save fa-fw') }}&nbsp;{{ 'album.edit.submit'|trans }}</button>
                         </div></div>
                     {{ form_end(edit_form) }}
                 </div>

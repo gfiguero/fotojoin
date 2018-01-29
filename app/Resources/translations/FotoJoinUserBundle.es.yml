@@ -8,7 +8,7 @@ user:
         current_password: 'Contraseña actual'
         password: Contraseña
         password_confirmation: 'Repita la contraseña'
-        termsAccepted: 'He leído y aceptado los términos y condiciones de FotoJoin.'
+        termsAccepted: 'He leído y aceptado los términos y condiciones de Fotojoin.'
         new_password: 'Nueva contraseña'
         new_password_confirmation: 'Repita la contraseña'
         name: 'Nombre'
@@ -100,7 +100,7 @@ registration:
         user_created: 'El usuario se ha creado satisfactoriamente'
     email:
         subject: 'Bienvenido %name%!'
-        message: "Hola %name%!\n\nPara completar la validación de tu cuenta - por favor visita %confirmationUrl%\n\nAtentamente,\nEquipo de FotoJoin.\n"
+        message: "Hola %name%!\n\nPara completar la validación de tu cuenta - por favor visita %confirmationUrl%\n\nAtentamente,\nEquipo de Fotojoin.\n"
 resetting:
     link: '¿Olvidaste tu contraseña?'
     password_already_requested: 'La contraseña para este usuario ya ha sido solicitada dentro de las 24 horas.'
@@ -169,7 +169,7 @@ signup:
     link: 'Crear una cuenta'
 
 upgrade:
-    link: 'Convertirme en fotógrafo de FotoJoin'
-    message: 'Estás a punto de convertir tu cuenta de usuario evaluador en cuenta de fotógrafo FotoJoin. Podrás subir tus propias fotografías para que otros usuarios puedan evaluarte. Esta operación es irreversible. ¿Estás de acuerdo?'
+    link: 'Convertirme en fotógrafo de Fotojoin'
+    message: 'Estás a punto de convertir tu cuenta de usuario evaluador en cuenta de fotógrafo Fotojoin. Podrás subir tus propias fotografías para que otros usuarios puedan evaluarte. Esta operación es irreversible. ¿Estás de acuerdo?'
     title: 'Actualización de cuenta de usuario'
-    confirm: 'Si, quiero ser fotógrafo de FotoJoin!'
+    confirm: 'Si, quiero ser fotógrafo de Fotojoin!'

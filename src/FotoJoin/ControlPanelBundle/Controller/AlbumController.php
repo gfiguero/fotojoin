@@ -89,7 +89,7 @@ class AlbumController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($album);
             $em->flush();
-            $request->getSession()->getFlashBag()->add( 'success', 'album.created' );    
+            $request->getSession()->getFlashBag()->add( 'success', 'album.new.flash' );    
 
             return $this->redirectToRoute('album_edit', array('id' => $album->getId()));
         }
@@ -220,7 +220,7 @@ class AlbumController extends Controller
         if ($deleteForm->isSubmitted() && $deleteForm->isValid()) {
             $em->remove($album);
             $em->flush();
-            $request->getSession()->getFlashBag()->add( 'danger', 'album.deleted' );
+            $request->getSession()->getFlashBag()->add( 'danger', 'album.delete.flash' );
             return $this->redirectToRoute('album_index');
         }
 

@@ -52,6 +52,8 @@ album:
         list: 'Álbumes'
     new:
         link: 'Nuevo álbum'
+        flash: Álbum creado
+        submit: Registrar
     show:
         link: 'Ver datos de álbum'
     delete:
@@ -60,6 +62,7 @@ album:
         link: 'Editar álbum'
         title: 'Editar álbum: %name%'
         flash: 'Cambios realizados'
+        submit: Confirmar cambios
     form:
         name: 'Nombre de álbum'
         sumbit: 'Guardar álbum'

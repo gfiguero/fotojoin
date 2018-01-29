@@ -1,12 +1,16 @@
 {% extends 'FotoJoinControlPanelBundle:Base:layout.html.twig' %}
 
-{% block title %}{{ 'message.index'|trans({}, 'FotoJoinControlPanelBundle') }}{% endblock %}
+{% trans_default_domain 'FotoJoinControlPanelBundle' %}
+
+{% block title %}{{ 'message.index.title'|trans({}, 'FotoJoinControlPanelBundle') }}{% endblock %}
 
 {% block controlpanel %}
     <div id="page-wrapper">
         <div class="row">
             <div class="col-lg-12">
+{#}
                 <h1 class="page-header">{% include 'FotoJoinControlPanelBundle:Base:icon.html.twig' %}{{ 'message.list'|trans({}, 'FotoJoinControlPanelBundle') }}</h1>
+{#}
                 {% include 'FotoJoinControlPanelBundle:Base:flashbag.html.twig' %}
             </div>
             <!-- /.col-lg-12 -->

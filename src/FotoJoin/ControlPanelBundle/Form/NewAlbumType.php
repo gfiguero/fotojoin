@@ -19,7 +19,7 @@ class NewAlbumType extends AbstractType
     {
         $builder
             ->add('name', null, array(
-                'label' => 'album.name',
+                'label' => 'album.form.name',
                 'translation_domain' => 'FotoJoinControlPanelBundle',
                 'attr' => array('label_col' => 4, 'widget_col' => 8 ),
             ))
