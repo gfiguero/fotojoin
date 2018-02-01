@@ -1,24 +1,42 @@
+topmenu:
+    status: Mi Fotojoin
+    profile: Pefil de usuario
+    message: Mensajes
+    album: Álbumes
+    photography: Fotografías
+    logout: Logout
+
 sidemenu:
     status: Mi Fotojoin
     profile: Pefil de usuario
     message: Mensajes
     album: Álbumes
     photography: Fotografías
+
 photography:
     show:
         link: Detalles
         title:
     list: 'Fotografías'
     index:
+        title: Fotografías
         album: Ver otras fotos del álbum
         link: 'Lista de fotografías'
-    new: 'Subir Fotografía'
+    new:
+        link: 'Subir Fotografía'
     massiveupload: 'Subir varias Fotografías'
     show: 'Ver datos de Fotografía'
     register: 'Registrar Fotografía'
-    edit: 'Editar información de Fotografía'
+    edit:
+        link: Editar datos
+        title: Editar datos de fotografía
     save: 'Guardar Fotografía'
-    delete: 'Eliminar Fotografía'
+    delete:
+        link: Eliminar
+        title: Eliminar
+        message: Se eliminará la fotografía seleccionada, sus datos y toda su información asociada
+        cancel: Cancelar
+        submit: Confirmar
     createdAt: 'Fecha de Carga'
     updatedAt: 'Fecha de Actualización'
     filename: 'Nombre de Archivo'
@@ -51,16 +69,22 @@ album:
         link: 'Álbumes'
         list: 'Álbumes'
     new:
+        title: Nuevo álbum
         link: 'Nuevo álbum'
         flash: Álbum creado
         submit: Registrar
     show:
+        title: Datos del álbum
         link: 'Ver datos de álbum'
     delete:
+        title: Eliminar álbum
         link: 'Eliminar álbum'
+        message: Al eliminar el álbum, perderá toda la información asociada y las fotos contenidas en él.
+        cancel: Cancelar
+        submit: Confirmar
     edit:
         link: 'Editar álbum'
-        title: 'Editar álbum: %name%'
+        title: 'Editar álbum'
         flash: 'Cambios realizados'
         submit: Confirmar cambios
     form:
@@ -79,7 +103,6 @@ message:
     createdAt: Enviado
     updatedAt: Actualizado
     transmitter: Remitente
-
 
 Deleted records can not be recovered.: 'Los datos eliminados no podrán ser recuperados.'
 Are you sure?: '¿Estás Seguro?'

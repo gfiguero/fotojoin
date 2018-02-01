@@ -1,5 +1,13 @@
 {% block tools %}
     {% trans_default_domain 'FotoJoinControlPanelBundle' %}
+    {% if album is defined and album %}
+    <ul class="nav nav-pills">
+        <li><a type="button" class="btn btn-primary" href="{{ path('photography_index', { 'album': album.id }) }}">{{ icon('image fa-fw') }}&nbsp;{{ 'photography.index.link'|trans }}</a></li>
+        <li><a type="button" class="btn btn-success" href="{{ path('photography_dropzone', { 'album': album.id }) }}">{{ icon('arrow-up fa-fw') }}&nbsp;{{ 'photography.new.link'|trans }}</a></li>
+        <li><a type="button" class="btn btn-default" href="{{ path('album_show', { 'id': album.id }) }}">{{ icon('book fa-fw') }}&nbsp;{{ 'album.show.link'|trans }}</a></li>
+    </ul>
+    <p></p>
+    {% endif %}
     {% if photography is defined %}
     <ul class="nav nav-pills">
         <li><a type="button" class="btn btn-primary" href="{{ path('photography_index', { 'album': photography.album.id }) }}">{{ icon('book fa-fw') }}&nbsp;{{ 'photography.index.album'|trans }}</a></li>

@@ -5,6 +5,13 @@ photography_index:
     requirements:
         album: '\d+|'
 
+photography_dropzone:
+    path:     /{album}/dropzone
+    defaults: { _controller: "FotoJoinControlPanelBundle:Photography:dropzone", album: '' }
+    methods:  [GET, POST]
+    requirements:
+        album: '\d+|'
+
 photography_show:
     path:     /{id}/show
     defaults: { _controller: "FotoJoinControlPanelBundle:Photography:show" }
@@ -24,11 +31,6 @@ photography_delete:
     path:     /{id}/delete
     defaults: { _controller: "FotoJoinControlPanelBundle:Photography:delete" }
     methods:  [GET, DELETE]
-
-photography_dropzone:
-    path:     /dropzone
-    defaults: { _controller: "FotoJoinControlPanelBundle:Photography:dropzone" }
-    methods:  [GET, POST]
 
 photography_exif:
     path:     /exif

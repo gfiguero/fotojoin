@@ -50,6 +50,7 @@ class PhotographyController extends Controller
 
         return $this->render('FotoJoinControlPanelBundle:Photography:index.html.twig', array(
             'photographies' => $photographies,
+            'album' => $album,
             'albums' => $albums,
             'direction' => $direction,
             'sort' => $sort,
@@ -61,7 +62,7 @@ class PhotographyController extends Controller
      * Creates a new Photography entity.
      *
      */
-    public function dropzoneAction(Request $request)
+    public function dropzoneAction(Request $request, Album $album = null)
     {
         $user = $this->getUser();
         if (!is_object($user) || !$user instanceof UserInterface) {
@@ -76,6 +77,7 @@ class PhotographyController extends Controller
             $photography->setUser($user);
             $photography->setFile($file);
             $photography->setExif($exif);
+            $photography->setAlbum($album);
             $em = $this->getDoctrine()->getManager();
             $em->persist($photography);
             $em->flush();
@@ -86,12 +88,17 @@ class PhotographyController extends Controller
             return $response;
         }
 
-        $dropzoneForm = $this->createForm('FotoJoin\ControlPanelBundle\Form\DropzoneType', null, array('action' => $this->generateUrl('photography_dropzone')));
+        $dropzoneForm = $this->createForm('FotoJoin\ControlPanelBundle\Form\DropzoneType', null, array('action' => $this->generateUrl('photography_dropzone', array('album' => $album->getId()))));
         $dropzoneForm->handleRequest($request);
+
+        $em = $this->getDoctrine()->getManager();
+        $albums = $em->getRepository('FotoJoinControlPanelBundle:Album')->findBy(array('user' => $user));
 
         return $this->render('FotoJoinControlPanelBundle:Photography:dropzone.html.twig', array(
             'dropzone_form' => $dropzoneForm->createView(),
             'user' => $user,
+            'album' => $album,
+            'albums' => $albums,
         ));
     }
 

@@ -89,9 +89,9 @@ class AlbumController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($album);
             $em->flush();
-            $request->getSession()->getFlashBag()->add( 'success', 'album.new.flash' );    
+//            $request->getSession()->getFlashBag()->add( 'success', 'album.new.flash' );    
 
-            return $this->redirectToRoute('album_edit', array('id' => $album->getId()));
+            return $this->redirectToRoute('photography_index', array('album' => $album->getId()));
         }
 
         return $this->render('FotoJoinControlPanelBundle:Album:new.html.twig', array(
