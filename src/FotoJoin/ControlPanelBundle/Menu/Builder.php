@@ -154,7 +154,7 @@ class Builder implements ContainerAwareInterface
         $albumFinder->addChild('album_new', array(
             'label' => 'album.new.link',
             'route' => 'album_new',
-            'extras' => array('icon' => 'plus fa-fw'),
+            'extras' => array('icon' => 'plus fa-fw', 'translation_domain' => 'FotoJoinControlPanelBundle'),
             'linkAttributes' => array('class' => 'btn btn-success'),
         ));
 

@@ -72,11 +72,11 @@ class PhotographyController extends Controller
         if($request->isXmlHttpRequest()) {
 
             $file = $this->getRequest()->files->get('photography');
-            $exif = exif_read_data($file);
+            $exif = @exif_read_data($file);
             $photography = new Photography();
             $photography->setUser($user);
             $photography->setFile($file);
-            $photography->setExif($exif);
+            if ($exif) $photography->setExif($exif);
             $photography->setAlbum($album);
             $em = $this->getDoctrine()->getManager();
             $em->persist($photography);

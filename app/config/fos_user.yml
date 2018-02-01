@@ -7,7 +7,7 @@ fos_user:
     model_manager_name:         null
     from_email:
         address:                contacto@fotojoin.com
-        sender_name:            FotoJoin
+        sender_name:            Fotojoin
     profile:
         form:
             type:               FotoJoin\UserBundle\Form\ProfileType
@@ -28,7 +28,7 @@ fos_user:
         confirmation:
             from_email: # Use this node only if you don't want the global email address for the confirmation email
                 address:        registro@fotojoin.com
-                sender_name:    FotoJoin
+                sender_name:    Fotojoin
             enabled:            true
             template:           FotoJoinUserBundle:Email:Registration.email.twig
         form:
@@ -40,7 +40,7 @@ fos_user:
         email:
             from_email:
                 address:        recuperacion@fotojoin.com
-                sender_name:    FotoJoin
+                sender_name:    Fotojoin
             template:           FotoJoinUserBundle:Email:Resetting.email.twig
         form:
             type:               FotoJoin\UserBundle\Form\ResettingType
