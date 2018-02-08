@@ -64,32 +64,32 @@
                 <dl class="dl-horizontal-caption">
 
                 {% if photography.datetimeoriginal %}
-                    <dt>{{ 'photography.capture.datetimeoriginal'|trans({}, 'FotoJoinControlPanelBundle') }}</dt>
+                    <dt>{{ 'photography.form.datetimeoriginal'|trans }}</dt>
                     <dd>{{ photography.datetimeoriginal|localizeddate('full', 'full', 'es_ES', 'America/Santiago', "dd-LLL-Y") }}</dd>
                 {% endif %}
 
                 {% if photography.makemodel %}
-                    <dt>{{ 'photography.capture.makemodel'|trans({}, 'FotoJoinControlPanelBundle') }}</dt>
+                    <dt>{{ 'photography.form.makemodel'|trans }}</dt>
                     <dd>{{ photography.makemodel }}</dd>
                 {% endif %}
 
                 {% if photography.exposuretime %}
-                    <dt>{{ 'photography.capture.exposuretime'|trans({}, 'FotoJoinControlPanelBundle') }}</dt>
+                    <dt>{{ 'photography.form.exposuretime'|trans }}</dt>
                     <dd>{{ photography.exposuretime }}{{ ' s' }}</dd>
                 {% endif %}
 
                 {% if photography.focallength %}
-                    <dt>{{ 'photography.capture.focallength'|trans({}, 'FotoJoinControlPanelBundle') }}</dt>
+                    <dt>{{ 'photography.form.focallength'|trans }}</dt>
                     <dd>{{ photography.focallength }}{{ ' mm' }}</dd>
                 {% endif %}
 
                 {% if photography.fnumber %}
-                    <dt>{{ 'photography.capture.fnumber'|trans({}, 'FotoJoinControlPanelBundle') }}</dt>
+                    <dt>{{ 'photography.form.fnumber'|trans }}</dt>
                     <dd>{{ 'f/' }}{{ photography.fnumber }}</dd>
                 {% endif %}
 
                 {% if photography.isospeedratings %}
-                    <dt>{{ 'photography.capture.isospeedratings'|trans({}, 'FotoJoinControlPanelBundle') }}</dt>
+                    <dt>{{ 'photography.form.isospeedratings'|trans }}</dt>
                     <dd>{{ photography.isospeedratings }}</dd>
                 {% endif %}
 
