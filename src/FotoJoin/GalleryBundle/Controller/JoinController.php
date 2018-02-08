@@ -140,6 +140,9 @@ class JoinController extends Controller
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($appraisement);
                 $em->flush();
+//                $request->getSession()->getFlashBag()->add( 'warning', 'Puntaje promedio: ' . $average );
+//                $request->getSession()->getFlashBag()->add( 'warning', 'Voto generado: ' . $value);
+                $request->getSession()->getFlashBag()->add( 'success', 'Puntos obtenidos: ' . $appraisement->getScore() );
                 return $this->redirectToRoute('foto_join_gallery_join');
             }
         }

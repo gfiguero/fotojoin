@@ -1,0 +1,17 @@
+{% extends 'FotoJoinGalleryBundle:Base:base.html.twig' %}
+{% use 'FotoJoinGalleryBundle:Base:header.html.twig' %}
+{% use 'FotoJoinGalleryBundle:Gallery:aside.html.twig' %}
+
+{% block body %}
+    {% block header %}{{ parent() }}{% endblock %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-3 col-sm-4">
+                {% block aside %}{{ parent() }}{% endblock %}
+            </div>
+            <div class="col-md-9 col-sm-8">
+                {% block gallery %}{% endblock %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

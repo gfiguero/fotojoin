@@ -33,8 +33,8 @@ liip_imagine:
         gallery_photography_medium:
             quality: 75
             filters:
-                upscale: { min: [1600, 900] }
-                thumbnail: { size: [1600, 900], mode: outbound }
+                upscale: { min: [1024, 768] }
+                thumbnail: { size: [1024, 768], mode: outbound }
                 watermark: { image: '../web/img/fotojoin.png', size: 1, position: center }
 
 ##############################################################
@@ -74,8 +74,8 @@ liip_imagine:
         frontpage_join:
             quality: 75
             filters:
-                upscale: { min: [1600, 900] }
-                thumbnail: { size: [1600, 900], mode: outbound }
+                upscale: { min: [1280, 768] }
+                thumbnail: { size: [1280, 768], mode: outbound }
                 watermark: { image: '../web/img/fotojoin.png', size: 1, position: center }
         frontpage_join_placeholder:
             quality: 5

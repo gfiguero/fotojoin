@@ -1,4 +1,4 @@
-{% extends 'FotoJoinGalleryBundle::base.html.twig' %}
+{% extends 'FotoJoinGalleryBundle:Gallery:layout.html.twig' %}
 
 {% use 'FotoJoinGalleryBundle:Gallery:user.html.twig' %}
 {% use 'FotoJoinGalleryBundle:Gallery:capture.html.twig' %}
@@ -9,54 +9,50 @@
     <link href="{{ asset('css/bootstrap-social/bootstrap-social.css') }}" rel="stylesheet">
 {% endblock %}
 
-{% block body %}
+{% block gallery %}
 
-    {% include 'FotoJoinGalleryBundle:Gallery:filter.html.twig' %}
-    <!-- /.col-md-3 -->
-    <div class="col-md-9">
-        <div class="row" id="response">
-            <div class="col-md-12">
-                {% for photography in photographies %}
-                    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 nopadding">
-                        <a href="#{{ photography.id }}" data-toggle="modal" data-target="#modal">
-                            <img class="img-responsive" src="{{ vich_uploader_asset(photography, 'file', 'FotoJoin\\ControlPanelBundle\\Entity\\Photography')|imagine_filter('gallery_photography_small') }}" alt="{{ 1 }}" />
-                        </a>
-                    </div>
-                {% endfor %}
+    <div class="row" id="response">
+        <div class="col-md-12">
+            {% for photography in photographies %}
+                <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 nopadding">
+                    <a href="#{{ photography.id }}" data-toggle="modal" data-target="#modal">
+                        <img class="img-responsive" src="{{ vich_uploader_asset(photography, 'file', 'FotoJoin\\ControlPanelBundle\\Entity\\Photography')|imagine_filter('gallery_photography_small') }}" alt="{{ 1 }}" />
+                    </a>
+                </div>
+            {% endfor %}
 
-                <div id="modal" class="modal fade" tabindex="-1" data-focus-on="input:first" style="display: none;">
-                    <div class="modal-dialog modal-lg" role="document">
-                        <div class="modal-content">
-                            <div class="modal-body">
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">{{ icon('times') }}</button>
-                                <div class="row">
-                                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-8">
-                                        <div id="modalCarousel" class="carousel" data-ride="carousel">
-                                            <div class="carousel-inner" role="listbox">
-                                                {% for key, photography in photographies %}
-                                                    {% set appraisementAverage = attribute(appraisementAverages, key) %}
-                                                    {% set appraisementQuantity = attribute(appraisementQuantities, key) %}
+            <div id="modal" class="modal fade" tabindex="-1" data-focus-on="input:first" style="display: none;">
+                <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content">
+                        <div class="modal-body">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">{{ icon('times') }}</button>
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-8">
+                                    <div id="modalCarousel" class="carousel" data-ride="carousel">
+                                        <div class="carousel-inner" role="listbox">
+                                            {% for key, photography in photographies %}
+                                                {% set appraisementAverage = attribute(appraisementAverages, key) %}
+                                                {% set appraisementQuantity = attribute(appraisementQuantities, key) %}
 
-                                                    {% if loop.first %}<div class="item active">{% else %}<div class="item">{% endif %}
-                                                        <img class="img-responsive" src="{{ vich_uploader_asset(photography, 'file', 'FotoJoin\\ControlPanelBundle\\Entity\\Photography')|imagine_filter('gallery_photography_medium') }}" alt="{{ 1 }}" />
-                                                        <div id="carousel-caption">
-                                                            {% block captionuser %}{{ parent() }}{% endblock %}
-                                                            {% block captioncapture %}{{ parent() }}{% endblock %}
-                                                            {% block captionappraisement %}{{ parent() }}{% endblock %}
-                                                            {% block captionshare %}{{ parent() }}{% endblock %}
-                                                            {#}<button class="demo btn btn-primary btn-lg" data-toggle="modal" href="#invitation">View Demo</button>{#}
-                                                            {#}<button type="button" class="btn btn-block btn-default" data-dismiss="modal" aria-label="Close">{{ icon('times') }} Cerrar</button>{#}
-                                                        </div>
+                                                {% if loop.first %}<div class="item active">{% else %}<div class="item">{% endif %}
+                                                    <img class="img-responsive" src="{{ vich_uploader_asset(photography, 'file', 'FotoJoin\\ControlPanelBundle\\Entity\\Photography')|imagine_filter('gallery_photography_medium') }}" alt="{{ 1 }}" />
+                                                    <div id="carousel-caption">
+                                                        {% block captionuser %}{{ parent() }}{% endblock %}
+                                                        {% block captioncapture %}{{ parent() }}{% endblock %}
+                                                        {% block captionappraisement %}{{ parent() }}{% endblock %}
+                                                        {% block captionshare %}{{ parent() }}{% endblock %}
+                                                        {#}<button class="demo btn btn-primary btn-lg" data-toggle="modal" href="#invitation">View Demo</button>{#}
+                                                        {#}<button type="button" class="btn btn-block btn-default" data-dismiss="modal" aria-label="Close">{{ icon('times') }} Cerrar</button>{#}
                                                     </div>
-                                                {% endfor %}
-                                                <a class="left carousel-control" href="#modalCarousel" data-slide="prev"><i class="glyphicon glyphicon-chevron-left"></i></a>
-                                                <a class="right carousel-control" href="#modalCarousel" data-slide="next"><i class="glyphicon glyphicon-chevron-right"></i></a>
-                                            </div>
+                                                </div>
+                                            {% endfor %}
+                                            <a class="left carousel-control" href="#modalCarousel" data-slide="prev"><i class="fa fa-chevron-left"></i></a>
+                                            <a class="right carousel-control" href="#modalCarousel" data-slide="next"><i class="fa fa-chevron-right"></i></a>
                                         </div>
                                     </div>
-                                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4">
-                                        <div id="modal-caption"></div>
-                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4">
+                                    <div id="modal-caption"></div>
                                 </div>
                             </div>
                         </div>
@@ -65,7 +61,6 @@
             </div>
         </div>
     </div>
-    <!-- /.col-md-3 -->
 
 {% endblock %}
 
