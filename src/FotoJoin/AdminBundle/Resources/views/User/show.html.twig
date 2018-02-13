@@ -1,0 +1,33 @@
+{% extends 'FotoJoinAdminBundle:User:layout.html.twig' %}
+
+{% trans_default_domain 'FotoJoinAdminBundle' %}
+
+{% block title %}{{ 'user.show.title'|trans }}{% endblock %}
+
+{% block user %}
+
+    <div class="row" id="page-show">
+        <div class="col-lg-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h2 class="panel-title">{{ 'user.show.title'|trans }}</h2>
+                </div>
+                <div class="panel-body">
+                    <dl class="dl-horizontal">
+                        <dt>{{ 'user.form.id'|trans }}</dt><dd>{% if user.id %}{{ user.id }}{% endif %}</dd>
+                        <dt>{{ 'user.form.username'|trans }}</dt><dd>{% if user.username %}{{ user.username }}{% endif %}</dd>
+                    </dl>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="btn-toolbar">
+                <div class="btn-group"><a type="button" class="btn btn-warning" href="{{ path('admin_user_edit', {'id' : user.id}) }}">{{ icon('edit fa-fw') }}&nbsp;{{ 'user.edit.link'|trans }}</a></div>
+                <div class="btn-group"><a type="button" class="btn btn-danger" href="{{ path('admin_user_delete', {'id' : user.id}) }}">{{ icon('times fa-fw') }}&nbsp;{{ 'user.delete.link'|trans }}</a></div>
+            </div>
+        </div>
+    </div>
+    <!-- /#page-show -->
+
+{% endblock %}
+

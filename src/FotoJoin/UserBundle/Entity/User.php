@@ -882,4 +882,33 @@ class User extends BaseUser
     {
         return $this->received_messages;
     }
+    /**
+     * @var \FotoJoin\AdminBundle\Entity\Plan
+     */
+    private $plan;
+
+
+    /**
+     * Set plan
+     *
+     * @param \FotoJoin\AdminBundle\Entity\Plan $plan
+     *
+     * @return User
+     */
+    public function setPlan(\FotoJoin\AdminBundle\Entity\Plan $plan = null)
+    {
+        $this->plan = $plan;
+
+        return $this;
+    }
+
+    /**
+     * Get plan
+     *
+     * @return \FotoJoin\AdminBundle\Entity\Plan
+     */
+    public function getPlan()
+    {
+        return $this->plan;
+    }
 }

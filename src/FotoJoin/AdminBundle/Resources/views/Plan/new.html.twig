@@ -1,0 +1,29 @@
+{% extends 'FotoJoinAdminBundle:Plan:layout.html.twig' %}
+
+{% trans_default_domain 'FotoJoinAdminBundle' %}
+
+{% block title %}{{ 'plan.new.title'|trans }}{% endblock %}
+
+{% block plan %}
+    <div class="row" id="page-new">
+        <div class="col-lg-12">
+            <div class="panel panel-success">
+                <div class="panel-heading">
+                    <h2 class="panel-title">{{ 'plan.new.form'|trans }}</h2>
+                </div>
+                <div class="panel-body">
+                    {{ form_start(newForm, { 'style': 'horizontal' }) }}
+                        {{ form_widget(newForm) }}
+                            <div class="form-group"><div class="col-lg-offset-4 col-lg-8">
+                                <button type="submit" class="btn btn-primary">{{ icon('save') }}&nbsp;{{ 'plan.new.submit'|trans }}</button>
+                            </div></div>
+                    {{ form_end(newForm) }}
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /#page-new -->
+
+{% endblock %}
+
+

@@ -27,6 +27,8 @@ FotoJoin\UserBundle\Entity\User:
             targetEntity: FotoJoin\AdminBundle\Entity\City
         city3:
             targetEntity: FotoJoin\AdminBundle\Entity\City
+        plan:
+            targetEntity: FotoJoin\AdminBundle\Entity\Plan
     id:
         id:
             type: integer

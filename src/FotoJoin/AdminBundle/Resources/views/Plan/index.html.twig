@@ -1,0 +1,56 @@
+{% extends 'FotoJoinAdminBundle:Plan:layout.html.twig' %}
+
+{% trans_default_domain 'FotoJoinAdminBundle' %}
+
+{% block title %}{{ 'plan.index.title'|trans }}{% endblock %}
+
+{% block plan %}
+    <div class="row" id="page-list">
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h2 class="panel-title">{{ 'plan.index.list'|trans }}</h2>
+                </div>
+                <div class="table-responsive">
+                    <table class="records_list table table-striped table-hover">
+                        <thead>
+                            <tr>
+                                <th>
+                                    <div class="btn-group" role="group"><a type="button" class="btn btn-xs btn-default disabled">{{ icon('search fa-fw') }}</a></div>
+                                    <div class="btn-group" role="group"><a type="button" class="btn btn-xs btn-default disabled">{{ icon('edit fa-fw') }}</a></div>
+                                    <div class="btn-group" role="group"><a type="button" class="btn btn-xs btn-default disabled">{{ icon('trash fa-fw') }}</a></div>
+                                </th>
+                                <th>{{ knp_pagination_sortable(plans, 'plan.form.id'|trans, 'id') }}{% if sort == 'id' %}{% if direction == 'desc' %}{{ icon('caret-down') }}{% else %}{{ icon('caret-up') }}{% endif %}{% endif %}</th>
+                                <th>{{ knp_pagination_sortable(plans, 'plan.form.name'|trans, 'name') }}{% if sort == 'name' %}{% if direction == 'desc' %}{{ icon('caret-down') }}{% else %}{{ icon('caret-up') }}{% endif %}{% endif %}</th>
+                                <th>{{ knp_pagination_sortable(plans, 'plan.form.maxalbum'|trans, 'maxalbum') }}{% if sort == 'maxalbum' %}{% if direction == 'desc' %}{{ icon('caret-down') }}{% else %}{{ icon('caret-up') }}{% endif %}{% endif %}</th>
+                                <th>{{ knp_pagination_sortable(plans, 'plan.form.maxphotography'|trans, 'maxphotography') }}{% if sort == 'maxphotography' %}{% if direction == 'desc' %}{{ icon('caret-down') }}{% else %}{{ icon('caret-up') }}{% endif %}{% endif %}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {% for key, plan in plans %}
+                            <tr>
+                                <td>
+                                    <div class="btn-group" role="group"><a type="button" class="btn btn-xs btn-default" href="{{ path('admin_plan_show', { 'id': plan.id }) }}">{{ icon('search fa-fw') }}</a></div>
+                                    <div class="btn-group" role="group"><a type="button" class="btn btn-xs btn-warning" href="{{ path('admin_plan_edit', { 'id': plan.id }) }}">{{ icon('edit fa-fw') }}</a></div>
+                                    <div class="btn-group" role="group"><a type="button" class="btn btn-xs btn-danger" href="{{ path('admin_plan_delete', { 'id': plan.id }) }}">{{ icon('trash fa-fw') }}</a></div>
+                                </td>
+                                <td>{% if plan.id %}{{ plan.id }}{% endif %}</td>
+                                <td>{% if plan.name %}{{ plan.name }}{% endif %}</td>
+                                <td>{% if plan.maxalbum %}{{ plan.maxalbum }}{% endif %}</td>
+                                <td>{% if plan.maxphotography %}{{ plan.maxphotography }}{% endif %}</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                <div class="panel-footer">
+                    <div class="text-center">
+                        {{ knp_pagination_render(plans) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /#page-list -->
+
+{% endblock %}

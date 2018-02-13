@@ -1,5 +1,6 @@
 php app/console fotojoin:admingenerate:crud --entity=FotoJoinAdminBundle:Category --format=yml --with-write --overwrite --no-interaction --route-prefix=admin_category
 php app/console fotojoin:admingenerate:crud --entity=FotoJoinAdminBundle:City --format=yml --with-write --overwrite --no-interaction --route-prefix=admin_city
+php app/console fotojoin:admingenerate:crud --entity=FotoJoinAdminBundle:Plan --format=yml --with-write --overwrite --no-interaction --route-prefix=admin_plan
 php app/console fotojoin:admingenerate:crud --entity=FotoJoinControlPanelBundle:Photography --format=yml --with-write --overwrite --no-interaction --route-prefix=admin_photography
 php app/console fotojoin:admingenerate:crud --entity=FotoJoinControlPanelBundle:Album --format=yml --with-write --overwrite --no-interaction --route-prefix=admin_album
 php app/console fotojoin:admingenerate:crud --entity=FotoJoinGalleryBundle:Appraisement --format=yml --with-write --overwrite --no-interaction --route-prefix=admin_appraisement

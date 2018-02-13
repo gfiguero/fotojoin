@@ -22,6 +22,10 @@ foto_join_admin_category:
     resource: "@FotoJoinAdminBundle/Resources/config/routing/category.yml"
     prefix:   /category
 
+foto_join_admin_plan:
+    resource: "@FotoJoinAdminBundle/Resources/config/routing/plan.yml"
+    prefix:   /plan
+
 foto_join_admin_dashboard:
     resource: "@FotoJoinAdminBundle/Resources/config/routing/dashboard.yml"
     prefix:   /dashboard

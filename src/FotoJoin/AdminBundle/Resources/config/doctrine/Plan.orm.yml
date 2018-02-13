@@ -1,0 +1,19 @@
+FotoJoin\AdminBundle\Entity\Plan:
+    type: entity
+    table: Plan
+    repositoryClass: FotoJoin\AdminBundle\Entity\PlanRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        name:
+            type: string
+            length: 100
+        max_album:
+            type: integer
+        max_photography:
+            type: integer
+    lifecycleCallbacks: {  }

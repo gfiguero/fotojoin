@@ -1,0 +1,54 @@
+{% extends 'FotoJoinAdminBundle:User:layout.html.twig' %}
+
+{% trans_default_domain 'FotoJoinAdminBundle' %}
+
+{% block title %}{{ 'user.index.title'|trans }}{% endblock %}
+
+{% block user %}
+    <div class="row" id="page-list">
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h2 class="panel-title">{{ 'user.index.list'|trans }}</h2>
+                </div>
+                <div class="table-responsive">
+                    <table class="records_list table table-striped table-hover">
+                        <thead>
+                            <tr>
+                                <th>
+                                    <div class="btn-group" role="group"><a type="button" class="btn btn-xs btn-default disabled">{{ icon('search fa-fw') }}</a></div>
+                                    <div class="btn-group" role="group"><a type="button" class="btn btn-xs btn-default disabled">{{ icon('edit fa-fw') }}</a></div>
+                                    <div class="btn-group" role="group"><a type="button" class="btn btn-xs btn-default disabled">{{ icon('trash fa-fw') }}</a></div>
+                                </th>
+                                <th>{{ knp_pagination_sortable(users, 'user.form.id'|trans, 'id') }}{% if sort == 'id' %}{% if direction == 'desc' %}{{ icon('caret-down') }}{% else %}{{ icon('caret-up') }}{% endif %}{% endif %}</th>
+                                <th>{{ knp_pagination_sortable(users, 'user.form.username'|trans, 'username') }}{% if sort == 'username' %}{% if direction == 'desc' %}{{ icon('caret-down') }}{% else %}{{ icon('caret-up') }}{% endif %}{% endif %}</th>
+                                <th>{{ knp_pagination_sortable(users, 'user.form.plan'|trans, 'plan') }}{% if sort == 'plan' %}{% if direction == 'desc' %}{{ icon('caret-down') }}{% else %}{{ icon('caret-up') }}{% endif %}{% endif %}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {% for key, user in users %}
+                            <tr>
+                                <td>
+                                    <div class="btn-group" role="group"><a type="button" class="btn btn-xs btn-default" href="{{ path('admin_user_show', { 'id': user.id }) }}">{{ icon('search fa-fw') }}</a></div>
+                                    <div class="btn-group" role="group"><a type="button" class="btn btn-xs btn-warning" href="{{ path('admin_user_edit', { 'id': user.id }) }}">{{ icon('edit fa-fw') }}</a></div>
+                                    <div class="btn-group" role="group"><a type="button" class="btn btn-xs btn-danger" href="{{ path('admin_user_delete', { 'id': user.id }) }}">{{ icon('trash fa-fw') }}</a></div>
+                                </td>
+                                <td>{% if user.id %}{{ user.id }}{% endif %}</td>
+                                <td>{% if user.username %}{{ user.username }}{% endif %}</td>
+                                <td>{% if user.plan %}{{ user.plan }}{% endif %}</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                <div class="panel-footer">
+                    <div class="text-center">
+                        {{ knp_pagination_render(users) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /#page-list -->
+
+{% endblock %}

@@ -1,0 +1,33 @@
+{% extends 'FotoJoinAdminBundle:Plan:layout.html.twig' %}
+
+{% trans_default_domain 'FotoJoinAdminBundle' %}
+
+{% block title %}{{ 'plan.show.title'|trans }}{% endblock %}
+
+{% block plan %}
+
+    <div class="row" id="page-show">
+        <div class="col-lg-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h2 class="panel-title">{{ 'plan.show.title'|trans }}</h2>
+                </div>
+                <div class="panel-body">
+                    <dl class="dl-horizontal">
+                        <dt>{{ 'plan.form.id'|trans }}</dt><dd>{% if plan.id %}{{ plan.id }}{% endif %}</dd>
+                        <dt>{{ 'plan.form.name'|trans }}</dt><dd>{% if plan.name %}{{ plan.name }}{% endif %}</dd>
+                    </dl>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="btn-toolbar">
+                <div class="btn-group"><a type="button" class="btn btn-warning" href="{{ path('admin_plan_edit', {'id' : plan.id}) }}">{{ icon('edit fa-fw') }}&nbsp;{{ 'plan.edit.link'|trans }}</a></div>
+                <div class="btn-group"><a type="button" class="btn btn-danger" href="{{ path('admin_plan_delete', {'id' : plan.id}) }}">{{ icon('times fa-fw') }}&nbsp;{{ 'plan.delete.link'|trans }}</a></div>
+            </div>
+        </div>
+    </div>
+    <!-- /#page-show -->
+
+{% endblock %}
+

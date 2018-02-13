@@ -14,6 +14,11 @@ class UserType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder 
+            ->add('plan', null, array(
+                'label' => 'user.form.plan',
+                'attr'  => array( 'label_col' => 4, 'widget_col' => 8 ),
+                'translation_domain' => 'FotoJoinAdminBundle',
+            )) 
             ->add('level', null, array(
                 'label' => 'user.form.level',
                 'attr'  => array( 'label_col' => 4, 'widget_col' => 8 ),
