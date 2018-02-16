@@ -26,6 +26,10 @@ foto_join_admin_plan:
     resource: "@FotoJoinAdminBundle/Resources/config/routing/plan.yml"
     prefix:   /plan
 
+foto_join_admin_contact:
+    resource: "@FotoJoinAdminBundle/Resources/config/routing/contact.yml"
+    prefix:   /contact
+
 foto_join_admin_dashboard:
     resource: "@FotoJoinAdminBundle/Resources/config/routing/dashboard.yml"
     prefix:   /dashboard

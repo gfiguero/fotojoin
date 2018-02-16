@@ -10,4 +10,15 @@ namespace FotoJoin\AdminBundle\Entity;
  */
 class PlanRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function getStandardPlan()
+    {
+        $qb = $this->getEntityManager()
+            ->createQueryBuilder()
+            ->select('p')
+            ->from('FotoJoinAdminBundle:Plan', 'p')
+            ->setMaxResults(1)
+        ;
+
+        return $qb->getQuery()->getOneOrNullResult();
+    }
 }

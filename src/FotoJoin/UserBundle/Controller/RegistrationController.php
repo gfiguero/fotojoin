@@ -32,8 +32,12 @@ class RegistrationController extends BaseController
         /** @var $dispatcher \Symfony\Component\EventDispatcher\EventDispatcherInterface */
         $dispatcher = $this->get('event_dispatcher');
 
+        $em = $this->getDoctrine()->getManager();
+        $plan = $em->getRepository('FotoJoinAdminBundle:Plan')->getStandardPlan();
+
         $user = $userManager->createUser();
         $user->setEnabled(true);
+        $user->setPlan($plan);
 
         $event = new GetResponseUserEvent($user, $request);
         $dispatcher->dispatch(FOSUserEvents::REGISTRATION_INITIALIZE, $event);

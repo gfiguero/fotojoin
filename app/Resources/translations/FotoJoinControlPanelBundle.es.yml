@@ -22,8 +22,9 @@ photography:
         title: Fotografías
         album: Ver otras fotos del álbum
         link: 'Lista de fotografías'
+        empty: 'No hay fotografías'
     new:
-        link: 'Subir Fotografía'
+        link: 'Subir Fotografías'
     massiveupload: 'Subir varias Fotografías'
     show: 'Ver datos de Fotografía'
     register: 'Registrar Fotografía'
@@ -37,6 +38,7 @@ photography:
         message: Se eliminará la fotografía seleccionada, sus datos y toda su información asociada
         cancel: Cancelar
         submit: Confirmar
+        flash: Fotografía eliminada
     createdAt: 'Fecha de Carga'
     updatedAt: 'Fecha de Actualización'
     filename: 'Nombre de Archivo'
@@ -63,6 +65,8 @@ photography:
         capture: Captura fotográfica
     album: 'Álbum'
     image: Imagen
+    message:
+        limit_reached: Has alcanzado tu límite de fotografías por álbum
 
 album:
     index:
@@ -82,6 +86,7 @@ album:
         message: Al eliminar el álbum, perderá toda la información asociada y las fotos contenidas en él.
         cancel: Cancelar
         submit: Confirmar
+        flash: Album eliminado
     edit:
         link: 'Editar álbum'
         title: 'Editar álbum'
@@ -92,6 +97,8 @@ album:
         sumbit: 'Guardar álbum'
         createdAt: 'Creado'
         updatedAt: 'Actualizado'
+    message:
+        limit_reached: Has alcanzado tu límite de álbumes
 
 status:
     index: 'Mi FotoJoin'

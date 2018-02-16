@@ -16,8 +16,12 @@
                     {{ form_start(deleteForm, { 'style': 'horizontal' }) }}
                         {{ form_widget(deleteForm) }}
                         <div class="form-group">
-                            <div class="col-md-12">
-                                <h4>{{ icon('exclamation-triangle fa-3x fa-fw') }}{{ 'album.delete.message'|trans }}</h4>
+                            <div class="col-md-4 text-center">
+                                <h2>{{ icon('exclamation-triangle fa-3x fa-fw') }}</h2>
+                            </div>
+                            <div class="col-md-8">
+                                <h4>{{ 'album.delete.message'|trans }}</h4>
+                                <br>
                                 <a type="button" class="btn btn-default" href="{{ path('album_show', { 'id': album.id }) }}">{{ icon('reply fa-fw') }}&nbsp;{{ 'album.delete.cancel'|trans }}</a>
                                 <button type="submit" class="btn btn-danger">{{ icon('times fa-fw') }}&nbsp;{{ 'album.delete.submit'|trans }}</button>
                             </div>

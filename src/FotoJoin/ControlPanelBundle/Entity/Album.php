@@ -189,4 +189,9 @@ class Album
     {
         return $this->photographies;
     }
+
+    public function countPhotographies()
+    {
+        return $this->photographies->count();
+    }
 }

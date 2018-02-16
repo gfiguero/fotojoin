@@ -3,6 +3,7 @@
 {% use 'FotoJoinControlPanelBundle:Base:credential.html.twig' %}
 {% use 'FotoJoinControlPanelBundle:Base:icon.html.twig' %}
 {% use 'FotoJoinControlPanelBundle:Base:aside.html.twig' %}
+{% use 'FotoJoinControlPanelBundle:Base:notification.html.twig' %}
 
 {% block body %}
     {% block header %}{{ parent() }}{% endblock %}
@@ -19,3 +20,5 @@
     </div>
 
 {% endblock %}
+
+{% block notification %}{{ parent() }}{% endblock %}

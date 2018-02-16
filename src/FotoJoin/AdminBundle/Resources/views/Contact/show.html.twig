@@ -1,0 +1,36 @@
+{% extends 'FotoJoinAdminBundle:Contact:layout.html.twig' %}
+
+{% trans_default_domain 'FotoJoinAdminBundle' %}
+
+{% block title %}{{ 'contact.show.title'|trans }}{% endblock %}
+
+{% block contact %}
+
+    <div class="row" id="page-show">
+        <div class="col-lg-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h2 class="panel-title">{{ 'contact.show.title'|trans }}</h2>
+                </div>
+                <div class="panel-body">
+                    <dl class="dl-horizontal">
+                        <dt>{{ 'contact.form.id'|trans }}</dt><dd>{% if contact.id %}{{ contact.id }}{% endif %}</dd>
+                        <dt>{{ 'contact.form.name'|trans }}</dt><dd>{% if contact.name %}{{ contact.name }}{% endif %}</dd>
+                        <dt>{{ 'contact.form.email'|trans }}</dt><dd>{% if contact.email %}{{ contact.email }}{% endif %}</dd>
+                        <dt>{{ 'contact.form.tag'|trans }}</dt><dd>{{ contact_reason[contact.tag] }}</dd>
+                        <dt>{{ 'contact.form.message'|trans }}</dt><dd>{% if contact.message %}{{ contact.message }}{% endif %}</dd>
+                    </dl>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="btn-toolbar">
+                <div class="btn-group"><a type="button" class="btn btn-warning" href="{{ path('admin_contact_edit', {'id' : contact.id}) }}">{{ icon('edit fa-fw') }}&nbsp;{{ 'contact.edit.link'|trans }}</a></div>
+                <div class="btn-group"><a type="button" class="btn btn-danger" href="{{ path('admin_contact_delete', {'id' : contact.id}) }}">{{ icon('times fa-fw') }}&nbsp;{{ 'contact.delete.link'|trans }}</a></div>
+            </div>
+        </div>
+    </div>
+    <!-- /#page-show -->
+
+{% endblock %}
+

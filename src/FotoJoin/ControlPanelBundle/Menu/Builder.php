@@ -74,19 +74,24 @@ class Builder implements ContainerAwareInterface
             'translation_domain' => 'FotoJoinControlPanelBundle',
             'routes' => array('message_index'),
         ));
-*/
         $menu->addChild('sidemenu.album', array('route' => 'album_index'))->setExtras(array('icon' => 'book fa-fw', 'translation_domain' => 'FotoJoinControlPanelBundle', 'routes' => array(
             'album_index',
             'album_show',
             'album_edit',
             'album_delete',
         )));
+*/
 
         $menu->addChild('sidemenu.photography', array('route' => 'photography_index'))->setExtras(array('icon' => 'picture-o fa-fw', 'translation_domain' => 'FotoJoinControlPanelBundle', 'routes' => array(
             'photography_index',
             'photography_show',
             'photography_edit',
             'photography_delete',
+            'photography_dropzone',
+            'album_new',
+            'album_show',
+            'album_edit',
+            'album_delete',
         )));
 /*
         $menu->addChild('profile.show.link', array('route' => 'fos_user_profile_show'))->setAttribute('icon', 'user fa-fw')->setAttribute('translation_domain', 'FotoJoinUserBundle');
@@ -144,7 +149,10 @@ class Builder implements ContainerAwareInterface
                 'extras' => array(
                     'icon' => 'book fa-fw',
                     'routes' => array(
-                        array('route' => 'photography_dropzone', 'parameters' => array('album' => $album->getId()))
+                        array('route' => 'photography_dropzone', 'parameters' => array('album' => $album->getId())),
+                        array('route' => 'album_show', 'parameters' => array('id' => $album->getId())),
+                        array('route' => 'album_edit', 'parameters' => array('id' => $album->getId())),
+                        array('route' => 'album_delete', 'parameters' => array('id' => $album->getId())),
                     ),
                 ),
                 'linkAttributes' => array('class' => 'btn'),

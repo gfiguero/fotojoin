@@ -1,0 +1,56 @@
+{% extends 'FotoJoinAdminBundle:Contact:layout.html.twig' %}
+
+{% trans_default_domain 'FotoJoinAdminBundle' %}
+
+{% block title %}{{ 'contact.index.title'|trans }}{% endblock %}
+
+{% block contact %}
+    <div class="row" id="page-list">
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h2 class="panel-title">{{ 'contact.index.list'|trans }}</h2>
+                </div>
+                <div class="table-responsive">
+                    <table class="records_list table table-striped table-hover">
+                        <thead>
+                            <tr>
+                                <th>
+                                    <div class="btn-group" role="group"><a type="button" class="btn btn-xs btn-default disabled">{{ icon('search fa-fw') }}</a></div>
+                                    <div class="btn-group" role="group"><a type="button" class="btn btn-xs btn-default disabled">{{ icon('edit fa-fw') }}</a></div>
+                                    <div class="btn-group" role="group"><a type="button" class="btn btn-xs btn-default disabled">{{ icon('trash fa-fw') }}</a></div>
+                                </th>
+                                <th>{{ knp_pagination_sortable(contacts, 'contact.form.id'|trans, 'id') }}{% if sort == 'id' %}{% if direction == 'desc' %}{{ icon('caret-down') }}{% else %}{{ icon('caret-up') }}{% endif %}{% endif %}</th>
+                                <th>{{ knp_pagination_sortable(contacts, 'contact.form.name'|trans, 'name') }}{% if sort == 'name' %}{% if direction == 'desc' %}{{ icon('caret-down') }}{% else %}{{ icon('caret-up') }}{% endif %}{% endif %}</th>
+                                <th>{{ knp_pagination_sortable(contacts, 'contact.form.email'|trans, 'email') }}{% if sort == 'email' %}{% if direction == 'desc' %}{{ icon('caret-down') }}{% else %}{{ icon('caret-up') }}{% endif %}{% endif %}</th>
+                                <th>{{ knp_pagination_sortable(contacts, 'contact.form.tag'|trans, 'tag') }}{% if sort == 'tag' %}{% if direction == 'desc' %}{{ icon('caret-down') }}{% else %}{{ icon('caret-up') }}{% endif %}{% endif %}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {% for key, contact in contacts %}
+                            <tr>
+                                <td>
+                                    <div class="btn-group" role="group"><a type="button" class="btn btn-xs btn-default" href="{{ path('admin_contact_show', { 'id': contact.id }) }}">{{ icon('search fa-fw') }}</a></div>
+                                    <div class="btn-group" role="group"><a type="button" class="btn btn-xs btn-warning" href="{{ path('admin_contact_edit', { 'id': contact.id }) }}">{{ icon('edit fa-fw') }}</a></div>
+                                    <div class="btn-group" role="group"><a type="button" class="btn btn-xs btn-danger" href="{{ path('admin_contact_delete', { 'id': contact.id }) }}">{{ icon('trash fa-fw') }}</a></div>
+                                </td>
+                                <td>{% if contact.id %}{{ contact.id }}{% endif %}</td>
+                                <td>{% if contact.name %}{{ contact.name }}{% endif %}</td>
+                                <td>{% if contact.email %}{{ contact.email }}{% endif %}</td>
+                                <td>{{ contact_reason[contact.tag] }}</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                <div class="panel-footer">
+                    <div class="text-center">
+                        {{ knp_pagination_render(contacts) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /#page-list -->
+
+{% endblock %}

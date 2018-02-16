@@ -55,6 +55,8 @@ class JoinController extends Controller
             }            
         }
 */
+
+/*
         $categoryForm = $this->createForm('FotoJoin\GalleryBundle\Form\CategoryFilterType');
 
         if('POST' === $request->getMethod() && $request->request->has('category_filter')) {
@@ -65,11 +67,18 @@ class JoinController extends Controller
             $request->setMethod('POST');
             $categoryForm->handleRequest($request);
         }
+*/
+        $categoryForm = $this->createCategoryFilterForm();
 
-        $category = $categoryForm->get('category')->getData();
+        if ($session->has('category_filter') and $session->get('category_filter') != null) {
+            $category = $session->get('category_filter');
+            $categoryForm->get('category')->setData($this->getDoctrine()->getEntityManager()->merge($category));
+        } else {
+            $category = null;
+        }
 
-//        $photographyRepository = $this->getDoctrine()->getRepository('FotoJoinControlPanelBundle:Photography');
         $photography = $this->getDoctrine()->getRepository('FotoJoinControlPanelBundle:Photography')->getRandomPhotography($category);
+
 
 //        $photographyQuery = $photographyRepository->createQueryBuilder('ph')
 //            ->select('COUNT(ph)')
@@ -105,8 +114,10 @@ class JoinController extends Controller
         $appraisement->setPhotography($photography);
         $appraisement->setUser($user);
         $appraisement->setIp($request->getClientIp());
-        $appraisementForm = $this->createForm('FotoJoin\GalleryBundle\Form\AppraisementType', $appraisement);
 
+//        $appraisementForm = $this->createForm('FotoJoin\GalleryBundle\Form\AppraisementType', $appraisement);
+        $appraisementForm = $this->createAppraisementForm($appraisement);
+/*
         if ('POST' === $request->getMethod() && $request->request->has('appraisement')) {
             $appraisementForm->handleRequest($request);
             if ($appraisementForm->isSubmitted() && $appraisementForm->isValid()) {
@@ -146,7 +157,7 @@ class JoinController extends Controller
                 return $this->redirectToRoute('foto_join_gallery_join');
             }
         }
-
+*/
         return $this->render('FotoJoinGalleryBundle:Join:join.html.twig', array(
             'user' => $user,
             'photography' => $photography,
@@ -154,6 +165,71 @@ class JoinController extends Controller
             'appraisementForm' => $appraisementForm->createView(),
         ));
 
+    }
+
+    private function createAppraisementForm(Appraisement $appraisement)
+    {
+        return $this->createForm(new AppraisementType(), $appraisement, array(
+            'action' => $this->generateUrl('foto_join_gallery_appraisement'),
+        ));
+    }
+
+    public function appraisementAction(Request $request)
+    {
+        $appraisement = new Appraisement();
+        $appraisementForm = $this->createAppraisementForm($appraisement);
+        $appraisementForm->handleRequest($request);
+        if ($appraisementForm->isSubmitted() && $appraisementForm->isValid()) {
+            $value = $appraisement->getValue();
+            $photography = $appraisement->getPhotography();
+
+            $em = $this->getDoctrine()->getManager();
+            $average = $em->getRepository('FotoJoinControlPanelBundle:Photography')->getAverage($photography);
+//            $request->getSession()->getFlashBag()->add( 'warning', 'Promedio: ' . $average );
+            if($average > 0) {
+                $calculator = array(
+                    0   =>  1000,
+                    1   =>  1000,
+                    2   =>  368,
+                    3   =>  135,
+                    4   =>  50,
+                    5   =>  18,
+                    6   =>  7,
+                    7   =>  2,
+                    8   =>  1,
+                    9   =>  0,
+                    10  =>  0
+                );
+                $appraisement->setScore( $calculator[abs(round($average) - $value)] );
+                $request->getSession()->getFlashBag()->add( 'success', 'Puntos obtenidos: ' . $appraisement->getScore() );
+            } else {
+                $appraisement->setScore(0);
+                $request->getSession()->getFlashBag()->add( 'success', 'Gracias! le diste el primer voto a la fotografía.' );
+            }
+
+            $em->persist($appraisement);
+            $em->flush();
+        }
+        return $this->redirectToRoute('foto_join_gallery_join');
+    }
+
+    private function createCategoryFilterForm()
+    {
+        return $this->createForm(new CategoryFilterType(), null, array(
+            'action' => $this->generateUrl('foto_join_gallery_categoryfilter'),
+        ));
+    }
+
+    public function categoryFilterAction(Request $request)
+    {
+        $categoryFilterForm = $this->createCategoryFilterForm();
+        $categoryFilterForm->handleRequest($request);
+        if ($categoryFilterForm->isSubmitted() && $categoryFilterForm->isValid()) {
+            $session = $request->getSession();
+            $session->set('category_filter', $categoryFilterForm->get('category')->getData());
+            $request->getSession()->getFlashBag()->add( 'warning', 'Cambio de Categoría: ' . $categoryFilterForm->get('category')->getData() );
+        }
+        return $this->redirectToRoute('foto_join_gallery_join');
     }
 
 }

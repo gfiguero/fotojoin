@@ -1,0 +1,44 @@
+{% extends "FotoJoinFrontPageBundle:Base:base.html.twig" %}
+{% use 'FotoJoinFrontPageBundle:Base:navbar.html.twig' %}
+{% use 'FotoJoinFrontPageBundle:Base:footer.html.twig' %}
+
+{% trans_default_domain 'FotoJoinUserBundle' %}
+
+{% block title %}Contacto{% endblock %}
+
+{% block stylesheet %}
+    <style type="text/css">
+        #contact-page {
+            margin-top: 100px;
+        }
+    </style>
+{% endblock %}
+
+{% block body %}
+{% block navbar %}{{ parent() }}{% endblock %}
+
+<div class="section" id="contact-page">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h2 class="panel-title">Formulario de contacto</h2>
+                    </div>
+                    <div class="panel-body">
+                    {{ form_start(newForm, { 'style': 'horizontal', 'widget_col': 12, 'attr': {'id': 'contact'} }) }}
+                        {{ form_widget(newForm) }}
+                        <div class="form-group"><div class="col-xs-12">
+                            <button type="submit" class="btn btn-block btn-primary">Enviar</button>
+                        </div></div>
+                    {{ form_end(newForm) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% block footer %}{{ parent() }}{% endblock %}
+
+{% endblock %}

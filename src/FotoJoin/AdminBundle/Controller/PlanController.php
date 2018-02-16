@@ -28,16 +28,13 @@ class PlanController extends Controller
         $paginator = $this->get('knp_paginator');
         $plans = $paginator->paginate($plans, $request->query->getInt('page', 1), 100);
 
-        $deleteForms = array();
-        foreach($plans as $key => $plan) {
-            $deleteForms[] = $this->createDeleteForm($plan)->createView();
-        }
+//        $standard = $em->getRepository('FotoJoinAdminBundle:Plan')->getStandardPlan();
+//        dump($standard);
 
         return $this->render('FotoJoinAdminBundle:Plan:index.html.twig', array(
             'plans' => $plans,
             'direction' => $direction,
             'sort' => $sort,
-            'deleteForms' => $deleteForms,
         ));
     }
 

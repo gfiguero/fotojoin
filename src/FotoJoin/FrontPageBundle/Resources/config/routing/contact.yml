@@ -1,0 +1,4 @@
+front_page_contact_new:
+    path:     /
+    defaults: { _controller: "FotoJoinFrontPageBundle:Contact:new" }
+    methods:  [GET, POST]

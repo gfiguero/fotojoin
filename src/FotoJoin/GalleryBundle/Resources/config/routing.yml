@@ -10,3 +10,13 @@ foto_join_gallery_share:
     path:     /{id}/share
     defaults: { _controller: FotoJoinGalleryBundle:Gallery:share }
     methods:  GET
+
+foto_join_gallery_appraisement:
+    path:     /appraisement
+    defaults: { _controller: FotoJoinGalleryBundle:Join:appraisement }
+    methods:  [GET, POST]
+
+foto_join_gallery_categoryfilter:
+    path:     /categoryfilter
+    defaults: { _controller: FotoJoinGalleryBundle:Join:categoryFilter }
+    methods:  [GET, POST]

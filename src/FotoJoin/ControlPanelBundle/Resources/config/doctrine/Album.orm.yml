@@ -11,7 +11,7 @@ FotoJoin\ControlPanelBundle\Entity\Album:
         photographies:
             targetEntity: FotoJoin\ControlPanelBundle\Entity\Photography
             mappedBy: album
-            cascade: ['persist', merge]
+            cascade: [persist, merge, remove]
     id:
         id:
             type: integer

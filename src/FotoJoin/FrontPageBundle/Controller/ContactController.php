@@ -2,44 +2,40 @@
 
 namespace FotoJoin\FrontPageBundle\Controller;
 
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use FotoJoin\AdminBundle\Entity\Contact;
 use FotoJoin\FrontPageBundle\Form\ContactType;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
+
 
 class ContactController extends Controller
 {
-    public function indexAction(Request $request)
+    public function newAction(Request $request)
     {
-        $form = $this->createForm('FotoJoin\FrontPageBundle\Form\ContactType');
-        $form->handleRequest($request);
+        $contact = new Contact();
+        $newForm = $this->createNewForm($contact);
+        $newForm->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            
-            $from_name = $form->get('nombre')->getData();
-            $from_email = $form->get('email')->getData();
-            $from = array($from_email => $from_name);
-            $message = \Swift_Message::newInstance()
-                ->setSubject('Formulario de contacto FotoJoin')
-                ->setFrom($from)
-                ->setTo('garri.figueroa@izarus.cl')
-                ->setBody(
-                    $this->renderView('FotoJoinFrontPageBundle:Email:Contact.email.twig', array(
-                        'name' => $form->get('nombre')->getData(),
-                        'message' => $form->get('mensaje')->getData(),
-                        'subject' => $form->get('asunto')->getData(),
-                        'email' => $form->get('email')->getData(),
-                    )),
-                    'text/plain'
-                )
-            ;
-            $this->get('mailer')->send($message);
-
-            return $this->redirectToRoute('foto_join_front_page_homepage');
+        if ($newForm->isSubmitted()) {
+            if($newForm->isValid()) {
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($contact);
+                $em->flush();
+                $request->getSession()->getFlashBag()->add( 'success', 'contact.new.flash' );
+                return $this->redirect($this->generateUrl('front_page_contact_new'));
+            }
         }
 
-        return $this->render('FotoJoinFrontPageBundle:Contact:contact.html.twig', array(
-            'form' => $form->createView(),
+        return $this->render('FotoJoinFrontPageBundle:Contact:new.html.twig', array(
+            'newForm' => $newForm->createView(),
         ));
     }
+
+    private function createNewForm(Contact $contact)
+    {
+        return $this->createForm(new ContactType(), $contact, array(
+            'action' => $this->generateUrl('front_page_contact_new'),
+        ));
+    }
+
 }

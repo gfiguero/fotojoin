@@ -69,7 +69,16 @@ class PhotographyController extends Controller
             throw new AccessDeniedException('This user does not have access to this section.');
         }
 
+        $plan = $user->getPlan();
+        $maxPhotography = $plan->getMaxPhotography();
+        $count = $album->countPhotographies();
+
         if($request->isXmlHttpRequest()) {
+
+            if($count >= $maxPhotography){
+                $response = new JsonResponse(array('Se alcanzó el límite de fotografías por álbum'), 401);
+                return $response;
+            }
 
             $file = $this->getRequest()->files->get('photography');
             $exif = @exif_read_data($file);
@@ -93,6 +102,15 @@ class PhotographyController extends Controller
 
         $em = $this->getDoctrine()->getManager();
         $albums = $em->getRepository('FotoJoinControlPanelBundle:Album')->findBy(array('user' => $user));
+
+        if($count >= $maxPhotography){
+            return $this->render('FotoJoinControlPanelBundle:Photography:limit.html.twig', array(
+                'dropzone_form' => $dropzoneForm->createView(),
+                'user' => $user,
+                'album' => $album,
+                'albums' => $albums,
+            ));
+        }
 
         return $this->render('FotoJoinControlPanelBundle:Photography:dropzone.html.twig', array(
             'dropzone_form' => $dropzoneForm->createView(),
@@ -184,7 +202,7 @@ class PhotographyController extends Controller
         if ($deleteForm->isSubmitted() && $deleteForm->isValid()) {
             $em->remove($photography);
             $em->flush();
-            $request->getSession()->getFlashBag()->add( 'danger', 'photography.deleted' );
+            $request->getSession()->getFlashBag()->add( 'danger', 'photography.delete.flash' );
             return $this->redirectToRoute('photography_index', array('album' => $photography->getAlbum()->getId()));
         }
 

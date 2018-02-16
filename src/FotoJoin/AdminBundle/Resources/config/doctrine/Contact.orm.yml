@@ -1,0 +1,22 @@
+FotoJoin\AdminBundle\Entity\Contact:
+    type: entity
+    table: Contact
+    repositoryClass: FotoJoin\AdminBundle\Entity\ContactRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        name:
+            type: string
+            length: 200
+        email:
+            type: string
+            length: 200
+        tag:
+            type: integer
+        message:
+            type: text
+    lifecycleCallbacks: {  }

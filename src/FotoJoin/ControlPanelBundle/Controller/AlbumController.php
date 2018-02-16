@@ -64,9 +64,11 @@ class AlbumController extends Controller
             throw new AccessDeniedException('This user does not have access to this section.');
         }
 
+        $albums = $user->getAlbums();
         return $this->render('FotoJoinControlPanelBundle:Album:show.html.twig', array(
             'user' => $user,
             'album' => $album,
+            'albums' => $albums,
         ));
     }
 
@@ -80,6 +82,18 @@ class AlbumController extends Controller
         if (!is_object($user) || !$user instanceof UserInterface) {
             throw new AccessDeniedException('This user does not have access to this section.');
         }
+        $plan = $user->getPlan();
+        $maxAlbum = $plan->getMaxAlbum();
+        $count = $user->countAlbums();
+        $albums = $user->getAlbums();
+
+        if($count >= $maxAlbum){
+            return $this->render('FotoJoinControlPanelBundle:Album:limit.html.twig', array(
+                'user' => $user,
+                'albums' => $albums,
+            ));
+        }
+
         $album = new Album();
         $newForm = $this->createForm(new NewAlbumType(), $album);
         $newForm->handleRequest($request);
@@ -96,6 +110,7 @@ class AlbumController extends Controller
 
         return $this->render('FotoJoinControlPanelBundle:Album:new.html.twig', array(
             'user' => $user,
+            'albums' => $albums,
             'newForm' => $newForm->createView(),
         ));
     }
@@ -196,8 +211,10 @@ class AlbumController extends Controller
 //        $photographyCollectionForm = $this->createForm('FotoJoin\ControlPanelBundle\Form\PhotographyCollectionType', $files);
 //        $editForm->get('file')->setData($files);
 
+        $albums = $user->getAlbums();
         return $this->render('FotoJoinControlPanelBundle:Album:edit.html.twig', array(
             'album' => $album,
+            'albums' => $albums,
             'edit_form' => $editForm->createView(),
             'user' => $user,
         ));
@@ -221,11 +238,13 @@ class AlbumController extends Controller
             $em->remove($album);
             $em->flush();
             $request->getSession()->getFlashBag()->add( 'danger', 'album.delete.flash' );
-            return $this->redirectToRoute('album_index');
+            return $this->redirectToRoute('photography_index');
         }
 
+        $albums = $user->getAlbums();
         return $this->render('FotoJoinControlPanelBundle:Album:delete.html.twig', array(
             'album' => $album,
+            'albums' => $albums,
             'user' => $user,
             'deleteForm' => $deleteForm->createView(),
         ));

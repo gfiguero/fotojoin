@@ -1,6 +1,6 @@
 foto_join_front_page_contact:
-    path:     /contact
-    defaults: { _controller: FotoJoinFrontPageBundle:Contact:index }
+    resource: "@FotoJoinFrontPageBundle/Resources/config/routing/contact.yml"
+    prefix:   /contact
 
 foto_join_front_page_signup:
     path:     /signup

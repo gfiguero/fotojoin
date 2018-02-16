@@ -20,6 +20,7 @@
     <link href="{{ asset('bundles/fotojoincontrolpanel/css/fotojoin.css') }}" rel="stylesheet">
     <link href="{{ asset('vendor/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('vendor/bootstrap-multiselect/css/bootstrap-multiselect.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('vendor/animate.css/animate.min.css') }}" rel="stylesheet" type="text/css">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -35,32 +36,9 @@
     <script src="{{ asset('vendor/bootstrap/js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('vendor/braincrafted/bc-bootstrap-collection.js') }}"></script>
     <script src="{{ asset('vendor/bootstrap-multiselect/js/bootstrap-multiselect.js') }}"></script>
+    <script src="{{ asset('vendor/bootstrap-notify/bootstrap-notify.min.js') }}"></script>
     <script src="{{ asset('js/jquery.serializeObject.min.js') }}"></script>
-{#}
-    <script src="{{ asset('js/FotoJoinControlPanel.js') }}"></script>
-
-    <script src="{{ asset('js/blueimp/vendor/jquery.ui.widget.js') }}"></script>
-    <script src="{{ asset('js/blueimp/jquery.iframe-transport.js') }}"></script>
-    <script src="{{ asset('js/blueimp/jquery.fileupload.js') }}"></script>
-
-    <!-- The Templates plugin is included to render the upload/download listings -->
-    <script src="//blueimp.github.io/JavaScript-Templates/js/tmpl.min.js"></script>
-    <!-- The Load Image plugin is included for the preview images and image resizing functionality -->
-    <script src="//blueimp.github.io/JavaScript-Load-Image/js/load-image.all.min.js"></script>
-
-    <script src="{{ asset('js/blueimp/jquery.fileupload-process.js') }}"></script>
-    <script src="{{ asset('js/blueimp/jquery.fileupload-image.js') }}"></script>
-    <script src="{{ asset('js/blueimp/jquery.fileupload-audio.js') }}"></script>
-    <script src="{{ asset('js/blueimp/jquery.fileupload-video.js') }}"></script>
-    <script src="{{ asset('js/blueimp/jquery.fileupload-validate.js') }}"></script>
-    <script src="{{ asset('js/blueimp/jquery.fileupload-ui.js') }}"></script>
-{#}
-    <script type="text/javascript">
-        jQuery(document).ready(function($) {
-            $(".clickableRow").click(function() { window.document.location = $(this).attr("href"); });
-            $(".clickableRow").css('cursor', 'pointer');
-        });
-    </script>
     {% block javascript %}{% endblock %}
+    {% block notification %}{% endblock %}
 </body>
 </html>

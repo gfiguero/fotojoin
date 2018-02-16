@@ -74,6 +74,13 @@ class Builder implements ContainerAwareInterface
             'admin_user_edit',
             'admin_user_delete',
         )));
+        $sidemenu->addChild('sidemenu.contact', array('route' => 'admin_contact_index'))->setExtras(array('translation_domain' => 'FotoJoinAdminBundle', 'routes' => array(
+            'admin_contact_index',
+            'admin_contact_new',
+            'admin_contact_show',
+            'admin_contact_edit',
+            'admin_contact_delete',
+        )));
 /*
         $sidemenu->addChild('sidemenu.dashboard', array('route' => 'dashboard_index'))->setAttribute('icon', 'dashboard fa-fw')->setAttribute('translation_domain', 'FotoJoinAdminBundle');
         $sidemenu->addChild('sidemenu.appraisement', array('route' => 'admin_appraisement_index'))->setAttribute('icon', 'star-half-o fa-fw')->setAttribute('translation_domain', 'FotoJoinAdminBundle');

@@ -13,6 +13,7 @@ FotoJoin\ControlPanelBundle\Entity\Photography:
         appraisements:
             targetEntity: FotoJoin\GalleryBundle\Entity\Appraisement
             mappedBy: photography
+
     manyToMany:
         categories:
             targetEntity: FotoJoin\AdminBundle\Entity\Category
@@ -95,11 +96,4 @@ FotoJoin\ControlPanelBundle\Entity\Photography:
             gedmo:
                 timestampable:
                     on: update
-        deletedAt:
-            type: datetime
-            nullable: true
-    gedmo:
-        soft_deleteable:
-            field_name: deletedAt
-            time_aware: false
     lifecycleCallbacks: {  }

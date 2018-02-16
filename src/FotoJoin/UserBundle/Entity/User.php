@@ -804,6 +804,10 @@ class User extends BaseUser
     {
         return $this->albums;
     }
+    public function countAlbums()
+    {
+        return $this->albums->count();
+    }
     /**
      * @var \Doctrine\Common\Collections\Collection
      */

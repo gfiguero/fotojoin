@@ -1,0 +1,24 @@
+admin_contact_index:
+    path:     /
+    defaults: { _controller: "FotoJoinAdminBundle:Contact:index" }
+    methods:  GET
+
+admin_contact_show:
+    path:     /{id}/show
+    defaults: { _controller: "FotoJoinAdminBundle:Contact:show" }
+    methods:  GET
+
+admin_contact_new:
+    path:     /new
+    defaults: { _controller: "FotoJoinAdminBundle:Contact:new" }
+    methods:  [GET, POST]
+
+admin_contact_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "FotoJoinAdminBundle:Contact:edit" }
+    methods:  [GET, POST]
+
+admin_contact_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "FotoJoinAdminBundle:Contact:delete" }
+    methods:  [GET, DELETE]

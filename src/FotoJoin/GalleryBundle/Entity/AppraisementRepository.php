@@ -25,6 +25,7 @@ class AppraisementRepository extends \Doctrine\ORM\EntityRepository
 
         return $joinPoints;
     }
+
     public function getPhotoPointsByUser($user)
     {
         $qb = $this->getEntityManager()->createQueryBuilder();

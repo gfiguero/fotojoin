@@ -120,5 +120,19 @@ class PhotographyRepository extends EntityRepository
         );
     }
 
+    public function getAverage($photography)
+    {
+        $qb = $this->getEntityManager()->createQueryBuilder();
+
+        $qb->select('AVG(a.value) as average')
+            ->from('FotoJoinGalleryBundle:Appraisement', 'a')
+            ->where('a.photography = (:photography)')
+            //->andWhere('a.delay < 15000')
+            //->andWhere('a.delay > 5000')
+            ->setParameter('photography', $photography)
+        ;
+
+        return $qb->getQuery()->getSingleScalarResult();
+    }
 
 }

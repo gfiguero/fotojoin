@@ -5,6 +5,7 @@ sidemenu:
     user: Usuarios
     photography: Fotos
     plan: Planes
+    contact: Contactos
     album: Álbumes
     appraisement: Evaluaciones
 
@@ -80,6 +81,42 @@ appraisement:
         createdAt: Creado
         updatedAt: Actualizado
         name: Nombre
+
+contact:
+    index:
+        title: Contactos
+        list: Lista de Contactos
+        link: Índice de Contactos
+    new:
+        title: Nuevo contacto
+        link: Crear nuevo contacto
+        form: Formulario de contacto
+        submit: Guardar
+        flash: Nuevo contacto registrado satisfactoriamente
+    edit:
+        title: Editar contacto
+        link: Editar
+        submit: Guardar
+        form: Formulario de edición
+        flash: Los cambios han sido guardados exitosamente
+    show:
+        title: Ver contacto
+        link: Detalles
+        data: Datos
+    delete:
+        link: Eliminar
+        title: Eliminación de contacto
+        message: Los datos eliminados no podrán ser recuperados
+        submit: Eliminar
+        flash: El contacto ha sido eliminado
+    form:
+        id: ID
+        name: Nombre
+        email: Email
+        tag: Asunto
+        message: Mensaje
+        createdAt: Creado
+        updatedAt: Actualizado
 
 city:
     index:

@@ -35,8 +35,9 @@ security:
                 login_path: /login
                 failure_path: /login
                 check_path: /login_check
-                always_use_default_target_path: true
-                default_target_path: /panel/status
+                use_referer: true
+                #always_use_default_target_path: true
+                #default_target_path: /panel/status
                 provider: fotojoin_userbundle
                 csrf_token_generator: security.csrf.token_manager
             logout:

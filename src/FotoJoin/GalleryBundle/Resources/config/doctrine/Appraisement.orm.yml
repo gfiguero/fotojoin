@@ -6,7 +6,11 @@ FotoJoin\GalleryBundle\Entity\Appraisement:
         photography:
             targetEntity: FotoJoin\ControlPanelBundle\Entity\Photography
             inversedBy: appraisements
-            cascade: ['persist']            
+            joinColumn:
+                name: photography_id
+                referencedColumnName: id
+                onDelete: SET NULL
+#            cascade: ['persist']
         user:
             targetEntity: FotoJoin\UserBundle\Entity\User
     id:

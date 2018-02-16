@@ -1,0 +1,22 @@
+{% extends 'FotoJoinControlPanelBundle:Photography:layout.html.twig' %}
+
+{% trans_default_domain 'FotoJoinControlPanelBundle' %}
+
+{% block title %}{{ 'photography.index.title'|trans }}{% endblock %}
+
+{% block photography %}
+    {% include 'FotoJoinControlPanelBundle:Base:flashbag.html.twig' %}
+
+    <!-- /.row -->
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-success">
+                <div class="panel-body">
+                    {{ 'photography.message.limit_reached'|trans }}
+                </div>
+            </div>
+        </div>
+        <!-- /.col-lg-12 -->
+    </div>
+    <!-- /.row -->
+{% endblock %}

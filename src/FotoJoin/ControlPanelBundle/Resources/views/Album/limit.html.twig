@@ -1,0 +1,22 @@
+{% extends 'FotoJoinControlPanelBundle:Album:layout.html.twig' %}
+
+{% trans_default_domain 'FotoJoinControlPanelBundle' %}
+
+{% block title %}{{ 'album.new.title'|trans }}{% endblock %}
+
+{% block album %}
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-success">
+                <div class="panel-heading">
+                    <h1 class="panel-title">{{ 'album.new.title'|trans }}</h1>
+                </div>
+                <div class="panel-body">
+                    {{'album.message.limit_reached'|trans}}
+                </div>
+            </div>
+        </div>
+        <!-- /.col-lg-12 -->
+    </div>
+    <!-- /.row -->
+{% endblock %}

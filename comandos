@@ -28,6 +28,7 @@ php app/console doctrine:generate:entities FotoJoinAdminBundle --path=src
 php app/console doctrine:generate:entities FotoJoinAdminBundle:Category --path=src
 php app/console doctrine:generate:entities FotoJoinAdminBundle:City --path=src
 php app/console doctrine:generate:entities FotoJoinAdminBundle:Plan --path=src
+php app/console doctrine:generate:entities FotoJoinAdminBundle:Contact --path=src
 
 php app/console doctrine:generate:entities FotoJoinGalleryBundle:Gallery --path=src
 php app/console doctrine:generate:entities FotoJoinGalleryBundle:Appraisement --path=src

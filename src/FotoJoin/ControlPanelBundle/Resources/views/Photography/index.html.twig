@@ -15,6 +15,7 @@
                     <h1 class="panel-title">{{ 'photography.index.title'|trans }}</h1>
                 </div>
                 <div class="panel-body">
+                    {% if photographies is not empty %}
                     {% for key, photography in photographies %}
                     <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
                         <div class="thumbnail">
@@ -28,6 +29,9 @@
                         </div>
                     </div>
                     {% endfor %}
+                    {% else %}
+                        {{ 'photography.index.empty'|trans }}
+                    {% endif %}
                 </div>
 
                 <div class="panel-footer">
