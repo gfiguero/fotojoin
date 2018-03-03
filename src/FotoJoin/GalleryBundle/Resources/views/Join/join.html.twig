@@ -4,13 +4,8 @@
 
 {% block stylesheet %}
 <style type="text/css">
-.loadingimage { position: relative; }
-{#}
-.loadingimage {
-    background-image:url("{{ vich_uploader_asset(photography, 'file', 'FotoJoin\\ControlPanelBundle\\Entity\\Photography')|imagine_filter('frontpage_join_placeholder') }}");
-    background-size: cover;
-}    
-{#}
+.joinimage { position: relative; }
+.lazyloading { visibility: hidden; }
 </style>
 {% endblock %}
 
@@ -19,10 +14,13 @@
     <div class="col-md-8">
         <div class="row" id="photography">
             <div class="col-xs-12">
-                <div class="loadingimage">
-                    <img class="img-responsive center-block" src="{{ vich_uploader_asset(photography, 'file', 'FotoJoin\\ControlPanelBundle\\Entity\\Photography')|imagine_filter('frontpage_join') }}" alt="{{ 1 }}" />
+                <img class="img-responsive center-block lazyload"
+                    data-src="{{ vich_uploader_asset(photography, 'file', 'FotoJoin\\ControlPanelBundle\\Entity\\Photography')|imagine_filter('frontpage_join') }}" />
+{#}
+                <div class="joinimage lazyload">
                     <a class="right carousel-control" href="{{ path('foto_join_gallery_join')}}" data-slide="next"><i class="fa fa-chevron-right"></i></a>
                 </div>
+{#}
             </div>
         </div>
     </div>
@@ -30,10 +28,14 @@
     <div class="col-md-4">
         <div class="row" id="appraisement">
             <div class="col-md-12">
+                <a class="btn btn-lg btn-default btn-block" href="{{ path('foto_join_gallery_join')}}" data-slide="next">{{ 'Omitir' }}&nbsp;<i class="fa fa-chevron-right"></i></a>
+            </div>
+            <div class="col-md-12">
                 <h3>{{ icon('thumbs-up fa-fw') }}Valoración</h3>
                 <div id="rating"></div>
             </div>
             {{ form(appraisementForm) }}
+
 {#}
             {{ form_start(appraisementForm) }}
                 {{ form_widget(appraisementForm) }}
@@ -43,11 +45,11 @@
             {{ form_end(appraisementForm) }}
 {#}
         </div>
+{#}
         <div class="row" id="category">
             <div class="col-md-12">
                 <h3>{{ icon('dot-circle-o fa-fw') }}Filtrar por Categoría</h3>
                 {{ form(categoryForm, {'attr': {'novalidate': 'novalidate'}}) }}
-{#}
                 {{ form(galleryForm, { 'style': 'horizontal', 'col_size': 'sm', 'label_col': 0, 'widget_col': 12 }) }}
                 {{ form_start(galleryForm, { 'style': 'horizontal', 'col_size': 'sm', 'label_col': 0, 'widget_col': 12 }) }}
                     {{ form_widget(galleryForm) }}
@@ -55,9 +57,9 @@
                         <button type="submit" class="btn btn-block btn-primary">Aplicar Filtro</button>
                     </div></div>
                 {{ form_end(galleryForm) }}
-{#}
             </div>
         </div>
+{#}
         <div class="row" id="capture">
             <div class="col-md-12">
                 <h3>{{ icon('camera fa-fw') }}Información Fotográfica</h3>
@@ -149,11 +151,16 @@
             appraisementTimeStart = new Date().getTime();
         });
     </script>
+    <script type="text/javascript">
+        window.lazySizesConfig = window.lazySizesConfig || {};
+        window.lazySizesConfig.loadingClass = 'lazyloading invisible';
+        window.lazySizesConfig.loadedClass = 'lazyloaded animated fadeIn';
+    </script>
+    <script src="{{ asset('vendor/lazysizes/lazysizes.min.js') }}" async=""></script>
 {% endblock %}
-
 {% block notification %}
     <script type="text/javascript">
-        {% for type, messages in app.session.flashBag.all %}
+        {% for icon, messages in app.session.flashBag.all %}
             {% for message in messages %}
     {#}
                 <div class="alert alert-{{ type }} alert-dismissible fade in" role="alert">
@@ -163,7 +170,7 @@
     {#}
                 $.notify({
                     // options
-                    icon: 'fa fa-star',
+                    icon: "{{ icon }}",
                     title: '',
                     message: "{{ message }}",
                     url: 'https://github.com/mouse0270/bootstrap-notify',
@@ -172,7 +179,7 @@
                     // settings
                     element: 'body',
                     position: null,
-                    type: "{{ type }}",
+                    type: "info",
                     allow_dismiss: true,
                     newest_on_top: false,
                     showProgressbar: false,
@@ -198,7 +205,7 @@
                     icon_type: 'class',
                     template: '<div data-notify="container" class="col-xs-11 col-sm-3 alert alert-{0}" role="alert">' +
                         '<button type="button" aria-hidden="true" class="close" data-notify="dismiss">×</button>' +
-                        '<span data-notify="icon"></span> ' +
+                        '<span data-notify="icon"></span>&nbsp; ' +
                         '<span data-notify="title">{1}</span> ' +
                         '<span data-notify="message">{2}</span>' +
                         '<div class="progress" data-notify="progressbar">' +

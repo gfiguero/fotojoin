@@ -1,0 +1,4 @@
+ranking_photography_index:
+    path:     /
+    defaults: { _controller: "FotoJoinRankingBundle:Photography:index" }
+    methods:  GET

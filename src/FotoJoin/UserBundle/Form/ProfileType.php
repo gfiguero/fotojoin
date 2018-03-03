@@ -56,6 +56,28 @@ class ProfileType extends AbstractType
                 'attr' => array('label_col' => 3, 'widget_col' => 9 ),
                 'required' => false,
             ))
+            ->add('commune', null, array(
+                'label' => 'form.commune',
+                'choice_label' => 'regionprovincename',
+                'translation_domain' => 'FotoJoinUserBundle',
+                'attr' => array('label_col' => 3, 'widget_col' => 9, 'align_with_widget' => true ),
+                'placeholder' => 'Ninguna comuna seleccionada',
+                'required' => false,
+            ))
+            ->add('level', 'user_level', array(
+                'label' => 'form.level.type',
+                'translation_domain' => 'FotoJoinUserBundle',
+                'attr' => array('label_col' => 3, 'widget_col' => 9 ),
+                'required' => false,
+                'placeholder' => 'Seleccione su nivel',
+            ))
+            ->add('description', 'textarea', array(
+                'label' => 'form.description',
+                'translation_domain' => 'FotoJoinUserBundle',
+                'attr' => array('label_col' => 3, 'widget_col' => 9 ),
+                'required' => false,
+            ))
+/*
             ->add('publiccontact', null, array(
                 'label' => 'form.publiccontact',
                 'translation_domain' => 'FotoJoinUserBundle',
@@ -89,15 +111,7 @@ class ProfileType extends AbstractType
                 'translation_domain' => 'FotoJoinUserBundle',
                 'attr' => array('label_col' => 3, 'widget_col' => 9 ),
             ))
-//        ;
-//        if($this->authorizationChecker->isGranted('ROLE_AUTHOR')) $builder
-            ->add('level', 'user_level', array(
-                'label' => 'form.level.type',
-                'translation_domain' => 'FotoJoinUserBundle',
-                'attr' => array('label_col' => 3, 'widget_col' => 9 ),
-                'required' => false,
-                'placeholder' => 'Seleccione su nivel',
-            ))
+*/
 /*
             ->add('exigency', 'user_exigency', array(
                 'label' => 'form.exigency.type',
@@ -107,19 +121,16 @@ class ProfileType extends AbstractType
                 'placeholder' => 'Seleccione su nivel de exigencia',
             ))
 */
-            ->add('description', 'textarea', array(
-                'label' => 'form.description',
-                'translation_domain' => 'FotoJoinUserBundle',
-                'attr' => array('label_col' => 3, 'widget_col' => 9 ),
-                'required' => false,
-//                'placeholder' => 'Describa su experiencia como fotógrafo',
-            ))
+//        ;
+//        if($this->authorizationChecker->isGranted('ROLE_AUTHOR')) $builder
+/*
             ->add('facebookshare', null, array(
                 'label' => 'form.facebookshare',
                 'translation_domain' => 'FotoJoinUserBundle',
                 'attr' => array('label_col' => 3, 'widget_col' => 9, 'align_with_widget' => true ),
                 'required' => false,
             ))
+*/
         ;
 //        if($options['isAuthor']) $builder->add('author', new AuthorType($builder));
 //            ->add('cities', 'Symfony\Component\Form\Extension\Core\Type\CollectionType', array(

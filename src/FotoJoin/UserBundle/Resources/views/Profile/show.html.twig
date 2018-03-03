@@ -29,11 +29,11 @@
         </div>
 
         <div class="col-md-6 col-xs-12">
+{#}
             <div class="panel panel-default">
                 <div class="panel-body">
                     <h3>{{ icon('map-marker fa-fw') }}Mis Ciudades de Cobertura</h3>
                     <dl class="dl-horizontal dl-horizontal-sm dl-horizontal-md dl-horizontal-lg">
-                        {#}{% if user.country %}<dt>{{ 'form.country'|trans }}</dt><dd>{{ user.country|country }}</dd>{% endif %}{#}
                         {% if user.city1 %}<dt>{{ 'form.city.1'|trans }}</dt><dd>{{ user.city1 }}</dd>{% endif %}
                         {% if user.city2 %}<dt>{{ 'form.city.2'|trans }}</dt><dd>{{ user.city2 }}</dd>{% endif %}
                         {% if user.city3 %}<dt>{{ 'form.city.3'|trans }}</dt><dd>{{ user.city3 }}</dd>{% endif %}
@@ -41,6 +41,16 @@
 
                 </div>
             </div>
+{#}
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <h3>{{ icon('map-marker fa-fw') }}Localización</h3>
+                    <dl class="dl-horizontal dl-horizontal-sm dl-horizontal-md dl-horizontal-lg">
+                        {% if user.commune %}<dt>{{ 'form.commune'|trans }}</dt><dd>{{ user.commune.regionprovincename }}</dd>{% endif %}
+                    </dl>
+                </div>
+            </div>
+
             <div class="panel panel-default">
                 <div class="panel-body">
                     <h3>{{ icon('camera fa-fw') }}Información Fotográfica</h3>

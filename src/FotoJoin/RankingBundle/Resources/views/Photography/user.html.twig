@@ -1,0 +1,19 @@
+{% block captionuser %}
+    <div id="credential">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="media">
+                    <div class="media-left">
+                        {% set profilephotourl = vich_uploader_asset(photography.user, 'profilephoto', 'FotoJoin\\UserBundle\\Entity\\User') %}
+                        {% if profilephotourl is null %}{% set profilephotourl = '/uploads/profilephoto/default.png' %}{% endif %}
+                        <img class="media-object" src="{{ profilephotourl|imagine_filter('user_credential_small') }}" />
+                    </div>
+                    <div class="media-body">
+                        {% if photography.user.name %}<h4 class="media-heading">{{ photography.user.name }}</h4>{% endif %}
+                        {% if photography.user %}{% if photography.user.level is not null %}<h5 class="media-heading">{{ user_level[photography.user.level]|trans({}, 'FotoJoinUserBundle') }}</h5>{% endif %}{% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

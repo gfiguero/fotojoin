@@ -99,8 +99,22 @@ registration:
     flash:
         user_created: 'El usuario se ha creado satisfactoriamente'
     email:
-        subject: 'Bienvenido %name%!'
-        message: "Hola %name%!\n\nPara completar la validación de tu cuenta - por favor visita %confirmationUrl%\n\nAtentamente,\nEquipo de Fotojoin.\n"
+        subject: 'Bienvenido a Fotojoin!'
+        greetings: 'Hola %name%!'
+        explanation: |
+            Somos la primera vitrina digital estadística de fotógrafos en américa latina, te invitamos a participar con nosotros!.
+
+            Si contratas a un fotógrafo de Fotojoin, podrás comprar las fotos que tu quieras según su evaluación.
+
+            Si evalúas las fotos de Fotojoin, obtendrás variados beneficios por tu participación.
+
+            Si trabajas como fotógrafo, podrás subir las fotos a Fotojoin y dejaremos que el público evalúe el trabajo que has logrado.
+
+            Completa tus datos o vé directamente a la sección VOTAR para evaluar fotos del evento al que has asistido.
+
+            No pagues de más ni de menos, sólo lo justo!"
+        url: 'Visita %confirmationUrl% para confirmar tu cuenta.\n'
+        regards: "Atentamente,\nEl equipo de Fotojoin."
 resetting:
     link: '¿Olvidaste tu contraseña?'
     password_already_requested: 'La contraseña para este usuario ya ha sido solicitada dentro de las 24 horas.'
@@ -132,6 +146,7 @@ form:
     email: Email
     name: Nombre
     country: País
+    commune: Comuna
     city:
         select: 'Seleccione una Ciudad'
         1: 'Ciudad 1'

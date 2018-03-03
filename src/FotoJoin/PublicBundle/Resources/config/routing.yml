@@ -1,0 +1,11 @@
+foto_join_public_user:
+    resource: "@FotoJoinPublicBundle/Resources/config/routing/user.yml"
+    prefix:     /user
+
+foto_join_public_album:
+    resource: "@FotoJoinPublicBundle/Resources/config/routing/album.yml"
+    prefix:     /album
+
+foto_join_public_photography:
+    resource: "@FotoJoinPublicBundle/Resources/config/routing/photography.yml"
+    prefix:     /photography

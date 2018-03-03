@@ -1,0 +1,23 @@
+FotoJoin\AdminBundle\Entity\Province:
+    type: entity
+    table: admin_province
+    repositoryClass: FotoJoin\AdminBundle\Entity\ProvinceRepository
+    manyToOne:
+        region:
+            targetEntity: FotoJoin\AdminBundle\Entity\Region
+            inversedBy: province
+    oneToMany:
+        communes:
+            targetEntity: FotoJoin\AdminBundle\Entity\Commune
+            mappedBy: provinces
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        name:
+            type: string
+            length: 100
+    lifecycleCallbacks: {  }

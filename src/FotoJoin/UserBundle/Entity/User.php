@@ -915,4 +915,33 @@ class User extends BaseUser
     {
         return $this->plan;
     }
+    /**
+     * @var \FotoJoin\AdminBundle\Entity\Commune
+     */
+    private $commune;
+
+
+    /**
+     * Set commune
+     *
+     * @param \FotoJoin\AdminBundle\Entity\Commune $commune
+     *
+     * @return User
+     */
+    public function setCommune(\FotoJoin\AdminBundle\Entity\Commune $commune = null)
+    {
+        $this->commune = $commune;
+
+        return $this;
+    }
+
+    /**
+     * Get commune
+     *
+     * @return \FotoJoin\AdminBundle\Entity\Commune
+     */
+    public function getCommune()
+    {
+        return $this->commune;
+    }
 }

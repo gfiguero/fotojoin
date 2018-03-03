@@ -1,3 +1,11 @@
+foto_join_public:
+    resource: "@FotoJoinPublicBundle/Resources/config/routing.yml"
+    prefix:   /public
+
+foto_join_ranking:
+    resource: "@FotoJoinRankingBundle/Resources/config/routing.yml"
+    prefix:   /ranking
+
 foto_join_gallery:
     resource: "@FotoJoinGalleryBundle/Resources/config/routing.yml"
     prefix:   /

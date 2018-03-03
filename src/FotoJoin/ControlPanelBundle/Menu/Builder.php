@@ -36,7 +36,7 @@ class Builder implements ContainerAwareInterface
 
             $menu['Panel']->addChild('topmenu.status', array('route' => 'foto_join_control_panel_homepage'))->setExtras(array('icon' => 'check fa-fw', 'translation_domain' => 'FotoJoinControlPanelBundle'));
             $menu['Panel']->addChild('topmenu.profile', array('route' => 'fos_user_profile_show'))->setExtras(array('icon' => 'user fa-fw', 'translation_domain' => 'FotoJoinControlPanelBundle'));
-            $menu['Panel']->addChild('topmenu.album', array('route' => 'album_index'))->setExtras(array('icon' => 'book fa-fw', 'translation_domain' => 'FotoJoinControlPanelBundle'));
+//            $menu['Panel']->addChild('topmenu.album', array('route' => 'album_index'))->setExtras(array('icon' => 'book fa-fw', 'translation_domain' => 'FotoJoinControlPanelBundle'));
             $menu['Panel']->addChild('topmenu.photography', array('route' => 'photography_index'))->setExtras(array('icon' => 'picture-o fa-fw', 'translation_domain' => 'FotoJoinControlPanelBundle'));
             $menu['Panel']->addChild('topmenu.logout', array('route' => 'fos_user_security_logout'))->setExtras(array('icon' => 'sign-out fa-fw', 'translation_domain' => 'FotoJoinControlPanelBundle'));
         }

@@ -1,0 +1,4 @@
+public_album_show:
+    path:     /{album}/show
+    defaults: { _controller: "FotoJoinPublicBundle:Album:show" }
+    methods:  GET

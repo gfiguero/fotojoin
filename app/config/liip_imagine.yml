@@ -33,9 +33,14 @@ liip_imagine:
         gallery_photography_medium:
             quality: 75
             filters:
-                upscale: { min: [1024, 768] }
-                thumbnail: { size: [1024, 768], mode: outbound }
+                upscale: { min: [1280, 768] }
+                thumbnail: { size: [1280, 768], mode: outbound }
                 watermark: { image: '../web/img/fotojoin.png', size: 1, position: center }
+        gallery_photography_medium_low:
+            quality: 5
+            filters:
+                upscale: { min: [1280, 768] }
+                thumbnail: { size: [1280, 768], mode: outbound }
 
 ##############################################################
         album_dropzone:
@@ -74,10 +79,10 @@ liip_imagine:
         frontpage_join:
             quality: 75
             filters:
-                upscale: { min: [1280, 768] }
-                thumbnail: { size: [1280, 768], mode: outbound }
+                upscale: { min: [1280, 720] }
+                thumbnail: { size: [1280, 720], mode: outbound }
                 watermark: { image: '../web/img/fotojoin.png', size: 1, position: center }
-        frontpage_join_placeholder:
+        frontpage_join_low:
             quality: 5
             filters:
                 upscale: { min: [1280, 720] }

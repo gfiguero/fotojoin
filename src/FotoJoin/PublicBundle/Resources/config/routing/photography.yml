@@ -1,0 +1,4 @@
+public_photography_show:
+    path:     /{photography}/show
+    defaults: { _controller: "FotoJoinPublicBundle:Photography:show" }
+    methods:  GET

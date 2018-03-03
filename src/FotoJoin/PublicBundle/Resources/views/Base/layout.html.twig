@@ -1,0 +1,19 @@
+{% extends 'FotoJoinPublicBundle:Base:base.html.twig' %}
+{% use 'FotoJoinPublicBundle:Base:header.html.twig' %}
+{% use 'FotoJoinPublicBundle:Base:credential.html.twig' %}
+
+{% block body %}
+    {% block header %}{{ parent() }}{% endblock %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                {% block credential %}{{ parent() }}{% endblock %}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                {% block public %}{% endblock %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

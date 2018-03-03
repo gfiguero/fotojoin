@@ -7,8 +7,11 @@
 {% endblock %}
 
 {% block body_text %}
-{% autoescape false %}
-{{ 'registration.email.message'|trans({'%name%': user.name, '%confirmationUrl%': confirmationUrl}) }}
+{% autoescape 'html' %}
+{{ 'registration.email.greetings'|trans({'%name%': user.name})|raw }}
+{{ 'registration.email.explanation'|trans|raw }}
+{{ 'registration.email.url'|trans({'%confirmationUrl%': confirmationUrl})|raw }}
+{{ 'registration.email.regards'|trans|raw }}
 {% endautoescape %}
 {% endblock %}
 

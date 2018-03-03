@@ -15,12 +15,24 @@
                     {{ form_row(form.name) }}
                     {{ form_row(form.birthdate) }}
                     {{ form_row(form.profilephoto) }}
+{#}
                     {{ form_row(form.publiccontact) }}
+{#}
                     <div class="form-group"><div class="col-lg-offset-3 col-lg-9">
                         <button type="submit" class="btn btn-primary">{{ icon('save fa-fw') }}&nbsp;{{ 'profile.edit.submit'|trans }}</button>
                     </div></div>
                 </div>
             </div>
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <h3>{{ icon('map-marker fa-fw') }}&nbsp;Localización</h3>
+                    {{ form_row(form.commune) }}
+                    <div class="form-group"><div class="col-lg-offset-3 col-lg-9">
+                        <button type="submit" class="btn btn-primary">{{ icon('save fa-fw') }}&nbsp;{{ 'profile.edit.submit'|trans }}</button>
+                    </div></div>
+                </div>
+            </div>
+{#}
             <div class="panel panel-default">
                 <div class="panel-body">
                     <h3>{{ icon('map-marker fa-fw') }}&nbsp;Mis Ciudades de Cobertura</h3>
@@ -32,15 +44,16 @@
                     </div></div>
                 </div>
             </div>
+{#}
             <div class="panel panel-default">
                 <div class="panel-body">
                     <h3>{{ icon('camera fa-fw') }}&nbsp;Información Fotográfica</h3>
                     {{ form_row(form.level) }}
 {#}
                     {{ form_row(form.exigency) }}
+                    {{ form_row(form.facebookshare) }}
 {#}
                     {{ form_row(form.description) }}
-                    {{ form_row(form.facebookshare) }}
                     <div class="form-group"><div class="col-lg-offset-3 col-lg-9">
                         <button type="submit" class="btn btn-primary">{{ icon('save fa-fw') }}&nbsp;{{ 'profile.edit.submit'|trans }}</button>
                     </div></div>
@@ -51,6 +64,30 @@
     </div>
 
 {% endblock %}
+
+{% block javascript %}
+    <script type="text/javascript">
+    var optionsLocation = {
+        maxHeight: 300,
+        enableFiltering: true,
+        enableCaseInsensitiveFiltering: true,
+        nonSelectedText: 'Seleccione una localidad',
+        filterPlaceholder: 'Buscar',
+        buttonWidth: '100%',
+        templates: {
+//            button: '<button type="button" class="multiselect dropdown-toggle" data-toggle="dropdown"></button>',
+//            ul: '<ul class="multiselect-container dropdown-menu"></ul>',
+            filter: '<li class="multiselect-item filter"><div class="input-group"><span class="input-group-addon"><i class="fa fa-search"></i></span><input class="form-control multiselect-search" type="text"></div></li>',
+            filterClearBtn: '<span class="input-group-btn"><button class="btn btn-default multiselect-clear-filter" type="button"><i class="fa fa-times-circle"></i></button></span>',
+//            li: '<li><a href="javascript:void(0);"><label></label></a></li>',
+//            divider: '<li class="multiselect-item divider"></li>',
+//            liGroup: '<li class="multiselect-item group"><label class="multiselect-group"></label></li>'
+        }
+    };
+    $('#fotojoin_user_profile_form_commune').multiselect(optionsLocation);
+    </script>
+{% endblock %}
+
 {#}
 {% block javascript %}
     <script type="text/javascript">

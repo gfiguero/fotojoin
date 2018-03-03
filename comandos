@@ -20,6 +20,8 @@ php app/console generate:bundle --namespace FotoJoin/GalleryBundle --dir src --b
 php app/console generate:bundle --namespace FotoJoin/ControlPanelBundle --dir src --bundle-name FotoJoinControlPanelBundle --format yml --shared --no-interaction
 php app/console generate:bundle --namespace FotoJoin/AdminBundle --dir src --bundle-name FotoJoinAdminBundle --format yml --shared --no-interaction
 php app/console generate:bundle --namespace FotoJoin/UserBundle --dir src --bundle-name FotoJoinUserBundle --format yml --shared --no-interaction
+php app/console generate:bundle --namespace FotoJoin/RankingBundle --dir src --bundle-name FotoJoinRankingBundle --format yml --shared --no-interaction
+php app/console generate:bundle --namespace FotoJoin/PublicBundle --dir src --bundle-name FotoJoinPublicBundle --format yml --shared --no-interaction
 
 php app/console assetic:dump --env=dev
 
@@ -29,6 +31,9 @@ php app/console doctrine:generate:entities FotoJoinAdminBundle:Category --path=s
 php app/console doctrine:generate:entities FotoJoinAdminBundle:City --path=src
 php app/console doctrine:generate:entities FotoJoinAdminBundle:Plan --path=src
 php app/console doctrine:generate:entities FotoJoinAdminBundle:Contact --path=src
+php app/console doctrine:generate:entities FotoJoinAdminBundle:Region --path=src
+php app/console doctrine:generate:entities FotoJoinAdminBundle:Province --path=src
+php app/console doctrine:generate:entities FotoJoinAdminBundle:Commune --path=src
 
 php app/console doctrine:generate:entities FotoJoinGalleryBundle:Gallery --path=src
 php app/console doctrine:generate:entities FotoJoinGalleryBundle:Appraisement --path=src

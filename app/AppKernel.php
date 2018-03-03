@@ -30,6 +30,8 @@ class AppKernel extends Kernel
             new FotoJoin\GalleryBundle\FotoJoinGalleryBundle(),
             new HWI\Bundle\OAuthBundle\HWIOAuthBundle(),
             new Oneup\UploaderBundle\OneupUploaderBundle(),
+            new FotoJoin\RankingBundle\FotoJoinRankingBundle(),
+            new FotoJoin\PublicBundle\FotoJoinPublicBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'), true)) {

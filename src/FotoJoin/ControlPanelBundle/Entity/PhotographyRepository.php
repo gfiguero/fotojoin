@@ -135,4 +135,32 @@ class PhotographyRepository extends EntityRepository
         return $qb->getQuery()->getSingleScalarResult();
     }
 
+    public function getRanking()
+    {
+        $qb = $this->getEntityManager()->createQueryBuilder();
+
+        $qb ->select('ph as photography')
+            ->addSelect('COUNT(DISTINCT(ap.id)) as quantity', 'AVG(ap.value) as average', 'u.exigency as exigency', 'u')
+            ->from('FotoJoinControlPanelBundle:Photography', 'ph')
+            ->leftJoin('FotoJoinGalleryBundle:Appraisement', 'ap', 'WITH', 'ap.photography = ph.id')
+            ->leftJoin('ph.user', 'u')
+            ->groupBy('ph.id')
+        ;
+
+//        $qb->having('quantity >= 3', 'average >= exigency');
+
+        $photographyNodes = $qb->getQuery()->getResult();
+        shuffle($photographyNodes);
+
+        $photographies = array_column($photographyNodes, 'photography');
+        $appraisementAverages = array_column($photographyNodes, 'average');
+        $appraisementQuantities = array_column($photographyNodes, 'quantity');
+
+        return array(
+            'photographies' => $photographies,
+            'appraisementAverages' => $appraisementAverages,
+            'appraisementQuantities' => $appraisementQuantities
+        );
+    }
+
 }

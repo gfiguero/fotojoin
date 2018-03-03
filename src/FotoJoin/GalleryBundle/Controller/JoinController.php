@@ -200,11 +200,26 @@ class JoinController extends Controller
                     9   =>  0,
                     10  =>  0
                 );
-                $appraisement->setScore( $calculator[abs(round($average) - $value)] );
-                $request->getSession()->getFlashBag()->add( 'success', 'Puntos obtenidos: ' . $appraisement->getScore() );
+                $dist = abs(round($average) - $value);
+                $appraisement->setScore( $calculator[$dist] );
+                switch ($dist) {
+                    case 0: $icon = 'fa fa-fw fa-lg fa-star'; $message = 'Perfecto! Has obtenido ' . $appraisement->getScore() . ' puntos.'; break;
+                    case 1: $icon = 'fa fa-fw fa-lg fa-star'; $message = 'Perfecto! Has obtenido ' . $appraisement->getScore() . ' puntos.'; break;
+                    case 2: $icon = 'fa fa-fw fa-lg fa-star'; $message = 'Excelente! Has obtenido ' . $appraisement->getScore() . ' puntos.'; break;
+                    case 3: $icon = 'fa fa-fw fa-lg fa-star'; $message = 'Muy bien! Has obtenido ' . $appraisement->getScore() . ' puntos.'; break;
+                    case 4: $icon = 'fa fa-fw fa-lg fa-star'; $message = 'Bien! Has obtenido ' . $appraisement->getScore() . ' puntos.'; break;
+                    case 5: $icon = 'fa fa-fw fa-lg fa-star'; $message = 'Has obtenido ' . $appraisement->getScore() . ' puntos.'; break;
+                    case 6: $icon = 'fa fa-fw fa-lg fa-star'; $message = 'Humm! Has obtenido ' . $appraisement->getScore() . ' puntos.'; break;
+                    case 7: $icon = 'fa fa-fw fa-lg fa-star'; $message = 'Ouch! Has obtenido ' . $appraisement->getScore() . ' puntos.'; break;
+                    case 8: $icon = 'fa fa-fw fa-lg fa-star'; $message = 'Mal! Has obtenido ' . $appraisement->getScore() . ' punto.'; break;
+                    case 9: $icon = 'fa fa-fw fa-lg fa-star'; $message = 'Muy mal! Has obtenido ' . $appraisement->getScore() . ' puntos.'; break;
+                    case 10: $icon = 'fa fa-fw fa-lg fa-star'; $message = 'Pésimo! Has obtenido ' . $appraisement->getScore() . ' puntos.'; break;
+                    default: $icon = 'fa fa-fw fa-lg fa-star'; $message = 'Eres lo peor! Has obtenido ' . $appraisement->getScore() . ' puntos.'; break;
+                }
+                $request->getSession()->getFlashBag()->add( $icon, $message );
             } else {
                 $appraisement->setScore(0);
-                $request->getSession()->getFlashBag()->add( 'success', 'Gracias! le diste el primer voto a la fotografía.' );
+                $request->getSession()->getFlashBag()->add( 'fa fa-fw fa-lg fa-thumbs-up', 'Gracias! le diste el primer voto a la fotografía.' );
             }
 
             $em->persist($appraisement);

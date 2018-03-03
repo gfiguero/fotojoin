@@ -29,6 +29,9 @@ FotoJoin\UserBundle\Entity\User:
             targetEntity: FotoJoin\AdminBundle\Entity\City
         plan:
             targetEntity: FotoJoin\AdminBundle\Entity\Plan
+        commune: 
+            targetEntity: FotoJoin\AdminBundle\Entity\Commune
+            inversedBy: users
     id:
         id:
             type: integer

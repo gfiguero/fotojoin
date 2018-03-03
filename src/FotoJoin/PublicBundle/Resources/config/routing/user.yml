@@ -1,0 +1,4 @@
+public_user_show:
+    path:     /{user}/show
+    defaults: { _controller: "FotoJoinPublicBundle:User:show" }
+    methods:  GET

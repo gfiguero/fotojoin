@@ -1,0 +1,18 @@
+{% extends 'FotoJoinPublicBundle:User:layout.html.twig' %}
+
+{% trans_default_domain 'FotoJoinUserBundle' %}
+
+{% block user %}
+
+{% autoescape false %}
+{{ 'registration.email.subject'|trans({'%name%': user.name}) }}
+{% endautoescape %}
+
+{% autoescape false %}
+{{ 'registration.email.greetings'|trans({'%name%': user.name}) }}
+{{ 'registration.email.explanation'|trans }}
+{{ 'registration.email.url'|trans({'%confirmationUrl%': 'www.fotojoin.com/urlconfirmtoken'}) }}
+{{ 'registration.email.regards'|trans }}
+{% endautoescape %}
+
+{% endblock %}

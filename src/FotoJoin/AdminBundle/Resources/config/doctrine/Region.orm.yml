@@ -1,0 +1,25 @@
+FotoJoin\AdminBundle\Entity\Region:
+    type: entity
+    table: admin_region
+    repositoryClass: FotoJoin\AdminBundle\Entity\RegionRepository
+    oneToMany:
+        provinces:
+            targetEntity: FotoJoin\AdminBundle\Entity\Province
+            mappedBy: region
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        name:
+            type: string
+            length: 100
+        code:
+            type: string
+            length: 10
+        country:
+            type: string
+            length: 2
+    lifecycleCallbacks: {  }

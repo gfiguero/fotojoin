@@ -1,0 +1,23 @@
+FotoJoin\AdminBundle\Entity\Commune:
+    type: entity
+    table: admin_commune
+    repositoryClass: FotoJoin\AdminBundle\Entity\CommuneRepository
+    manyToOne:
+        province:
+            targetEntity: FotoJoin\AdminBundle\Entity\Province
+            inversedBy: communes
+    oneToMany:
+        users:
+            targetEntity: FotoJoin\UserBundle\Entity\User
+            mappedBy: commune
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        name:
+            type: string
+            length: 100
+    lifecycleCallbacks: {  }

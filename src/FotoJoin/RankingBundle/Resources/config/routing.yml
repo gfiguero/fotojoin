@@ -1,0 +1,10 @@
+foto_join_ranking_photography:
+    resource: "@FotoJoinRankingBundle/Resources/config/routing/photography.yml"
+    prefix:   /photography
+
+foto_join_ranking_homepage:
+    path: /
+    defaults:
+        _controller: FrameworkBundle:Redirect:redirect
+        route: ranking_photography_index
+        permanent: true

@@ -1,0 +1,11 @@
+{% block captionappraisement %}
+    {% if appraisementAverage %}
+    <div id="appraisement">
+        <h4>{{ icon('star fa-fw') }} {{ 'photography.appraisement.title'|trans({}, 'FotoJoinGalleryBundle') }}</h4>
+        <dl class="dl-horizontal">
+            <dt>{{ 'photography.appraisement.average'|trans({}, 'FotoJoinGalleryBundle') }}</dt><dd>{{ appraisementAverage }}</dd>
+            <dt>{{ 'photography.appraisement.quantity'|trans({}, 'FotoJoinGalleryBundle') }}</dt><dd>{{ appraisementQuantity }}</dd>
+        </dl>
+    </div>
+    {% endif %}
+{% endblock %}
