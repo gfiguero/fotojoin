@@ -10,4 +10,18 @@ namespace FotoJoin\AdminBundle\Entity;
  */
 class CommuneRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function getActive($province)
+    {
+        $qb = $this->getEntityManager()->createQueryBuilder()->select('c')
+            ->from('FotoJoinAdminBundle:Commune', 'c')
+            ->join('c.users', 'u')
+            ->join('u.albums', 'a')
+            ->join('a.photographies', 'ph')
+            ->where('c.province = :province')
+            ->groupBy('c.id')
+            ->setParameter('province', $province)
+        ;
+
+        return $qb->getQuery()->getResult();
+    }
 }

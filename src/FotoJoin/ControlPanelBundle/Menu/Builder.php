@@ -21,6 +21,7 @@ class Builder implements ContainerAwareInterface
         $menu->setChildrenAttribute('class', 'nav navbar-nav navbar-right');
         $menu->setChildrenAttribute('id', 'top-menu');
         $menu->addChild('link.gallery', array('route' => 'foto_join_gallery_homepage'))->setExtras(array('icon' => 'picture-o fa-fw', 'translation_domain' => 'FotoJoinFrontPageBundle'));
+        $menu->addChild('link.ranking', array('route' => 'ranking_photography_index'))->setExtras(array('icon' => 'star fa-fw', 'translation_domain' => 'FotoJoinFrontPageBundle'));
 
         if($securityContext->isGranted('IS_AUTHENTICATED_FULLY')) {
             $menu->addChild('link.join', array('route' => 'foto_join_gallery_join'))->setExtras(array('icon' => 'star fa-fw', 'translation_domain' => 'FotoJoinFrontPageBundle'));

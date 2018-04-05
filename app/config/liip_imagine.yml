@@ -41,6 +41,11 @@ liip_imagine:
             filters:
                 upscale: { min: [1280, 768] }
                 thumbnail: { size: [1280, 768], mode: outbound }
+        ranking_photographer_medium:
+            quality: 75
+            filters:
+                upscale: { min: [640, 400] }
+                thumbnail: { size: [640, 400], mode: outbound }
 
 ##############################################################
         album_dropzone:
@@ -98,3 +103,4 @@ liip_imagine:
             filters:
                 upscale: { min: [800, 800] }
                 thumbnail: { size: [800, 800], mode: inset }
+

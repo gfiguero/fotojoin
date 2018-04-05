@@ -135,19 +135,60 @@ class PhotographyRepository extends EntityRepository
         return $qb->getQuery()->getSingleScalarResult();
     }
 
-    public function getRanking()
+    public function getAppraisementCount($photography)
+    {
+        $qb = $this->getEntityManager()->createQueryBuilder();
+
+        $qb->select('COUNT(a.value) as appraisementcount')
+            ->from('FotoJoinGalleryBundle:Appraisement', 'a')
+            ->where('a.photography = (:photography)')
+            ->setParameter('photography', $photography)
+        ;
+
+        return $qb->getQuery()->getSingleScalarResult();
+    }
+
+    public function getAppraisementValue($photography)
+    {
+        $qb = $this->getEntityManager()->createQueryBuilder();
+
+        $qb->select('AVG(a.value) as appraisementvalue')
+            ->from('FotoJoinGalleryBundle:Appraisement', 'a')
+            ->where('a.photography = (:photography)')
+            ->setParameter('photography', $photography)
+        ;
+
+        return $qb->getQuery()->getSingleScalarResult();
+    }
+
+    public function getRanking($region = null, $province = null, $commune = null)
     {
         $qb = $this->getEntityManager()->createQueryBuilder();
 
         $qb ->select('ph as photography')
-            ->addSelect('COUNT(DISTINCT(ap.id)) as quantity', 'AVG(ap.value) as average', 'u.exigency as exigency', 'u')
+            ->addSelect('COUNT(DISTINCT(ap.id)) as quantity', 'AVG(ap.value) as average')
             ->from('FotoJoinControlPanelBundle:Photography', 'ph')
-            ->leftJoin('FotoJoinGalleryBundle:Appraisement', 'ap', 'WITH', 'ap.photography = ph.id')
-            ->leftJoin('ph.user', 'u')
-            ->groupBy('ph.id')
         ;
 
-//        $qb->having('quantity >= 3', 'average >= exigency');
+        $qb->leftJoin('FotoJoinGalleryBundle:Appraisement', 'ap', 'WITH', 'ap.photography = ph.id');
+        $qb->leftJoin('ph.user', 'u');
+//        $qb->join('al.user', 'u');
+        $qb->join('u.commune', 'c');
+        $qb->join('c.province', 'p');
+        $qb->join('p.region', 'r');
+
+        if($commune){
+            $qb = $qb->andWhere('c.id = :commune');
+            $qb = $qb->setParameter('commune', $commune->getId());
+        } elseif ($province) {
+            $qb = $qb->andWhere('p.id = :province');
+            $qb = $qb->setParameter('province', $province->getId());
+        } elseif ($region) {
+            $qb = $qb->andWhere('r.id = :region');
+            $qb = $qb->setParameter('region', $region->getId());
+        }
+
+        $qb->groupBy('ph.id');
 
         $photographyNodes = $qb->getQuery()->getResult();
         shuffle($photographyNodes);

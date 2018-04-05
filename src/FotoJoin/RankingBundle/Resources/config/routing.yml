@@ -1,3 +1,7 @@
+foto_join_ranking_photographer:
+    resource: "@FotoJoinRankingBundle/Resources/config/routing/photographer.yml"
+    prefix:   /photographer
+
 foto_join_ranking_photography:
     resource: "@FotoJoinRankingBundle/Resources/config/routing/photography.yml"
     prefix:   /photography

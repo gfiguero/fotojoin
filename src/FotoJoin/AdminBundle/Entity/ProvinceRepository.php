@@ -10,4 +10,19 @@ namespace FotoJoin\AdminBundle\Entity;
  */
 class ProvinceRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function getActive($region)
+    {
+        $qb = $this->getEntityManager()->createQueryBuilder()->select('p')
+            ->from('FotoJoinAdminBundle:Province', 'p')
+            ->join('p.communes', 'c')
+            ->join('c.users', 'u')
+            ->join('u.albums', 'a')
+            ->join('a.photographies', 'ph')
+            ->where('p.region = :region')
+            ->groupBy('p.id')
+            ->setParameter('region', $region)
+        ;
+
+        return $qb->getQuery()->getResult();
+    }
 }

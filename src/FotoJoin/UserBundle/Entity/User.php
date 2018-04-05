@@ -263,7 +263,11 @@ class User extends BaseUser
      */
     public function getProfilePhotoFileName()
     {
-        return $this->profilephotofilename;
+        if ($this->profilephotofilename) {
+            return $this->profilephotofilename;
+        }
+        return 'default.png';
+
     }
 
     public function setProfilePhoto(File $profilephoto = null)

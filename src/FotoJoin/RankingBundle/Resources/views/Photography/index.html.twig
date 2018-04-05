@@ -1,112 +1,44 @@
 {% extends 'FotoJoinRankingBundle:Photography:layout.html.twig' %}
-{% use 'FotoJoinRankingBundle:Photography:user.html.twig' %}
-{% use 'FotoJoinRankingBundle:Photography:appraisement.html.twig' %}
-{% use 'FotoJoinRankingBundle:Photography:capture.html.twig' %}
 
 {% trans_default_domain 'FotoJoinRankingBundle' %}
 
 {% block photography %}
-    <div class="row" id="response">
-        <div class="col-md-12">
-            {% for photography in photographies %}
-                <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3 nopadding">
-                    <a href="#{{ photography.id }}" data-toggle="modal" data-target="#modal">
-                        <img class="img-responsive lazyload" data-sizes="auto" data-src="{{ vich_uploader_asset(photography, 'file', 'FotoJoin\\ControlPanelBundle\\Entity\\Photography')|imagine_filter('gallery_photography_small') }}" />
-                    </a>
+    <div class="row">
+        {% block location %}{{ parent() }}{% endblock %}
+        {% block switch %}{{ parent() }}{% endblock %}
+        <div class="col-sm-12">
+            <div class="grid cs-style-4">
+                {% for photography in photographies %}
+                <div class="element">
+                    <figure>
+                        <div class="photography"><img class="img-responsive lazyload" data-size="auto" data-src="{{ vich_uploader_asset(photography, 'file', 'FotoJoin\\ControlPanelBundle\\Entity\\Photography')|imagine_filter('gallery_photography_small') }}" /></div>
+                        <figcaption>
+                            <h3>{{ photography.user }}</h3>
+                            <span>{{ user_level[photography.user.level]|trans({}, 'FotoJoinUserBundle') }}</span>
+                            <a class="btn btn-success" href="{{ path('ranking_photography_show', {'photography': photography.id }) }}">Dar un vistazo</a>
+                        </figcaption>
+                    </figure>
                 </div>
-            {% endfor %}
-            <div id="modal" class="modal animated fadeIn" tabindex="-1" data-focus-on="input:first" style="display: none;">
-                <div class="modal-dialog modal-lg" role="document">
-                    <div class="modal-content">
-                        <div class="modal-body">
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">{{ icon('times') }}</button>
-                            <div class="row">
-                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-8">
-                                    <div id="modalCarousel" class="carousel" data-ride="carousel">
-                                        <div class="carousel-inner" role="listbox">
-                                            {% for key, photography in photographies %}
-                                                {% set appraisementAverage = attribute(appraisementAverages, key) %}
-                                                {% set appraisementQuantity = attribute(appraisementQuantities, key) %}
-                                                {% if loop.first %}<div class="item active">{% else %}<div class="item">{% endif %}
-                                                    <img class="img-responsive center-block" src="{{ vich_uploader_asset(photography, 'file', 'FotoJoin\\ControlPanelBundle\\Entity\\Photography')|imagine_filter('gallery_photography_medium') }}" alt="{{ 1 }}" />
-                                                    <div id="carousel-caption">
-                                                        {% block captionuser %}{{ parent() }}{% endblock %}
-                                                        {% block captioncapture %}{{ parent() }}{% endblock %}
-                                                        {% block captionappraisement %}{{ parent() }}{% endblock %}
-                                                    </div>
-                                                </div>
-                                            {% endfor %}
-                                            <a class="left carousel-control" href="#modalCarousel" data-slide="prev"><i class="fa fa-chevron-left"></i></a>
-                                            <a class="right carousel-control" href="#modalCarousel" data-slide="next"><i class="fa fa-chevron-right"></i></a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4">
-                                    <div id="modal-caption"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                {% endfor %}
             </div>
         </div>
     </div>
 {% endblock %}
 
 {% block stylesheet %}
-    <style type="text/css">
-        .modal-dialog {
-          width: 98%;
-          padding: 0;
-        }
-
-        .modal-content {
-          height: 99%;
-        }
-    </style>
+    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/fotojoinranking/css/component.css') }}" />
+    <style type="text/css">.btn-bar{margin-bottom: 2px;}</style>
 {% endblock %}
 
 {% block javascript %}
-    <script type="text/javascript">
-        function loadCarousel(){
-            $('#modalCarousel').carousel({interval:false});
-            var caption = $('div.item:nth-child(1) #carousel-caption');
-            $('#modal-caption').html(caption.html());
-            caption.css('display','none');
-            $("#modalCarousel").on('slide.bs.carousel', function(evt) {
-                var key = $(evt.relatedTarget).index();
-                var caption = $('div.item:nth-child(' + (key+1) + ') #carousel-caption');
-                $('#modal-caption').html(caption.html());
-                caption.css('display','none');
-                //loadAppraisement(key);
-            });
-        }
-
-        $(document).ready(function() {
-            loadCarousel();
-        });
-
-        $('#modalCarousel').carousel({interval:false});
-
-        /* change modal title when slide changes */
-        $('#modalCarousel').on('slid.bs.carousel', function () {
-            $('.modal-title').html($(this).find('.active').attr("title"));
-        })
-
-        /* when clicking a thumbnail */
-        $('.row .img-responsive').click(function(){
-            var idx = $(this).parents('div').index();
-            var id = parseInt(idx);
-            $('#myModal').modal('show'); // show the modal
-            $('#modalCarousel').carousel(id); // slide carousel to selected
-        });
-    </script>
+    <script src="{{ asset('bundles/fotojoinranking/js/modernizr.custom.js') }}" async=""></script>
+    <script src="{{ asset('vendor/lazysizes/lazysizes.min.js') }}" async=""></script>
     <script type="text/javascript">
         window.lazySizesConfig = window.lazySizesConfig || {};
         window.lazySizesConfig.expand = 100;
         window.lazySizesConfig.expFactor = 1;
         window.lazySizesConfig.loadMode = 1;
-        window.lazySizesConfig.loadedClass = 'lazyloaded animated zoomIn';
+        window.lazySizesConfig.loadedClass = 'lazyloaded animated fadeIn';
     </script>
-    <script src="{{ asset('vendor/lazysizes/lazysizes.min.js') }}" async=""></script>
+    <script type="text/javascript">$('.btn-bar').popover({ trigger: "hover" });</script>
 {% endblock %}

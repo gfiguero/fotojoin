@@ -10,6 +10,77 @@ namespace FotoJoin\UserBundle\Entity;
  */
 class UserRepository extends \Doctrine\ORM\EntityRepository
 {
+
+    public function getAppraisementCount($user)
+    {
+        $qb = $this->getEntityManager()->createQueryBuilder();
+
+        $qb->select('COUNT(a.value) as appraisementcount')
+            ->from('FotoJoinGalleryBundle:Appraisement', 'a')
+            ->join('a.photography', 'ph')
+            ->where('ph.user = (:user)')
+            ->setParameter('user', $user)
+        ;
+
+        return $qb->getQuery()->getSingleScalarResult();
+    }
+
+    public function getAppraisementValue($user)
+    {
+        $qb = $this->getEntityManager()->createQueryBuilder();
+
+        $qb->select('AVG(a.value) as appraisementvalue')
+            ->from('FotoJoinGalleryBundle:Appraisement', 'a')
+            ->join('a.photography', 'ph')
+            ->where('ph.user = (:user)')
+            ->setParameter('user', $user)
+        ;
+
+        return $qb->getQuery()->getSingleScalarResult();
+    }
+
+    public function getRanking($region = null, $province = null, $commune = null)
+    {
+        $qb = $this->getEntityManager()->createQueryBuilder();
+        $qb ->select('u as photographer')
+            ->addSelect('COUNT(DISTINCT(ap.id)) as quantity', 'AVG(ap.value) as average')
+            ->from('FotoJoinUserBundle:User', 'u')
+        ;
+
+        $qb->leftJoin('FotoJoinControlPanelBundle:Photography', 'ph', 'WITH', 'ph.user = u.id');
+        $qb->leftJoin('FotoJoinGalleryBundle:Appraisement', 'ap', 'WITH', 'ap.photography = ph.id');
+        $qb->join('u.commune', 'c');
+        $qb->join('c.province', 'p');
+        $qb->join('p.region', 'r');
+
+        if($commune){
+            $qb = $qb->andWhere('c.id = :commune');
+            $qb = $qb->setParameter('commune', $commune->getId());
+        } elseif ($province) {
+            $qb = $qb->andWhere('p.id = :province');
+            $qb = $qb->setParameter('province', $province->getId());
+        } elseif ($region) {
+            $qb = $qb->andWhere('r.id = :region');
+            $qb = $qb->setParameter('region', $region->getId());
+        }
+
+        $qb->groupBy('u.id');
+
+        $userNodes = $qb->getQuery()->getResult();
+        shuffle($userNodes);
+
+        $photographers = array_column($userNodes, 'photographer');
+        $appraisementAverages = array_column($userNodes, 'average');
+        $appraisementQuantities = array_column($userNodes, 'quantity');
+
+        return array(
+            'photographers' => $photographers,
+            'appraisementAverages' => $appraisementAverages,
+            'appraisementQuantities' => $appraisementQuantities
+        );
+    }
+
+
     public function getUsersByCategories($categories)
     {
         $qb = $this->getEntityManager()

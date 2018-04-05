@@ -5,11 +5,11 @@ FotoJoin\AdminBundle\Entity\Province:
     manyToOne:
         region:
             targetEntity: FotoJoin\AdminBundle\Entity\Region
-            inversedBy: province
+            inversedBy: provinces
     oneToMany:
         communes:
             targetEntity: FotoJoin\AdminBundle\Entity\Commune
-            mappedBy: provinces
+            mappedBy: province
     id:
         id:
             type: integer

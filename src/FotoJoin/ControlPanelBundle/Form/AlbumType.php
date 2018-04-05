@@ -26,6 +26,7 @@ class AlbumType extends AbstractType
             ->add('user', 'entity_hidden', array(
                 'class' => 'FotoJoin\UserBundle\Entity\User'
             ))
+/*
             ->add('photographies', 'bootstrap_collection', array(
                 'label' => false,
                 'attr'  => array( 'label_col' => 0, 'widget_col' => 12 ),
@@ -34,6 +35,7 @@ class AlbumType extends AbstractType
                 'allow_delete' => true,
                 'by_reference' => false,
             ))
+*/
         ;
     }
     
