@@ -1,0 +1,33 @@
+{% extends 'FotoJoinRankingBundle:Photographer:layout.html.twig' %}
+
+{% trans_default_domain 'FotoJoinRankingBundle' %}
+
+{% block photographer %}
+    {% block location %}{{ parent() }}{% endblock %}
+    <div class="row">
+        <div class="col-md-4">
+            {% block user %}{{ parent() }}{% endblock %}
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+        </div>
+    </div>
+{% endblock %}
+
+{% block stylesheet %}
+    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/fotojoinranking/css/component.css') }}" />
+{% endblock %}
+
+{% block javascript %}
+    <script src="{{ asset('bundles/fotojoinranking/js/modernizr.custom.js') }}" async=""></script>
+    <script src="{{ asset('vendor/lazysizes/lazysizes.min.js') }}" async=""></script>
+    <script type="text/javascript">
+        window.lazySizesConfig = window.lazySizesConfig || {};
+        window.lazySizesConfig.expand = 100;
+        window.lazySizesConfig.expFactor = 1;
+        window.lazySizesConfig.loadMode = 1;
+        window.lazySizesConfig.loadedClass = 'lazyloaded animated fadeIn';
+    </script>
+{% endblock %}

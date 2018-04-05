@@ -1,0 +1,54 @@
+{% extends 'FotoJoinRankingBundle:Photography:layout.html.twig' %}
+
+{% trans_default_domain 'FotoJoinRankingBundle' %}
+
+{% block photography %}
+    <div class="row">
+        {% block location %}{{ parent() }}{% endblock %}
+        {% block switch %}{{ parent() }}{% endblock %}
+        <div class="col-md-8">
+            <img class="img-responsive lazyload" data-size="auto" data-src="{{ vich_uploader_asset(photography, 'file', 'FotoJoin\\ControlPanelBundle\\Entity\\Photography')|imagine_filter('gallery_photography_medium') }}" />
+        </div>
+        <div class="col-md-4">
+            {% block user %}{{ parent() }}{% endblock %}
+            {% block appraisement %}{{ parent() }}{% endblock %}
+            {% block capture %}{{ parent() }}{% endblock %}
+        </div>
+    </div>
+
+    <div class="row" id="response">
+        <div class="col-md-12">
+            <h3>Otras fotografías del mismo álbum</h3>
+            <div class="grid cs-style-4">
+                {% for photography in photographies %}
+                <div class="element">
+                    <figure>
+                        <div class="photography"><img class="img-responsive lazyload" data-size="auto" data-src="{{ vich_uploader_asset(photography, 'file', 'FotoJoin\\ControlPanelBundle\\Entity\\Photography')|imagine_filter('gallery_photography_small') }}" /></div>
+                        <figcaption>
+                            <h3>{{ photography.user }}</h3>
+                            <span>{{ user_level[photography.user.level]|trans({}, 'FotoJoinUserBundle') }}</span>
+                            <a class="btn btn-success" href="{{ path('ranking_photography_show', {'photography': photography.id }) }}">Dar un vistazo</a>
+                        </figcaption>
+                    </figure>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block stylesheet %}
+    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/fotojoinranking/css/component.css') }}" />
+{% endblock %}
+
+{% block javascript %}
+    <script src="{{ asset('bundles/fotojoinranking/js/modernizr.custom.js') }}" async=""></script>
+    <script src="{{ asset('vendor/lazysizes/lazysizes.min.js') }}" async=""></script>
+    <script type="text/javascript">
+        window.lazySizesConfig = window.lazySizesConfig || {};
+        window.lazySizesConfig.expand = 100;
+        window.lazySizesConfig.expFactor = 1;
+        window.lazySizesConfig.loadMode = 1;
+        window.lazySizesConfig.loadedClass = 'lazyloaded animated fadeIn';
+    </script>
+{% endblock %}

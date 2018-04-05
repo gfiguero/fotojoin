@@ -1,0 +1,45 @@
+{% extends 'FotoJoinRankingBundle:Photographer:layout.html.twig' %}
+
+{% trans_default_domain 'FotoJoinRankingBundle' %}
+
+{% block photographer %}
+    <div class="row">
+        {% block location %}{{ parent() }}{% endblock %}
+        {% block switch %}{{ parent() }}{% endblock %}
+        <div class="col-md-12">
+            <div class="grid cs-style-4">
+                {% for photographer in photographers %}
+                <div class="element">
+                    <figure>
+                        <div class="photographer"><img class="img-responsive lazyload" data-size="auto" data-src="{{ vich_uploader_asset(photographer, 'profilephoto')|imagine_filter('ranking_photographer_medium') }}" /></div>
+                        <figcaption>
+                            <h3>{{ photographer.name }}</h3>
+                            <span>{{ user_level[photographer.level]|trans({}, 'FotoJoinUserBundle') }}</span>
+                            <p>{{ photographer.commune.name }}</p>
+                            <a class="btn btn-success" href="{{ path('ranking_photographer_show', {'photographer': photographer.id }) }}">Ver Perfil</a>
+                        </figcaption>
+                    </figure>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block stylesheet %}
+    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/fotojoinranking/css/component.css') }}" />
+    <style type="text/css">.btn-bar{margin-bottom: 2px;}</style>
+{% endblock %}
+
+{% block javascript %}
+    <script src="{{ asset('bundles/fotojoinranking/js/modernizr.custom.js') }}" async=""></script>
+    <script src="{{ asset('vendor/lazysizes/lazysizes.min.js') }}" async=""></script>
+    <script type="text/javascript">
+        window.lazySizesConfig = window.lazySizesConfig || {};
+        window.lazySizesConfig.expand = 100;
+        window.lazySizesConfig.expFactor = 1;
+        window.lazySizesConfig.loadMode = 1;
+        window.lazySizesConfig.loadedClass = 'lazyloaded animated fadeIn';
+    </script>
+    <script type="text/javascript">$('.btn-bar').popover({ trigger: "hover" });</script>
+{% endblock %}

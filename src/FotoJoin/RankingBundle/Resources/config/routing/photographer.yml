@@ -1,0 +1,13 @@
+ranking_photographer_index:
+    path:     /{region}/{province}/{commune}
+    defaults: { _controller: "FotoJoinRankingBundle:Photographer:index", region: '', province: '', commune: '' }
+    methods:  GET
+    requirements:
+        region: '\d+|'
+        province: '\d+|'
+        commune: '\d+|'
+
+ranking_photographer_show:
+    path:     /{user}/show
+    defaults: { _controller: "FotoJoinRankingBundle:Photographer:show" }
+    methods:  GET

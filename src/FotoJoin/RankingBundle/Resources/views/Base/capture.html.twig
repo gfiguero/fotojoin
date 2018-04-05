@@ -1,0 +1,40 @@
+{% block capture %}
+    {% if photography.DateTimeOriginal or photography.MakeModel or photography.ExposureTime or photography.FocalLength or photography.FNumber or photography.ISOSpeedRatings %}
+    <div id="capture">
+        <h4>{{ icon('camera fa-fw') }}&nbsp;{{ 'photography.capture.title'|trans }}</h4>
+        <dl class="dl-horizontal">
+
+        {% if photography.DateTimeOriginal %}
+            <dt>{{ 'photography.form.datetimeoriginal'|trans }}</dt>
+            <dd>{{ photography.DateTimeOriginal|localizeddate('full', 'full', 'es_ES', 'America/Santiago', "dd 'de' LLLL 'de' Y") }}</dd>
+        {% endif %}
+
+        {% if photography.MakeModel %}
+            <dt>{{ 'photography.form.makemodel'|trans }}</dt>
+            <dd>{{ photography.MakeModel }}</dd>
+        {% endif %}
+
+        {% if photography.ExposureTime %}
+            <dt>{{ 'photography.form.exposuretime'|trans }}</dt>
+            <dd>{{ photography.ExposureTime }}</dd>
+        {% endif %}
+
+        {% if photography.FocalLength %}
+            <dt>{{ 'photography.form.focallength'|trans }}</dt>
+            <dd>{{ photography.FocalLength }}</dd>
+        {% endif %}
+
+        {% if photography.FNumber %}
+            <dt>{{ 'photography.form.fnumber'|trans }}</dt>
+            <dd>{{ photography.FNumber }}</dd>
+        {% endif %}
+
+        {% if photography.ISOSpeedRatings %}
+            <dt>{{ 'photography.form.isospeedratings'|trans }}</dt>
+            <dd>{{ photography.ISOSpeedRatings }}</dd>
+        {% endif %}
+
+        </dl>
+    </div>
+    {% endif %}
+{% endblock %}

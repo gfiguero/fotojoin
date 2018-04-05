@@ -1,0 +1,27 @@
+{% block location %}
+    <div class="col-md-8">
+        <a data-content="Buscar en todo el país" data-toggle="popover" data-placement="bottom" href="{{ path('ranking_photographer_index') }}" class="btn btn-primary btn-bar">{{ icon('search fa-fw') }}&nbsp;Chile</a>
+    {% if region %}
+        <a data-content="Buscar en la región" data-toggle="popover" data-placement="bottom" href="{{ path('ranking_photographer_index', {'region' : region.id }) }}" class="btn btn-primary btn-bar">{{ icon('search fa-fw') }}&nbsp;{{ region.name }}</a>
+    {% else %}
+    {% for region in regions %}
+        <a data-content="Seleccionar región" data-toggle="popover" data-placement="bottom" href="{{ path('ranking_photographer_index', {'region' : region.id }) }}" class="btn btn-default btn-bar">{{ icon('map-marker fa-fw') }}&nbsp;{{ region.name }}</a>
+    {% endfor %}
+    {% endif %}
+    {% if province %}
+        <a data-content="Buscar en la provincia" data-toggle="popover" data-placement="bottom" href="{{ path('ranking_photographer_index', {'region' : region.id, 'province' : province.id }) }}" class="btn btn-primary btn-bar">{{ icon('search fa-fw') }}&nbsp;{{ province.name }}</a>
+    {% else %}
+    {% for province in provinces %}
+        <a data-content="Seleccionar provincia" data-toggle="popover" data-placement="bottom" href="{{ path('ranking_photographer_index', {'region' : region.id, 'province' : province.id }) }}" class="btn btn-default btn-bar">{{ icon('map-marker fa-fw') }}&nbsp;{{ province.name }}</a>
+    {% endfor %}
+    {% endif %}
+    {% if commune %}
+        <a data-content="Buscar en la comuna" data-toggle="popover" data-placement="bottom" href="{{ path('ranking_photographer_index', {'region' : region.id, 'province' : province.id, 'commune' : commune.id }) }}" class="btn btn-primary btn-bar">{{ icon('search fa-fw') }}&nbsp;{{ commune.name }}</a>
+    {% else %}
+    {% for commune in communes %}
+        <a data-content="Seleccionar comuna" data-toggle="popover" data-placement="bottom" href="{{ path('ranking_photographer_index', {'region' : region.id, 'province' : province.id, 'commune' : commune.id }) }}" class="btn btn-default btn-bar">{{ icon('map-marker fa-fw') }}&nbsp;{{ commune.name }}</a>
+    {% endfor %}
+    {% endif %}
+        <p></p>
+    </div>
+{% endblock %}
