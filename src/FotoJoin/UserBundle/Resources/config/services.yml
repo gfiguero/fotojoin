@@ -35,3 +35,7 @@ services:
         arguments: ['@security.authorization_checker', '%user_level%', '%user_exigency%']
         tags:
             - { name: form.type, alias: fotojoin_user_profile }
+
+    fos_user.profile.controller:
+        class: FOS\UserBundle\Controller\ProfileController
+        arguments: ['@event_dispatcher', '@fos_user.profile.form.factory', '@fos_user.user_manager']
