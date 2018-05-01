@@ -16,7 +16,7 @@
                             <h3>{{ photographer.name }}</h3>
                             <span>{{ user_level[photographer.level]|trans({}, 'FotoJoinUserBundle') }}</span>
                             <p>{{ photographer.commune.name }}</p>
-                            <a class="btn btn-success" href="{{ path('ranking_photographer_show', {'photographer': photographer.id }) }}">Ver Perfil</a>
+                            <a class="btn btn-success" href="{{ path('ranking_photographer_show', {'user': photographer.id }) }}">Ver Perfil</a>
                         </figcaption>
                     </figure>
                 </div>

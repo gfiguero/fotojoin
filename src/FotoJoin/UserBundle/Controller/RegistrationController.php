@@ -15,6 +15,9 @@ use FOS\UserBundle\Model\UserInterface;
 use FOS\UserBundle\Controller\RegistrationController as BaseController;
 use FotoJoin\UserBundle\Entity\Author;
 
+use FOS\UserBundle\Form\Factory\FactoryInterface;
+
+
 /**
  * Controller managing the registration
  *
@@ -76,25 +79,6 @@ class RegistrationController extends BaseController
     }
 
     /**
-     * Tell the user to check his email provider
-     */
-    public function checkEmailAction()
-    {
-        $email = $this->get('session')->get('fos_user_send_confirmation_email/email');
-        $this->get('session')->remove('fos_user_send_confirmation_email/email');
-        $user = $this->get('fos_user.user_manager')->findUserByEmail($email);
-
-        if (null === $user) {
-            return $this->redirectToRoute('foto_join_front_page_homepage');
-            throw new NotFoundHttpException(sprintf('The user with email "%s" does not exist', $email));
-        }
-
-        return $this->render('FotoJoinUserBundle:Registration:checkEmail.html.twig', array(
-            'user' => $user,
-        ));
-    }
-
-    /**
      * Receive the confirmation token from user email provider, login the user
      */
     public function confirmAction(Request $request, $token)
@@ -129,35 +113,4 @@ class RegistrationController extends BaseController
         return $response;
     }
 
-    /**
-     * Tell the user his account is now confirmed
-     */
-    public function confirmedAction()
-    {
-        $user = $this->getUser();
-        if (!is_object($user) || !$user instanceof UserInterface) {
-            throw new AccessDeniedException('This user does not have access to this section.');
-        }
-
-        return $this->render('FotoJoinUserBundle:Registration:confirmed.html.twig', array(
-            'user' => $user,
-            'targetUrl' => $this->getTargetUrlFromSession(),
-        ));
-    }
-
-    private function getTargetUrlFromSession()
-    {
-        // Set the SecurityContext for Symfony <2.6
-        if (interface_exists('Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface')) {
-            $tokenStorage = $this->get('security.token_storage');
-        } else {
-            $tokenStorage = $this->get('security.context');
-        }
-
-        $key = sprintf('_security.%s.target_path', $tokenStorage->getToken()->getProviderKey());
-
-        if ($this->get('session')->has($key)) {
-            return $this->get('session')->get($key);
-        }
-    }
 }

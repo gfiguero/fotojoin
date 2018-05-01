@@ -1,7 +1,9 @@
 {% block switch %}
     <div class="col-sm-12 col-md-4">
-        <a href="{{ path('ranking_photographer_index') }}" class="btn btn-primary btn-bar {% if 'photographer' in app.request.attributes.get('_route') %}active{% endif %}">{{ icon('user fa-fw') }}&nbsp;Fotógrafos</a>
-        <a href="{{ path('ranking_photography_index') }}" class="btn btn-primary btn-bar {% if 'photography' in app.request.attributes.get('_route') %}active{% endif %}">{{ icon('picture-o fa-fw') }}&nbsp;Fotografías</a>
-        <p></p>
+        <div class="pull-right">
+            <a href="{{ path('ranking_photographer_index') }}" class="btn btn-primary btn-bar {% if 'photographer' in app.request.attributes.get('_route') %}active{% endif %}">{{ icon('user fa-fw') }}&nbsp;Fotógrafos</a>
+            <a href="{{ path('ranking_photography_index') }}" class="btn btn-primary btn-bar {% if 'photography' in app.request.attributes.get('_route') %}active{% endif %}">{{ icon('picture-o fa-fw') }}&nbsp;Fotografías</a>
+            <p></p>
+        </div>
     </div>
 {% endblock %}
