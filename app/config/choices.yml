@@ -1,7 +1,8 @@
 parameters:
     user_level:
-        0: form.level.amatheur
-        1: form.level.professional
+        0: Principiante
+        1: Aficionado
+        2: Profesional
 
     gallery_order:
         0: gallery.order.random

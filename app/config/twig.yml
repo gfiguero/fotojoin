@@ -11,4 +11,5 @@ twig:
             - :Form:prototype.html.twig
     globals:
         user_level: "%user_level%"
+        user_exigency: "%user_exigency%"
         contact_reason: "%contact_reason%"

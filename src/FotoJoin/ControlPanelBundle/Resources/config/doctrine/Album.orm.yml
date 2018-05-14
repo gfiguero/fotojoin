@@ -12,6 +12,7 @@ FotoJoin\ControlPanelBundle\Entity\Album:
             targetEntity: FotoJoin\ControlPanelBundle\Entity\Photography
             mappedBy: album
             cascade: [persist, merge, remove]
+            fetch: EAGER
     id:
         id:
             type: integer

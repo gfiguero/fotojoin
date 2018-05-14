@@ -1,6 +1,14 @@
 link:
     join: Votar!
     gallery: 'Galería Fotográfica'
+    ranking: Explorar
     login: 'Ingresar'
     signup: Registro
     timeline: Funcionamiento
+    contact: Contacto
+
+contact:
+    form:
+        name: Nombre
+        email: Email
+        message: Mensaje

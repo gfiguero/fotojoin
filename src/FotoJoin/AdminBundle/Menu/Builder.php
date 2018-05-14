@@ -28,20 +28,44 @@ class Builder implements ContainerAwareInterface
         $sidemenu->setChildrenAttribute('id', 'side-menu');
 
 
-        $sidemenu->addChild('sidemenu.category', array('route' => 'admin_category_index'))->setExtras(array('translation_domain' => 'FotoJoinAdminBundle', 'routes' => array(
-            'admin_category_index',
-            'admin_category_new',
-            'admin_category_show',
-            'admin_category_edit',
-            'admin_category_delete',
+//        $sidemenu->addChild('sidemenu.category', array('route' => 'admin_category_index'))->setExtras(array('translation_domain' => 'FotoJoinAdminBundle', 'routes' => array(
+//            'admin_category_index',
+//            'admin_category_new',
+//            'admin_category_show',
+//            'admin_category_edit',
+//            'admin_category_delete',
+//        )));
+
+//        $sidemenu->addChild('sidemenu.city', array('route' => 'admin_city_index'))->setExtras(array('translation_domain' => 'FotoJoinAdminBundle', 'routes' => array(
+//            'admin_city_index',
+//            'admin_city_new',
+//            'admin_city_show',
+//            'admin_city_edit',
+//            'admin_city_delete',
+//        )));
+
+        $sidemenu->addChild('sidemenu.contact', array('route' => 'admin_contact_index'))->setExtras(array('translation_domain' => 'FotoJoinAdminBundle', 'routes' => array(
+            'admin_contact_index',
+            'admin_contact_new',
+            'admin_contact_show',
+            'admin_contact_edit',
+            'admin_contact_delete',
         )));
 
-        $sidemenu->addChild('sidemenu.city', array('route' => 'admin_city_index'))->setExtras(array('translation_domain' => 'FotoJoinAdminBundle', 'routes' => array(
-            'admin_city_index',
-            'admin_city_new',
-            'admin_city_show',
-            'admin_city_edit',
-            'admin_city_delete',
+        $sidemenu->addChild('sidemenu.plan', array('route' => 'admin_plan_index'))->setExtras(array('translation_domain' => 'FotoJoinAdminBundle', 'routes' => array(
+            'admin_plan_index',
+            'admin_plan_new',
+            'admin_plan_show',
+            'admin_plan_edit',
+            'admin_plan_delete',
+        )));
+
+        $sidemenu->addChild('sidemenu.user', array('route' => 'admin_user_index'))->setExtras(array('translation_domain' => 'FotoJoinAdminBundle', 'routes' => array(
+            'admin_user_index',
+            'admin_user_new',
+            'admin_user_show',
+            'admin_user_edit',
+            'admin_user_delete',
         )));
 
         $sidemenu->addChild('sidemenu.album', array('route' => 'admin_album_index'))->setExtras(array('translation_domain' => 'FotoJoinAdminBundle', 'routes' => array(
@@ -60,27 +84,6 @@ class Builder implements ContainerAwareInterface
             'admin_photography_delete',
         )));
 
-        $sidemenu->addChild('sidemenu.plan', array('route' => 'admin_plan_index'))->setExtras(array('translation_domain' => 'FotoJoinAdminBundle', 'routes' => array(
-            'admin_plan_index',
-            'admin_plan_new',
-            'admin_plan_show',
-            'admin_plan_edit',
-            'admin_plan_delete',
-        )));
-        $sidemenu->addChild('sidemenu.user', array('route' => 'admin_user_index'))->setExtras(array('translation_domain' => 'FotoJoinAdminBundle', 'routes' => array(
-            'admin_user_index',
-            'admin_user_new',
-            'admin_user_show',
-            'admin_user_edit',
-            'admin_user_delete',
-        )));
-        $sidemenu->addChild('sidemenu.contact', array('route' => 'admin_contact_index'))->setExtras(array('translation_domain' => 'FotoJoinAdminBundle', 'routes' => array(
-            'admin_contact_index',
-            'admin_contact_new',
-            'admin_contact_show',
-            'admin_contact_edit',
-            'admin_contact_delete',
-        )));
 /*
         $sidemenu->addChild('sidemenu.dashboard', array('route' => 'dashboard_index'))->setAttribute('icon', 'dashboard fa-fw')->setAttribute('translation_domain', 'FotoJoinAdminBundle');
         $sidemenu->addChild('sidemenu.appraisement', array('route' => 'admin_appraisement_index'))->setAttribute('icon', 'star-half-o fa-fw')->setAttribute('translation_domain', 'FotoJoinAdminBundle');

@@ -24,7 +24,8 @@ class ContactType extends AbstractType
                 'attr'  => array( 'label_col' => 4, 'widget_col' => 8 ),
                 'translation_domain' => 'FotoJoinAdminBundle',
             )) 
-            ->add('tag', null, array(
+            ->add('tag', 'contact_reason', array(
+                'required' => true,
                 'label' => 'contact.form.tag',
                 'attr'  => array( 'label_col' => 4, 'widget_col' => 8 ),
                 'translation_domain' => 'FotoJoinAdminBundle',

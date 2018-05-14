@@ -180,6 +180,9 @@ user:
         flash: El Usuario ha sido eliminado
     form:
         id: ID
+        email: Email
+        password: Password
+        plan: Plan
         level: Nivel
         description: Descripción
         publiccontact: Contacto
@@ -278,5 +281,6 @@ album:
         id: ID
         user: Usuario
         name: Nombre
+        photographies: Fotografías
         createdAt: Creado
         updatedAt: Actualizado

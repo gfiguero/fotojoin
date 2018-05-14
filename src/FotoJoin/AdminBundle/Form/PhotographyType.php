@@ -13,22 +13,17 @@ class PhotographyType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder 
-            ->add('filename', null, array(
-                'label' => 'photography.form.filename',
-                'attr'  => array( 'label_col' => 4, 'widget_col' => 8 ),
-                'translation_domain' => 'FotoJoinAdminBundle',
-            )) 
-            ->add('value', null, array(
-                'label' => 'photography.form.value',
-                'attr'  => array( 'label_col' => 4, 'widget_col' => 8 ),
-                'translation_domain' => 'FotoJoinAdminBundle',
-            )) 
-            ->add('published', null, array(
-                'label' => 'photography.form.published',
-                'attr'  => array( 'label_col' => 4, 'widget_col' => 8 ),
-                'translation_domain' => 'FotoJoinAdminBundle',
-            )) 
+        $builder
+//            ->add('filename', null, array(
+//                'label' => 'photography.form.filename',
+//                'attr'  => array( 'label_col' => 4, 'widget_col' => 8 ),
+//                'translation_domain' => 'FotoJoinAdminBundle',
+//            )) 
+//            ->add('value', null, array(
+//                'label' => 'photography.form.value',
+//                'attr'  => array( 'label_col' => 4, 'widget_col' => 8 ),
+//                'translation_domain' => 'FotoJoinAdminBundle',
+//            )) 
             ->add('MakeModel', null, array(
                 'label' => 'photography.form.MakeModel',
                 'attr'  => array( 'label_col' => 4, 'widget_col' => 8 ),
@@ -68,12 +63,17 @@ class PhotographyType extends AbstractType
                 'label' => 'photography.form.album',
                 'attr'  => array( 'label_col' => 4, 'widget_col' => 8 ),
                 'translation_domain' => 'FotoJoinAdminBundle',
-            )) 
-            ->add('categories', null, array(
-                'label' => 'photography.form.categories',
+            ))
+            ->add('published', null, array(
+                'label' => 'photography.form.published',
                 'attr'  => array( 'label_col' => 4, 'widget_col' => 8 ),
                 'translation_domain' => 'FotoJoinAdminBundle',
-            ))
+            )) 
+//            ->add('categories', null, array(
+//                'label' => 'photography.form.categories',
+//                'attr'  => array( 'label_col' => 4, 'widget_col' => 8 ),
+//                'translation_domain' => 'FotoJoinAdminBundle',
+//            ))
         ;
     }
     

@@ -15,12 +15,32 @@ class UserType extends AbstractType
     {
         $builder 
             ->add('plan', null, array(
+                'required' => true,
                 'label' => 'user.form.plan',
                 'attr'  => array( 'label_col' => 4, 'widget_col' => 8 ),
                 'translation_domain' => 'FotoJoinAdminBundle',
             )) 
-            ->add('level', null, array(
+            ->add('level', 'user_level', array(
+                'required' => true,
                 'label' => 'user.form.level',
+                'attr'  => array( 'label_col' => 4, 'widget_col' => 8 ),
+                'translation_domain' => 'FotoJoinAdminBundle',
+            )) 
+            ->add('email', null, array(
+                'required' => true,
+                'label' => 'user.form.email',
+                'attr'  => array( 'label_col' => 4, 'widget_col' => 8 ),
+                'translation_domain' => 'FotoJoinAdminBundle',
+            )) 
+            ->add('password', null, array(
+                'required' => true,
+                'label' => 'user.form.password',
+                'attr'  => array( 'label_col' => 4, 'widget_col' => 8 ),
+                'translation_domain' => 'FotoJoinAdminBundle',
+            )) 
+            ->add('name', null, array(
+                'required' => true,
+                'label' => 'user.form.name',
                 'attr'  => array( 'label_col' => 4, 'widget_col' => 8 ),
                 'translation_domain' => 'FotoJoinAdminBundle',
             )) 
@@ -29,12 +49,22 @@ class UserType extends AbstractType
                 'attr'  => array( 'label_col' => 4, 'widget_col' => 8 ),
                 'translation_domain' => 'FotoJoinAdminBundle',
             )) 
-            ->add('publiccontact', null, array(
-                'label' => 'user.form.publiccontact',
+            ->add('birthdate', null, array(
+                'label' => 'user.form.birthdate',
                 'attr'  => array( 'label_col' => 4, 'widget_col' => 8 ),
                 'translation_domain' => 'FotoJoinAdminBundle',
             )) 
-            ->add('exigency', null, array(
+            ->add('profilephotofilename', null, array(
+                'label' => 'user.form.profilephotofilename',
+                'attr'  => array( 'label_col' => 4, 'widget_col' => 8 ),
+                'translation_domain' => 'FotoJoinAdminBundle',
+            )) 
+//            ->add('publiccontact', null, array(
+//                'label' => 'user.form.publiccontact',
+//                'attr'  => array( 'label_col' => 4, 'widget_col' => 8 ),
+//                'translation_domain' => 'FotoJoinAdminBundle',
+//            )) 
+            ->add('exigency', 'user_exigency', array(
                 'label' => 'user.form.exigency',
                 'attr'  => array( 'label_col' => 4, 'widget_col' => 8 ),
                 'translation_domain' => 'FotoJoinAdminBundle',
@@ -49,11 +79,11 @@ class UserType extends AbstractType
                 'attr'  => array( 'label_col' => 4, 'widget_col' => 8 ),
                 'translation_domain' => 'FotoJoinAdminBundle',
             )) 
-            ->add('facebookshare', null, array(
-                'label' => 'user.form.facebookshare',
-                'attr'  => array( 'label_col' => 4, 'widget_col' => 8 ),
-                'translation_domain' => 'FotoJoinAdminBundle',
-            )) 
+//            ->add('facebookshare', null, array(
+//                'label' => 'user.form.facebookshare',
+//                'attr'  => array( 'label_col' => 4, 'widget_col' => 8 ),
+//                'translation_domain' => 'FotoJoinAdminBundle',
+//            )) 
             ->add('googleid', null, array(
                 'label' => 'user.form.googleid',
                 'attr'  => array( 'label_col' => 4, 'widget_col' => 8 ),
@@ -74,36 +104,21 @@ class UserType extends AbstractType
                 'attr'  => array( 'label_col' => 4, 'widget_col' => 8 ),
                 'translation_domain' => 'FotoJoinAdminBundle',
             )) 
-            ->add('name', null, array(
-                'label' => 'user.form.name',
-                'attr'  => array( 'label_col' => 4, 'widget_col' => 8 ),
-                'translation_domain' => 'FotoJoinAdminBundle',
-            )) 
-            ->add('birthdate', null, array(
-                'label' => 'user.form.birthdate',
-                'attr'  => array( 'label_col' => 4, 'widget_col' => 8 ),
-                'translation_domain' => 'FotoJoinAdminBundle',
-            )) 
-            ->add('profilephotofilename', null, array(
-                'label' => 'user.form.profilephotofilename',
-                'attr'  => array( 'label_col' => 4, 'widget_col' => 8 ),
-                'translation_domain' => 'FotoJoinAdminBundle',
-            )) 
-            ->add('city1', null, array(
-                'label' => 'user.form.city1',
-                'attr'  => array( 'label_col' => 4, 'widget_col' => 8 ),
-                'translation_domain' => 'FotoJoinAdminBundle',
-            )) 
-            ->add('city2', null, array(
-                'label' => 'user.form.city2',
-                'attr'  => array( 'label_col' => 4, 'widget_col' => 8 ),
-                'translation_domain' => 'FotoJoinAdminBundle',
-            )) 
-            ->add('city3', null, array(
-                'label' => 'user.form.city3',
-                'attr'  => array( 'label_col' => 4, 'widget_col' => 8 ),
-                'translation_domain' => 'FotoJoinAdminBundle',
-            ))
+//            ->add('city1', null, array(
+//                'label' => 'user.form.city1',
+//                'attr'  => array( 'label_col' => 4, 'widget_col' => 8 ),
+//                'translation_domain' => 'FotoJoinAdminBundle',
+//            )) 
+//            ->add('city2', null, array(
+//                'label' => 'user.form.city2',
+//                'attr'  => array( 'label_col' => 4, 'widget_col' => 8 ),
+//                'translation_domain' => 'FotoJoinAdminBundle',
+//            )) 
+//            ->add('city3', null, array(
+//                'label' => 'user.form.city3',
+//                'attr'  => array( 'label_col' => 4, 'widget_col' => 8 ),
+//                'translation_domain' => 'FotoJoinAdminBundle',
+//            ))
         ;
     }
     

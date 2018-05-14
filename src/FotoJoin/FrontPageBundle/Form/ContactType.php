@@ -18,6 +18,7 @@ class ContactType extends AbstractType
             ->add('name', 'text', array(
                 'required' => true,
                 'label' => false,
+                'translation_domain' => 'FotoJoinFrontPageBundle',
                 'attr' => array(
                     'placeholder' => 'contact.form.name',
                     'input_group' => array(
@@ -28,6 +29,7 @@ class ContactType extends AbstractType
             ->add('email', 'email', array(
                 'required' => true,
                 'label' => false,
+                'translation_domain' => 'FotoJoinFrontPageBundle',
                 'attr' => array(
                     'placeholder' => 'contact.form.email',
                     'input_group' => array(
@@ -38,6 +40,7 @@ class ContactType extends AbstractType
             ->add('tag', 'contact_reason', array(
                 'required' => true,
                 'label' => false,
+                'translation_domain' => 'FotoJoinFrontPageBundle',
                 'attr' => array(
                     'input_group' => array(
                         'prepend' => '.icon-tag+fw',
@@ -47,6 +50,7 @@ class ContactType extends AbstractType
             ->add('message', 'textarea', array(
                 'required' => true,
                 'label' => false,
+                'translation_domain' => 'FotoJoinFrontPageBundle',
                 'attr' => array(
                     'placeholder' => 'contact.form.message',
                     'input_group' => array(
