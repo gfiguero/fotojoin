@@ -10,6 +10,10 @@ foto_join_front_page_homepage:
     path:     /
     defaults: { _controller: FotoJoinFrontPageBundle:FrontPage:index }
 
+foto_join_front_page_registration:
+    path:     /registration
+    defaults: { _controller: FotoJoinFrontPageBundle:FrontPage:registration }
+
 foto_join_front_page_homepage1:
     path:     /profile/{email}
     defaults: { _controller: FotoJoinFrontPageBundle:FrontPage:profile }

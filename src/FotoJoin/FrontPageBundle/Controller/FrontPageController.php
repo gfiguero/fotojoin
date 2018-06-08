@@ -41,6 +41,10 @@ class FrontPageController extends Controller
         ));
     }
 
+    public function registrationAction() {
+        return $this->render('FotoJoinFrontPageBundle:FrontPage:registration.html.twig');        
+    }
+
     public function signupAction() {
         return $this->render('FotoJoinFrontPageBundle:FrontPage:signup.html.twig', array(
             'userForm' => $this->createUserForm()->createView(),

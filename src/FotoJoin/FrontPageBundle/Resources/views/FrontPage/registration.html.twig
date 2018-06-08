@@ -1,0 +1,33 @@
+{% extends "FotoJoinFrontPageBundle:Base:base.html.twig" %}
+{% use 'FotoJoinFrontPageBundle:Base:navbar.html.twig' %}
+{% use 'FotoJoinFrontPageBundle:Base:footer.html.twig' %}
+
+{% trans_default_domain 'FotoJoinUserBundle' %}
+
+{% block title %}Contacto{% endblock %}
+
+{% block stylesheet %}
+    <style type="text/css">
+        #contact-page {
+            margin-top: 100px;
+        }
+    </style>
+{% endblock %}
+
+{% block body %}
+{% block navbar %}{{ parent() }}{% endblock %}
+
+<div class="section" id="contact-page">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <iframe id="typeform-full" width="100%" height="1200" frameborder="0" src="https://docs.google.com/forms/d/e/1FAIpQLSd0OjO-ysT8dz4jIVa8n8hMDPZcGZHpj69vhu9xS89an8jPig/viewform"></iframe>
+                <script type="text/javascript" src="https://embed.typeform.com/embed.js"></script>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% block footer %}{{ parent() }}{% endblock %}
+
+{% endblock %}
