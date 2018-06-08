@@ -612,4 +612,25 @@ class Photography
         return $this->appraisements;
     }
 
+    /**
+     * Get appraisement
+     */
+    public function getAppraisement()
+    {
+        $sum = 0;
+        $appraisements = $this->getAppraisements();
+        foreach ($appraisements as $appraisement) {
+            dump($appraisement);
+            $sum += $appraisement->getValue();
+        }
+
+        $count = $appraisements->count();
+        if ($count) {
+            return $sum / $count;
+        } else {
+            return 0;
+        }
+
+    }
+
 }

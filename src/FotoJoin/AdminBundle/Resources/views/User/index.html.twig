@@ -22,7 +22,9 @@
                                 </th>
                                 <th>{{ knp_pagination_sortable(users, 'user.form.id'|trans, 'id') }}{% if sort == 'id' %}{% if direction == 'desc' %}{{ icon('caret-down') }}{% else %}{{ icon('caret-up') }}{% endif %}{% endif %}</th>
                                 <th>{{ knp_pagination_sortable(users, 'user.form.username'|trans, 'username') }}{% if sort == 'username' %}{% if direction == 'desc' %}{{ icon('caret-down') }}{% else %}{{ icon('caret-up') }}{% endif %}{% endif %}</th>
+                                <th>{{ knp_pagination_sortable(users, 'user.form.name'|trans, 'name') }}{% if sort == 'name' %}{% if direction == 'desc' %}{{ icon('caret-down') }}{% else %}{{ icon('caret-up') }}{% endif %}{% endif %}</th>
                                 <th>{{ knp_pagination_sortable(users, 'user.form.plan'|trans, 'plan') }}{% if sort == 'plan' %}{% if direction == 'desc' %}{{ icon('caret-down') }}{% else %}{{ icon('caret-up') }}{% endif %}{% endif %}</th>
+                                <th>{{ 'user.form.commune'|trans }}</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -35,7 +37,9 @@
                                 </td>
                                 <td>{% if user.id %}{{ user.id }}{% endif %}</td>
                                 <td>{% if user.username %}{{ user.username }}{% endif %}</td>
+                                <td>{% if user.name %}{{ user.name }}{% endif %}</td>
                                 <td>{% if user.plan %}{{ user.plan }}{% endif %}</td>
+                                <td>{% if user.commune %}{{ user.commune.name }}{% endif %}</td>
                             </tr>
                         {% endfor %}
                         </tbody>

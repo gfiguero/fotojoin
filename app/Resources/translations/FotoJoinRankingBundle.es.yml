@@ -1,0 +1,40 @@
+link:
+    gallery: 'Galería Fotográfica'
+
+gallery:
+    categories: 'Categorías'
+    authors: 'Fotógrafos'
+    cities: 'Ciudades'
+    order:
+        random: 'Orden Aleatorio'
+        evaluation: 'Ordenado por Evaluación'
+        relevance: 'Ordenado por Relevancia'
+        date: 'Ordenado por Fecha'
+
+filter:
+    send:
+        post: 'Filtrar Galería'
+
+photography:
+    capture:
+        title: Información de la captura
+    form:
+        capture: Captura fotográfica
+        file: Archivo
+        categories: 'Categorías Fotográficas'
+        title: 'Captura Fotográfica'
+        datetimeoriginal: 'Fecha de Captura'
+        makemodel: 'Cámara - Modelo'
+        exposuretime: 'Tiempo'
+        focallength: 'Distancia Focal'
+        fnumber: 'Relación Focal'
+        isospeedratings: ISO
+    appraisement:
+        title: Valoración
+        average: 'Valor'
+        weighted: 'Valor Ponderado'
+        quantity: 'Votos Recibidos'
+    user:
+        title: Información del Fotógrafo
+    share:
+        title: Compartir

@@ -33,14 +33,14 @@ liip_imagine:
         gallery_photography_medium:
             quality: 75
             filters:
-                upscale: { min: [1280, 768] }
-                thumbnail: { size: [1280, 768], mode: outbound }
-                watermark: { image: '../web/img/fotojoin.png', size: 1, position: center }
+                upscale: { min: [1366, 768] }
+                thumbnail: { size: [1366, 768], mode: inset }
+                watermark: { image: '../web/img/fotojoin_center.png', size: 1, position: center }
         gallery_photography_medium_low:
             quality: 5
             filters:
-                upscale: { min: [1280, 768] }
-                thumbnail: { size: [1280, 768], mode: outbound }
+                upscale: { min: [1366, 768] }
+                thumbnail: { size: [1366, 768], mode: outbound }
         ranking_photographer_medium:
             quality: 75
             filters:
@@ -85,8 +85,8 @@ liip_imagine:
             quality: 75
             filters:
                 upscale: { min: [1280, 720] }
-                thumbnail: { size: [1280, 720], mode: outbound }
-                watermark: { image: '../web/img/fotojoin.png', size: 1, position: center }
+                thumbnail: { size: [1280, 720], mode: inset }
+                watermark: { image: '../web/img/fotojoin_center.png', size: 1, position: center }
         frontpage_join_low:
             quality: 5
             filters:

@@ -2,11 +2,6 @@ FotoJoin\UserBundle\Entity\User:
     type: entity
     table: User
     repositoryClass: FotoJoin\UserBundle\Entity\UserRepository
-#    oneToOne:
-#        author:
-#            targetEntity: Author
-#            inversedBy: user
-#            cascade: ['persist']            
     oneToMany:
         photographies:
             targetEntity: FotoJoin\ControlPanelBundle\Entity\Photography
@@ -14,19 +9,20 @@ FotoJoin\UserBundle\Entity\User:
         albums:
             targetEntity: FotoJoin\ControlPanelBundle\Entity\Album
             mappedBy: user
+            cascade: ["remove"]
         transmitted_messages:
             targetEntity: FotoJoin\ControlPanelBundle\Entity\Message
             mappedBy: transmitter
+            cascade: ["remove"]
         received_messages:
             targetEntity: FotoJoin\ControlPanelBundle\Entity\Message
             mappedBy: receiver
+            cascade: ["remove"]
+        appraisements:
+            targetEntity: FotoJoin\GalleryBundle\Entity\Appraisement
+            mappedBy: user
+            cascade: ["remove"]
     manyToOne:
-        city1:
-            targetEntity: FotoJoin\AdminBundle\Entity\City
-        city2:
-            targetEntity: FotoJoin\AdminBundle\Entity\City
-        city3:
-            targetEntity: FotoJoin\AdminBundle\Entity\City
         plan:
             targetEntity: FotoJoin\AdminBundle\Entity\Plan
         commune: 
@@ -105,11 +101,4 @@ FotoJoin\UserBundle\Entity\User:
             gedmo:
                 timestampable:
                     on: update
-        deletedAt:
-            type: datetime
-            nullable: true
-    gedmo:
-        soft_deleteable:
-            field_name: deletedAt
-            time_aware: false
     lifecycleCallbacks: {  }

@@ -1,11 +1,11 @@
 link:
     join: Votar!
     gallery: 'Galería Fotográfica'
-    ranking: Explorar
-    login: 'Ingresar'
-    signup: Registro
+    ranking: Explore
+    login: Log In
+    signup: Sign In
     timeline: Funcionamiento
-    contact: Contacto
+    contact: Contact
 
 contact:
     form:

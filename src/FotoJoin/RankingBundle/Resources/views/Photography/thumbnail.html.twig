@@ -1,0 +1,13 @@
+{% block thumbnail %}
+    <div class="element">
+        <figure>
+            <div class="photography"><img class="img-responsive lazyload" data-size="auto" data-src="{{ vich_uploader_asset(photography, 'file', 'FotoJoin\\ControlPanelBundle\\Entity\\Photography')|imagine_filter('gallery_photography_small') }}" /></div>
+            <figcaption>
+                <h4>{{ photography.user }}</h4>
+                <span>{{ user_level[photography.user.level]|trans({}, 'FotoJoinUserBundle') }}</span>
+                <h5>Valor {{ photography.appraisement }}</h5>
+                <a class="btn btn-success" href="{{ path('ranking_photography_show', {'photography': photography.id }) }}">Dar un vistazo</a>
+            </figcaption>
+        </figure>
+    </div>
+{% endblock %}

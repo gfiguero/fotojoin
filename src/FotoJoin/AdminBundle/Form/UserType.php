@@ -49,16 +49,19 @@ class UserType extends AbstractType
                 'attr'  => array( 'label_col' => 4, 'widget_col' => 8 ),
                 'translation_domain' => 'FotoJoinAdminBundle',
             )) 
-            ->add('birthdate', null, array(
+            ->add('birthdate', 'birthday', array(
                 'label' => 'user.form.birthdate',
-                'attr'  => array( 'label_col' => 4, 'widget_col' => 8 ),
                 'translation_domain' => 'FotoJoinAdminBundle',
-            )) 
-            ->add('profilephotofilename', null, array(
-                'label' => 'user.form.profilephotofilename',
-                'attr'  => array( 'label_col' => 4, 'widget_col' => 8 ),
+                'attr' => array('label_col' => 4, 'widget_col' => 8 ),
+                'placeholder' => ['year' => 'Año', 'month' => 'Mes', 'day' => 'Día'],
+                'required' => false,
+            ))
+            ->add('profilephoto', 'profile_photo', array(
+                'label' => 'user.form.profilephoto',
                 'translation_domain' => 'FotoJoinAdminBundle',
-            )) 
+                'attr' => array('label_col' => 4, 'widget_col' => 8 ),
+                'required' => false,
+            ))
 //            ->add('publiccontact', null, array(
 //                'label' => 'user.form.publiccontact',
 //                'attr'  => array( 'label_col' => 4, 'widget_col' => 8 ),

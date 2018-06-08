@@ -948,4 +948,43 @@ class User extends BaseUser
     {
         return $this->commune;
     }
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $appraisements;
+
+
+    /**
+     * Add appraisement
+     *
+     * @param \FotoJoin\GalleryBundle\Entity\Appraisement $appraisement
+     *
+     * @return User
+     */
+    public function addAppraisement(\FotoJoin\GalleryBundle\Entity\Appraisement $appraisement)
+    {
+        $this->appraisements[] = $appraisement;
+
+        return $this;
+    }
+
+    /**
+     * Remove appraisement
+     *
+     * @param \FotoJoin\GalleryBundle\Entity\Appraisement $appraisement
+     */
+    public function removeAppraisement(\FotoJoin\GalleryBundle\Entity\Appraisement $appraisement)
+    {
+        $this->appraisements->removeElement($appraisement);
+    }
+
+    /**
+     * Get appraisements
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getAppraisements()
+    {
+        return $this->appraisements;
+    }
 }

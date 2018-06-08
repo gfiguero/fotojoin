@@ -162,26 +162,28 @@ user:
         submit: Guardar
         flash: Nuevo Usuario registrado satisfactoriamente
     edit:
-        title: Editar Usuario %id%
+        title: Editar Usuario
         link: Editar
         submit: Guardar
         form: Formulario de edición
         flash: Los cambios han sido guardados exitosamente
     show:
-        title: Ver Usuario %id%
+        title: Ver Usuario
         link: Detalles
         data: Datos
-        breadcrumb: Usuario %id%
+        breadcrumb: Usuario
     delete:
         link: Eliminar
         title: Eliminación de Usuario
         message: Los datos eliminados no podrán ser recuperados
         submit: Eliminar
+        cancel: Cancelar
         flash: El Usuario ha sido eliminado
     form:
         id: ID
         email: Email
         password: Password
+        username: Nombre de usuario
         plan: Plan
         level: Nivel
         description: Descripción
@@ -197,6 +199,7 @@ user:
         name: Nombre
         birthdate: Nacimiento
         profilephotofilename: Foto
+        profilephoto: Foto
         city1: Ciudad 1
         city2: Ciudad 2
         city3: Ciudad 3

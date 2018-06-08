@@ -5,7 +5,9 @@
 }
 
 .grid .element {
-	width: 25%;
+	width: 400px;
+	margin-right: 1em;
+	margin-bottom: 1em;
 	text-align: left;
 	position: relative;
 	display: inline-block;
@@ -32,7 +34,13 @@
 	color: #ed4e6e;
 }
 
-.grid figcaption h3 {
+.grid figcaption h4 {
+	margin: 0;
+	padding: 0;
+	color: #fff;
+}
+
+.grid figcaption h5 {
 	margin: 0;
 	padding: 0;
 	color: #fff;
@@ -47,7 +55,8 @@
 	overflow: hidden;
 }
 
-.cs-style-4 figure .photography {
+.cs-style-4 figure .photography,
+.cs-style-4 figure .photographer {
 	-webkit-perspective: 1700px;
 	-moz-perspective: 1700px;
 	perspective: 1700px;
@@ -60,7 +69,9 @@
 }
 
 .no-touch .cs-style-4 figure:hover .photography,
-.cs-style-4 figure.cs-hover .photography {
+.no-touch .cs-style-4 figure:hover .photographer,
+.cs-style-4 figure.cs-hover .photography,
+.cs-style-4 figure.cs-hover .photographer {
 	-webkit-transform: translateX(25%);
 	-moz-transform: translateX(25%);
 	-ms-transform: translateX(25%);
@@ -99,7 +110,7 @@
 .cs-style-4 figcaption a {
 	position: absolute;
 	bottom: 20px;
-	right: 20px;
+	left: 20px;
 }
 
 @media screen and (max-width: 31.5em) {
